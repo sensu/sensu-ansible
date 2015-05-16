@@ -1,0 +1,25 @@
+#!/bin/bash
+
+PATH=/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
+export PATH
+
+set -o errexit
+set -o xtrace
+
+. /lib/svc/share/smf_include.sh
+
+HOME={{ uchiwa_path }}
+UCHIWA_PATH=${HOME}/go/src/github.com/sensu/uchiwa
+UCHIWA_USER={{ sensu_user_name }}
+
+if [ ! -d $HOME ]; then
+   echo "No directory found at: $HOME"
+fi
+
+if [ ! -f $HOME/etc/config.json ]; then
+   echo "No Uchiwa config found at: ${HOME}/config.json"
+fi
+
+cd $UCHIWA_PATH
+${HOME}/go/bin/uchiwa -c ${HOME}/etc/config.json &
+exit ${SMF_EXIT_OK}

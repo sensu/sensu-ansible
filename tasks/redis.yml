@@ -1,0 +1,7 @@
+---
+
+  - name: Ensure Redis is installed
+    pkgin: name=redis state=present
+
+  - name: Ensure Redis is running
+    service: name=redis state=started enabled=true

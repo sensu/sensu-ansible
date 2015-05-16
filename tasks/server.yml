@@ -1,0 +1,41 @@
+---
+
+  - name: Deploy Sensu server API configuration
+    template: dest={{ sensu_config_path }}/conf.d/api.json
+              owner={{ sensu_user_name }} group={{ sensu_group_name }}
+              src=sensu-api.json.j2
+    notify: restart sensu-api service
+
+  - name: Deploy Sensu Redis configuration
+    template: dest={{ sensu_config_path }}/conf.d/redis.json
+              owner={{ sensu_user_name }} group={{ sensu_group_name }}
+              src=sensu-redis.json.j2
+    notify: restart sensu-api service
+
+  - name: Deploy Sensu server service manifest
+    template: dest=/opt/local/lib/svc/manifest/sensu-server.xml
+              src=sensu-server.smartos_smf_manifest.xml.j2
+              owner=root group=root mode=644
+    notify: import sensu-server service
+
+  - name: Deploy Sensu API service manifest
+    template: dest=/opt/local/lib/svc/manifest/sensu-api.xml
+              src=sensu-api.smartos_smf_manifest.xml.j2
+              owner=root group=root mode=644
+    notify: import sensu-api service
+ 
+  - name: Initial import of Sensu server service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
+    args:
+      creates: "/var/svc/log/application-sensu-server:default.log"
+        
+  - name: Initial import of Sensu API service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-api.xml
+    args:
+      creates: "/var/svc/log/application-sensu-api:default.log"
+
+  - name: Ensure Sensu server service is running
+    service: name=sensu-server state=started enabled=yes
+
+  - name: Ensure Sensu API service is running
+    service: name=sensu-api state=started enabled=yes

@@ -1,0 +1,29 @@
+---
+
+  - name: restart rabbitmq service
+    service: name=rabbitmq state=restarted
+  
+  - name: restart uchiwa service
+    service: name=uchiwa state=restarted
+
+  - name: restart sensu-server service
+    service: name=sensu-server state=restarted
+
+  - name: restart sensu-api service
+    service: name=sensu-api state=restarted
+
+  - name: restart sensu-client service
+    service: name=sensu-client state=restarted
+
+  - name: import sensu-server service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
+  
+  - name: import sensu-api service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-api.xml
+  
+  - name: import sensu-client service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-client.xml
+  
+  - name: import uchiwa service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
+  

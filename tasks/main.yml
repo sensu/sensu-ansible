@@ -1,0 +1,51 @@
+---
+
+  - name: Ensure the Sensu group is present
+    group: name={{ sensu_group_name }}
+             state=present
+             
+  - name: Ensure the Sensu user is present
+    user: name={{ sensu_user_name }}
+          group={{ sensu_group_name }}
+          shell=/bin/false
+          home={{ sensu_config_path }}
+          createhome=yes
+          state=present
+
+  - name: Ensure the Sensu config directory is present
+    file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+
+  - name: Ensure Sensu dependencies are installed
+    pkgin: name=build-essential,ruby21-base state=present
+
+  - name: Ensure Uchiwa (dashboard) dependencies are installed
+    pkgin: name=go state=present
+    when: sensu_include_dashboard
+
+  - name: Ensure Sensu is installed
+    gem: name=sensu state={{ sensu_gem_state }} user_install=no
+    notify:
+      - restart sensu-client service
+    
+  - name: Ensure Sensu 'plugins' gem is installed
+    gem: name=sensu-plugin state={{ sensu_plugin_gem_state }} user_install=no
+
+  - include: ssl.yml tags=ssl
+
+  - include: rabbit.yml tags=rabbitmq
+    when: rabbitmq_server
+
+  - include: redis.yml tags=redis
+    when: redis_server
+
+  - include: server.yml tags=server
+    when: sensu_master
+
+  - include: dashboard.yml tags=dashboard
+    when: sensu_include_dashboard
+    
+  - include: client.yml tags=client
+
+  - include: plugins.yml tags=plugins
+    when: sensu_include_plugins

@@ -1,0 +1,52 @@
+---
+
+  - name: Ensure Sensu SSL directory exists
+    file: dest={{ sensu_config_path }}/ssl state=directory
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+
+  - name: Ensure SSL generation directory exists
+    file: dest={{ sensu_config_path }}/ssl_generation state=directory
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    when: sensu_master
+
+  - name: Fetch the ssl_certs tarball from sensuapp.org
+    get_url: url=http://sensuapp.org/docs/0.16/tools/ssl_certs.tar
+             dest={{ sensu_config_path }}/ssl_generation/ssl_certs.tar
+    when: sensu_master
+    sudo: yes
+    sudo_user: "{{ sensu_user_name }}"
+
+  - name: Untar the ssl_certs tarball from sensuapp.org
+    shell: tar xf ssl_certs.tar chdir={{ sensu_config_path }}/ssl_generation
+    args:
+      creates: "{{ sensu_config_path }}/ssl_generation/ssl_certs"
+    when: sensu_master
+    sudo: yes
+    sudo_user: "{{ sensu_user_name }}"
+
+  - name: Generate SSL certs
+    shell: ./ssl_certs.sh generate chdir={{ sensu_config_path }}/ssl_generation/ssl_certs
+    args:
+      creates: "{{ sensu_config_path }}/ssl_generation/ssl_certs/server"
+    when: sensu_master
+    sudo: yes
+    sudo_user: "{{ sensu_user_name }}"
+
+  - name: Stash the Sensu SSL certs/keys
+    fetch: src={{ sensu_config_path }}/ssl_generation/ssl_certs/{{ item }}
+           dest={{ dynamic_data_store }}
+    when: sensu_master
+    with_items:
+      - sensu_ca/cacert.pem
+      - server/cert.pem
+      - server/key.pem
+      - client/cert.pem
+      - client/key.pem
+
+  - name: Deploy the Sensu client SSL cert/key
+    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/client/{{ item }}
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+          dest={{ sensu_config_path }}/ssl
+    with_items:
+      - cert.pem
+      - key.pem

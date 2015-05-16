@@ -1,0 +1,10 @@
+[
+    {rabbit, [
+    {ssl_listeners, [{{ rabbitmq_port }}]},
+    {ssl_options, [{cacertfile,"{{ rabbitmq_config_path }}/ssl/cacert.pem"},
+                   {certfile,"{{ rabbitmq_config_path }}/ssl/cert.pem"},
+                   {keyfile,"{{ rabbitmq_config_path }}/ssl/key.pem"},
+                   {verify,verify_peer},
+                   {fail_if_no_peer_cert,true}]}
+  ]}
+].

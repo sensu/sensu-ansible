@@ -1,0 +1,7 @@
+{
+  "client": {
+    "name": "{{ ansible_hostname }}",
+    "address": "{{ ansible_default_ipv4['address'] }}",
+      "subscriptions": {{ group_names | to_nice_json }}
+  }
+}

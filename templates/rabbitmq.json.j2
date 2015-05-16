@@ -1,0 +1,13 @@
+{
+  "rabbitmq": {
+    "ssl": {
+      "cert_chain_file": "{{ sensu_config_path }}/ssl/cert.pem",
+      "private_key_file": "{{ sensu_config_path }}/ssl/key.pem"
+    },
+"host": "{{ rabbitmq_host }}",
+    "port": {{ rabbitmq_port }},
+    "vhost": "{{ rabbitmq_sensu_vhost }}",
+    "user": "{{ rabbitmq_sensu_user_name }}",
+    "password": "{{ rabbitmq_sensu_password }}"
+  }
+}
