@@ -5,7 +5,7 @@ site_description: An Ansible role to deploy a fully dynamic Sensu stack!
 site_author: Calum MacRae
 
 pages:
-  - [ '../README.md', 'README' ]
+  - [ 'index.md', 'Index' ]
   - [ 'example_infra.md', 'Usage', 'Example infrastructure layout' ]
   - [ 'single_master.md', 'Usage', 'Deploy the stack to a single node' ]
   - [ 'custom_client_config.md', 'Usage', 'Custom client configuration' ]
@@ -13,5 +13,5 @@ pages:
   - [ 'sensitive_info.md', 'Usage', 'Sensitive information in version control' ]
   - [ 'dynamic_data.md','Conventions','Dynamic data store' ]
   - [ 'dynamic_checks.md','Conventions','Dynamic check deployment' ]
-  - [ '../LICENSE','About','LICENSE' ]
   - [ 'afewwords.md','About','A few words from the author' ]
+  - [ 'license.md','About','License' ]
