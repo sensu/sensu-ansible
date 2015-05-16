@@ -1,4 +1,5 @@
-# Sensu [![Ansible Galaxy](https://galaxy.ansible.com/list#/roles/3802)](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg)
+# Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/list#/roles/3802)
+
 This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
 
 ## Features
