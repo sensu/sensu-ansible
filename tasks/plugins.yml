@@ -24,6 +24,12 @@
           owner={{ sensu_user_name }} group={{ sensu_group_name }}
     notify: restart sensu-client service
 
+  - name: Deploy filter plugins
+    copy: src={{ static_data_store }}/sensu/filters/
+          dest={{ sensu_config_path }}/plugins/ mode=755
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    notify: restart sensu-client service
+
   - name: Deploy mutator plugins
     copy: src={{ static_data_store }}/sensu/mutators/
           dest={{ sensu_config_path }}/plugins/ mode=755
