@@ -7,7 +7,8 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
 
-_Note:_ _Further documentation on features is coming_
+## Documentation
+Head over to [Read the Docs](http://ansible-sensu.rtfd.org/) for a comprehensive overview of this role and its powerful features.
 
 ## Supported Platforms
 This role has been written with [SmartOS](https://smartos.org) in mind, to be deployed to [zones](https://wiki.smartos.org/display/DOC/Zones)

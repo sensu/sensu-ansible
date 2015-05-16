@@ -1,13 +1,11 @@
-# Sensu
-This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
+# Ansible Sensu
+An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
 
 ## Features
 - Deploy a full Sensu stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on role defined in your inventory
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
-
-_Note:_ _Further documentation on features is coming_
 
 ## Supported Platforms
 This role has been written with [SmartOS](https://smartos.org) in mind, to be deployed to [zones](https://wiki.smartos.org/display/DOC/Zones)
