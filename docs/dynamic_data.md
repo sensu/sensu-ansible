@@ -22,7 +22,7 @@ If you take a look at the `tasks/ssl.yml` playbook, there's a use of the handy [
 
 Very handy!
 
-I've coupled this with the generation of SSL certs on the Sensu "master". So, when applying this role to a node on which `sensu_master` evaluates to `true`, SSL several SSL certs are generated, then stashed on the Ansible "master" node in the dynamic data store for distribution to client nodes at a later point in the playbook.
+I've coupled this with the generation of SSL certs on the Sensu "master". So, when applying this role to a node on which `sensu_master` evaluates to `true`, several SSL certs are generated, then stashed on the Ansible "master" node in the dynamic data store for distribution to client nodes at a later point in the playbook.
 
 I've defined my `dynamic_data_store` variable at the top level of my Ansible codebase, in the file `group_vars/all.yml`:
 ``` yaml
