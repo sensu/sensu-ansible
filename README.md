@@ -12,8 +12,6 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 [Read the full documentation](http://rtfm.cmacr.ae/) for a comprehensive overview of this role and its powerful features.
 
 ## Supported Platforms
-This role has been written with [SmartOS](https://smartos.org) in mind, to be deployed to [zones](https://wiki.smartos.org/display/DOC/Zones)
-
 In this initial release [SmartOS](https://smartos.org) will be the only supported platform.
 However, I am dedicating a lot of time to this role and will be adding support for all major BSD & Linux platforms.
 
