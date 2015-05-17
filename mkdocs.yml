@@ -6,7 +6,8 @@ site_author: Calum MacRae
 
 theme: flatly
 pages:
-  - [ 'index.md', 'Index' ]
+  - [ 'index.md', 'Home' ]
+  - [ 'role_variables.md', 'Usage', 'Role variables' ]
   - [ 'example_infra.md', 'Usage', 'Example infrastructure layout' ]
   - [ 'single_master.md', 'Usage', 'Deploy the stack to a single node' ]
   - [ 'custom_client_config.md', 'Usage', 'Custom client configuration' ]

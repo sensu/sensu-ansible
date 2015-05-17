@@ -48,5 +48,5 @@ Then, to ensure the variables are picked up during the play, you can add `vars/s
 ```
 
 ### Editing encrypted data
-Editing encrypted data is as easy as `$ ansible-vault edit path/to/data.yml`
+Editing encrypted data is as easy as `$ ansible-vault edit path/to/data.yml`  
 See [the Ansible Vault page for more information](http://docs.ansible.com/playbooks_vault.html)

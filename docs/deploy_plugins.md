@@ -1,5 +1,5 @@
 # Deployment of Handlers, Filters, and Mutators
-_Note:_ _If you haven't familiarized yourself with the concept of the static data store please read_['_Dynamic check deployment'_](http://rtfm.cmacr.ae/dynamic_checks/)
+_Note:_ _If you haven't familiarized yourself with the concept of the static data store please read_['_Dynamic check deployment'_](dynamic_checks.md)
 
 Deployment of [handlers](https://sensuapp.org/docs/0.18/handlers), [filters](https://sensuapp.org/docs/0.18/filters), and [mutators](https://sensuapp.org/docs/0.18/mutators) is handled by leveraging templates and other data placed in the static data store.
 
