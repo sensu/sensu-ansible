@@ -4,7 +4,7 @@ An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensu
 [![Join the chat at https://gitter.im/cmacrae/ansible-sensu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cmacrae/ansible-sensu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Features
-- Deploy a full Sensu stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
+- Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on role defined in your inventory
 - Fine grained control over dynamic client configurations
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
@@ -27,6 +27,10 @@ However, I am dedicating a lot of time to this role and will be adding support f
 ## Role Variables
 All variables have sensible defaults, which can be found in `defaults/main.yml`.  
 Head over to [the role variables page](role_variables.md) to review them
+
+## Install (Ansible Galaxy)
+To install this role from [Ansible Galaxy](https://galaxy.ansible.com), simpy run:  
+`ansible-galaxy install cmacrae.sensu`
 
 ## Example Playbook
 
