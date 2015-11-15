@@ -4,7 +4,7 @@ repo_url: https://github.com/cmacrae/ansible-sensu/
 site_description: An Ansible role to deploy a fully dynamic Sensu stack!
 site_author: Calum MacRae
 
-theme: flatly
+theme: readable
 pages:
   - [ 'index.md', 'Home' ]
   - [ 'role_variables.md', 'Usage', 'Role variables' ]
