@@ -1,4 +1,11 @@
 ---
+# tasks/plugins.yml: Deploy available checks/plugins/handlers/filters/mutators
+
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - default.yml
 
   - name: Ensure Sensu plugin directory exists
     file: dest={{ sensu_config_path }}/plugins state=directory
@@ -35,12 +42,3 @@
           dest={{ sensu_config_path }}/plugins/ mode=755
           owner={{ sensu_user_name }} group={{ sensu_group_name }}
     notify: restart sensu-client service
-
-  - name: Deploy check/handler/filter/mutator definitions to the master
-    template: src={{ static_data_store }}/sensu/definitions/{{ item }}.j2
-          dest={{ sensu_config_path }}/conf.d/{{ item }}
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
-    when: sensu_master
-    with_lines:
-      - ls {{ static_data_store }}/sensu/definitions | cut -d. --fields=1,2
-    notify: restart sensu-api service

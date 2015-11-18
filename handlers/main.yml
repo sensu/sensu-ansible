@@ -15,6 +15,7 @@
   - name: restart sensu-client service
     service: name=sensu-client state=restarted
 
+  # Joyent SmartOS specific handlers
   - name: import sensu-server service
     command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
   
@@ -26,4 +27,3 @@
   
   - name: import uchiwa service
     command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
-  

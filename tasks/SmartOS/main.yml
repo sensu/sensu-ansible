@@ -1,0 +1,36 @@
+---
+# tasks/SmartOS/main.yml: "Set-up" playbook for cmacrae.sensu role
+# This takes care of base prerequisites for Joyent SmartOS
+
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - default.yml
+
+  - name: Ensure the Sensu group is present
+    group: name={{ sensu_group_name }}
+             state=present
+             
+  - name: Ensure the Sensu user is present
+    user: name={{ sensu_user_name }}
+          group={{ sensu_group_name }}
+          shell=/bin/false
+          home={{ sensu_config_path }}
+          createhome=yes
+          state=present
+
+  - name: Ensure the Sensu config directory is present
+    file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+
+  - name: Ensure Sensu dependencies are installed
+    pkgin: name=build-essential,ruby21-base state=present
+
+  - name: Ensure Sensu is installed
+    gem: name=sensu state={{ sensu_gem_state }} user_install=no
+    notify:
+      - restart sensu-client service
+    
+  - name: Ensure Sensu 'plugins' gem is installed
+    gem: name=sensu-plugin state={{ sensu_plugin_gem_state }} user_install=no

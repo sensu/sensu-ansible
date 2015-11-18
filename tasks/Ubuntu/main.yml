@@ -1,0 +1,11 @@
+---
+# tasks/Ubuntu/main.yml: Ubuntu specific set-up
+# This takes care of base prerequisites for Ubuntu
+
+  - name: Ensure the Sensu APT repo GPG key is present
+    apt_key: url=http://repositories.sensuapp.org/apt/pubkey.gpg
+             state=present
+
+  - name: Ensure the Sensu Core APT repo is present
+    apt_repository: repo='deb     http://repositories.sensuapp.org/apt sensu main'
+                    state=present update_cache=yes

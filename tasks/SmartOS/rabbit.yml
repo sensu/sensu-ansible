@@ -1,0 +1,6 @@
+---
+# tasks/SmartOS/rabbit.yml: Deploy RabbitMQ
+# Specific to Joyent SmartOS
+
+- name: Ensure RabbitMQ is installed
+  pkgin: name=rabbitmq state=present

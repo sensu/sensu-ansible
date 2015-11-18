@@ -1,67 +1,9 @@
 ---
-
-  - name: Ensure Uchiwa directory exists
-    file: dest={{ uchiwa_path }} state=directory
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
-          recurse=yes
-
-  - name: Ensure Uchiwa config directory exists
-    file: dest={{ uchiwa_path }}/etc state=directory
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
-          recurse=yes
-
-  - name: Ensure Uchiwa Go directory exists
-    file: dest={{ uchiwa_path }}/go state=directory
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
-          recurse=yes
-
-  - name: Ensure Uchiwa GOPATH exists
-    file: dest={{ uchiwa_path }}/go/{{ item }}
-          owner={{ sensu_user_name }}
-          group={{ sensu_group_name }}
-          state=directory recurse=yes
-    with_items:
-      - bin
-      - pkg
-      - src
-
-  - name: Fetch Uchiwa from GitHub
-    command: go get github.com/sensu/uchiwa
-    environment:
-      GOPATH: "{{ uchiwa_path }}/go"
-    sudo: yes
-    sudo_user: "{{ sensu_user_name }}"
-    args:
-      creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
-
-  - name: Build and deploy Uchiwa
-    shell: npm install --production chdir={{ uchiwa_path }}/go/src/github.com/sensu/uchiwa
-    args:
-      creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa/public/bower_components"
-    sudo: yes
-    sudo_user: "{{ sensu_user_name }}"
-
-  - name: Deploy Uchiwa config
-    template: src=uchiwa_config.json.j2 dest={{ uchiwa_path }}/etc/config.json
-              owner={{ sensu_user_name }} group={{ sensu_group_name }}
-    notify: restart uchiwa service
-
-  - name: Deploy Uchiwa service script
-    template: src=uchiwa.sh.j2
-              dest=/opt/local/lib/svc/method/uchiwa
-              owner=root group=root mode=755
-    notify: restart uchiwa service
-
-  - name: Deploy Uchiwa service manifest
-    template: dest=/opt/local/lib/svc/manifest/uchiwa.xml
-              src=uchiwa.smartos_smf_manifest.xml.j2
-              owner=root group=root mode=644
-    notify: import uchiwa service
-
-  - name: Initial import of Uchiwa server service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
-    args:
-      creates: "/var/svc/log/application-uchiwa:default.log"
+# tasks/dashboard.yml: Deployment of the Uchiwa dashboard
+  - include: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}/dashboard.yml"
+      - "{{ ansible_os_family }}/dashboard.yml"
 
   - name: Ensure Uchiwa server service is running
     service: name=uchiwa state=started enabled=yes

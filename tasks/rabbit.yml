@@ -1,22 +1,31 @@
 ---
+# tasks/rabbit.yml: Deploy RabbitMQ and set-up vhost for Sensu messaging
 
-  - name: Ensure RabbitMQ is installed
-    pkgin: name=rabbitmq state=present
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - default.yml
+
+  - include: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}/rabbit.yml"
+      - "{{ ansible_os_family }}/rabbit.yml"
 
   - name: Ensure RabbitMQ SSL directory exists
     file: dest={{ rabbitmq_config_path }}/ssl state=directory
 
   - name: Ensure RabbitMQ SSL certs/keys are in place
-    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/{{ item }}
+    copy: src={{ item }}
           dest={{ rabbitmq_config_path }}/ssl
     with_items:
-      - sensu_ca/cacert.pem
-      - server/cert.pem
-      - server/key.pem
+      - "{{ sensu_ssl_server_cacert }}"
+      - "{{ sensu_ssl_server_cert }}"
+      - "{{ sensu_ssl_server_key }}"
 
   - name: Deploy RabbitMQ config
     template: dest={{ rabbitmq_config_path }}/rabbitmq.config
-              src=rabbitmq.config.j2
+              src={{ rabbitmq_config_template }}
               owner=root group=root mode=644
     notify: restart rabbitmq service
 

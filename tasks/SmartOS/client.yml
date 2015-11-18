@@ -1,0 +1,20 @@
+---
+# tasks/client.yml: Deploy various client-side configurations for Sensu
+# Specific to Joyent SmartOS
+  
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - default.yml
+
+  - name: Deploy Sensu client service manifest
+    template: dest=/opt/local/lib/svc/manifest/sensu-client.xml
+              src=sensu-client.smartos_smf_manifest.xml.j2
+              owner=root group=root mode=644
+    notify: import sensu-client service
+              
+  - name: Initial import of Sensu client service
+    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-client.xml
+    args:
+      creates: "/var/svc/log/application-sensu-client:default.log"

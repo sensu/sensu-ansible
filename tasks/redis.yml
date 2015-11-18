@@ -1,7 +1,10 @@
 ---
+# tasks/redis.yml: Deploy Redis
 
-  - name: Ensure Redis is installed
-    pkgin: name=redis state=present
+  - include: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}/redis.yml"
+      - "{{ ansible_os_family }}/redis.yml"
 
   - name: Ensure Redis is running
     service: name=redis state=started enabled=true

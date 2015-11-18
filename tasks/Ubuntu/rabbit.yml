@@ -1,0 +1,21 @@
+---
+# tasks/Ubuntu/rabbit.yml: Deploy RabbitMQ
+# Specific to Ubuntu
+
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+      - "{{ ansible_os_family }}.yml"
+      - default.yml
+
+  - name: Ensure the RabbitMQ APT repo GPG key is present
+    apt_key: url=https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+             state=present
+
+  - name: Ensure the RabbitMQ APT repo is present
+    apt_repository: repo='deb http://www.rabbitmq.com/debian/ testing main'
+                    state=present update_cache=yes
+
+  - name: Ensure RabbitMQ is installed
+    apt: name=rabbitmq state={{ rabbitmq_pkg_state }}
+         update_cache=yes
