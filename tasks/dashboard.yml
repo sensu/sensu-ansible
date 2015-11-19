@@ -1,9 +1,10 @@
 ---
 # tasks/dashboard.yml: Deployment of the Uchiwa dashboard
-  - include: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}/dashboard.yml"
-      - "{{ ansible_os_family }}/dashboard.yml"
+  - include: SmartOS/dashboard.yml
+    when: ansible_distribution == SmartOS
+
+  - include: Ubuntu/dashboard.yml
+    when: ansible_distribution == Ubuntu
 
   - name: Ensure Uchiwa server service is running
     service: name=uchiwa state=started enabled=yes

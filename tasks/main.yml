@@ -1,10 +1,11 @@
 ---
 # tasks/main.yml: "Master" playbook for the cmacrae.sensu role
 
-  - include: "{{ item }} tags=setup"
-    with_first_found:
-      - "{{ ansible_distribution }}/main.yml"
-      - "{{ ansible_os_family }}/main.yml"
+  - include: SmartOS/main.yml tags=setup
+    when: ansible_distribution == SmartOS
+
+  - include: Ubuntu/main.yml tags=setup
+    when: ansible_distribution == Ubuntu
       
   - include: ssl.yml tags=ssl
 

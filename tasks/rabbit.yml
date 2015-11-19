@@ -7,10 +7,11 @@
       - "{{ ansible_os_family }}.yml"
       - default.yml
 
-  - include: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}/rabbit.yml"
-      - "{{ ansible_os_family }}/rabbit.yml"
+  - include: SmartOS/rabbit.yml
+    when: ansible_distribution == SmartOS
+
+  - include: Ubuntu/rabbit.yml
+    when: ansible_distribution == Ubuntu
 
   - name: Ensure RabbitMQ SSL directory exists
     file: dest={{ rabbitmq_config_path }}/ssl state=directory
