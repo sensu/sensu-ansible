@@ -7,6 +7,10 @@
       - "{{ ansible_os_family }}.yml"
       - default.yml
 
+  - name: Ensure the Sensu config directory is present
+    file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes
+          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+
   - name: Deploy Sensu client RabbitMQ configuration
     template: dest="{{ sensu_config_path }}/conf.d/rabbitmq.json"
               owner={{ sensu_user_name }} group={{ sensu_group_name }}
@@ -20,10 +24,7 @@
     notify: restart sensu-client service
 
   - include: SmartOS/client.yml
-    when: ansible_distribution == SmartOS
-
-  - include: Ubuntu/client.yml
-    when: ansible_distribution == Ubuntu
+    when: ansible_distribution == "SmartOS"
 
   - name: Ensure Sensu client service is running
     service: name=sensu-client state=started enabled=yes

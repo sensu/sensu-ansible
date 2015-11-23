@@ -9,3 +9,6 @@
   - name: Ensure the Sensu Core APT repo is present
     apt_repository: repo='deb     http://repositories.sensuapp.org/apt sensu main'
                     state=present update_cache=yes
+
+  - name: Ensure Sensu is installed
+    apt: name=sensu state={{ sensu_pkg_state }}

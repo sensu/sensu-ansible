@@ -2,7 +2,7 @@
 # tasks/ssl.yml: Deploy the client SSL cert/key to client systems
 
   - include_vars: "{{ item }}"
-    with_found_first:
+    with_first_found:
       - "{{ ansible_distribution }}.yml"
       - "{{ ansible_os_family }}.yml"
       - default.yml

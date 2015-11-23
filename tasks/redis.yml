@@ -2,10 +2,10 @@
 # tasks/redis.yml: Deploy Redis
 
   - include: SmartOS/redis.yml
-    when: ansible_distribution == SmartOS
+    when: ansible_distribution == "SmartOS"
 
   - include: Ubuntu/redis.yml
-    when: ansible_distribution == Ubuntu
+    when: ansible_distribution == "Ubuntu"
 
   - name: Ensure Redis is running
     service: name=redis state=started enabled=true
