@@ -12,7 +12,11 @@
               src=sensu-redis.json.j2
     notify: restart sensu-api service
 
-  - include: "{{ ansible_distribution }}/server.yml"
+  - include: SmartOS/server.yml
+    when: ansible_distribution == SmartOS
+
+  - include: Ubuntu/server.yml
+    when: ansible_distribution == Ubuntu
 
   - name: Ensure Sensu server service is running
     service: name=sensu-server state=started enabled=yes

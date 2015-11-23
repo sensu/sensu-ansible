@@ -19,7 +19,11 @@
               src={{ sensu_client_config  }}
     notify: restart sensu-client service
 
-  - include: "{{ ansible_distribution }}/client.yml"
+  - include: SmartOS/client.yml
+    when: ansible_distribution == SmartOS
+
+  - include: Ubuntu/client.yml
+    when: ansible_distribution == Ubuntu
 
   - name: Ensure Sensu client service is running
     service: name=sensu-client state=started enabled=yes
