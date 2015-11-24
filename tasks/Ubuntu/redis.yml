@@ -2,11 +2,7 @@
 # tasks/Ubuntu/redis.yml: Deploy Redis
 # Specific to Ubuntu
 
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
-      - "{{ ansible_os_family }}.yml"
-      - default.yml
+  - include_vars: ../../vars/{{ ansible_distribution }}.yml
 
   - name: Ensure the Redis APT repo is present
     apt_repository: repo={{ redis_pkg_repo }}

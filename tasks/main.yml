@@ -1,6 +1,10 @@
 ---
 # tasks/main.yml: "Master" playbook for the cmacrae.sensu role
 
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+
   - include: SmartOS/main.yml tags=setup
     when: ansible_distribution == "SmartOS"
 

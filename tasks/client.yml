@@ -4,8 +4,6 @@
   - include_vars: "{{ item }}"
     with_first_found:
       - "{{ ansible_distribution }}.yml"
-      - "{{ ansible_os_family }}.yml"
-      - default.yml
 
   - name: Ensure the Sensu config directory is present
     file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes

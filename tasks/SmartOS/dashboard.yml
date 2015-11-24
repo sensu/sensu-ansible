@@ -2,6 +2,8 @@
 # tasks/SmartOS/dashboard.yml: Deployment of the Uchiwa dashboard
 # Specific to Joyent SmartOS
 
+  - include_vars: ../../vars/{{ ansible_distribution }}.yml
+
   - name: Ensure Uchiwa (dashboard) dependencies are installed
     pkgin: name=go state=present
 
@@ -47,19 +49,19 @@
     sudo_user: "{{ sensu_user_name }}"
 
   - name: Deploy Uchiwa config
-    template: src=uchiwa_config.json.j2 dest={{ uchiwa_path }}/etc/config.json
+    template: src=../../templates/uchiwa_config.json.j2 dest={{ uchiwa_path }}/etc/config.json
               owner={{ sensu_user_name }} group={{ sensu_group_name }}
     notify: restart uchiwa service
 
   - name: Deploy Uchiwa service script
-    template: src=uchiwa.sh.j2
+    template: src=../../templates/uchiwa.sh.j2
               dest=/opt/local/lib/svc/method/uchiwa
               owner=root group=root mode=755
     notify: restart uchiwa service
 
   - name: Deploy Uchiwa service manifest
     template: dest=/opt/local/lib/svc/manifest/uchiwa.xml
-              src=uchiwa.smartos_smf_manifest.xml.j2
+              src=../../templates/uchiwa.smartos_smf_manifest.xml.j2
               owner=root group=root mode=644
     notify: import uchiwa service
 

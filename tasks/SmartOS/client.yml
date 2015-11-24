@@ -1,16 +1,12 @@
 ---
-# tasks/client.yml: Deploy various client-side configurations for Sensu
+# tasks/SmartOS/client.yml: Deploy various client-side configurations for Sensu
 # Specific to Joyent SmartOS
   
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
-      - "{{ ansible_os_family }}.yml"
-      - default.yml
+  - include_vars: ../../vars/{{ ansible_distribution }}.yml
 
   - name: Deploy Sensu client service manifest
     template: dest=/opt/local/lib/svc/manifest/sensu-client.xml
-              src=sensu-client.smartos_smf_manifest.xml.j2
+              src=../../templates/sensu-client.smartos_smf_manifest.xml.j2
               owner=root group=root mode=644
     notify: import sensu-client service
               

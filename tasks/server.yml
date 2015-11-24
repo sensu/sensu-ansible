@@ -1,5 +1,9 @@
 ---
 
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+
   - name: Ensure the Sensu config directory is present
     file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes
           owner={{ sensu_user_name }} group={{ sensu_group_name }}
