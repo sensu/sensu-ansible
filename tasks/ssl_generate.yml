@@ -12,7 +12,7 @@
     when: sensu_master
 
   - name: Fetch the ssl_certs tarball from sensuapp.org
-    get_url: url=wget http://sensuapp.org/docs/0.20/files/sensu_ssl_tool.tar
+    get_url: url=http://sensuapp.org/docs/0.20/files/sensu_ssl_tool.tar
              dest={{ sensu_config_path }}/ssl_generation/ssl_certs.tar
     when: sensu_master
     sudo: yes
