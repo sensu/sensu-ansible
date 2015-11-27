@@ -23,7 +23,7 @@
     sudo_user: "{{ sensu_user_name }}"
 
   - name: Untar the ssl_certs tarball from sensuapp.org
-    shell: tar xf ssl_certs.tar chdir={{ sensu_config_path }}/ssl_generation
+    shell: tar xf sensu_ssl_tool.tar chdir={{ sensu_config_path }}/ssl_generation
     args:
       creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
     when: sensu_master
