@@ -13,5 +13,5 @@
          update_cache=yes
 
   - name: Deploy Redis systemd service manifest
-    copy: src=ubuntu_redis_systemd.service
-          dest=/etc/systemd/system/redis-server.service
+    copy: src=../../files/ubuntu_redis_systemd.service
+          dest=/etc/systemd/system/redis.service

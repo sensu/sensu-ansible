@@ -7,6 +7,7 @@ rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
 rabbitmq_port: 5671
 rabbitmq_pkg_state: present
 rabbitmq_server: false
+rabbitmq_service_name: rabbitmq-server
 rabbitmq_sensu_user_name: sensu
 rabbitmq_sensu_password: sensu
 rabbitmq_sensu_vhost: /sensu
@@ -39,11 +40,11 @@ sensu_user_name: sensu
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
-sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/client/cert.pem"
-sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/client/key.pem"
-sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/sensu_ca/cacert.pem"
-sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/server/cert.pem"
-sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/server/key.pem"
+sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
+sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
+sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
+sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
   
 # Uchiwa properties
 uchiwa_dc_name: ~

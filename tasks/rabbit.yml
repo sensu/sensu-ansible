@@ -32,7 +32,7 @@
     service: name={{ item }} state=started enabled=true
     with_items:
       - epmd
-      - rabbitmq
+      - "{{ rabbitmq_service_name }}"
 
   - name: Wait for RabbitMQ to be up and running before asking to create a vhost
     pause: seconds=3

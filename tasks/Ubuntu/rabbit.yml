@@ -13,5 +13,5 @@
                     state=present update_cache=yes
 
   - name: Ensure RabbitMQ is installed
-    apt: name=rabbitmq state={{ rabbitmq_pkg_state }}
+    apt: name=rabbitmq-server state={{ rabbitmq_pkg_state }}
          update_cache=yes

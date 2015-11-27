@@ -17,7 +17,7 @@
 
   - name: Fetch the ssl_certs tarball from sensuapp.org
     get_url: url=http://sensuapp.org/docs/0.20/files/sensu_ssl_tool.tar
-             dest={{ sensu_config_path }}/ssl_generation/ssl_certs.tar
+             dest={{ sensu_config_path }}/ssl_generation/sensu_ssl_tool.tar
     when: sensu_master
     sudo: yes
     sudo_user: "{{ sensu_user_name }}"
@@ -25,21 +25,21 @@
   - name: Untar the ssl_certs tarball from sensuapp.org
     shell: tar xf ssl_certs.tar chdir={{ sensu_config_path }}/ssl_generation
     args:
-      creates: "{{ sensu_config_path }}/ssl_generation/ssl_certs"
+      creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
     when: sensu_master
     sudo: yes
     sudo_user: "{{ sensu_user_name }}"
 
   - name: Generate SSL certs
-    shell: ./ssl_certs.sh generate chdir={{ sensu_config_path }}/ssl_generation/ssl_certs
+    shell: ./ssl_certs.sh generate chdir={{ sensu_config_path }}/ssl_generation/sensu_ssl_tool
     args:
-      creates: "{{ sensu_config_path }}/ssl_generation/ssl_certs/server"
+      creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
     when: sensu_master
     sudo: yes
     sudo_user: "{{ sensu_user_name }}"
 
   - name: Stash the Sensu SSL certs/keys
-    fetch: src={{ sensu_config_path }}/ssl_generation/ssl_certs/{{ item }}
+    fetch: src={{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/{{ item }}
            dest={{ dynamic_data_store }}
     when: sensu_master
     with_items:

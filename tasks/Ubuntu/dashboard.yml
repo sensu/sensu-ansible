@@ -7,7 +7,11 @@
   - name: Retrieve the Uchiwa deb package
     get_url: url={{ uchiwa_pkg_download_url }}
              dest={{ uchiwa_pkg_download_path }}
-             checksum=md5:{{ uchiwa_pkg_download_md5 }}
+             sha256sum={{ uchiwa_pkg_download_sha256sum }}
 
   - name: Install Uchiwa from the retrieved deb package
     apt: deb={{ uchiwa_pkg_download_path }} 
+
+  - name: Deploy Uchiwa config
+    template: src=../../templates/uchiwa_config.json.j2 dest={{ sensu_config_path }}/uchiwa.json
+    notify: restart uchiwa service

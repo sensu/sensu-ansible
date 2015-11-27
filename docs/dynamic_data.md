@@ -54,7 +54,7 @@ As you can see, it resembles the file tree from the node it fetched the data fro
 Next up is this rather unsightly play (still from the `tasks/ssl.yml` playbook):
 ``` yaml
   - name: Deploy the Sensu client SSL cert/key
-    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/client/{{ item }}
+    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/{{ item }}
           owner={{ sensu_user_name }} group={{ sensu_group_name }}
           dest={{ sensu_config_path }}/ssl
     with_items:
@@ -69,7 +69,7 @@ The same method is used for node communication with RabbitMQ:
 `tasks/rabbitmq.yml`
 ``` yaml
   - name: Ensure RabbitMQ SSL certs/keys are in place
-    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/{{ item }}
+    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/{{ item }}
           dest={{ rabbitmq_config_path }}/ssl
     with_items:
       - sensu_ca/cacert.pem
