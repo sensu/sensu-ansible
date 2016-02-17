@@ -7,40 +7,47 @@
       - "{{ ansible_distribution }}.yml"
 
   - name: Ensure Sensu SSL directory exists
-    file: dest={{ sensu_config_path }}/ssl state=directory
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    file:
+      dest: "{{ sensu_config_path }}/ssl"
+      state: directory
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
 
   - name: Ensure SSL generation directory exists
-    file: dest={{ sensu_config_path }}/ssl_generation state=directory
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    file:
+      dest: "{{ sensu_config_path }}/ssl_generation"
+      state: directory
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
     when: sensu_master
 
-  - name: Fetch the ssl_certs tarball from sensuapp.org
-    get_url: url=http://sensuapp.org/docs/0.20/files/sensu_ssl_tool.tar
-             dest={{ sensu_config_path }}/ssl_generation/sensu_ssl_tool.tar
-    when: sensu_master
-    sudo: yes
-    sudo_user: "{{ sensu_user_name }}"
+  - block:
 
-  - name: Untar the ssl_certs tarball from sensuapp.org
-    shell: tar xf sensu_ssl_tool.tar chdir={{ sensu_config_path }}/ssl_generation
-    args:
-      creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
-    when: sensu_master
-    sudo: yes
-    sudo_user: "{{ sensu_user_name }}"
+    - name: Fetch the ssl_certs tarball from sensuapp.org
+      get_url:
+        url: http://sensuapp.org/docs/0.20/files/sensu_ssl_tool.tar
+        dest: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool.tar"
+  
+    - name: Untar the ssl_certs tarball from sensuapp.org
+      shell: tar xf sensu_ssl_tool.tar
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
+  
+    - name: Generate SSL certs
+      shell: ./ssl_certs.sh generate
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
 
-  - name: Generate SSL certs
-    shell: ./ssl_certs.sh generate chdir={{ sensu_config_path }}/ssl_generation/sensu_ssl_tool
-    args:
-      creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
-    when: sensu_master
-    sudo: yes
-    sudo_user: "{{ sensu_user_name }}"
+    when: sensu_master|bool
+    become: true
+    become_user: "{{ sensu_user_name }}"
 
   - name: Stash the Sensu SSL certs/keys
-    fetch: src={{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/{{ item }}
-           dest={{ dynamic_data_store }}
+    fetch:
+      src: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/{{ item }}"
+      dest: "{{ dynamic_data_store }}"
     when: sensu_master
     with_items:
       - sensu_ca/cacert.pem

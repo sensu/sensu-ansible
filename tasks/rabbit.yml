@@ -15,40 +15,42 @@
     file: dest={{ rabbitmq_config_path }}/ssl state=directory
 
   - name: Ensure RabbitMQ SSL certs/keys are in place
-    copy: src={{ item }}
-          dest={{ rabbitmq_config_path }}/ssl
+    copy: src={{ item }} dest={{ rabbitmq_config_path }}/ssl
     with_items:
       - "{{ sensu_ssl_server_cacert }}"
       - "{{ sensu_ssl_server_cert }}"
       - "{{ sensu_ssl_server_key }}"
 
   - name: Deploy RabbitMQ config
-    template: dest={{ rabbitmq_config_path }}/rabbitmq.config
-              src={{ rabbitmq_config_template }}
-              owner=root group=root mode=644
+    template:
+      dest: "{{ rabbitmq_config_path }}/rabbitmq.config"
+      src: "{{ rabbitmq_config_template }}"
+      owner: root
+      group: root
+      mode: 644
     notify: restart rabbitmq service
 
   - name: Ensure RabbitMQ is running
-    service: name={{ item }} state=started enabled=true
-    with_items:
-      - epmd
-      - "{{ rabbitmq_service_name }}"
+    service:
+      name: "{{ rabbitmq_service_name }}"
+      state: started
+      enabled: true
 
   - name: Wait for RabbitMQ to be up and running before asking to create a vhost
     pause: seconds=3
 
-  - name: Ensure Sensu RabbitMQ vhost exists
-    rabbitmq_vhost: name={{ rabbitmq_sensu_vhost }} state=present
-    sudo: yes
-    sudo_user: rabbitmq
+  - block:
+    - name: Ensure Sensu RabbitMQ vhost exists
+      rabbitmq_vhost: name={{ rabbitmq_sensu_vhost }} state=present
 
-  - name: Ensure Sensu RabbitMQ user has access to the Sensu vhost
-    rabbitmq_user: user={{ rabbitmq_sensu_user_name }}
-                   password={{ rabbitmq_sensu_password }}
-                   vhost={{ rabbitmq_sensu_vhost }}
-                   configure_priv=.*
-                   read_priv=.*
-                   write_priv=.*
-                   state=present
-    sudo: yes
-    sudo_user: rabbitmq
+    - name: Ensure Sensu RabbitMQ user has access to the Sensu vhost
+      rabbitmq_user:
+        user: "{{ rabbitmq_sensu_user_name }}"
+        password: "{{ rabbitmq_sensu_password }}"
+        vhost: "{{ rabbitmq_sensu_vhost }}"
+        configure_priv: .*
+        read_priv: .*
+        write_priv: .*
+        state: present
+    become: true
+    become_user: rabbitmq

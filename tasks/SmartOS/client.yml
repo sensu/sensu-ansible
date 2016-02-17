@@ -5,12 +5,14 @@
   - include_vars: ../../vars/{{ ansible_distribution }}.yml
 
   - name: Deploy Sensu client service manifest
-    template: dest=/opt/local/lib/svc/manifest/sensu-client.xml
-              src=../../templates/sensu-client.smartos_smf_manifest.xml.j2
-              owner=root group=root mode=644
-    notify: import sensu-client service
-              
-  - name: Initial import of Sensu client service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-client.xml
-    args:
-      creates: "/var/svc/log/application-sensu-client:default.log"
+    template:
+      dest: /opt/local/lib/svc/manifest/sensu-client.xml
+      src: '../../templates/sensu-client.smartos_smf_manifest.xml.j2'
+      owner: root
+      group: root
+      mode: 644
+    notify:
+      - import sensu-client service
+      - restart sensu-client service
+
+  - meta: flush_handlers

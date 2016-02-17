@@ -9,9 +9,11 @@
     when: sensu_ssl_gen_certs
 
   - name: Deploy the Sensu client SSL cert/key
-    copy: src={{ item }}
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
-          dest={{ sensu_config_path }}/ssl
+    copy:
+      src: "{{ item }}"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      dest: "{{ sensu_config_path }}/ssl"
     with_items:
       - "{{ sensu_ssl_client_cert }}"
       - "{{ sensu_ssl_client_key }}"

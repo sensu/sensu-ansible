@@ -6,19 +6,27 @@
       - "{{ ansible_distribution }}.yml"
 
   - name: Ensure the Sensu config directory is present
-    file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    file:
+      dest: "{{ sensu_config_path }}/conf.d"
+      state: directory
+      recurse: true
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
 
   - name: Deploy Sensu server API configuration
-    template: dest={{ sensu_config_path }}/conf.d/api.json
-              owner={{ sensu_user_name }} group={{ sensu_group_name }}
-              src=sensu-api.json.j2
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/api.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: sensu-api.json.j2
     notify: restart sensu-api service
 
   - name: Deploy Sensu Redis configuration
-    template: dest={{ sensu_config_path }}/conf.d/redis.json
-              owner={{ sensu_user_name }} group={{ sensu_group_name }}
-              src=sensu-redis.json.j2
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/redis.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: sensu-redis.json.j2
     notify: restart sensu-api service
 
   - include: SmartOS/server.yml

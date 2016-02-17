@@ -5,20 +5,24 @@
   - include_vars: ../../vars/{{ ansible_distribution }}.yml
 
   - name: Ensure the Sensu group is present
-    group: name={{ sensu_group_name }}
-             state=present
+    group: name={{ sensu_group_name }} state=present
              
   - name: Ensure the Sensu user is present
-    user: name={{ sensu_user_name }}
-          group={{ sensu_group_name }}
-          shell=/bin/false
-          home={{ sensu_config_path }}
-          createhome=yes
-          state=present
+    user:
+      name: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      shell: /bin/false
+      home: "{{ sensu_config_path }}"
+      createhome: true
+      state: present
 
   - name: Ensure the Sensu config directory is present
-    file: dest={{ sensu_config_path }}/conf.d state=directory recurse=yes
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    file:
+      dest: "{{ sensu_config_path }}/conf.d"
+      state: directory
+      recurse: true
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
 
   - name: Ensure Sensu dependencies are installed
     pkgin: name=build-essential,ruby21-base state=present
