@@ -2,7 +2,7 @@
 # tasks/Ubuntu/dashboard.yml: Deployment of the Uchiwa dashboard
 # Specific to Ubuntu
 
-  - include_vars: ../../vars/{{ ansible_distribution }}.yml
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Retrieve the Uchiwa deb package
     get_url:
@@ -15,6 +15,6 @@
 
   - name: Deploy Uchiwa config
     template:
-      src: '../../templates/uchiwa_config.json.j2'
+      src: uchiwa_config.json.j2
       dest: "{{ sensu_config_path }}/uchiwa.json"
     notify: restart uchiwa service

@@ -3,12 +3,12 @@
 # a Sensu 'master' node.
 # Specific to SmartOS
 
-  - include_vars: ../../vars/{{ ansible_distribution }}.yml
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Deploy Sensu server service manifest
     template:
       dest: /opt/local/lib/svc/manifest/sensu-server.xml
-      src: '../../templates/sensu-server.smartos_smf_manifest.xml.j2'
+      src: sensu-server.smartos_smf_manifest.xml.j2
       owner: root
       group: root
       mode: 644
@@ -17,7 +17,7 @@
   - name: Deploy Sensu API service manifest
     template:
       dest: /opt/local/lib/svc/manifest/sensu-api.xml
-      src: '../../templates/sensu-api.smartos_smf_manifest.xml.j2'
+      src: sensu-api.smartos_smf_manifest.xml.j2
       owner: root
       group: root
       mode: 644

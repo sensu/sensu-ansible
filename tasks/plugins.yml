@@ -15,7 +15,7 @@
   - name: Register available checks
     local_action: command ls {{ static_data_store }}/sensu/checks
     register: sensu_available_checks
-    changed_when: False
+    changed_when: false
 
   - name: Deploy check plugins
     copy:

@@ -2,7 +2,7 @@
 # tasks/Ubuntu/rabbit.yml: Deploy RabbitMQ
 # Specific to Ubuntu
 
-  - include_vars: ../../vars/{{ ansible_distribution }}.yml
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure the RabbitMQ APT repo GPG key is present
     apt_key:

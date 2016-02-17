@@ -20,6 +20,10 @@
       - "{{ sensu_ssl_server_cacert }}"
       - "{{ sensu_ssl_server_cert }}"
       - "{{ sensu_ssl_server_key }}"
+    notify:
+      - restart rabbitmq service
+      - restart sensu-api service
+      - restart sensu-server service
 
   - name: Deploy RabbitMQ config
     template:

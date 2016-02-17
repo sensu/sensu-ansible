@@ -2,7 +2,7 @@
 # tasks/SmartOS/main.yml: "Set-up" playbook for cmacrae.sensu role
 # This takes care of base prerequisites for Joyent SmartOS
 
-  - include_vars: ../../vars/{{ ansible_distribution }}.yml
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure the Sensu group is present
     group: name={{ sensu_group_name }} state=present

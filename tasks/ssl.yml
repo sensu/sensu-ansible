@@ -17,3 +17,4 @@
     with_items:
       - "{{ sensu_ssl_client_cert }}"
       - "{{ sensu_ssl_client_key }}"
+    notify: restart sensu-client service
