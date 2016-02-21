@@ -8,9 +8,11 @@
 
   - name: restart sensu-server service
     service: name=sensu-server state=restarted
+    delegate_to: "{{ sensu_api_host }}"
 
   - name: restart sensu-api service
     service: name=sensu-api state=restarted
+    delegate_to: "{{ sensu_api_host }}"
 
   - name: restart sensu-client service
     service: name=sensu-client state=restarted
