@@ -1,7 +1,7 @@
 # Testing
 A small testing framework is provided with this role using [Vagrant](https://vagrantup.com/).  
 
-To test this role locally, once you've set up Vagrant, simply `cd` to `tests` and run `vagrant up`, after which you can visit the following URLs in your browser for the associated deployments:  
+To test this role locally, once you've set up Vagrant, simply `cd` to `tests` and run `vagrant up [ubuntu15|centos7]`, after which you can visit the following URLs in your browser for the associated deployments:  
 - Ubuntu 15.04: `http://localhost:3000`  
 - CentOS 7: `http://localhost:3001`  
 
