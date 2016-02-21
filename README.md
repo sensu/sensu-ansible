@@ -11,14 +11,6 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
 
-## UPDATE [Feb 10th, 2016]
-Although this role's development has been dormant a while, I do plan on restarting development soon.  
-Support for Ubuntu was written over on [the ubuntu branch](https://github.com/cmacrae/ansible-sensu/tree/ubuntu).  
-
-I plan to resume development shortly and overhall most of the code (some of it isn't great).
-
-So... watch this space!
-
 ## Documentation [![Documentation](https://readthedocs.org/projects/ansible-sensu/badge/?version=latest)](http://rtfm.cmacr.ae/)
 [Read the full documentation](http://rtfm.cmacr.ae/) for a comprehensive overview of this role and its powerful features.
 
