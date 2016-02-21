@@ -27,3 +27,10 @@
   
   - name: import uchiwa service
     command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
+
+  - name: Build and deploy Uchiwa
+    shell: npm install --production
+    args:
+      chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+    become: true
+    become_user: "{{ sensu_user_name }}"

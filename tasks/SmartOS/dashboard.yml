@@ -38,23 +38,17 @@
       - pkg
       - src
 
-  - block:
-
-    - name: Fetch Uchiwa from GitHub
-      command: go get github.com/sensu/uchiwa
-      environment:
-        GOPATH: "{{ uchiwa_path }}/go"
-        args:
-          creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
-
-    - name: Build and deploy Uchiwa
-      shell: npm install --production
-      args:
-        chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
-        creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa/public/bower_components"
-
+  - name: Fetch Uchiwa from GitHub
+    command: go get github.com/sensu/uchiwa
+    environment:
+      GOPATH: "{{ uchiwa_path }}/go"
+    args:
+      creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+    notify: Build and deploy Uchiwa
     become: true
     become_user: "{{ sensu_user_name }}"
+
+  - meta: flush_handlers
 
   - name: Deploy Uchiwa config
     template:
