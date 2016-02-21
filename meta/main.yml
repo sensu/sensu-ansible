@@ -1,22 +1,8 @@
----
 galaxy_info:
   author: Calum MacRae
-  description: Roll out a full Sensu stack, including the Uchiwa dashboard
-  #company: your company (optional)
-  # Some suggested licenses:
-  # - BSD (default)
-  # - MIT
-  # - GPLv2
-  # - GPLv3
-  # - Apache
-  # - CC-BY
+  description: Deploy a full Sensu monitoring stack; including Redis, RabbitMQ & the Uchiwa dashboard
   license: MIT
-  min_ansible_version: 1.4
-  #
-  # Below are all platforms currently available. Just uncomment
-  # the ones that apply to your role. If you don't see your 
-  # platform on this list, let us know and we'll get it added!
-  #
+  min_ansible_version: 2.0
   platforms:
   #- name: EL
   #  versions:
@@ -28,6 +14,14 @@ galaxy_info:
   #  versions:
   #  - all
   #  - any
+  #- name: Solaris
+  #  versions:
+  #  - all
+  #  - 10
+  #  - 11.0
+  #  - 11.1
+  #  - 11.2
+  #  - 11.3
   #- name: Fedora
   #  versions:
   #  - all
@@ -36,10 +30,18 @@ galaxy_info:
   #  - 18
   #  - 19
   #  - 20
-  #- name: SmartOS
+  #  - 21
+  #  - 22
+  #  - 23
+  #- name: Windows
   #  versions:
   #  - all
+  #  - 2012R2
+  - name: SmartOS
+    versions:
+  #  - all
   #  - any
+     - 15.x.x
   #- name: opensuse
   #  versions:
   #  - all
@@ -60,6 +62,9 @@ galaxy_info:
   #- name: FreeBSD
   #  versions:
   #  - all
+  #  - 10.0
+  #  - 10.1
+  #  - 10.2
   #  - 8.0
   #  - 8.1
   #  - 8.2
@@ -69,8 +74,9 @@ galaxy_info:
   #  - 9.1
   #  - 9.1
   #  - 9.2
-  #- name: Ubuntu
-  #  versions:
+  #  - 9.3
+  - name: Ubuntu
+    versions:
   #  - all
   #  - lucid
   #  - maverick
@@ -81,6 +87,9 @@ galaxy_info:
   #  - raring
   #  - saucy
   #  - trusty
+  #  - utopic
+    - vivid
+  #  - wily
   #- name: SLES
   #  versions:
   #  - all
@@ -98,34 +107,25 @@ galaxy_info:
   #  versions:
   #  - all
   #  - etch
+  #  - jessie
   #  - lenny
   #  - squeeze
   #  - wheezy
-  - name: SmartOS
-    versions:
-    - 15.1.0
-  #
-  # Below are all categories currently available. Just as with
-  # the platforms above, uncomment those that apply to your role.
-  #
-  categories:
-  - cloud
-  #- cloud:ec2
-  #- cloud:gce
-  #- cloud:rax
-  #- clustering
-  #- database
-  #- database:nosql
-  #- database:sql
-  #- development
-  - monitoring
-  #- networking
-  #- packaging
-  - system
-  - web
+  
+  galaxy_tags:
+    - cloud
+    - monitoring
+    - system
+    - web
+    - sensu
+    - rabbitmq
+    - redis
+    - metrics
+    - amqp
+    - alerting
+    - stack
+    - dashboard
 dependencies: []
-  # List your role dependencies here, one per line. Only
-  # dependencies available via galaxy should be listed here.
+  # List your role dependencies here, one per line.
   # Be sure to remove the '[]' above if you add dependencies
   # to this list.
-  
