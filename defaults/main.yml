@@ -1,4 +1,7 @@
 ---
+# Service deployment options
+sensu_deploy_rabbitmq: true
+sensu_deploy_redis: true
 
 # RabbitMQ server properties
 rabbitmq_config_path: /etc/rabbitmq

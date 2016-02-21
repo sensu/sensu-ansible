@@ -6,7 +6,7 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 
 ## Features
 - Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
-- Tight integration with the Ansible inventory - deployment of monitoring checks based on role defined in your inventory
+- Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
@@ -31,6 +31,13 @@ All variables have sensible defaults, which can be found in `defaults/main.yml`.
 The current version includes the following variables:
 
 ## Defaults
+
+### Service Deployment Options
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+|`sensu_deploy_rabbitmq` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ |
+|`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure Redis |
+_Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)
 | Name               | Default Value | Description                  |

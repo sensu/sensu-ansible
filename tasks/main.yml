@@ -12,10 +12,12 @@
   - include: rabbit.yml
     tags: rabbitmq
     when: rabbitmq_server
+          and sensu_deploy_rabbitmq
 
   - include: redis.yml
     tags: redis
     when: redis_server
+          and sensu_deploy_redis
 
   - include: server.yml
     tags: server
