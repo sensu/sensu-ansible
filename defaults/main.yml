@@ -54,6 +54,7 @@ uchiwa_user_name: admin
 uchiwa_password: admin
 uchiwa_port: 3000
 uchiwa_refresh: 5
-uchiwa_pkg_download_md5: ~
+uchiwa_pkg_download_sha256sum: ~
 uchiwa_pkg_download_path: ~
+uchiwa_pkg_version: ~
 uchiwa_pkg_download_url: ~
