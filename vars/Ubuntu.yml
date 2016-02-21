@@ -4,6 +4,7 @@
 
 # Redis server properties
 redis_pkg_repo: 'ppa:rwky/redis'
+redis_pkg_name: redis-server
 
 # Sensu/Uchiwa user/group/service properties
 sensu_user_name: root

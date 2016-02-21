@@ -14,12 +14,12 @@ An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensu
 ### Current Release
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
+- [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 
 ### Future Releases
 - OpenBSD
 - FreeBSD
 - NetBSD
-- EL (RHEL/CentOS)
 - Debian
 
 ## Role Variables

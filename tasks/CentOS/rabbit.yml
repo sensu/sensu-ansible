@@ -1,0 +1,13 @@
+---
+# tasks/CentOS/rabbit.yml: Deploy RabbitMQ
+# Specific to CentOS
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure Erlang & RabbitMQ are installed
+    yum:
+      name:
+        - erlang
+        - rabbitmq-server
+      state: present
+      enablerepo: epel

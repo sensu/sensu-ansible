@@ -4,12 +4,12 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.0
   platforms:
-  #- name: EL
-  #  versions:
+  - name: EL
+    versions:
   #  - all
   #  - 5
   #  - 6
-  #  - 7
+    - 7
   #- name: GenericUNIX
   #  versions:
   #  - all

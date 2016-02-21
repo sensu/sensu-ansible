@@ -12,7 +12,7 @@
 
   - name: Ensure Redis is installed
     apt:
-      name: redis-server
+      name: "{{ redis_pkg_name }}"
       state: "{{ redis_pkg_state }}"
       update_cache: true
 

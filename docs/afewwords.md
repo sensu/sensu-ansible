@@ -18,7 +18,6 @@ Coming in the near future:
 - OpenBSD
 - FreeBSD
 - NetBSD
-- EL
 - Debian
 
 I'd be happy to add any others to the list if high demand shows.

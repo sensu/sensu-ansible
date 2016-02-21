@@ -1,0 +1,17 @@
+---
+# tasks/CentOS/redis.yml: Deploy Redis
+# Specific to CentOS
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure Redis is installed
+    yum:
+      name: "{{ redis_pkg_name }}"
+      state: "{{ redis_pkg_state }}"
+      enablerepo: epel
+
+  - name: Ensure Redis binds to accessible IP
+    lineinfile:
+      dest: /etc/redis.conf
+      regexp: '^bind'
+      line: 'bind 0.0.0.0'

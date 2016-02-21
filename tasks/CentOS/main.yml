@@ -1,0 +1,21 @@
+---
+# tasks/CentOS/main.yml: CentOS specific set-up
+# This takes care of base prerequisites for CentOS
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure the Sensu Core Yum repo is present
+    copy:
+      dest: /etc/yum.repos.d/sensu.repo
+      content: |
+        [sensu]
+        name=sensu
+        baseurl=http://repositories.sensuapp.org/yum/$basearch/
+        gpgcheck=0
+        enabled=1
+      owner: root
+      group: root
+      mode: 0644
+
+  - name: Ensure Sensu is installed
+    yum: name=sensu state={{ sensu_pkg_state }}
