@@ -13,6 +13,7 @@ pages:
   - [ 'custom_client_config.md', 'Usage', 'Custom client configuration' ]
   - [ 'deploy_plugins.md', 'Usage', 'Deployment of handlers/filters/mutators' ]
   - [ 'sensitive_info.md', 'Usage', 'Sensitive information in version control' ]
+  - [ 'testing.md', 'Usage', 'Testing' ]
   - [ 'dynamic_data.md','Conventions','Dynamic data store' ]
   - [ 'dynamic_checks.md','Conventions','Dynamic check deployment' ]
   - [ 'afewwords.md','About','A few words from the author' ]

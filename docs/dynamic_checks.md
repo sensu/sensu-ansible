@@ -78,12 +78,15 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
   - name: Register available checks
     local_action: command ls {{ static_data_store }}/sensu/checks
     register: sensu_available_checks
-    changed_when: False
+    changed_when: false
 
   - name: Deploy check plugins
-    copy: src={{ static_data_store }}/sensu/checks/{{ item }}/
-          dest={{ sensu_config_path }}/plugins/ mode=755
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    copy:
+      src: "{{ static_data_store }}/sensu/checks/{{ item }}/"
+      dest: "{{ sensu_config_path }}/plugins/"
+      mode: 0755
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
     when: sensu_available_checks.stdout.find('{{ item }}') != -1
     with_flattened:
       - group_names

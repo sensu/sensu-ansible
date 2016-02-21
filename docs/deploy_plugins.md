@@ -63,33 +63,43 @@ Finally, we have the actual handler script [`pushover.rb`](https://github.com/se
 
 
 These are all deployed when the role runs through the `tasks/plugins.yml` playbook, in particular these plays:
-```
+``` yaml
   - name: Deploy handler plugins
-    copy: src={{ static_data_store }}/sensu/handlers/
-          dest={{ sensu_config_path }}/plugins/ mode=755
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    copy:
+      src: "{{ static_data_store }}/sensu/handlers/"
+      dest: "{{ sensu_config_path }}/plugins/"
+      mode: 0755
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
     notify: restart sensu-client service
 
   - name: Deploy filter plugins
-    copy: src={{ static_data_store }}/sensu/filters/
-          dest={{ sensu_config_path }}/plugins/ mode=755
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    copy:
+      src: "{{ static_data_store }}/sensu/filters/"
+      dest: "{{ sensu_config_path }}/plugins/"
+      mode: 0755
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
     notify: restart sensu-client service
 
   - name: Deploy mutator plugins
-    copy: src={{ static_data_store }}/sensu/mutators/
-          dest={{ sensu_config_path }}/plugins/ mode=755
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    copy:
+      src: "{{ static_data_store }}/sensu/mutators/"
+      dest: "{{ sensu_config_path }}/plugins/"
+      mode: 0755
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
     notify: restart sensu-client service
 
   - name: Deploy check/handler/filter/mutator definitions to the master
-    template: src={{ static_data_store }}/sensu/definitions/{{ item }}.j2
-          dest={{ sensu_config_path }}/conf.d/{{ item }}
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
+    template:
+      src: "{{ static_data_store }}/sensu/definitions/{{ item }}.j2"
+      dest: "{{ sensu_config_path }}/conf.d/{{ item }}"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
     when: sensu_master
     with_lines:
-      - ls {{ static_data_store }}/sensu/definitions | cut -d. --fields=1,2
+      - ls {{ static_data_store }}/sensu/definitions | sed 's/\.j2//'
     notify: restart sensu-api service
-
 ```
 Quite straight forward and repetitive. If you skim this code, it may become clear that failures could be introduced if the source directories don't exist within your static data store. That's correct. You may have noticed that the example output `tree` shows both the `filters` & `mutators` directories are empty. It's expected that such features will be used, but if you don't wish to use filters or mutators, you still need to ensure these directories exist.
