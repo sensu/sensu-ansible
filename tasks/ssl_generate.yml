@@ -25,7 +25,7 @@
 
     - name: Fetch the ssl_certs tarball from sensuapp.org
       get_url:
-        url: http://sensuapp.org/docs/0.20/files/sensu_ssl_tool.tar
+        url: http://sensuapp.org/docs/0.21/files/sensu_ssl_tool.tar
         dest: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool.tar"
   
     - name: Untar the ssl_certs tarball from sensuapp.org
