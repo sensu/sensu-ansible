@@ -1,9 +1,7 @@
 ---
 # tasks/server.yml: Deploy Sensu Server/API
 
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure the Sensu config directory is present
     file:

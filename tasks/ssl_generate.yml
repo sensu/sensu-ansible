@@ -2,9 +2,7 @@
 # tasks/ssl_generate.yml: Generate SSL data and stash to dynamic
 # data store for deployment to clients
 
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure Sensu SSL directory exists
     file:

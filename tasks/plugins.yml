@@ -1,9 +1,7 @@
 ---
 # tasks/plugins.yml: Deploy available checks/plugins/handlers/filters/mutators
 
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure Sensu plugin directory exists
     file:

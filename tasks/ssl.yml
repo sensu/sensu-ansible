@@ -1,9 +1,7 @@
 ---
 # tasks/ssl.yml: Deploy the client SSL cert/key to client systems
 
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
+  - include_vars: "{{ ansible_distribution }}.yml"
 
   - include: ssl_generate.yml
     when: sensu_ssl_gen_certs
