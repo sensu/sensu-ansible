@@ -13,8 +13,8 @@ As support for other operating systems/distributions is written, they will be ad
 
 ## Caveats
 It is expected that the following two handlers, triggered at the end of the test run will fail:  
-- `restart sensu-server service`
-- `restart sensu-api service`
+- `restart sensu-server service`  
+- `restart sensu-api service`  
 
 Both these handlers use the `delegate_to` directive, which does not play nice with Vagrant.  
 This __is__ expected to work in real deployments.
