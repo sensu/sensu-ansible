@@ -1,0 +1,82 @@
+---
+# tasks/SmartOS/dashboard.yml: Deployment of the Uchiwa dashboard
+# Specific to Joyent SmartOS
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure Uchiwa (dashboard) dependencies are installed
+    pkgin: name=go state=present
+
+  - name: Ensure Uchiwa directory exists
+    file:
+      dest: "{{ uchiwa_path }}"
+      state: directory
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      recurse: true
+
+  - name: Ensure Uchiwa Go/config directory exists
+    file:
+      dest: "{{ uchiwa_path }}/{{ item }}"
+      state: directory
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      recurse: true
+    with_items:
+      - etc
+      - go
+
+  - name: Ensure Uchiwa GOPATH exists
+    file:
+      dest: "{{ uchiwa_path }}/go/{{ item }}"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      state: directory
+      recurse: true
+    with_items:
+      - bin
+      - pkg
+      - src
+
+  - name: Fetch Uchiwa from GitHub
+    command: go get github.com/sensu/uchiwa
+    environment:
+      GOPATH: "{{ uchiwa_path }}/go"
+    args:
+      creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+    notify: Build and deploy Uchiwa
+    become: true
+    become_user: "{{ sensu_user_name }}"
+
+  - meta: flush_handlers
+
+  - name: Deploy Uchiwa config
+    template:
+      src: uchiwa_config.json.j2
+      dest: "{{ uchiwa_path }}/etc/config.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+    notify: restart uchiwa service
+
+  - name: Deploy Uchiwa service script
+    template:
+      src: uchiwa.sh.j2
+      dest: /opt/local/lib/svc/method/uchiwa
+      owner: root
+      group: root
+      mode: 0755
+    notify: restart uchiwa service
+
+  - name: Deploy Uchiwa service manifest
+    template:
+      dest: /opt/local/lib/svc/manifest/uchiwa.xml
+      src: uchiwa.smartos_smf_manifest.xml.j2
+      owner: root
+      group: root
+      mode: 644
+    notify: import uchiwa service
+
+  - meta: flush_handlers
+
+  - name: Ensure Uchiwa server service is running
+    service: name=uchiwa state=started enabled=yes

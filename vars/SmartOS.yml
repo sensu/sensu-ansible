@@ -1,0 +1,10 @@
+---
+# vars/SmartOS.yml: Variables for Joyent SmartOS
+# Defaults are defined in vars/default.yml
+
+# RabbitMQ server properties
+rabbitmq_service_name: rabbitmq
+rabbitmq_config_path: /opt/local/etc/rabbitmq
+
+# Sensu/Uchiwa user/group/service properties
+sensu_config_path: /opt/local/etc/sensu

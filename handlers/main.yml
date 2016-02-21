@@ -1,20 +1,23 @@
 ---
 
   - name: restart rabbitmq service
-    service: name=rabbitmq state=restarted
+    service: name={{ rabbitmq_service_name }} state=restarted
   
   - name: restart uchiwa service
     service: name=uchiwa state=restarted
 
   - name: restart sensu-server service
     service: name=sensu-server state=restarted
+    delegate_to: "{{ sensu_api_host }}"
 
   - name: restart sensu-api service
     service: name=sensu-api state=restarted
+    delegate_to: "{{ sensu_api_host }}"
 
   - name: restart sensu-client service
     service: name=sensu-client state=restarted
 
+  # Joyent SmartOS specific handlers
   - name: import sensu-server service
     command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
   
@@ -26,4 +29,10 @@
   
   - name: import uchiwa service
     command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
-  
+
+  - name: Build and deploy Uchiwa
+    shell: npm install --production
+    args:
+      chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+    become: true
+    become_user: "{{ sensu_user_name }}"

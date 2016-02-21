@@ -1,10 +1,13 @@
 ---
 
 # RabbitMQ server properties
-rabbitmq_config_path: /opt/local/etc/rabbitmq
+rabbitmq_config_path: /etc/rabbitmq
+rabbitmq_config_template: rabbitmq.config.j2
 rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
 rabbitmq_port: 5671
+rabbitmq_pkg_state: present
 rabbitmq_server: false
+rabbitmq_service_name: rabbitmq-server
 rabbitmq_sensu_user_name: sensu
 rabbitmq_sensu_password: sensu
 rabbitmq_sensu_vhost: /sensu
@@ -12,6 +15,8 @@ rabbitmq_sensu_vhost: /sensu
 # Redis server properties
 redis_host: "{{ groups['redis_servers'][0] }}"
 redis_server: false
+redis_pkg_repo: ~
+redis_pkg_state: present
 redis_port: 6379
 
 # Sensu/Uchiwa user/group/service properties
@@ -23,7 +28,8 @@ sensu_api_password: secret
 sensu_api_uchiwa_path: ''
 sensu_api_timeout: 5000
 sensu_client_config: client.json.j2
-sensu_config_path: /opt/local/etc/sensu
+sensu_config_path: /etc/sensu
+sensu_pkg_state: present
 sensu_gem_state: present
 sensu_plugin_gem_state: present
 sensu_group_name: sensu
@@ -32,6 +38,14 @@ sensu_include_dashboard: false
 sensu_master: false
 sensu_user_name: sensu
 
+# Sensu/RabbitMQ SSL certificate properties
+sensu_ssl_gen_certs: true
+sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
+sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
+sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
+sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
+  
 # Uchiwa properties
 uchiwa_dc_name: ~
 uchiwa_path: /opt/uchiwa
@@ -40,3 +54,7 @@ uchiwa_user_name: admin
 uchiwa_password: admin
 uchiwa_port: 3000
 uchiwa_refresh: 5
+uchiwa_pkg_download_sha256sum: ~
+uchiwa_pkg_download_path: ~
+uchiwa_pkg_version: ~
+uchiwa_pkg_download_url: ~

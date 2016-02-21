@@ -1,4 +1,4 @@
-# Ansible Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/list#/roles/3802)
+# Ansible Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/cmacrae/sensu/)
 An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
 
 [![Join the chat at https://gitter.im/cmacrae/ansible-sensu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cmacrae/ansible-sensu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -11,18 +11,16 @@ An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensu
 - Highly configurable
 
 ## Supported Platforms
-In this initial release [SmartOS](https://smartos.org) will be the only supported platform.
-However, I am dedicating a lot of time to this role and will be adding support for all major BSD & Linux platforms.
-
 ### Current Release
-- [SmartOS - base-64 15.1.0](https://docs.joyent.com/images/smartos/base#base-15.1.0)
+- [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
+- [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
 
 ### Future Releases
 - OpenBSD
 - FreeBSD
 - NetBSD
-- EL
-- Ubuntu / Debian
+- EL (RHEL/CentOS)
+- Debian
 
 ## Role Variables
 All variables have sensible defaults, which can be found in `defaults/main.yml`.  

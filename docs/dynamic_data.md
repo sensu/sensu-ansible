@@ -51,30 +51,34 @@ data/dynamic/
 As you can see, it resembles the file tree from the node it fetched the data from. This is configurable behavior, and can be set otherwise if you find this inconvenient/unsightly. See [ the `fetch` documentation](http://docs.ansible.com/fetch_module.html) for more information.
 
 ## Deployment of the data fetched to the dynamic data store
-Next up is this rather unsightly play (still from the `tasks/ssl.yml` playbook):
+Next up is this nifty little play (still from the `tasks/ssl.yml` playbook):
 ``` yaml
   - name: Deploy the Sensu client SSL cert/key
-    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/client/{{ item }}
-          owner={{ sensu_user_name }} group={{ sensu_group_name }}
-          dest={{ sensu_config_path }}/ssl
+    copy:
+      src: "{{ item }}"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      dest: "{{ sensu_config_path }}/ssl"
     with_items:
-      - cert.pem
-      - key.pem
-
+      - "{{ sensu_ssl_client_cert }}"
+      - "{{ sensu_ssl_client_key }}"
+    notify: restart sensu-client service
 ```
-Blegh! Pretty ugly, right? Well, it may not be so great looking, but it's pretty nifty.
 It takes care of distributing the SSL certificates to the client systems so they can interact with the Sensu API.
 
 The same method is used for node communication with RabbitMQ:
 `tasks/rabbitmq.yml`
 ``` yaml
   - name: Ensure RabbitMQ SSL certs/keys are in place
-    copy: src={{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/ssl_certs/{{ item }}
-          dest={{ rabbitmq_config_path }}/ssl
+    copy: src={{ item }} dest={{ rabbitmq_config_path }}/ssl
     with_items:
-      - sensu_ca/cacert.pem
-      - server/cert.pem
-      - server/key.pem
+      - "{{ sensu_ssl_server_cacert }}"
+      - "{{ sensu_ssl_server_cert }}"
+      - "{{ sensu_ssl_server_key }}"
+    notify:
+      - restart rabbitmq service
+      - restart sensu-api service
+      - restart sensu-server service
 ```
 
 ## So, what do I need to do?

@@ -1,27 +1,36 @@
 ---
+# tasks/client.yml: Deploy various client-side configurations for Sensu
+  
+  - include_vars: "{{ item }}"
+    with_first_found:
+      - "{{ ansible_distribution }}.yml"
+
+  - name: Ensure the Sensu config directory is present
+    file:
+      dest: "{{ sensu_config_path }}/conf.d"
+      state: directory
+      recurse: true
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
 
   - name: Deploy Sensu client RabbitMQ configuration
-    template: dest="{{ sensu_config_path }}/conf.d/rabbitmq.json"
-              owner={{ sensu_user_name }} group={{ sensu_group_name }}
-              src=rabbitmq.json.j2
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/rabbitmq.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: rabbitmq.json.j2
     notify: restart sensu-client service
 
   - name: Deploy Sensu client service configuration
-    template: dest="{{ sensu_config_path }}/conf.d/client.json"
-              owner={{ sensu_user_name }} group={{ sensu_group_name }}
-              src={{ sensu_client_config  }}
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/client.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: "{{ sensu_client_config  }}"
     notify: restart sensu-client service
 
-  - name: Deploy Sensu client service manifest
-    template: dest=/opt/local/lib/svc/manifest/sensu-client.xml
-              src=sensu-client.smartos_smf_manifest.xml.j2
-              owner=root group=root mode=644
-    notify: import sensu-client service
-              
-  - name: Initial import of Sensu client service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-client.xml
-    args:
-      creates: "/var/svc/log/application-sensu-client:default.log"
+  - include: SmartOS/client.yml
+    when: ansible_distribution == "SmartOS"
 
   - name: Ensure Sensu client service is running
     service: name=sensu-client state=started enabled=yes
