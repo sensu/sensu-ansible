@@ -38,11 +38,10 @@ galaxy_info:
   #  - all
   #  - 2012R2
   - name: SmartOS
-    versions:
+  #  versions:
   #  - all
   #  - any
-     - 15.x.x
-  #- name: opensuse
+  # - name: opensuse
   #  versions:
   #  - all
   #  - 12.1
