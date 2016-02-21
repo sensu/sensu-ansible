@@ -12,7 +12,7 @@ To log in, use `admin` as both the username & password.
 As support for other operating systems/distributions is written, they will be added as options for testing.
 
 ## Caveats
-It is expected that the following two handlers, triggered at the end of the test run will fail: 
+It is expected that the following two handlers, triggered at the end of the test run will fail:  
 - `restart sensu-server service`
 - `restart sensu-api service`
 
