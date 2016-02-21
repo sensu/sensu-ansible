@@ -1,31 +1,33 @@
 ---
 # tasks/main.yml: "Master" playbook for the cmacrae.sensu role
 
-  - include_vars: "{{ item }}"
-    with_first_found:
-      - "{{ ansible_distribution }}.yml"
+  - include_vars: "{{ ansible_distribution }}.yml"
 
-  - include: SmartOS/main.yml tags=setup
-    when: ansible_distribution == "SmartOS"
-
-  - include: Ubuntu/main.yml tags=setup
-    when: ansible_distribution == "Ubuntu"
+  - include: "{{ ansible_distribution }}/main.yml"
+    tags: setup
       
-  - include: ssl.yml tags=ssl
+  - include: ssl.yml
+    tags: ssl
 
-  - include: rabbit.yml tags=rabbitmq
+  - include: rabbit.yml
+    tags: rabbitmq
     when: rabbitmq_server
 
-  - include: redis.yml tags=redis
+  - include: redis.yml
+    tags: redis
     when: redis_server
 
-  - include: server.yml tags=server
+  - include: server.yml
+    tags: server
     when: sensu_master
 
-  - include: dashboard.yml tags=dashboard
+  - include: dashboard.yml
+    tags: dashboard
     when: sensu_include_dashboard
     
-  - include: client.yml tags=client
+  - include: client.yml
+    tags: client
 
-  - include: plugins.yml tags=plugins
+  - include: plugins.yml
+    tags: plugins
     when: sensu_include_plugins
