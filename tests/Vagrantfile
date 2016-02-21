@@ -1,0 +1,4 @@
+vagrantfiles = %w[vms/Vagrantfile.ubuntu15]
+vagrantfiles.each do |vagrantfile|
+  load File.expand_path(vagrantfile) if File.exists?(vagrantfile)
+end
