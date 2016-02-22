@@ -6,6 +6,7 @@
 |--------------------|---------------|------------------------------|
 |`sensu_deploy_rabbitmq` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ |
 |`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure Redis |
+
 _Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)

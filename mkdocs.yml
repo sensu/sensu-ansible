@@ -1,10 +1,10 @@
 site_name: Ansible Sensu
-site_url: https://galaxy.ansible.com/list#/roles/3802
+site_url: https://galaxy.ansible.com/cmacrae/sensu/
 repo_url: https://github.com/cmacrae/ansible-sensu/
 site_description: An Ansible role to deploy a fully dynamic Sensu stack!
 site_author: Calum MacRae
 
-theme: readthedocs
+theme: flatly
 pages:
   - [ 'index.md', 'Home' ]
   - [ 'role_variables.md', 'Usage', 'Role variables' ]
