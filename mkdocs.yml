@@ -12,6 +12,7 @@ pages:
   - [ 'single_master.md', 'Usage', 'Deploy the stack to a single node' ]
   - [ 'custom_client_config.md', 'Usage', 'Custom client configuration' ]
   - [ 'deploy_plugins.md', 'Usage', 'Deployment of handlers/filters/mutators' ]
+  - [ 'remote_plugins.md', 'Usage', 'Remote plugin deployment']
   - [ 'sensitive_info.md', 'Usage', 'Sensitive information in version control' ]
   - [ 'testing.md', 'Usage', 'Testing' ]
   - [ 'dynamic_data.md','Conventions','Dynamic data store' ]

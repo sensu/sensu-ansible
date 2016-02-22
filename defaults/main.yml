@@ -42,6 +42,7 @@ sensu_include_plugins: true
 sensu_include_dashboard: false
 sensu_master: false
 sensu_user_name: sensu
+sensu_remote_plugins: ~
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true

@@ -10,6 +10,12 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
 
+  - name: Ensure any remote plugins defined are present
+    shell: sensu-install -p {{ item }}
+    with_items: sensu_remote_plugins
+    changed_when: false
+    when: sensu_remote_plugins > 0
+
   - name: Register available checks
     local_action: command ls {{ static_data_store }}/sensu/checks
     register: sensu_available_checks
@@ -63,4 +69,4 @@
     when: sensu_master
     with_lines:
       - ls {{ static_data_store }}/sensu/definitions | sed 's/\.j2//'
-    notify: restart sensu-api service
+    notify: restart sensu-server service
