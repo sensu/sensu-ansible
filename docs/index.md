@@ -7,6 +7,7 @@ An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensu
 - Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
+- Remote plugin deployment
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
 
