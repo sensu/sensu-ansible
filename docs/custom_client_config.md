@@ -1,5 +1,5 @@
 # Custom Client Configuration
-When this Ansible role deploys the Sensu client configuration - defined in `client.json` in the Sensu configuration directory, it works out [subscriptions](https://sensuapp.org/docs/0.18/clients#definition-attributes) based on group membership within the Ansible inventory.
+When this Ansible role deploys the Sensu client configuration - defined in `client.json` in the Sensu configuration directory, it works out [subscriptions](https://sensuapp.org/docs/0.21/clients#definition-attributes) based on group membership within the Ansible inventory.
 For example, if you have a `webservers` group within your Ansible inventory, any nodes listed in that group will automatically gain a subscription to `webservers` within Sensu.
 This is quite a powerful, convenient feature. It's coupled with the deployment of [checks](https://sensuapp.org/docs/0.18/checks). If you add a new webserver to your infrastructure, Sensu will dynamically pick it up, subscribe it to 'webservers', and deploy webserver checks, without you having to do anything other than add that node into the `webservers` group within your Ansible inventory. Instantaneous monitoring of your web services!
 

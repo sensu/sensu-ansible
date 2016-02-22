@@ -1,7 +1,7 @@
 # Deployment of Handlers, Filters, and Mutators
 _Note:_ _If you haven't familiarized yourself with the concept of the static data store please read_['_Dynamic check deployment'_](dynamic_checks.md)
 
-Deployment of [handlers](https://sensuapp.org/docs/0.18/handlers), [filters](https://sensuapp.org/docs/0.18/filters), and [mutators](https://sensuapp.org/docs/0.18/mutators) is handled by leveraging templates and other data placed in the static data store.
+Deployment of [handlers](https://sensuapp.org/docs/0.21/handlers), [filters](https://sensuapp.org/docs/0.18/filters), and [mutators](https://sensuapp.org/docs/0.18/mutators) is handled by leveraging templates and other data placed in the static data store.
 
 ## Static data store hierarchy with respect to handlers/filters/mutators
 To deploy your handlers, filters, and mutators, you'll need to have directories named after each under a directory called 'sensu' in your static data store:
@@ -28,7 +28,7 @@ data/static
 All three are deployed using Ansible's [template]() module. This allows the use of variables within your configurations, which can come in quite handy!
 
 Let's take a look at the stuff I've got for [Pushover](https://pushover.net/).
-First off, the [handler](https://sensuapp.org/docs/0.18/getting-started-with-handlers) json file `pushover_handler.json.j2`:
+First off, the [handler](https://sensuapp.org/docs/0.21/getting-started-with-handlers) json file `pushover_handler.json.j2`:
 ``` json
 {
   "handlers": {
