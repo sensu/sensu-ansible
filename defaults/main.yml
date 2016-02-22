@@ -18,6 +18,7 @@ rabbitmq_sensu_vhost: /sensu
 # Redis server properties
 redis_host: "{{ groups['redis_servers'][0] }}"
 redis_server: false
+redis_service_name: redis
 redis_pkg_repo: ~
 redis_pkg_name: redis
 redis_pkg_state: present

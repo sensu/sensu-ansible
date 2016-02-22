@@ -18,5 +18,5 @@
 
   - name: Deploy Redis systemd service manifest
     copy:
-      src: ubuntu_redis_systemd.service
+      src: redis_systemd.service
       dest: /etc/systemd/system/redis.service

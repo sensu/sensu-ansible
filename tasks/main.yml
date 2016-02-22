@@ -6,6 +6,11 @@
   - include: "{{ ansible_distribution }}/main.yml"
     tags: setup
       
+  - include: redis.yml
+    tags: redis
+    when: redis_server
+          and sensu_deploy_redis
+
   - include: ssl.yml
     tags: ssl
 
@@ -13,11 +18,6 @@
     tags: rabbitmq
     when: rabbitmq_server
           and sensu_deploy_rabbitmq
-
-  - include: redis.yml
-    tags: redis
-    when: redis_server
-          and sensu_deploy_redis
 
   - include: server.yml
     tags: server

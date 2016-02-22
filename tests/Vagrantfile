@@ -1,4 +1,4 @@
-vagrantfiles = %w[vms/Vagrantfile.centos7 vms/Vagrantfile.ubuntu15]
+vagrantfiles = %w[vms/Vagrantfile.centos7 vms/Vagrantfile.debian8 vms/Vagrantfile.ubuntu15]
 vagrantfiles.each do |vagrantfile|
   load File.expand_path(vagrantfile) if File.exists?(vagrantfile)
 end

@@ -1,5 +1,13 @@
 ---
 - hosts: all
 
+  vars:
+    sensu_ssl_client_cert: "data/dynamic/{{ ansible_hostname }}/etc/sensu/ssl_generation/sensu_ssl_tool/client/cert.pem"
+    sensu_ssl_client_key: "data/dynamic/{{ ansible_hostname }}/etc/sensu/ssl_generation/sensu_ssl_tool/client/key.pem"
+    sensu_ssl_server_cacert: "data/dynamic/{{ ansible_hostname }}/etc/sensu/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
+    sensu_ssl_server_cert: "data/dynamic/{{ ansible_hostname }}/etc/sensu/ssl_generation/sensu_ssl_tool/server/cert.pem"
+    sensu_ssl_server_key: "data/dynamic/{{ ansible_hostname }}/etc/sensu/ssl_generation/sensu_ssl_tool/server/key.pem"
+
+
   roles:
     - ../../cmacrae.sensu

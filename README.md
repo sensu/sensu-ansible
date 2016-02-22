@@ -16,15 +16,17 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 
 ## Supported Platforms
 ### Current Release
+
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
-- [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
+- [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
+- [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
 
 ### Future Releases
+
 - OpenBSD
 - FreeBSD
 - NetBSD
-- Debian
 
 ## Role Variables
 All variables have sensible defaults, which can be found in `defaults/main.yml`.
@@ -59,6 +61,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the Redis node |
 | `redis_server` | `false` | Determines whether to include the deployment of Redis |
 | `redis_pkg_repo` | _undefined_ |  The PPA to use for installing Redis from (specific to Debian flavored systems) |
+| `redis_service_name` | redis | The name of the Redis service |
 | `redis_pkg_name` | redis |  The name of the Redis package to install |
 | `redis_pkg_state` | present | The state of the Redis package (should be set to `present` or `latest`) |
 | `redis_port` | 6379 | The transmission port for Redis communications |
@@ -114,7 +117,6 @@ sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}
 |--------------------|---------------|------------------------------|
 | `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing Redis from |
 
-
 ### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
@@ -124,6 +126,23 @@ sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}
 | `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
 | `uchiwa_pkg_version` | _See `vars/Ubuntu.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
 | `uchiwa_pkg_download_url`  | _See `vars/Ubuntu.yml`_ | The URL of the Uchiwa package to fetch |
+
+## Debian
+### [Redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing Redis from |
+| `redis_service_name` | redis-server | The name of the Redis service |
+
+### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `sensu_user_name`    | root        | The name of the Sensu service user |
+| `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
+| `uchiwa_pkg_download_sha256sum` | _See `vars/Debian.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
+| `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
+| `uchiwa_pkg_version` | _See `vars/Debian.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
+| `uchiwa_pkg_download_url`  | _See `vars/Debian.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)

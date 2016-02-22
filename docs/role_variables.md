@@ -95,6 +95,23 @@ sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}
 | `uchiwa_pkg_version` | _See `vars/Ubuntu.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
 | `uchiwa_pkg_download_url`  | _See `vars/Ubuntu.yml`_ | The URL of the Uchiwa package to fetch |
 
+## Debian
+### [Redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing Redis from |
+| `redis_service_name` | redis-server | The name of the Redis service |
+
+### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `sensu_user_name`    | root        | The name of the Sensu service user |
+| `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
+| `uchiwa_pkg_download_sha256sum` | _See `vars/Debian.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
+| `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
+| `uchiwa_pkg_version` | _See `vars/Debian.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
+| `uchiwa_pkg_download_url`  | _See `vars/Debian.yml`_ | The URL of the Uchiwa package to fetch |
+
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
 | Name               | Default Value | Description                  |
