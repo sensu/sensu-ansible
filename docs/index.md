@@ -11,6 +11,9 @@ An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensu
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
 
+## Requirements
+This role requires Ansible 2.0
+
 ## Supported Platforms
 ### Current Release
 

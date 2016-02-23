@@ -15,6 +15,9 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 ## Documentation [![Documentation](https://readthedocs.org/projects/ansible-sensu/badge/?version=latest)](http://rtfm.cmacr.ae/)
 [Read the full documentation](http://rtfm.cmacr.ae/) for a comprehensive overview of this role and its powerful features.
 
+## Requirements
+This role requires Ansible 2.0
+
 ## Supported Platforms
 ### Current Release
 
