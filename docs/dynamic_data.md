@@ -3,7 +3,7 @@ Throughout this role, you may notice the use of the variable `dynamic_data_store
 This is a convention that I have implemented personally within my infrastructure, though it stems from a feature that I'm sure many people leverage in their own way - probably in a very similar manner.
 
 ## The concept
-The dynamic data store is a directory on the node acting as the Ansible "master" (where you're pushing all your Ansible code from).
+The dynamic data store is a directory on the Ansible control node (where you're pushing all your Ansible code from).
 This directory, in version control, is practically empty, with the exception of a `.gitignore` with the following contents:
 ```
 # Ignore everything in this directory
@@ -13,7 +13,7 @@ This directory, in version control, is practically empty, with the exception of 
 ```
 Using this `.gitignore` ensures that the directory (and the `.gitignore`) are kept within version control, but anything that may be placed in it is not tracked. As you may have figured out from the name "dynamic", that's because the data here will be subject to change with your infrastructure.
 
-The idea behind having this "empty" directory within your codebase is that, when deploying your Ansible code repo to your Ansible "master", it ensures the directory is there. This directory is then used in conjunction with some roles to store node specific data that you may wish to distribute amongst other nodes.
+The idea behind having this "empty" directory within your codebase is that, when deploying your Ansible codebase to your Ansible control node, it ensures the directory is there. This directory is then used in conjunction with some roles to store node specific data that you may wish to distribute amongst other nodes.
 
 ## Use of the dynamic data store in this Sensu role
 If you take a look at the `tasks/ssl.yml` playbook, there's a use of the handy [`fetch`](http://docs.ansible.com/fetch_module.html) module.
@@ -22,7 +22,7 @@ If you take a look at the `tasks/ssl.yml` playbook, there's a use of the handy [
 
 Very handy!
 
-I've coupled this with the generation of SSL certs on the Sensu "master". So, when applying this role to a node on which `sensu_master` evaluates to `true`, several SSL certs are generated, then stashed on the Ansible "master" node in the dynamic data store for distribution to client nodes at a later point in the playbook.
+I've coupled this with the generation of SSL certs on the Sensu "master". So, when applying this role to a node on which `sensu_master` evaluates to `true`, several SSL certs are generated, then stashed on the Ansible control node in the dynamic data store for distribution to client nodes at a later point in the playbook.
 
 I've defined my `dynamic_data_store` variable at the top level of my Ansible codebase, in the file `group_vars/all.yml`:
 ``` yaml
@@ -82,11 +82,11 @@ The same method is used for node communication with RabbitMQ:
 ```
 
 ## So, what do I need to do?
-Well, you simply need to decide where, on your Ansible "master" node's filesystem, where you'd like your dynamic data store to reside.
+Well, you simply need to decide where, on your Ansible control node's filesystem, where you'd like your dynamic data store to reside.
 Then simply set the `dynamic_data_store` value to that path for all nodes that are going to be using this Sensu role, as described above.
 
 This variable's value, like any other in Ansible, can include variable(s) itself also.
-I have a role that deploys an Ansible "master" node, and use a variable for where I want my Ansible codebase to sit.
+I have a role that deploys an Ansible control node, and use a variable for where I want my Ansible codebase to sit.
 So my `dynamic_data_store` (again) defined in `group_vars/all.yml` is actually set to:
 ``` yaml
 dynamic_data_store: {{ ansible_conf_path }}/data/dynamic
