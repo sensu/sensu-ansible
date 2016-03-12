@@ -5,11 +5,11 @@
   - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Retrieve the Uchiwa deb package
-    register: uchiwa_deb
     get_url:
       url: "{{ uchiwa_pkg_download_url }}"
       dest: "{{ uchiwa_pkg_download_path }}"
       sha256sum: "{{ uchiwa_pkg_download_sha256sum }}"
+    register: uchiwa_deb
 
   - name: Install Uchiwa from the retrieved deb package
     apt: deb={{ uchiwa_pkg_download_path }} 
