@@ -5,6 +5,7 @@
   - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Retrieve the Uchiwa deb package
+    register: uchiwa_deb
     get_url:
       url: "{{ uchiwa_pkg_download_url }}"
       dest: "{{ uchiwa_pkg_download_path }}"
@@ -12,6 +13,7 @@
 
   - name: Install Uchiwa from the retrieved deb package
     apt: deb={{ uchiwa_pkg_download_path }} 
+    when: uchiwa_deb|changed
 
   - name: Deploy Uchiwa config
     template:
