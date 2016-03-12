@@ -29,6 +29,7 @@
     notify: restart rabbitmq service
 
   - name: Ensure RabbitMQ is running
+    register: rabbitmq_state
     service:
       name: "{{ rabbitmq_service_name }}"
       state: started
@@ -36,6 +37,7 @@
 
   - name: Wait for RabbitMQ to be up and running before asking to create a vhost
     pause: seconds=3
+    when: rabbitmq_state|changed
 
   - block:
     - name: Ensure Sensu RabbitMQ vhost exists
