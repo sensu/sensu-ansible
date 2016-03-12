@@ -9,17 +9,23 @@
       state: directory
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
+    tags:
+      - update_plugins
 
   - name: Ensure any remote plugins defined are present
     shell: sensu-install -p {{ item }}
     with_items: sensu_remote_plugins
     changed_when: false
     when: sensu_remote_plugins > 0
+    tags:
+      - update_plugins
 
   - name: Register available checks
     local_action: command ls {{ static_data_store }}/sensu/checks
     register: sensu_available_checks
     changed_when: false
+    tags:
+      - update_plugins
 
   - name: Deploy check plugins
     copy:
@@ -32,6 +38,8 @@
     with_flattened:
       - group_names
     notify: restart sensu-client service
+    tags:
+      - update_plugins
 
   - name: Deploy handler plugins
     copy:
@@ -41,6 +49,8 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     notify: restart sensu-client service
+    tags:
+      - update_plugins
 
   - name: Deploy filter plugins
     copy:
@@ -50,6 +60,8 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     notify: restart sensu-client service
+    tags:
+      - update_plugins
 
   - name: Deploy mutator plugins
     copy:
@@ -59,6 +71,8 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     notify: restart sensu-client service
+    tags:
+      - update_plugins
 
   - name: Deploy check/handler/filter/mutator definitions to the master
     template:
@@ -70,3 +84,5 @@
     with_lines:
       - ls {{ static_data_store }}/sensu/definitions | sed 's/\.j2//'
     notify: restart sensu-server service
+    tags:
+      - update_plugins
