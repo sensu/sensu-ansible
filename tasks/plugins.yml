@@ -69,4 +69,6 @@
     when: sensu_master
     with_lines:
       - ls {{ static_data_store }}/sensu/definitions | sed 's/\.j2//'
-    notify: restart sensu-server service
+    notify: 
+      - restart sensu-server service
+      - restart sensu-api service
