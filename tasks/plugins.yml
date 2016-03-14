@@ -62,13 +62,13 @@
 
   - name: Deploy check/handler/filter/mutator definitions to the master
     template:
-      src: "{{ static_data_store }}/sensu/definitions/{{ item }}.j2"
-      dest: "{{ sensu_config_path }}/conf.d/{{ item }}"
+      src: "{{ item }}"
+      dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     when: sensu_master
-    with_lines:
-      - ls {{ static_data_store }}/sensu/definitions | sed 's/\.j2//'
+    with_fileglob:
+      - "{{ static_data_store }}/sensu/definitions/*"
     notify: 
       - restart sensu-server service
       - restart sensu-api service
