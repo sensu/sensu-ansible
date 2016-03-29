@@ -16,7 +16,7 @@ Using this `.gitignore` ensures that the directory (and the `.gitignore`) are ke
 The idea behind having this "empty" directory within your codebase is that, when deploying your Ansible codebase to your Ansible control node, it ensures the directory is there. This directory is then used in conjunction with some roles to store node specific data that you may wish to distribute amongst other nodes.
 
 ## Use of the dynamic data store in this Sensu role
-If you take a look at the `tasks/ssl.yml` playbook, there's a use of the handy [`fetch`](http://docs.ansible.com/fetch_module.html) module.
+If you take a look at the `tasks/ssl.yml` playbook, there's a use of the [`fetch`](http://docs.ansible.com/fetch_module.html) module.
 
 >This module works like `copy`, but in reverse. It is used for fetching files from remote machines and storing them locally in a file tree, organized by hostname.
 
