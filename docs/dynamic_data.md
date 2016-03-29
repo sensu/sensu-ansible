@@ -51,7 +51,7 @@ data/dynamic/
 As you can see, it resembles the file tree from the node it fetched the data from. This is configurable behavior, and can be set otherwise if you find this inconvenient/unsightly. See [ the `fetch` documentation](http://docs.ansible.com/fetch_module.html) for more information.
 
 ## Deployment of the data fetched to the dynamic data store
-Next up is this nifty little play (still from the `tasks/ssl.yml` playbook):
+Next up is this little play (from the `tasks/ssl.yml` playbook):
 ``` yaml
   - name: Deploy the Sensu client SSL cert/key
     copy:
@@ -70,7 +70,9 @@ The same method is used for node communication with RabbitMQ:
 `tasks/rabbitmq.yml`
 ``` yaml
   - name: Ensure RabbitMQ SSL certs/keys are in place
-    copy: src={{ item }} dest={{ rabbitmq_config_path }}/ssl
+    copy:
+	  src: "{{ item }}"
+	  dest: "{{ rabbitmq_config_path }}/ssl"
     with_items:
       - "{{ sensu_ssl_server_cacert }}"
       - "{{ sensu_ssl_server_cert }}"
