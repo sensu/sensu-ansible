@@ -82,7 +82,7 @@ The same method is used for node communication with RabbitMQ:
 ```
 
 ## So, what do I need to do?
-Well, you simply need to decide where, on your Ansible control node's filesystem, where you'd like your dynamic data store to reside.
+Well, you simply need to decide where, on your Ansible control node's filesystem, you'd like your dynamic data store to reside.
 Then simply set the `dynamic_data_store` value to that path for all nodes that are going to be using this Sensu role, as described above.
 
 This variable's value, like any other in Ansible, can include variable(s) itself also.
