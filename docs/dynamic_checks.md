@@ -69,7 +69,7 @@ tater.cmacr.ae
 web.cmacr.ae
 test.cmacr.ae
 ```
-Under these subdirectories, you can see [checks](https://sensuapp.org/docs/0.21/checks) that relate to directory they're placed in.
+Under these subdirectories, you can see [checks](https://sensuapp.org/docs/0.21/checks) that relate to the directory they're placed in.
 The `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
 
 So how do these checks actually get deployed to their associated nodes?
