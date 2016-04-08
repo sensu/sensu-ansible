@@ -33,10 +33,11 @@
         creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
   
     - name: Generate SSL certs
-      shell: ./ssl_certs.sh generate
+      command: "_ {{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/ssl_certs.sh generate"
       args:
         chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
         creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
+        executable: "{{ __bash_path }}"
 
     when: sensu_master|bool
     become: true
