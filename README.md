@@ -155,7 +155,7 @@ sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `uchiwa_pkg_version` | _See `vars/CnetOS.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
+| `uchiwa_pkg_version` | _See `vars/CentOS.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
 | `uchiwa_pkg_download_url`  | _See `vars/CentOS.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## SmartOS
