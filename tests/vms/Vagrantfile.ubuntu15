@@ -8,39 +8,39 @@ Vagrant.configure(2) do | config |
     vb.customize ["modifyvm", :id, "--memory", "2048"]
   end
 
-   config.vm.define "ubuntu15" do |ubuntu15|
+  config.vm.define "ubuntu15" do |ubuntu15|
     ubuntu15.vm.hostname = "ubuntu15.dev"
     ubuntu15.vm.box = "ubuntu/vivid64"
     ubuntu15.vm.network :private_network, ip: "192.168.40.6"
     ubuntu15.vm.network "forwarded_port", guest: 3000, host: 3003
-  end
 
-  # Ansible
-  config.vm.provision "ansible" do |ansible|
-    ansible.groups = {
-      "sensu_masters" => ["ubuntu15"],
-      "rabbitmq_servers" => ["ubuntu15"],
-      "redis_servers" => ["ubuntu15"],
-    }
+    # Ansible
+    config.vm.provision "ansible" do |ansible|
+      ansible.groups = {
+        "sensu_masters" => ["ubuntu15"],
+        "rabbitmq_servers" => ["ubuntu15"],
+        "redis_servers" => ["ubuntu15"],
+      }
 
-    ansible.extra_vars = {
-      dynamic_data_store: "data/dynamic",
-      rabbitmq_host: "192.168.40.6",
-      rabbitmq_server: true,
-      redis_host: "192.168.40.6",
-      redis_server: true,
-      sensu_api_host: "192.168.40.6",
-      sensu_api_user_name: "admin",
-      sensu_api_password: "admin",
-      sensu_include_plugins: false,
-      sensu_include_dashboard: true,
-      sensu_master: true,
-      uchiwa_dc_name: "vagrant",
-      uchiwa_user_name: "admin",
-      uchiwa_password: "admin",
-    }
+      ansible.extra_vars = {
+        dynamic_data_store: "data/dynamic",
+        rabbitmq_host: "192.168.40.6",
+        rabbitmq_server: true,
+        redis_host: "192.168.40.6",
+        redis_server: true,
+        sensu_api_host: "192.168.40.6",
+        sensu_api_user_name: "admin",
+        sensu_api_password: "admin",
+        sensu_include_plugins: false,
+        sensu_include_dashboard: true,
+        sensu_master: true,
+        uchiwa_dc_name: "vagrant",
+        uchiwa_user_name: "admin",
+        uchiwa_password: "admin",
+      }
 
-    ansible.sudo = true
-    ansible.playbook = "provision.yml"
+      ansible.sudo = true
+      ansible.playbook = "provision.yml"
+    end
   end
 end
