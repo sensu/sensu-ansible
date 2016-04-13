@@ -57,11 +57,13 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### Sensu/RabbitMQ SSL certificate properties
 ``` yaml
 sensu_ssl_gen_certs: true
-sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
-sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
-sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
-sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
-sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
+sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"
+sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
+sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
+sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
+sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
+sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 ```
 
 ### [Uchiwa Properties](http://docs.uchiwa.io/en/latest/)
@@ -149,3 +151,10 @@ sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}
 |--------------------|---------------|------------------------------|
 | `rabbitmq_service_name` | `rabbitmq` | The name of the RabbitMQ service |
 | `rabbitmq_config_path` | `/usr/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
+
+### Internal properties
+# Internal settings
+```yaml
+__bash_path: /bin/bash
+__root_group: root
+```

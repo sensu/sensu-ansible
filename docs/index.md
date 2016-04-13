@@ -59,6 +59,9 @@ Author Information
 ------------------
 Created by [Calum MacRae](http://cmacr.ae)
 
+### Contributors
+[@smuth4](https://github.com/smuth4)
+
 Feel free to:  
 Contact me - [@calumacrae](https://twitter.com/calumacrae), [mailto:calum0macrae@gmail.com](calum0macrae@gmail.com)  
 [Raise an issue](https://github.com/cmacrae/ansible-sensu/issues)  

@@ -94,7 +94,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### Sensu/RabbitMQ SSL certificate properties
 ``` yaml
 sensu_ssl_gen_certs: true
-sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] | default('/etc/sensu') }}"
+sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"
 sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
 sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
 sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
@@ -209,6 +209,9 @@ MIT
 Author Information
 ------------------
 Created by [Calum MacRae](http://cmacr.ae)
+
+### Contributors
+[@smuth4](https://github.com/smuth4)
 
 Feel free to:  
 Contact me - [@calumacrae](https://twitter.com/calumacrae), [mailto:calum0macrae@gmail.com](calum0macrae@gmail.com)  
