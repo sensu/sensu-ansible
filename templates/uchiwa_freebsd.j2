@@ -1,0 +1,27 @@
+#!/bin/sh
+
+. /etc/rc.subr
+
+name=uchiwa
+rcvar=uchiwa_enable
+
+command="{{ uchiwa_path }}/go/bin/${name}"
+uchiwa_flags="-d {{ uchiwa_path }} -c {{ uchiwa_path }}/etc/config.json -p {{ uchiwa_path }}/go/src/github.com/sensu/uchiwa/public"
+
+load_rc_config $name
+
+pidfile=/var/run/${name}.pid
+start_cmd=uchiwa_start
+stop_postcmd=uchiwa_cleanup
+
+uchiwa_start() {
+  echo "Starting uchiwa."
+  /usr/bin/touch ${pidfile}
+  /usr/sbin/daemon -cf -p ${pidfile} ${command} ${uchiwa_flags}
+}
+
+uchiwa_cleanup() {
+  [ -f ${pidfile} ] && /bin/rm ${pidfile}
+}
+
+run_rc_command "$1"

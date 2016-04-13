@@ -1,0 +1,43 @@
+---
+# tasks/FreeBSD/main.yml: FreeBSD specific set-up
+# This takes care of base prerequisites for FreeBSD
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure the Sensu group is present
+    group: name={{ sensu_group_name }} state=present
+
+  - name: Ensure the Sensu user is present
+    user:
+      name: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      shell: /bin/false
+      home: "{{ sensu_config_path }}"
+      createhome: true
+      state: present
+
+  - name: Install prerequisite packages
+    pkgng:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - bash
+      - ca_root_nss
+
+  - name: Retrieve the sensu txz package
+    get_url:
+      url: "{{ sensu_pkg_download_url }}"
+      dest: "{{ sensu_pkg_download_path }}"
+    register: sensu_txz
+
+  - name: Install sensu from the retrieved txz package
+    command: "pkg add {{ sensu_pkg_download_path }}"
+    when: sensu_txz|changed
+
+  - name: Ensure the Sensu config directory is present
+    file:
+      dest: "{{ sensu_config_path }}/conf.d"
+      state: directory
+      recurse: true
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"

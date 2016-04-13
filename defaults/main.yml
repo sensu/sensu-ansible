@@ -46,11 +46,13 @@ sensu_remote_plugins: ~
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
-sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
-sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
-sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
-sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
-sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
+sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] | default('/etc/sensu') }}"
+sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
+sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
+sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
+sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
+sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
   
 # Uchiwa properties
 uchiwa_dc_name: ~
@@ -64,3 +66,7 @@ uchiwa_pkg_download_sha256sum: ~
 uchiwa_pkg_download_path: ~
 uchiwa_pkg_version: ~
 uchiwa_pkg_download_url: ~
+
+# Internal settings
+__bash_path: /bin/bash
+__root_group: root

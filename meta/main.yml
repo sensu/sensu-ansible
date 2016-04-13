@@ -58,12 +58,12 @@ galaxy_info:
   #  versions:
   #  - all
   #  - any
-  #- name: FreeBSD
-  #  versions:
+  - name: FreeBSD
+    versions:
   #  - all
   #  - 10.0
   #  - 10.1
-  #  - 10.2
+    - 10.2
   #  - 8.0
   #  - 8.1
   #  - 8.2

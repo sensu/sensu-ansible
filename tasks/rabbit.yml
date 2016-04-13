@@ -24,7 +24,7 @@
       dest: "{{ rabbitmq_config_path }}/rabbitmq.config"
       src: "{{ rabbitmq_config_template }}"
       owner: root
-      group: root
+      group: "{{ __root_group }}"
       mode: 644
     notify: restart rabbitmq service
 

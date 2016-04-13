@@ -1,0 +1,53 @@
+##############
+# FreeBSD 10 #
+##############
+Vagrant.configure(2) do | config |
+  config.ssh.insert_key = false
+  config.ssh.username = 'vagrant'
+  config.ssh.shell = '/bin/sh'
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+
+  # Use rsync for shared folder
+  config.vm.synced_folder ".", "/vagrant", type: "rsync", id: "vagrant-root",
+                          rsync__args: ["--verbose", "--rsync-path='sudo rsync'", "--archive", "--delete", "-z"]
+
+  config.vm.define "freebsd10" do |freebsd10|
+    freebsd10.vm.hostname = "freebsd10.dev"
+    freebsd10.vm.box = "freebsd/FreeBSD-10.2-STABLE"
+    freebsd10.vm.base_mac = "72f28c4782fd"
+    freebsd10.vm.network :private_network, ip: "192.168.40.7"
+    freebsd10.vm.network "forwarded_port", guest: 3000, host: 3004
+  end
+
+  # Ansible
+  config.vm.provision "ansible" do |ansible|
+    ansible.groups = {
+      "sensu_masters" => ["freebsd10"],
+      "rabbitmq_servers" => ["freebsd10"],
+      "redis_servers" => ["freebsd10"],
+    }
+
+    ansible.extra_vars = {
+      ansible_python_interpreter: "/usr/local/bin/python2.7",
+      dynamic_data_store: "data/dynamic",
+      rabbitmq_host: "192.168.40.7",
+      rabbitmq_server: true,
+      redis_host: "192.168.40.7",
+      redis_server: true,
+      sensu_api_host: "192.168.40.7",
+      sensu_api_user_name: "admin",
+      sensu_api_password: "admin",
+      sensu_include_plugins: false,
+      sensu_include_dashboard: true,
+      sensu_master: true,
+      uchiwa_dc_name: "vagrant",
+      uchiwa_user_name: "admin",
+      uchiwa_password: "admin",
+    }
+
+    ansible.sudo = true
+    ansible.playbook = "provision.yml"
+  end
+end

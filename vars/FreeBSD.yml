@@ -1,0 +1,17 @@
+---
+# vars/FreeBSD.yml: Variables for FreeBSD
+# Defaults are defined in vars/default.yml
+
+# Sensu config/package properties
+sensu_config_path: /usr/local/etc/sensu
+sensu_pkg_version: 0.23.0_1
+sensu_pkg_download_url: https://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz
+sensu_pkg_download_path: /root/sensu_latest.txz
+
+# RabbitMQ options
+rabbitmq_config_path: /usr/local/etc/rabbitmq
+rabbitmq_service_name: rabbitmq
+
+# Internal settings
+__bash_path: /usr/local/bin/bash
+__root_group: wheel

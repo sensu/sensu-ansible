@@ -17,7 +17,6 @@ It's planned!
 Coming in the near future:
 
 - OpenBSD
-- FreeBSD
 - NetBSD
 
 I'd be happy to add any others to the list if high demand shows.

@@ -25,11 +25,11 @@ This role requires Ansible 2.0
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
 - [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
+- [FreeBSD - 10.2](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
 ### Future Releases
 
 - OpenBSD
-- FreeBSD
 - NetBSD
 
 ## Role Variables
@@ -94,11 +94,13 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### Sensu/RabbitMQ SSL certificate properties
 ``` yaml
 sensu_ssl_gen_certs: true
-sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
-sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
-sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
-sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
-sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
+sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] | default('/etc/sensu') }}"
+sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
+sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
+sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
+sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
+sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 ```
 
 ### [Uchiwa Properties](http://docs.uchiwa.io/en/latest/)
@@ -169,6 +171,21 @@ sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/opt/local/etc/sensu` | Path to the Sensu configuration directory |
+
+## FreeBSD
+### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
+| `sensu_pkg_version` | `0.23.0_1` | Version of Sensu to download and install |
+| `sensu_pkg_download_url` | `http://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
+| `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
+
+### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `rabbitmq_service_name` | `rabbitmq` | The name of the RabbitMQ service |
+| `rabbitmq_config_path` | `/usr/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
 
 ## Example Playbook
 
