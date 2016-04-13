@@ -47,7 +47,7 @@ sensu_remote_plugins: ~
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
 sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"
-sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
+sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
 sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
 sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
 sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
