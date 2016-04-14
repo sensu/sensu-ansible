@@ -17,10 +17,10 @@
     when: sensu_remote_plugins > 0
 
   - name: Register available checks
-    become: False
     local_action: command ls {{ static_data_store }}/sensu/checks
     register: sensu_available_checks
     changed_when: false
+    become: false
 
   - name: Deploy check plugins
     copy:
