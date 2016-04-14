@@ -1,5 +1,5 @@
 [Unit]
-Description=Redis Datastore Server
+Description=redis Datastore Server
 After=network.target
 
 [Service]

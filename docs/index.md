@@ -4,12 +4,16 @@ An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensu
 [![Join the chat at https://gitter.im/cmacrae/ansible-sensu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cmacrae/ansible-sensu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Features
-- Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
+- Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
 - Remote plugin deployment
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
+
+## Batteries included, but not imposed
+Along with deploying the Sensu Server, API and clients, this role can deploy a full stack: [RabbitMQ](http://www.rabbitmq.com/), [redis](http://redis.io), and the [Uchiwa dashboard](https://uchiwa.io/#/).  
+However, if you want to rely on other roles/management methods to deploy/manage these services, [it's nice and easy to integrate this role](integration/).
 
 ## Requirements
 This role requires Ansible 2.0

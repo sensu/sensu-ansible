@@ -2,7 +2,7 @@
 # vars/Debian.yml: Variables for Debian
 # Defaults are defined in vars/default.yml
 
-# Redis server properties
+# redis server properties
 redis_pkg_name: redis-server
 redis_service_name: redis-server
 

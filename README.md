@@ -5,12 +5,16 @@
 This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
 
 ## Features
-- Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, Redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
+- Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
 - Remote plugin deployment
 - Automatic generation and dynamic deployment of SSL certs for secure communication between your clients and servers
 - Highly configurable
+
+## Batteries included, but not imposed
+Along with deploying the Sensu Server, API and clients, this role can deploy a full stack: [RabbitMQ](http://www.rabbitmq.com/), [redis](http://redis.io), and the [Uchiwa dashboard](https://uchiwa.io/#/).  
+However, if you want to rely on other roles/management methods to deploy/manage these services, [it's nice and easy to integrate this role](http://rtfm.cmacr.ae/integration/).
 
 ## Documentation [![Documentation](https://readthedocs.org/projects/ansible-sensu/badge/?version=latest)](http://rtfm.cmacr.ae/)
 [Read the full documentation](http://rtfm.cmacr.ae/) for a comprehensive overview of this role and its powerful features.
@@ -42,7 +46,7 @@ The current version includes the following variables:
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 |`sensu_deploy_rabbitmq` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ |
-|`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure Redis |
+|`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure redis |
 _Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)
@@ -59,16 +63,16 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
 | `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
 
-### [Redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+### [redis Server Properties](https://sensuapp.org/docs/0.21/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the Redis node |
-| `redis_server` | `false` | Determines whether to include the deployment of Redis |
-| `redis_pkg_repo` | _undefined_ |  The PPA to use for installing Redis from (specific to Debian flavored systems) |
-| `redis_service_name` | redis | The name of the Redis service |
-| `redis_pkg_name` | redis |  The name of the Redis package to install |
-| `redis_pkg_state` | present | The state of the Redis package (should be set to `present` or `latest`) |
-| `redis_port` | 6379 | The transmission port for Redis communications |
+| `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
+| `redis_server` | `false` | Determines whether to include the deployment of redis |
+| `redis_pkg_repo` | _undefined_ |  The PPA to use for installing redis from (specific to Debian flavored systems) |
+| `redis_service_name` | redis | The name of the redis service |
+| `redis_pkg_name` | redis |  The name of the redis package to install |
+| `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
+| `redis_port` | 6379 | The transmission port for redis communications |
 
 ### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
 | Name               | Default Value | Description                  |
@@ -108,7 +112,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 |--------------------|---------------|------------------------------|
 | `uchiwa_dc_name` | _undefined_ | Datacenter name for Uchiwa instance |
 | `uchiwa_path` | `/opt/uchiwa` | Path to the Uchiwa configuration directory |
-| `uchiwa_redis_use_ssl` | `false` | Determines whether to use SSL for Redis communication |
+| `uchiwa_redis_use_ssl` | `false` | Determines whether to use SSL for redis communication |
 | `uchiwa_user_name`| admin | The user-name to log into Uchiwa |
 | `uchiwa_password` | admin | The password to log into Uchiwa |
 | `uchiwa_port` | 3000 | The TCP port to bind the Uchiwa web service to |
@@ -119,10 +123,10 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_url` | _undefined_ | The URL of the Uchiwa package to fetch (specific to Linux systems) |
 
 ## Ubuntu
-### [Redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+### [redis Server Properties](https://sensuapp.org/docs/0.21/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing Redis from |
+| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
 
 ### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
 | Name               | Default Value | Description                  |
@@ -135,11 +139,11 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_url`  | _See `vars/Ubuntu.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## Debian
-### [Redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+### [redis Server Properties](https://sensuapp.org/docs/0.21/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing Redis from |
-| `redis_service_name` | redis-server | The name of the Redis service |
+| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
+| `redis_service_name` | redis-server | The name of the redis service |
 
 ### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
 | Name               | Default Value | Description                  |

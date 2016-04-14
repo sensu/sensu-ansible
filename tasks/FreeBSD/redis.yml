@@ -1,15 +1,15 @@
 ---
-# tasks/FreeBSD/redis.yml: Deploy Redis
+# tasks/FreeBSD/redis.yml: Deploy redis
 # Specific to FreeBSD
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure Redis is installed
+  - name: Ensure redis is installed
     pkgng:
       name: "{{ redis_pkg_name }}"
       state: "{{ redis_pkg_state }}"
 
-  - name: Ensure Redis binds to accessible IP
+  - name: Ensure redis binds to accessible IP
     lineinfile:
       dest: /usr/local/etc/redis.conf
       regexp: '^bind'

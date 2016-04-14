@@ -66,7 +66,7 @@ The above code could also be set straight in the node's `host_vars` file: `host_
 	  - cmacrae.sensu
 ```
 
-### RabbitMQ/Redis variables
+### RabbitMQ/redis variables
 You'll probably have noticed the two groups `rabbitmq_servers` and `redis_servers` in the example inventory.
 Quite self explanatory what these are, but - as with the `sensu_master` variable in the previous section - both the `rabbitmq_server` & `redis_server` values are set to `false` by default (defined in `defaults/main.yml`).
 
@@ -83,4 +83,4 @@ rabbitmq_server: true
 redis_server: true
 ```
 
-The same can, again, be set directly in your RabbitMQ/Redis nodes' `host_vars` files, or done so in the playbook as shown in the previous section for the values `sensu_master` & `sensu_include_uchiwa`.
+The same can, again, be set directly in your RabbitMQ/redis nodes' `host_vars` files, or done so in the playbook as shown in the previous section for the values `sensu_master` & `sensu_include_uchiwa`.

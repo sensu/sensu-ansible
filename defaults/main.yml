@@ -15,7 +15,7 @@ rabbitmq_sensu_user_name: sensu
 rabbitmq_sensu_password: sensu
 rabbitmq_sensu_vhost: /sensu
 
-# Redis server properties
+# redis server properties
 redis_host: "{{ groups['redis_servers'][0] }}"
 redis_server: false
 redis_service_name: redis

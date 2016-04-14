@@ -120,7 +120,7 @@ data/static
 
 ## Picking up changes on the fly
 Let's say, for some reason, one of your nodes decides to switch roles, or take on the responsibility of another role.
-You've got a webserver, who all of a sudden you decide "this guy should be running Redis too". No problem!
+You've got a webserver, who all of a sudden you decide "this guy should be running redis too". No problem!
 You probably had something like:
 ```
 [webservers]
@@ -134,7 +134,7 @@ mime.domain.name
 [redis_servers]
 mime.domain.name
 ```
-Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for Redis will be deployed to `mime.domain.name` and it'll be subscribed to the `redis_servers` stream within Sensu. Pretty slick, right?
+Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for redis will be deployed to `mime.domain.name` and it'll be subscribed to the `redis_servers` stream within Sensu. Pretty slick, right?
 
-The same goes for the removal of a node from a group. Did you just realize you really don't want `mime.domain.name` to act as a Redis server?
-It's cool, we all make mistakes, just take him out of the `[redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `redis_servers` stream, and Redis'll stop being monitored!
+The same goes for the removal of a node from a group. Did you just realize you really don't want `mime.domain.name` to act as a redis server?
+It's cool, we all make mistakes, just take him out of the `[redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `redis_servers` stream, and redis'll stop being monitored!

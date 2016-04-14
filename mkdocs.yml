@@ -15,6 +15,7 @@ pages:
   - [ 'deploy_plugins.md', 'Usage', 'Deployment of handlers/filters/mutators' ]
   - [ 'remote_plugins.md', 'Usage', 'Remote plugin deployment']
   - [ 'sensitive_info.md', 'Usage', 'Sensitive information in version control' ]
+  - [ 'integration.md', 'Usage', 'Integration with other roles/managment methods']
   - [ 'testing.md', 'Usage', 'Testing' ]
   - [ 'dynamic_data.md','Conventions','Dynamic data store' ]
   - [ 'dynamic_checks.md','Conventions','Dynamic check deployment' ]

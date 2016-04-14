@@ -15,7 +15,7 @@ sensu_include_dashboard: true
 rabbitmq_server: true
 redis_server: true
 ```
-This would set the node `master.cmacr.ae` to act as the Sensu, RabbitMQ, and Redis server for all Sensu communications across your infrastructure.
+This would set the node `master.cmacr.ae` to act as the Sensu, RabbitMQ, and redis server for all Sensu communications across your infrastructure.
 
 ## Statically setting the communication endpoints
 In `defaults/main.yml` the following keys have the following values:
@@ -37,5 +37,5 @@ rabbitmq_host: master.cmacr.ae
 redis_host: master.cmacr.ae
 sensu_api_host: master.cmacr.ae
 ```
-This will tell your entire environment that if they're looking to communicate with RabbitMQ, Redis, or the Sensu API, they can talk to `master.cmacr.ae`. Of course, if you're just distributing Sensu to just the `zones` group or `some_other_group`, the same could be set in `group_vars/zones.yml`/`group_vars/some_other_group.yml`.
+This will tell your entire environment that if they're looking to communicate with RabbitMQ, redis, or the Sensu API, they can talk to `master.cmacr.ae`. Of course, if you're just distributing Sensu to just the `zones` group or `some_other_group`, the same could be set in `group_vars/zones.yml`/`group_vars/some_other_group.yml`.
 

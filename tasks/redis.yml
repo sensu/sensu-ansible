@@ -1,7 +1,7 @@
 ---
-# tasks/redis.yml: Deploy Redis
+# tasks/redis.yml: Deploy redis
 
   - include: "{{ ansible_distribution }}/redis.yml"
 
-  - name: Ensure Redis is running
+  - name: Ensure redis is running
     service: name={{ redis_service_name }} state=started enabled=true

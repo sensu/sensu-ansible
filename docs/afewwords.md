@@ -9,7 +9,7 @@ I figure I have to list them, in no particular order, here they are. __Make sure
 - [Uchiwa](https://uchiwa.io/#/)
 - [SmartOS](https://smartos.org/)
 - [RabbitMQ](https://rabbitmq.com/)
-- [Redis](http://redis.io/)
+- [redis](http://redis.io/)
 
 ## What about support for other operating systems?
 It's planned!

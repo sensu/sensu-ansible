@@ -19,7 +19,7 @@
       src: sensu-api.json.j2
     notify: restart sensu-api service
 
-  - name: Deploy Sensu Redis configuration
+  - name: Deploy Sensu redis configuration
     template:
       dest: "{{ sensu_config_path }}/conf.d/redis.json"
       owner: "{{ sensu_user_name }}"

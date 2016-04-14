@@ -1,22 +1,22 @@
 ---
-# tasks/Ubuntu/redis.yml: Deploy Redis
+# tasks/Ubuntu/redis.yml: Deploy redis
 # Specific to Ubuntu
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure the Redis APT repo is present
+  - name: Ensure the redis APT repo is present
     apt_repository:
       repo: "{{ redis_pkg_repo }}"
       state: present
       update_cache: true
 
-  - name: Ensure Redis is installed
+  - name: Ensure redis is installed
     apt:
       name: "{{ redis_pkg_name }}"
       state: "{{ redis_pkg_state }}"
       update_cache: true
 
-  - name: Deploy Redis systemd service manifest
+  - name: Deploy redis systemd service manifest
     copy:
       src: redis_systemd.service
       dest: /etc/systemd/system/redis.service

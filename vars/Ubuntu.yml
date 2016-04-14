@@ -2,7 +2,7 @@
 # vars/Ubuntu.yml: Variables for Ubuntu
 # Defaults are defined in vars/default.yml
 
-# Redis server properties
+# redis server properties
 redis_pkg_repo: 'ppa:rwky/redis'
 redis_pkg_name: redis-server
 
