@@ -10,6 +10,7 @@ pages:
   - [ 'role_variables.md', 'Usage', 'Role variables' ]
   - [ 'example_infra.md', 'Usage', 'Example infrastructure layout' ]
   - [ 'single_master.md', 'Usage', 'Deploy the stack to a single node' ]
+  - [ 'differing_master_environment.md', 'Usage', 'A differing master environment' ]
   - [ 'custom_client_config.md', 'Usage', 'Custom client configuration' ]
   - [ 'deploy_plugins.md', 'Usage', 'Deployment of handlers/filters/mutators' ]
   - [ 'remote_plugins.md', 'Usage', 'Remote plugin deployment']
