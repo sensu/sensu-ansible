@@ -87,7 +87,7 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
       mode: 0755
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-    when: sensu_available_checks.stdout.find('{{ item }}') != -1
+    when: "'{{ item }}' in sensu_available_checks.stdout"
     with_flattened:
       - group_names
     notify: restart sensu-client service
