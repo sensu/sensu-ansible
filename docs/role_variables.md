@@ -72,8 +72,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_dc_name` | _undefined_ | Datacenter name for Uchiwa instance |
 | `uchiwa_path` | `/opt/uchiwa` | Path to the Uchiwa configuration directory |
 | `uchiwa_redis_use_ssl` | `false` | Determines whether to use SSL for redis communication |
-| `uchiwa_user_name`| admin | The user-name to log into Uchiwa |
-| `uchiwa_password` | admin | The password to log into Uchiwa |
+| `uchiwa_users`| [{username: admin, password: admin}] | The users to log into Uchiwa |
 | `uchiwa_port` | 3000 | The TCP port to bind the Uchiwa web service to |
 | `uchiwa_refresh` | 5 | The interval to pull the Sensu APIs in seconds |
 | `uchiwa_pkg_download_sha256sum` | _undefined_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched (specific to Linux systems) |

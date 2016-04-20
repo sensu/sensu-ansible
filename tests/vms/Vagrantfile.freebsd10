@@ -43,8 +43,7 @@ Vagrant.configure(2) do | config |
       sensu_include_dashboard: true,
       sensu_master: true,
       uchiwa_dc_name: "vagrant",
-      uchiwa_user_name: "admin",
-      uchiwa_password: "admin",
+      uchiwa_users: [{"username": "admin", "password": "admin"}]
     }
 
     ansible.sudo = true

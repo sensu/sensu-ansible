@@ -58,8 +58,9 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 uchiwa_dc_name: ~
 uchiwa_path: /opt/uchiwa
 uchiwa_redis_use_ssl: false
-uchiwa_user_name: admin
-uchiwa_password: admin
+uchiwa_users:
+  - username: admin
+    password: admin
 uchiwa_port: 3000
 uchiwa_refresh: 5
 uchiwa_pkg_download_sha256sum: ~

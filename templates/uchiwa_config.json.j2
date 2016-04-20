@@ -12,8 +12,7 @@
    }
  ],
  "uchiwa": {
-   "user": "{{ uchiwa_user_name }}",
-   "pass": "{{ uchiwa_password }}",
+   "users": {{ uchiwa_users | to_nice_json }},
    "port": {{ uchiwa_port }},
    "refresh": {{ uchiwa_refresh }}
   }
