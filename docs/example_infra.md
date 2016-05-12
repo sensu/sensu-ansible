@@ -83,4 +83,4 @@ rabbitmq_server: true
 redis_server: true
 ```
 
-The same can, again, be set directly in your RabbitMQ/redis nodes' `host_vars` files, or done so in the playbook as shown in the previous section for the values `sensu_master` & `sensu_include_uchiwa`.
+The same can, again, be set directly in your RabbitMQ/redis nodes' `host_vars` files, or done so in the playbook as shown in the previous section for the values `sensu_master` & `sensu_include_dashboard`.
