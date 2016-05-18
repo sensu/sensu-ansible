@@ -87,7 +87,7 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
       mode: 0755
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-    when: "'{{ item }}' in sensu_available_checks.stdout"
+    when: "'{{ item }}' in sensu_available_checks.stdout_lines"
     with_flattened:
       - group_names
     notify: restart sensu-client service
