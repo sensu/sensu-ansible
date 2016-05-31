@@ -70,6 +70,6 @@
     when: sensu_master
     with_fileglob:
       - "{{ static_data_store }}/sensu/definitions/*"
-    notify: 
+    notify:
       - restart sensu-server service
       - restart sensu-api service

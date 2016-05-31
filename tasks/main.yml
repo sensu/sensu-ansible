@@ -5,7 +5,7 @@
 
   - include: "{{ ansible_distribution }}/main.yml"
     tags: setup
-      
+
   - include: redis.yml
     tags: redis
     when: redis_server
@@ -26,7 +26,7 @@
   - include: dashboard.yml
     tags: dashboard
     when: sensu_include_dashboard
-    
+
   - include: client.yml
     tags: client
 

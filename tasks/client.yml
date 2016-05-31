@@ -1,6 +1,6 @@
 ---
 # tasks/client.yml: Deploy various client-side configurations for Sensu
-  
+
   - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure the Sensu config directory is present

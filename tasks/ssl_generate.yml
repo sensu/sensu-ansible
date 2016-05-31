@@ -27,9 +27,10 @@
         dest: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool.tar"
 
     - name: Untar the ssl_certs tarball from sensuapp.org
-      shell: tar xf sensu_ssl_tool.tar
+      unarchive:
       args:
-        chdir: "{{ sensu_config_path }}/ssl_generation"
+        src: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool.tar"
+        dest: "{{ sensu_config_path }}/ssl_generation/"
         creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
 
     - name: Generate SSL certs

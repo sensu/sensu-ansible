@@ -25,7 +25,7 @@
       src: "{{ rabbitmq_config_template }}"
       owner: root
       group: "{{ __root_group }}"
-      mode: 644
+      mode: 0644
     notify: restart rabbitmq service
 
   - name: Ensure RabbitMQ is running
