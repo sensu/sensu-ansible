@@ -6,6 +6,9 @@
   - include: ssl_generate.yml
     when: sensu_ssl_gen_certs
 
+  - name: Ensure Sensu client SSL directory exists
+    file: dest={{ sensu_config_path }}/ssl state=directory
+
   - name: Deploy the Sensu client SSL cert/key
     copy:
       src: "{{ item }}"
