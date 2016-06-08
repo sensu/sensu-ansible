@@ -54,6 +54,7 @@ sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
 sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
 sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
 sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
+sensu_ssl_tool_version: "0.23"
 
 # Uchiwa properties
 uchiwa_dc_name: ~
