@@ -142,8 +142,8 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
-| `sensu_pkg_version` | `0.23.0_1` | Version of Sensu to download and install |
-| `sensu_pkg_download_url` | `http://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
+| `sensu_pkg_version` | `0.25.3_1` | Version of Sensu to download and install |
+| `sensu_pkg_download_url` | `http://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
 | `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
