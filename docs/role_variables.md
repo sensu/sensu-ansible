@@ -9,7 +9,7 @@
 
 _Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
-### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)
+### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `rabbitmq_config_path` | `/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
@@ -23,7 +23,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
 | `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
 
-### [redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
@@ -33,7 +33,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
 | `redis_port` | 6379 | The transmission port for redis communications |
 
-### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_api_host` | `"{{ groups['sensu_masters'][0] }}"` | Hostname/IP address of the node running the Sensu API |
@@ -82,14 +82,14 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_url` | _undefined_ | The URL of the Uchiwa package to fetch (specific to Linux systems) |
 
 ## Ubuntu
-### [redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
 | `redis_pkg_name` | redis-server |  The name of the redis package to install |
 
 
-### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
@@ -100,13 +100,13 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_url`  | _See `vars/Ubuntu.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## Debian
-### [redis Server Properties](https://sensuapp.org/docs/0.21/redis)
+### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
 | `redis_service_name` | redis-server | The name of the redis service |
 
-### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
@@ -117,7 +117,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_url`  | _See `vars/Debian.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## CentOS
-### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
@@ -126,19 +126,19 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_url`  | _See `vars/CentOS.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## SmartOS
-### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)
+### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `rabbitmq_config_path` | `/opt/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
 | `rabbitmq_service_name` | rabbitmq | The name of the RabbitMQ service |
 
-### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/opt/local/etc/sensu` | Path to the Sensu configuration directory |
 
 ## FreeBSD
-### [Sensu Properties](https://sensuapp.org/docs/0.21/install-sensu)
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
@@ -146,7 +146,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `sensu_pkg_download_url` | `http://core.sensuapp.com/freebsd-unstable/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
 | `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
 
-### [RabbitMQ Server Properties](https://sensuapp.org/docs/0.21/rabbitmq)
+### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `rabbitmq_service_name` | `rabbitmq` | The name of the RabbitMQ service |

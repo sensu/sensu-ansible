@@ -1,5 +1,5 @@
 # Dynamic Check Deployment
-One of the awesome features of this role (if I do say so myself) is the deployment of Sensu [checks](https://sensuapp.org/docs/0.21/checks) on a dynamic basis. Deployment of which checks should be distributed to which nodes is determined from group membership within the Ansible inventory.
+One of the awesome features of this role (if I do say so myself) is the deployment of Sensu [checks](https://sensuapp.org/docs/latest/reference/checks) on a dynamic basis. Deployment of which checks should be distributed to which nodes is determined from group membership within the Ansible inventory.
 
 Have a group of webservers you need to monitor webservices on? Well, I'm sure you've bunched them together in your inventory under the `[webservers]` group, right? Or perhaps you only want to monitor disk space on your production systems; if they're a member of `[production]` within the inventory, you can do this easily.
 
@@ -69,7 +69,7 @@ tater.cmacr.ae
 web.cmacr.ae
 test.cmacr.ae
 ```
-Under these subdirectories, you can see [checks](https://sensuapp.org/docs/0.21/checks) that relate to the directory they're placed in.
+Under these subdirectories, you can see [checks](https://sensuapp.org/docs/latest/reference/checks) that relate to the directory they're placed in.
 The `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
 
 So how do these checks actually get deployed to their associated nodes?
