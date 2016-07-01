@@ -14,8 +14,9 @@ As mentioned already throughout this documentation: Ansible really is quite vers
 Let's say we want to set the Uchiwa username and password for the node we have acting as the dashboard for our Sensu setup.
 If it were a host called `uchiwa.cmacr.ae`, we could set the following in `host_vars/uchiwa.cmacr.ae.yml`:
 ``` yaml
-uchiwa_user_name: mordecai
-uchiwa_password: rigby
+uchiwa_users:
+  - username: mordecai
+    password: rigby
 ```
 Then, using `ansible-vault` we can encrypt this file: `$ ansible-vault encrypt host_vars/uchiwa.cmacr.ae.yml`
 
@@ -33,8 +34,9 @@ You don't have to set these variables directly in specific a node's variables.
 These could also be defined in, say, `vars/sensitive.yml` at the top of your Ansible codebase:
 
 ``` yaml
-uchiwa_user_name: mordecai
-uchiwa_password: rigby
+uchiwa_users:
+  - username: mordecai
+    password: rigby
 sensu_api_user_name: muscleman
 sensu_api_password: highfiveghost
 ```
