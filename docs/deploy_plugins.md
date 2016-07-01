@@ -1,7 +1,7 @@
 # Deployment of Handlers, Filters, and Mutators
 _Note:_ _If you haven't familiarized yourself with the concept of the static data store please read_['_Dynamic check deployment'_](dynamic_checks.md)
 
-Deployment of [handlers](https://sensuapp.org/docs/0.21/handlers), [filters](https://sensuapp.org/docs/0.18/filters), and [mutators](https://sensuapp.org/docs/0.18/mutators) is handled by leveraging templates and other data placed in the static data store.
+Deployment of [handlers](https://sensuapp.org/docs/latest/reference/handlers), [filters](https://sensuapp.org/docs/latest/reference/filters), and [mutators](https://sensuapp.org/docs/latest/reference/mutators) is handled by leveraging templates and other data placed in the static data store.
 
 ## Static data store hierarchy with respect to handlers/filters/mutators
 To deploy your handlers, filters, and mutators, you'll need to have directories named after each under a directory called 'sensu' in your static data store:
@@ -28,13 +28,13 @@ data/static
 All three are deployed using Ansible's [template]() module. This allows the use of variables within your configurations, which can come in quite handy!
 
 Let's take a look at the stuff I've got for [Pushover](https://pushover.net/).
-First off, the [handler](https://sensuapp.org/docs/0.21/getting-started-with-handlers) json file `pushover_handler.json.j2`:
+First off, the [handler](https://sensuapp.org/docs/latest/guides/getting-started/intro-to-handlers) json file `pushover_handler.json.j2`:
 ``` json
 {
   "handlers": {
     "pushover": {
       "type": "pipe",
-      "command": "{{ sensu_config_path }}/plugins/pushover.rb",
+      "command": "{{ sensu_config_path }}/plugins/handler-pushover.rb",
       "timeout": 10,
       "severites": ["critical"]
     }
@@ -43,7 +43,7 @@ First off, the [handler](https://sensuapp.org/docs/0.21/getting-started-with-han
 ```
 This is a simple handler definition, registering the `pushover` handler, and its properties, so that it can be used for any checks that trigger it.
 
-[This particular handler](https://github.com/sensu/sensu-community-plugins/blob/master/handlers/notification/pushover.rb) needs a configuration file, `pushover.json.j2`:
+[This particular handler](https://github.com/sensu-plugins/sensu-plugins-pushover/blob/master/bin/handler-pushover.rb) needs a configuration file, `pushover.json.j2`:
 ``` json
 {
         "pushover": {
@@ -59,7 +59,7 @@ To use this, I have `sensu_pushover_userkey` & `sensu_pushover_token` defined in
 
 Not all handler's require a config file like this, but I figured I'd use this example to show how useful the templates can be.
 
-Finally, we have the actual handler script [`pushover.rb`](https://github.com/sensu/sensu-community-plugins/blob/master/handlers/notification/pushover.rb), which resides in the `handlers` directory.  
+Finally, we have the actual handler script [`handler-pushover.rb`](https://github.com/sensu-plugins/sensu-plugins-pushover/blob/master/bin/handler-pushover.rb), which resides in the `handlers` directory.
 
 
 These are all deployed when the role runs through the `tasks/plugins.yml` playbook, in particular these plays:
