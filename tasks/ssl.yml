@@ -3,6 +3,13 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Ensure Sensu SSL directory exists
+    file:
+      dest: "{{ sensu_config_path }}/ssl"
+      state: directory
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+
   - include: ssl_generate.yml
     when: sensu_ssl_gen_certs
 
