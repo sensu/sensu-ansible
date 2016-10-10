@@ -1,4 +1,7 @@
 ---
+# Sensu version
+sensu_package: sensu
+
 # Service deployment options
 sensu_deploy_rabbitmq: true
 sensu_deploy_redis: true
