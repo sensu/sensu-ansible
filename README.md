@@ -17,7 +17,7 @@ Along with deploying the Sensu Server, API and clients, this role can deploy a f
 However, if you want to rely on other roles/management methods to deploy/manage these services, [it's nice and easy to integrate this role](http://rtfm.cmacr.ae/integration/).
 
 ## Documentation [![Documentation](https://readthedocs.org/projects/ansible-sensu/badge/?version=latest)](http://rtfm.cmacr.ae/)
-[Read the full documentation](http://rtfm.cmacr.ae/) for a comprehensive overview of this role and its powerful features.
+[Read the full documentation](http://ansible-sensu.readthedocs.io/en/latest/) for a comprehensive overview of this role and its powerful features.
 
 ## Requirements
 This role requires Ansible 2.0
