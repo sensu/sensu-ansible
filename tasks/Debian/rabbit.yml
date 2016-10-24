@@ -6,7 +6,7 @@
 
   - name: Ensure the RabbitMQ APT repo GPG key is present
     apt_key:
-      url: https://www.rabbitmq.com/rabbitmq-signing-key-public.asc
+      url: https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
       state: present
 
   - name: Ensure the RabbitMQ APT repo is present
