@@ -20,7 +20,9 @@ However, if you want to rely on other roles/management methods to deploy/manage 
 [Read the full documentation](http://ansible-sensu.readthedocs.io/en/latest/) for a comprehensive overview of this role and its powerful features.
 
 ## Requirements
-This role requires Ansible 2.0
+This role requires:
+- Ansible 2.0
+- The `dynamic_data_store` variable to be set: see http://ansible-sensu.readthedocs.io/en/latest/dynamic_data/
 
 ## Supported Platforms
 ### Current Release
