@@ -23,6 +23,7 @@ redis_pkg_repo: ~
 redis_pkg_name: redis
 redis_pkg_state: present
 redis_port: 6379
+redis_password:
 
 # Sensu/Uchiwa user/group/service properties
 sensu_api_host: "{{ groups['sensu_masters'][0] }}"

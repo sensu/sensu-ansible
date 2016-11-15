@@ -1,6 +1,9 @@
 {
   "redis": {
     "host": "{{ redis_host }}",
+{% if redis_password %}
+    "password": "{{ redis_password }}",
+{% endif %}
     "port": {{ redis_port }}
   }
 }
