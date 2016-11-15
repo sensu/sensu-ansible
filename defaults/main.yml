@@ -77,6 +77,7 @@ uchiwa_pkg_download_sha256sum: ~
 uchiwa_pkg_download_path: ~
 uchiwa_pkg_version: ~
 uchiwa_pkg_download_url: ~
+uchiwa_sensu_api_port: "{{ sensu_api_port }]"
 
 # Internal settings
 __bash_path: /bin/bash
