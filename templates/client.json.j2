@@ -2,6 +2,6 @@
   "client": {
     "name": "{{ sensu_client_name }}",
     "address": "{{ ansible_default_ipv4['address'] }}",
-      "subscriptions": {{ group_names | to_nice_json }}
+    "subscriptions": {{ sensu_client_subscriptions | to_nice_json(indent=6) }}
   }
 }
