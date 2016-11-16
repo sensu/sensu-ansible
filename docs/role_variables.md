@@ -53,6 +53,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_master` | `false` | Determines if a node is to act as the Sensu "master" node |
 | `sensu_user_name`| sensu | The name of the Sensu service user |
 | `sensu_remote_plugins` | _undefined_ | A list of plugins to install via `sensu-install` (Ruby Gems) |
+| `sensu_client_name` | `"{{ ansible_hostname }}"`| Sensu client identification (for display purposes) |
 
 ### Sensu/RabbitMQ SSL certificate properties
 ``` yaml
