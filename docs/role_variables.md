@@ -32,6 +32,9 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `redis_pkg_name` | redis |  The name of the redis package to install |
 | `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
 | `redis_port` | 6379 | The transmission port for redis communications |
+| `redis_password` | `` | Password to use for redis authentication |
+| `redis_sentinels` | `[]` | List of Redis Sentinel servers to use, with each item having `host` and `port` keys. Disables Sentinel when empty/unset |
+| `redis_master_name` | `` | Name of the master (replica set) to use with Redis Sentinel |
 
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
