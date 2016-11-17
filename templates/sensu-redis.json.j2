@@ -4,7 +4,7 @@
     "password": "{{ redis_password }}",
 {% endif %}
 {% if redis_sentinels %}
-    "sentinels": {{ redis_sentinels | to_nice_json(indent=4) }},
+    "sentinels": {{ redis_sentinels | to_nice_json }},
     "master": "{{ redis_master_name }}"
 {% else %}
     "host": "{{ redis_host }}",
