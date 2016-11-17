@@ -16,4 +16,5 @@
       update_cache: true
 
   - name: Ensure Sensu is installed
-    apt: name=sensu state={{ sensu_pkg_state }}
+    apt: name="sensu={{sensu_pkg_version}}" state={{ sensu_pkg_state }}
+
