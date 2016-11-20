@@ -17,6 +17,7 @@
     copy:
       src: "{{ item }}"
       owner: "{{ sensu_user_name }}"
+      remote_src: "{{ sensu_ssl_deploy_remote_src }}"
       group: "{{ sensu_group_name }}"
       dest: "{{ sensu_config_path }}/ssl"
     with_items:

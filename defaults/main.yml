@@ -55,6 +55,7 @@ sensu_client_subscriptions: "{{ group_names }}"
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
+sensu_ssl_deploy_remote_src: false
 sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] | default('/etc/sensu') }}"
 sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
 sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
