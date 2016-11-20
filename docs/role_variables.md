@@ -84,6 +84,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_path` | _undefined_ | The path to fetch the Uchiwa package to (specific to Linux systems) |
 | `uchiwa_pkg_version` | _undefined_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
 | `uchiwa_pkg_download_url` | _undefined_ | The URL of the Uchiwa package to fetch (specific to Linux systems) |
+| `uchiwa_sensu_api_port' | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
 
 ## Ubuntu
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
