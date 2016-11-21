@@ -11,9 +11,11 @@
 
   - name: restart sensu-server service
     service: name=sensu-server state=restarted
+    when: sensu_master
 
   - name: restart sensu-api service
     service: name=sensu-api state=restarted
+    when: sensu_master
 
   - name: restart sensu-client service
     service: name=sensu-client state=restarted
