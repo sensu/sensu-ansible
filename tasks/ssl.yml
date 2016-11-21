@@ -15,12 +15,12 @@
 
   - name: Deploy the Sensu client SSL cert/key
     copy:
-      src: "{{ item }}"
+      src: "{{ item.src }}"
       owner: "{{ sensu_user_name }}"
       remote_src: "{{ sensu_ssl_deploy_remote_src }}"
       group: "{{ sensu_group_name }}"
-      dest: "{{ sensu_config_path }}/ssl"
+      dest: "{{ sensu_config_path }}/ssl/{{ item.dest }}"
     with_items:
-      - "{{ sensu_ssl_client_cert }}"
-      - "{{ sensu_ssl_client_key }}"
+      - {src: "{{ sensu_ssl_client_cert }}", dest: cert.pem}
+      - {src: "{{ sensu_ssl_client_key }}", dest: key.pem}
     notify: restart sensu-client service
