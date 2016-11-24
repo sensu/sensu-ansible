@@ -16,14 +16,6 @@
       createhome: true
       state: present
 
-  - name: Ensure the Sensu config directory is present
-    file:
-      dest: "{{ sensu_config_path }}/conf.d"
-      state: directory
-      recurse: true
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-
   - name: Ensure Sensu dependencies are installed
     pkgin: name=build-essential,ruby21-base state=present
 

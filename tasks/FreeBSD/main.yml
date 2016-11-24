@@ -33,11 +33,3 @@
   - name: Install sensu from the retrieved txz package
     command: "pkg add {{ sensu_pkg_download_path }}"
     when: sensu_txz|changed
-
-  - name: Ensure the Sensu config directory is present
-    file:
-      dest: "{{ sensu_config_path }}/conf.d"
-      state: directory
-      recurse: true
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"

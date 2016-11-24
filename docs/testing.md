@@ -13,13 +13,3 @@ To log in, use `admin` as both the username & password.
 
 
 As support for other operating systems/distributions is written, they will be added as options for testing.
-
-## Caveats
-### Failing handlers
-It is expected that the following two handlers, triggered at the end of the test run will fail:  
-
-- `restart sensu-server service`
-- `restart sensu-api service`
-
-Both these handlers use the `delegate_to` directive, which does not play nice with Vagrant.  
-This __is__ expected to work in real deployments.

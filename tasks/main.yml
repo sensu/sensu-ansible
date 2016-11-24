@@ -19,6 +19,9 @@
     when: rabbitmq_server
           and sensu_deploy_rabbitmq
 
+  - include: common.yml
+    tags: common
+
   - include: server.yml
     tags: server
     when: sensu_master

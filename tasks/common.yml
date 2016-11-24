@@ -1,0 +1,46 @@
+---
+# tasks/common.yml: Deploy configurations common to client and server for Sensu
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure the Sensu config directory is present
+    file:
+      dest: "{{ sensu_config_path }}/conf.d"
+      state: directory
+      recurse: true
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+
+  - name: Deploy Sensu Redis configuration
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/redis.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: sensu-redis.json.j2
+    notify:
+      - restart sensu-server service
+      - restart sensu-api service
+      - restart sensu-client service
+
+  - name: Deploy Sensu RabbitMQ configuration
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/rabbitmq.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: rabbitmq.json.j2
+    when: sensu_transport == "rabbitmq"
+    notify:
+      - restart sensu-server service
+      - restart sensu-api service
+      - restart sensu-client service
+
+  - name: Deploy Sensu transport configuration
+    template:
+      dest: "{{ sensu_config_path }}/conf.d/transport.json"
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      src: transport.json.j2
+    notify:
+      - restart sensu-server service
+      - restart sensu-api service
+      - restart sensu-client service
