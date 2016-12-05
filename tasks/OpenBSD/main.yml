@@ -26,6 +26,7 @@
 
   - name: Get the current version of rubygems
     shell: /usr/local/bin/gem23 --version
+    check_mode: no
     register: gem23_version
     changed_when: False
 
