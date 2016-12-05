@@ -18,7 +18,7 @@
     when: sensu_master
 
   - name: restart sensu-client service
-    service: name=sensu-client state=restarted
+    service: name={{ sensu_client_service_name }} state=restarted
 
   # Joyent SmartOS specific handlers
   - name: import sensu-server service

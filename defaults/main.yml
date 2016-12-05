@@ -1,6 +1,7 @@
 ---
 # Sensu version
 sensu_package: sensu
+sensu_client_service_name: sensu-client
 
 # Service deployment options
 sensu_deploy_rabbitmq: true

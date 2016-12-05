@@ -1,0 +1,13 @@
+#!/bin/sh
+
+daemon="/usr/local/bin/sensu-client"
+
+daemon_flags="-b -c {{ sensu_config_path }}/conf.json -d {{ sensu_config_path }}/conf.d -e {{ sensu_config_path }}/extensions -p /var/run/sensu-client.pid -l /var/log/sensu/sensu-client.log -L info"
+
+. /etc/rc.d/rc.subr
+
+rc_reload="NO"
+
+pexp="/usr/local/bin/ruby23 /usr/local/bin/sensu-client.*"
+
+rc_cmd $1

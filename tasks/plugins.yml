@@ -22,6 +22,8 @@
     changed_when: false
     become: false
 
+  - debug: var=sensu_available_checks
+
   - name: Deploy check plugins
     copy:
       src: "{{ static_data_store }}/sensu/checks/{{ item }}/"
