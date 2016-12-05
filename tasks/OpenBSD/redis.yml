@@ -1,6 +1,6 @@
 ---
-# tasks/FreeBSD/redis.yml: Deploy redis
-# Specific to FreeBSD
+# tasks/OpenBSD/redis.yml: Deploy redis
+# Specific to OpenBSD
 
   - include_vars: "{{ ansible_distribution }}.yml"
 

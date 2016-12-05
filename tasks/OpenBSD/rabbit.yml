@@ -1,6 +1,6 @@
 ---
-# tasks/FreeBSD/rabbit.yml: Deploy RabbitMQ
-# Specific to FreeBSD
+# tasks/OpenBSD/rabbit.yml: Deploy RabbitMQ
+# Specific to OpenBSD
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
