@@ -4,7 +4,7 @@
 
 # Sensu config/package properties
 sensu_config_path: /usr/local/etc/sensu
-sensu_pkg_version: 0.25.3_1
+sensu_pkg_version: 0.25.6_1
 sensu_pkg_download_url: http://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz
 sensu_pkg_download_path: /root/sensu_latest.txz
 
