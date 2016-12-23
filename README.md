@@ -32,7 +32,7 @@ This role requires:
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
 - [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
-- [FreeBSD - 10.2](https://www.freebsd.org/releases/10.2R/relnotes.html)
+- [FreeBSD - 10.2 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
 ### Future Releases
 
