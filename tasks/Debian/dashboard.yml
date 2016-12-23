@@ -12,7 +12,7 @@
     register: uchiwa_deb
 
   - name: Install Uchiwa from the retrieved deb package
-    apt: deb={{ uchiwa_pkg_download_path }} 
+    apt: deb={{ uchiwa_pkg_download_path }}
     when: uchiwa_deb|changed
 
   - name: Deploy Uchiwa config

@@ -4,7 +4,7 @@
 
   - name: Ensure RabbitMQ is installed
     pkgin: name=rabbitmq state=present
-  
+
   - name: Ensure EPMD is running
     service:
       name: epmd

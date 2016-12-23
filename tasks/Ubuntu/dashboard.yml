@@ -11,7 +11,7 @@
       sha256sum: "{{ uchiwa_pkg_download_sha256sum }}"
 
   - name: Install Uchiwa from the retrieved deb package
-    apt: deb={{ uchiwa_pkg_download_path }} 
+    apt: deb={{ uchiwa_pkg_download_path }}
 
   - name: Deploy Uchiwa config
     template:
