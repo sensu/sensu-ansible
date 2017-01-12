@@ -23,7 +23,7 @@ However, if you want to rely on other roles/management methods to deploy/manage 
 This role requires:
 - Ansible 2.0
 - The `dynamic_data_store` variable to be set: see [Dynamic Data Store](http://ansible-sensu.readthedocs.io/en/latest/dynamic_data/)
-- If `sensu_include_plugins` is true (the default), the `static_data_store` variable needs to be set: see [Dynamic Check Deployment](http://ansible-sensu.readthedocs.io/en/latest/dynamic_checks/)
+- If `sensu_include_plugins` is true (the default), the `static_data_store` variable needs to be set: see [Check Deployment](http://ansible-sensu.readthedocs.io/en/latest/dynamic_checks/)
 
 ## Supported Platforms
 ### Current Release
