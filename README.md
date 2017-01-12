@@ -30,6 +30,7 @@ This role requires:
 
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
+- [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/) - only client side support is tested
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
 - [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
 - [FreeBSD - 10.2 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
