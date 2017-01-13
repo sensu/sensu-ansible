@@ -42,6 +42,12 @@
       version: "{{ sensu_gem_version }}"
       executable: /usr/local/bin/gem23
 
+  - name: Create the sensu log folder
+    file:
+      path: /var/log/sensu
+      owner: root
+      group: root
+
   - name: Deploy OpenBSD rc script
     template:
       src: sensuclient_openbsd.j2
