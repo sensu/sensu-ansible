@@ -27,7 +27,7 @@
       dest: "{{ sensu_config_path }}/conf.d/rabbitmq.json"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-      src: rabbitmq.json.j2
+      src: "{{ sensu_rabbitmq_config }}"
     when: sensu_transport == "rabbitmq"
     notify:
       - restart sensu-server service
