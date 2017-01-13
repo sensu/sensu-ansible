@@ -47,6 +47,7 @@
       path: /var/log/sensu
       owner: root
       group: wheel
+      state: directory
 
   - name: Deploy OpenBSD rc script
     template:
