@@ -89,6 +89,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_api_uchiwa_path` | `''` | Path to append to the Sensu API URI for Uchiwa communications |
 | `sensu_api_timeout` | 5000 | Value to set for the Sensu API timeout |
 | `sensu_client_config` | `client.json.j2` | Jinja2 template to use for node configuration of the Sensu Client service |
+| `sensu_rabbitmq_config` | `rabbitmq.json.j2` | Jinja2 template to use for RabbitMQ configuration |
 | `sensu_config_path` | `/etc/sensu` | Path to the Sensu configuration directory |
 | `sensu_gem_state` | present | State of the Sensu gem - can be set to `latest` to keep Sensu updated |
 | `sensu_plugin_gem_state` | present | State of the Sensu Plugins gem - can be set to `latest` to keep Sensu Plugins updated |
