@@ -85,7 +85,8 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_sha256sum` | _undefined_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched (specific to Linux systems) |
 | `uchiwa_pkg_download_path` | _undefined_ | The path to fetch the Uchiwa package to (specific to Linux systems) |
 | `uchiwa_pkg_version` | _undefined_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_download_url` | _undefined_ | The URL of the Uchiwa package to fetch (template will add .deb or .rpm - specific to Linux systems) |
+| `uchiwa_pkg_rpm_download_url` | _undefined_ | The URL of the Uchiwa package to fetch on rpm based distros |
+| `uchiwa_pkg_deb_download_url` | _undefined_ | The URL of the Uchiwa package to fetch on deb based distros |
 | `uchiwa_sensu_api_port' | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
 
 ## Ubuntu
@@ -103,7 +104,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
 | `uchiwa_pkg_download_sha256sum` | _See `defaults/main.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
 | `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
-| `uchiwa_pkg_version` | _See `defaults/main.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
+| `uchiwa_pkg_deb_download_url` |  _See `defaults/main.yml`_  | The URL of the Uchiwa package to fetch on deb based distros |
 | `uchiwa_pkg_download_url`  | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch (template will add .deb or .rpm - specific to Linux systems)|
 
 ## Debian
@@ -121,7 +122,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_pkg_download_sha256sum` | _See `defaults/main.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
 | `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
 | `uchiwa_pkg_version` | _See `default/main.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_download_url`  | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch (template will add .deb or .rpm - specific to Linux systems)
+| `uchiwa_pkg_deb_download_url` |  _See `defaults/main.yml`_  | The URL of the Uchiwa package to fetch on deb based distros |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
@@ -130,7 +131,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
 | `uchiwa_pkg_version` | _See `defaults/main.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_download_url`  | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch (template will add .deb or .rpm - specific to Linux systems)
+| `uchiwa_pkg_rpm_download_url` | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch on rpm based distros |
 
 ## SmartOS
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
