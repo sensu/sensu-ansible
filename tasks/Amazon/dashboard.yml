@@ -6,7 +6,7 @@
 
   - name: Ensure Uchiwa is installed
     yum:
-      name: "{{ uchiwa_pkg_download_url }}"
+      name: "{{ uchiwa_pkg_download_url }}.rpm"
       state: present
 
   - name: Deploy Uchiwa config

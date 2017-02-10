@@ -6,7 +6,7 @@
 
   - name: Retrieve the Uchiwa deb package
     get_url:
-      url: "{{ uchiwa_pkg_download_url }}"
+      url: "{{ uchiwa_pkg_download_url }}.deb"
       dest: "{{ uchiwa_pkg_download_path }}"
       sha256sum: "{{ uchiwa_pkg_download_sha256sum }}"
 
