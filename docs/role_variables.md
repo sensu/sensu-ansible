@@ -101,10 +101,10 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `uchiwa_pkg_download_sha256sum` | _See `vars/Ubuntu.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
+| `uchiwa_pkg_download_sha256sum` | _See `defaults/main.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
 | `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
-| `uchiwa_pkg_version` | _See `vars/Ubuntu.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_download_url`  | _See `vars/Ubuntu.yml`_ | The URL of the Uchiwa package to fetch |
+| `uchiwa_pkg_version` | _See `defaults/main.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
+| `uchiwa_pkg_download_url`  | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch |
 
 ## Debian
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
@@ -118,7 +118,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `uchiwa_pkg_download_sha256sum` | _See `vars/Debian.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
+| `uchiwa_pkg_download_sha256sum` | _See `defaults/main.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
 | `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
 | `uchiwa_pkg_version` | _See `vars/Debian.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
 | `uchiwa_pkg_download_url`  | _See `vars/Debian.yml`_ | The URL of the Uchiwa package to fetch |

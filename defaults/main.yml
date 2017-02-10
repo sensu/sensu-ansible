@@ -75,10 +75,10 @@ uchiwa_users:
     password: admin
 uchiwa_port: 3000
 uchiwa_refresh: 5
-uchiwa_pkg_download_sha256sum: ~
-uchiwa_pkg_download_path: ~
-uchiwa_pkg_version: ~
-uchiwa_pkg_download_url: ~
+uchiwa_pkg_download_sha256sum: 04d830e84159cc82b297ec9eb4333b8038b58ab77b12464163d7c5291bdda21d
+uchiwa_pkg_download_path: /root/uchiwa_latest.deb
+uchiwa_pkg_version: 0.14.2-1
+uchiwa_pkg_download_url: http://dl.bintray.com/palourde/uchiwa/uchiwa_{{ uchiwa_pkg_version }}_amd64.deb
 uchiwa_sensu_api_port: "{{ sensu_api_port }}"
 
 # Internal settings
