@@ -11,7 +11,7 @@
       src: sensu-api.json.j2
     notify: restart sensu-api service
 
-  - include: SmartOS/server.yml
+  - include: "{{ role_path }}/tasks/SmartOS/server.yml"
     when: ansible_distribution == "SmartOS"
 
   - name: Ensure Sensu server service is running

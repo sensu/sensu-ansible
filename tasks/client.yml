@@ -11,7 +11,7 @@
       src: "{{ sensu_client_config  }}"
     notify: restart sensu-client service
 
-  - include: SmartOS/client.yml
+  - include: "{{ role_path }}/tasks/SmartOS/client.yml
     when: ansible_distribution == "SmartOS"
 
   - name: Ensure Sensu client service is running

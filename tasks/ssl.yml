@@ -10,7 +10,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
 
-  - include: ssl_generate.yml
+  - include: "{{ role_path }}/tasks/ssl_generate.yml"
     when: sensu_ssl_gen_certs
 
   - name: Deploy the Sensu client SSL cert/key

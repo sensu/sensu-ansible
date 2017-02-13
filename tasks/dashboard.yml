@@ -1,6 +1,6 @@
 ---
 # tasks/dashboard.yml: Deployment of the Uchiwa dashboard
-  - include: "{{ ansible_distribution }}/dashboard.yml"
+  - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/dashboard.yml"
 
   - name: Ensure Uchiwa server service is running
     service: name=uchiwa state=started enabled=yes
