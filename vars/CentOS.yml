@@ -6,5 +6,6 @@
 sensu_user_name: root
 sensu_group_name: root
 sensu_pkg_version: '0.26.5'
+sensu_yum_repo_url: http://repositories.sensuapp.org/yum/$basearch/
 uchiwa_pkg_version: 0.14.2-1
 uchiwa_pkg_download_url: http://dl.bintray.com/palourde/uchiwa/uchiwa-{{ uchiwa_pkg_version }}.x86_64.rpm
