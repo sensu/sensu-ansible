@@ -2,6 +2,10 @@
 # Sensu version
 sensu_package: sensu
 sensu_client_service_name: sensu-client
+# Sensu repo urls
+sensu_yum_repo_url: http://repositories.sensuapp.org/yum/$basearch/
+sensu_apt_repo_url: 'deb     http://repositories.sensuapp.org/apt sensu main'
+sensu_apt_key_url: http://repositories.sensuapp.org/apt/pubkey.gpg
 
 # Service deployment options
 sensu_deploy_rabbitmq: true

@@ -6,12 +6,12 @@
 
   - name: Ensure the Sensu APT repo GPG key is present
     apt_key:
-      url: http://repositories.sensuapp.org/apt/pubkey.gpg
+      url: "{{ sensu_apt_key_url }}"
       state: present
 
   - name: Ensure the Sensu Core APT repo is present
     apt_repository:
-      repo: 'deb     http://repositories.sensuapp.org/apt sensu main'
+      repo: "{{ sensu_apt_repo_url }}"
       state: present
       update_cache: true
 

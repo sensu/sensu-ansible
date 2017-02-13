@@ -5,20 +5,15 @@
   - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure the Sensu Core Yum repo is present
-    copy:
-      dest: /etc/yum.repos.d/sensu.repo
-      content: |
-        [sensu]
-        name=sensu
-        baseurl=http://repositories.sensuapp.org/yum/$basearch/
-        gpgcheck=0
-        enabled=1
-      owner: root
-      group: root
-      mode: 0644
+    yum_repository:
+      name: sensu
+      description: The Sensu Core yum repository
+      baseurl: "{{ sensu_yum_repo_url }}"
+      gpgcheck: no
+      enabled: yes
 
   - name: Ensure Sensu is installed
-    yum: 
+    yum:
       name: "{{sensu_package }}-{{sensu_pkg_version}}"
       state: "{{ sensu_pkg_state }}"
 
