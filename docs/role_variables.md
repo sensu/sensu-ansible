@@ -62,6 +62,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### Sensu/RabbitMQ SSL certificate properties
 ``` yaml
 sensu_ssl_gen_certs: true
+sensu_ssl_manage_cert: true
 sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"
 sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
 sensu_ssl_deploy_remote_src: false  # Copy certificates from paths in the destination host, not in the controller host.
