@@ -18,6 +18,7 @@
       - restart rabbitmq service
       - restart sensu-api service
       - restart sensu-server service
+    when: sensu_ssl_manage_certs
 
   - name: Deploy RabbitMQ config
     template:
