@@ -24,3 +24,4 @@
       - {src: "{{ sensu_ssl_client_cert }}", dest: cert.pem}
       - {src: "{{ sensu_ssl_client_key }}", dest: key.pem}
     notify: restart sensu-client service
+    when: sensu_ssl_manage_certs
