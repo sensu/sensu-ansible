@@ -12,6 +12,7 @@
 
   - include: ssl_generate.yml
     when: sensu_ssl_gen_certs
+    static: false
 
   - name: Deploy the Sensu client SSL cert/key
     copy:
