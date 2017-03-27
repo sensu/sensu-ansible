@@ -10,6 +10,7 @@
     tags: redis
     when: redis_server
           and sensu_deploy_redis
+    static: false
 
   - include: "{{ role_path }}/tasks/ssl.yml"
     tags: ssl
@@ -18,6 +19,7 @@
     tags: rabbitmq
     when: rabbitmq_server
           and sensu_deploy_rabbitmq
+    static: false
 
   - include: "{{ role_path }}/tasks/common.yml"
     tags: common
@@ -25,10 +27,12 @@
   - include: "{{ role_path }}/tasks/server.yml"
     tags: server
     when: sensu_master
+    static: false
 
   - include: "{{ role_path }}/tasks/dashboard.yml"
     tags: dashboard
     when: sensu_include_dashboard
+    static: false
 
   - include: "{{ role_path }}/tasks/client.yml"
     tags: client
@@ -36,3 +40,4 @@
   - include: "{{ role_path }}/tasks/plugins.yml"
     tags: plugins
     when: sensu_include_plugins
+    static: false

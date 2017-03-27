@@ -13,6 +13,7 @@
 
   - include: "{{ role_path }}/tasks/SmartOS/client.yml"
     when: ansible_distribution == "SmartOS"
+    static: false
 
   - name: Ensure Sensu client service is running
     service:
