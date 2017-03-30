@@ -17,6 +17,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       src: sensu-redis.json.j2
+    when: sensu_deploy_redis
     notify:
       - restart sensu-server service
       - restart sensu-api service
