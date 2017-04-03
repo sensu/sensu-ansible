@@ -33,7 +33,7 @@ This role requires:
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/) - only client side support is tested
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
 - [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
-- [FreeBSD - 10.2 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
+- [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
 ### Future Releases
 
