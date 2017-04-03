@@ -10,7 +10,7 @@
       content: |
         [sensu]
         name=sensu
-        baseurl=http://repositories.sensuapp.org/yum/$basearch/
+        baseurl=https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/
         gpgcheck=0
         enabled=1
       owner: root
