@@ -41,6 +41,77 @@ This role requires:
 - NetBSD
 
 ## Role Variables
+All variables have sensible defaults, which can be found in `defaults/main.yml`.
+The current version includes the following variables:
+
+## Defaults
+
+### Service Deployment Options
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+|`sensu_deploy_rabbitmq` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ |
+|`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure redis |
+_Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
+
+### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `rabbitmq_config_path` | `/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
+| `rabbitmq_config_template` | `rabbitmq.config.j2` | The template to use for the RabbitMQ service configuration |
+|` rabbitmq_host` | `"{{ groups\['rabbitmq_servers']\[0] }}"` | The hostname/IP address of the RabbitMQ node |
+| `rabbitmq_port` | 5671 | The transmission port for RabbitMQ communications |
+| `rabbitmq_pkg_state` | present | The state of the RabbitMQ package (should be set to `present` or `latest`) |
+| `rabbitmq_server` | `false` | Determines whether to include the deployment of RabbitMQ |
+| `rabbitmq_service_name` | rabbitmq-server | The name of the RabbitMQ service |
+| `rabbitmq_sensu_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
+| `rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
+| `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
+
+### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
+| `redis_server` | `false` | Determines whether to include the deployment of redis |
+| `redis_pkg_repo` | _undefined_ |  The PPA to use for installing redis from (specific to Debian flavored systems) |
+| `redis_service_name` | redis | The name of the redis service |
+| `redis_pkg_name` | redis |  The name of the redis package to install |
+| `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
+| `redis_port` | 6379 | The transmission port for redis communications |
+
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `sensu_api_host` | `"{{ groups['sensu_masters'][0] }}"` | Hostname/IP address of the node running the Sensu API |
+| `sensu_api_port` | 4567 | Transmission port for Sensu API communications |
+| `sensu_api_ssl` | "false" | Determines whether to use SSL for Sensu API communications |
+| `sensu_api_user_name` | admin | Username for authentication with the Sensu API |
+| `sensu_api_password` | secret | Password for authentication with the Sensu API |
+| `sensu_api_uchiwa_path` | `''` | Path to append to the Sensu API URI for Uchiwa communications |
+| `sensu_api_timeout` | 5000 | Value to set for the Sensu API timeout |
+| `sensu_client_config` | `client.json.j2` | Jinja2 template to use for node configuration of the Sensu Client service |
+| `sensu_rabbitmq_config` | `sensu-rabbitmq.json.j2` | Jinja2 template to use for RabbitMQ configuration |
+| `sensu_config_path` | `/etc/sensu` | Path to the Sensu configuration directory |
+| `sensu_gem_state` | present | State of the Sensu gem - can be set to `latest` to keep Sensu updated |
+| `sensu_plugin_gem_state` | present | State of the Sensu Plugins gem - can be set to `latest` to keep Sensu Plugins updated |
+| `sensu_group_name` | sensu | The name of the Sensu service user's primary group |
+| `sensu_include_plugins` | `true` | Determines whether to include the `sensu-plugins` gem |
+| `sensu_include_dashboard` | `false` | Determines whether to deploy the Uchiwa dashboard |
+| `sensu_master` | `false` | Determines if a node is to act as the Sensu "master" node |
+| `sensu_user_name`| sensu | The name of the Sensu service user |
+| `sensu_remote_plugins` | _undefined_ | A list of plugins to install via `sensu-install` (Ruby Gems) |
+
+### Sensu/RabbitMQ SSL certificate properties
+``` yaml
+sensu_ssl_gen_certs: true
+sensu_ssl_manage_certs: true
+sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"
+sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
+sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
+sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
+sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
+sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
+```
 
 See [Role Variables](http://ansible-sensu.readthedocs.io/en/latest/role_variables/) for a detailed list of the variables this role uses
 

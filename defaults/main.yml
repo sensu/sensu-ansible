@@ -54,7 +54,7 @@ sensu_api_password: secret
 sensu_api_uchiwa_path: ''
 sensu_api_timeout: 5000
 sensu_client_config: client.json.j2
-sensu_rabbitmq_config: rabbitmq.json.j2
+sensu_rabbitmq_config: sensu-rabbitmq.json.j2
 sensu_config_path: /etc/sensu
 sensu_pkg_state: present
 sensu_gem_state: present
