@@ -1,5 +1,9 @@
 ---
-# Sensu version
+# Sensu enterprise credential
+# Variables for Sensu Enterprise License
+se_enterprise: false
+se_user: ''
+se_pass: ''
 sensu_package: sensu
 
 # Service deployment options
