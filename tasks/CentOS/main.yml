@@ -55,7 +55,6 @@
 
   - name: Ensure Sensu is installed
     yum: name={{ sensu_package }} state={{ sensu_pkg_state }}
-    when: not se_enterprise
 
   - name: Ensure Sensu Enterprise is installed
     yum: name={{ sensu_enterprise_package }} state={{ sensu_pkg_state }}
