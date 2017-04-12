@@ -4,7 +4,18 @@
 se_enterprise: false
 se_user: ''
 se_pass: ''
+
+# Sensu package
 sensu_package: sensu
+sensu_enterprise_package: sensu-enterprise
+
+# Sensu service names
+sensu_server_service_name: sensu-server
+sensu_api_service_name: sensu-api
+sensu_client_service_name: sensu-client
+sensu_enterprise_service_name: sensu-enterprise
+sensu_enterprise_dashboard_service_name: sensu-enterprise-dashboard
+uchiwa_service_name: uchiwa
 
 # Service deployment options
 sensu_deploy_rabbitmq: true
