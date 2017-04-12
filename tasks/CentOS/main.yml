@@ -17,5 +17,46 @@
       group: root
       mode: 0644
 
+  - name: Ensure that credential is supplied if installing Sensu Enterprise
+    assert:
+      that:
+        - "se_user != ''"
+        - "se_pass != ''"
+      msg: Sensu enterprise credential must not be empty. Did you forget to set se_user and se_pass?
+    when: se_enterprise
+
+  - name: Ensure the Sensu Enterprise repo is present
+    copy:
+      dest: /etc/yum.repos.d/sensu-enterprise.repo
+      content: |
+        [sensu-enterprise]
+        name=sensu-enterprise
+        baseurl=http://{{ se_user }}:{{ se_pass }}@enterprise.sensuapp.com/yum/noarch/
+        gpgcheck=0
+        enabled=1
+      owner: root
+      group: root
+      mode: 0644
+    when: se_enterprise
+
+  - name: Ensure the Sensu Enterprise Dashboard repo is present
+    copy:
+      dest: /etc/yum.repos.d/sensu-enterprise-dashboard.repo
+      content: |
+        [sensu-enterprise-dashboard]
+        name=sensu-enterprise-dashboard
+        baseurl=http://{{ se_user }}:{{ se_pass }}@enterprise.sensuapp.com/yum/\$basearch/
+        gpgcheck=0
+        enabled=1
+      owner: root
+      group: root
+      mode: 0644
+    when: se_enterprise
+
   - name: Ensure Sensu is installed
     yum: name={{ sensu_package }} state={{ sensu_pkg_state }}
+    when: not se_enterprise
+
+  - name: Ensure Sensu Enterprise is installed
+    yum: name={{ sensu_enterprise_package }} state={{ sensu_pkg_state }}
+    when: se_enterprise
