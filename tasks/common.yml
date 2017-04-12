@@ -21,7 +21,6 @@
     notify:
       - restart sensu-server service
       - restart sensu-api service
-      - restart sensu-client service
       - restart sensu-enterprise service
 
   - name: Deploy Sensu RabbitMQ configuration
@@ -34,7 +33,6 @@
     notify:
       - restart sensu-server service
       - restart sensu-api service
-      - restart sensu-client service
       - restart sensu-enterprise service
 
   - name: Deploy Sensu transport configuration
@@ -46,5 +44,4 @@
     notify:
       - restart sensu-server service
       - restart sensu-api service
-      - restart sensu-client service
       - restart sensu-enterprise service
