@@ -8,6 +8,7 @@ se_pass: ''
 # Sensu package
 sensu_package: sensu
 sensu_enterprise_package: sensu-enterprise
+sensu_enterprise_dashboard_package: sensu-enterprise-dashboard
 
 # Sensu service names
 sensu_server_service_name: sensu-server
