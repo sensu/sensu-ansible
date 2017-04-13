@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## Unreleased
 ### Changed
 - Rely on the existing sensu repositories to install Uchiwa
+- Use the latest version of the FreeBSD package
 
 ## 1.1.0 2017-04-03
 ### Added
