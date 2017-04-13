@@ -10,6 +10,15 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
 
+  - name: Ensure local directories exist
+    local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
+    sudo: no
+    with_items:
+      - checks
+      - filters
+      - handlers
+      - mutators
+
   - name: Ensure any remote plugins defined are present
     shell: sensu-install -p {{ item }}
     with_items: "{{ sensu_remote_plugins }}"
