@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## Unreleased
+### Changed
+- Rely on the existing sensu repositories to install Uchiwa
+
 ## 1.1.0 2017-04-03
 ### Added
 - Toggle for SSL cert management
