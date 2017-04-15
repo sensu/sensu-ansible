@@ -12,7 +12,7 @@
 
   - name: Ensure local directories exist
     local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
-    sudo: no
+    become: no
     with_items:
       - checks
       - filters
@@ -38,7 +38,7 @@
       mode: 0755
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-    when: "sensu_available_checks is defined and '{{ item }}' in sensu_available_checks.stdout_lines"
+    when: "sensu_available_checks is defined and item in sensu_available_checks.stdout_lines"
     with_flattened:
       - "{{ group_names }}"
     notify: restart sensu-client service
