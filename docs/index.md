@@ -24,7 +24,7 @@ This role requires Ansible 2.0
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
-- [Ubuntu - 15.04 (Vivid Vervet)](http://releases.ubuntu.com/15.04/)
+- [Ubuntu - 16.04 (Vivid Vervet)](http://releases.ubuntu.com/16.04/)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
 ### Future Releases

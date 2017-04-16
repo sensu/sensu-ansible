@@ -28,6 +28,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
 | `redis_server` | `false` | Determines whether to include the deployment of redis |
+| `redis_service_name` | redis |  The name of the redis service to enable |
 | `redis_pkg_repo` | _undefined_ |  The PPA to use for installing redis from (specific to Debian flavored systems) |
 | `redis_pkg_name` | redis |  The name of the redis package to install |
 | `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
@@ -84,9 +85,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
 | `redis_pkg_name` | redis-server |  The name of the redis package to install |
-
+| `redis_service_name` | redis-server | The name of the redis service |
 
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
@@ -98,7 +98,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
+| `redis_pkg_name` | redis-server | The name of the redis service |
 | `redis_service_name` | redis-server | The name of the redis service |
 
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)

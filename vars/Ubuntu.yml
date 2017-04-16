@@ -3,8 +3,8 @@
 # Defaults are defined in vars/default.yml
 
 # redis server properties
-redis_pkg_repo: 'ppa:chris-lea/redis-server'
 redis_pkg_name: redis-server
+redis_service_name: redis-server
 
 # Sensu/Uchiwa user/group/service properties
 sensu_user_name: root
