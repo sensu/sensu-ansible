@@ -32,7 +32,7 @@ This role requires:
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/) - only client side support is tested
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
-- [Ubuntu - 16.04 (Vivid Vervet)](http://releases.ubuntu.com/16.04/)
+- [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
 ### Future Releases
