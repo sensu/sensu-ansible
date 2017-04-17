@@ -27,7 +27,7 @@
 
   - name: Deploy Sensu Enterprise Dashboard
     template:
-      src: sensu_enterprise_dashboard_condig.json.j2
+      src: sensu_enterprise_dashboard_config.json.j2
       dest: "{{ sensu_config_path}}/dashboard.json"
     when: se_enterprise
     notify:
