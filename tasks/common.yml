@@ -16,12 +16,13 @@
       dest: "{{ sensu_config_path }}/conf.d/redis.json"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-      src: sensu-redis.json.j2
+      src: "{{ sensu_redis_config }}"
     when: sensu_deploy_redis
     notify:
       - restart sensu-server service
       - restart sensu-api service
       - restart sensu-enterprise service
+      - restart sensu-client service
 
   - name: Deploy Sensu RabbitMQ configuration
     template:
@@ -34,6 +35,7 @@
       - restart sensu-server service
       - restart sensu-api service
       - restart sensu-enterprise service
+      - restart sensu-client service
 
   - name: Deploy Sensu transport configuration
     template:
@@ -45,3 +47,4 @@
       - restart sensu-server service
       - restart sensu-api service
       - restart sensu-enterprise service
+      - restart sensu-client service

@@ -45,6 +45,7 @@ redis_port: 6379
 redis_password:
 redis_sentinels: []
 redis_master_name:
+sensu_redis_config: sensu-redis.json.j2
 
 # Sensu/Uchiwa user/group/service properties
 sensu_api_host: "{{ groups['sensu_masters'][0] }}"
