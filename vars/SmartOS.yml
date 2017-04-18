@@ -1,6 +1,6 @@
 ---
 # vars/SmartOS.yml: Variables for Joyent SmartOS
-# Defaults are defined in vars/default.yml
+# Defaults are defined in defaults/main.yml
 
 # RabbitMQ server properties
 rabbitmq_service_name: rabbitmq

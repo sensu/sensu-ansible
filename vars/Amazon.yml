@@ -1,6 +1,6 @@
 ---
 # vars/Amazon.yml: Variables for Amazon Linux AMI
-# Defaults are defined in vars/default.yml
+# Defaults are defined in defaults/main.yml
 
 # Sensu/Uchiwa user/group/service properties
 sensu_user_name: root
