@@ -1,6 +1,6 @@
 ---
 # vars/FreeBSD.yml: Variables for FreeBSD
-# Defaults are defined in vars/default.yml
+# Defaults are defined in defaults/main.yml
 
 # Sensu config/package properties
 sensu_config_path: /usr/local/etc/sensu
