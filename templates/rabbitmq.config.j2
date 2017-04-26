@@ -1,6 +1,6 @@
 [
     {rabbit, [
-    {% if sensu_ssl_manage_certs %}
+    {% if rabbitmq_enable_ssl %}
     {ssl_listeners, [{{ rabbitmq_port }}]},
     {ssl_options, [{cacertfile,"{{ rabbitmq_config_path }}/ssl/cacert.pem"},
                    {certfile,"{{ rabbitmq_config_path }}/ssl/cert.pem"},

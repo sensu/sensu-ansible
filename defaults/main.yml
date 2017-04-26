@@ -25,6 +25,7 @@ sensu_deploy_redis: true
 # RabbitMQ server properties
 rabbitmq_config_path: /etc/rabbitmq
 rabbitmq_config_template: rabbitmq.config.j2
+rabbitmq_enable_ssl: true
 rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
 rabbitmq_port: 5671
 rabbitmq_pkg_state: present
