@@ -82,3 +82,4 @@
     notify:
       - restart sensu-server service
       - restart sensu-api service
+      - restart sensu-enterprise service
