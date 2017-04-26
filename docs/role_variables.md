@@ -22,6 +22,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `rabbitmq_sensu_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
 | `rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
 | `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
+| `rabbitmq_enable_ssl` | `true` | Determines whether or not to use `ssl_listener` for RabbitMQ |
 
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
