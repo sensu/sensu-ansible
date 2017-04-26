@@ -6,6 +6,7 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 
 ## Features
 - Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
+- Full support for [Sensu Enterprise](https://sensuapp.org/enterprise)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
 - Remote plugin deployment

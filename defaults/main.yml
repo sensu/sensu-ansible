@@ -1,6 +1,22 @@
 ---
-# Sensu version
+# Sensu enterprise credential
+# Variables for Sensu Enterprise License
+se_enterprise: false
+se_user: ''
+se_pass: ''
+
+# Sensu package
 sensu_package: sensu
+sensu_enterprise_package: sensu-enterprise
+sensu_enterprise_dashboard_package: sensu-enterprise-dashboard
+
+# Sensu service names
+sensu_server_service_name: sensu-server
+sensu_api_service_name: sensu-api
+sensu_client_service_name: sensu-client
+sensu_enterprise_service_name: sensu-enterprise
+sensu_enterprise_dashboard_service_name: sensu-enterprise-dashboard
+uchiwa_service_name: uchiwa
 
 # Service deployment options
 sensu_deploy_rabbitmq: true
@@ -9,6 +25,7 @@ sensu_deploy_redis: true
 # RabbitMQ server properties
 rabbitmq_config_path: /etc/rabbitmq
 rabbitmq_config_template: rabbitmq.config.j2
+rabbitmq_enable_ssl: true
 rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
 rabbitmq_port: 5671
 rabbitmq_pkg_state: present
@@ -29,6 +46,7 @@ redis_port: 6379
 redis_password:
 redis_sentinels: []
 redis_master_name:
+sensu_redis_config: sensu-redis.json.j2
 
 # Sensu/Uchiwa user/group/service properties
 sensu_api_host: "{{ groups['sensu_masters'][0] }}"
@@ -39,7 +57,7 @@ sensu_api_password: secret
 sensu_api_uchiwa_path: ''
 sensu_api_timeout: 5000
 sensu_client_config: client.json.j2
-sensu_rabbitmq_config: rabbitmq.json.j2
+sensu_rabbitmq_config: sensu-rabbitmq.json.j2
 sensu_config_path: /etc/sensu
 sensu_pkg_state: present
 sensu_gem_state: present
@@ -66,6 +84,8 @@ sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
 sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
 sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 sensu_ssl_tool_version: "0.23"
+dynamic_data_store: "{{ playbook_dir }}/data/store"
+static_data_store: "{{ playbook_dir}}/data/static"
 
 # Uchiwa properties
 uchiwa_dc_name: ~
