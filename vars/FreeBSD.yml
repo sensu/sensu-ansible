@@ -4,9 +4,7 @@
 
 # Sensu config/package properties
 sensu_config_path: /usr/local/etc/sensu
-sensu_pkg_version: 0.29.0_1
-sensu_pkg_download_url: https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/sensu/sensu-{{ sensu_pkg_version }}.txz
-sensu_pkg_download_path: /root/sensu_latest.txz
+sensu_pkg_version: ~
 
 # RabbitMQ options
 rabbitmq_config_path: /usr/local/etc/rabbitmq

@@ -47,3 +47,6 @@
       chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
     become: true
     become_user: "{{ sensu_user_name }}"
+
+  - name: Update pkgng database
+    command: /usr/sbin/pkg update
