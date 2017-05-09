@@ -98,6 +98,9 @@ uchiwa_port: 3000
 uchiwa_refresh: 5
 uchiwa_sensu_api_port: "{{ sensu_api_port }}"
 
+# CentOS repository for redis and rabbitmq
+centos_repository: epel
+
 # Internal settings
 __bash_path: /bin/bash
 __root_group: root
