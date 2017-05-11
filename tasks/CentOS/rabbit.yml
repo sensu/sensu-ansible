@@ -10,4 +10,4 @@
         - erlang
         - rabbitmq-server
       state: present
-      enablerepo: epel
+      enablerepo: "{{ centos_repository }}"

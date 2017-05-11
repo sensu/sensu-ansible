@@ -8,7 +8,7 @@
     yum:
       name: "{{ redis_pkg_name }}"
       state: "{{ redis_pkg_state }}"
-      enablerepo: epel
+      enablerepo: "{{ centos_repository }}"
 
   - name: Ensure redis binds to accessible IP
     lineinfile:

@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Changed
 - Rely on the existing sensu repositories to install Uchiwa
 - Use the latest version of the FreeBSD package
+- Add Red Hat node
 
 ### Fixed
 - Make sure any local directories that are assumed exist actually do
