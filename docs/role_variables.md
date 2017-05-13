@@ -81,6 +81,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `uchiwa_port` | 3000 | The TCP port to bind the Uchiwa web service to |
 | `uchiwa_refresh` | 5 | The interval to pull the Sensu APIs in seconds |
 | `uchiwa_sensu_api_port` | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
+| `uchiwa_auth_privatekey` | None | If set, Uchiwa uses the key at this location for signing JWT token |
+| `uchiwa_auth_publickey` | None | Public counterpart to the above variable |
 
 ## Ubuntu
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
