@@ -20,6 +20,14 @@
   - name: restart sensu-client service
     service: name={{ sensu_client_service_name }} state=restarted
 
+  - name: restart sensu-enterprise service
+    service: name={{ sensu_enterprise_service_name }} state=restarted
+    when: se_enterprise and sensu_master
+
+  - name: restart sensu-enterprise-dashboard service
+    service: name={{ sensu_enterprise_dashboard_service_name }} state=restarted
+    when: se_enterprise and sensu_master
+
   # Joyent SmartOS specific handlers
   - name: import sensu-server service
     command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
