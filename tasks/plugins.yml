@@ -10,6 +10,15 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
 
+  - name: Ensure local directories exist
+    local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
+    become: no
+    with_items:
+      - checks
+      - filters
+      - handlers
+      - mutators
+
   - name: Ensure any remote plugins defined are present
     shell: sensu-install -p {{ item }}
     with_items: "{{ sensu_remote_plugins }}"
@@ -29,7 +38,7 @@
       mode: 0755
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-    when: "sensu_available_checks is defined and '{{ item }}' in sensu_available_checks.stdout_lines"
+    when: "sensu_available_checks is defined and item in sensu_available_checks.stdout_lines"
     with_flattened:
       - "{{ group_names }}"
     notify: restart sensu-client service
@@ -73,3 +82,4 @@
     notify:
       - restart sensu-server service
       - restart sensu-api service
+      - restart sensu-enterprise service

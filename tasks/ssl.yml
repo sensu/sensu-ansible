@@ -9,6 +9,7 @@
       state: directory
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
+    when: sensu_ssl_gen_certs and sensu_ssl_manage_certs
 
   - include: "{{ role_path }}/tasks/ssl_generate.yml"
     when: sensu_ssl_gen_certs

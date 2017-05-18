@@ -16,7 +16,8 @@
     static: false
 
   - name: Ensure Sensu server service is running
-    service: name=sensu-server state=started enabled=yes
+    service: name={{ sensu_server_service_name if not se_enterprise else sensu_enterprise_service_name }} state=started enabled=yes
 
   - name: Ensure Sensu API service is running
     service: name=sensu-api state=started enabled=yes
+    when: not se_enterprise

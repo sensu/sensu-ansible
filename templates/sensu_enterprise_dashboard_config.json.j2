@@ -11,15 +11,9 @@
        "timeout": {{ sensu_api_timeout }}
    }
  ],
- "uchiwa": {
+ "dashboard": {
    "users": {{ uchiwa_users | to_nice_json }},
    "port": {{ uchiwa_port }},
-   {% if uchiwa_auth_privatekey %}
-   "auth": {
-     "privatekey": "{{ uchiwa_auth_privatekey }}",
-     "publickey": "{{ uchiwa_auth_publickey }}"
-   },
-   {% endif %}
    "refresh": {{ uchiwa_refresh }}
   }
 }

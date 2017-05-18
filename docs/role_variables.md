@@ -22,12 +22,14 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `rabbitmq_sensu_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
 | `rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
 | `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
+| `rabbitmq_enable_ssl` | `true` | Determines whether or not to use `ssl_listener` for RabbitMQ |
 
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
 | `redis_server` | `false` | Determines whether to include the deployment of redis |
+| `redis_service_name` | redis |  The name of the redis service to enable |
 | `redis_pkg_repo` | _undefined_ |  The PPA to use for installing redis from (specific to Debian flavored systems) |
 | `redis_pkg_name` | redis |  The name of the redis package to install |
 | `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
@@ -48,31 +50,26 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_api_timeout` | 5000 | Value to set for the Sensu API timeout |
 | `sensu_client_config` | `client.json.j2` | Jinja2 template to use for node configuration of the Sensu Client service |
 | `sensu_config_path` | `/etc/sensu` | Path to the Sensu configuration directory |
-| `sensu_gem_state` | present | State of the Sensu gem - can be set to `latest` to keep Sensu updated |
-| `sensu_plugin_gem_state` | present | State of the Sensu Plugins gem - can be set to `latest` to keep Sensu Plugins updated |
-| `sensu_group_name` | sensu | The name of the Sensu service user's primary group |
 | `sensu_include_plugins` | `true` | Determines whether to include the `sensu-plugins` gem |
 | `sensu_include_dashboard` | `false` | Determines whether to deploy the Uchiwa dashboard |
 | `sensu_master` | `false` | Determines if a node is to act as the Sensu "master" node |
 | `sensu_user_name`| sensu | The name of the Sensu service user |
+| `sensu_group_name` | sensu | The name of the Sensu service user's primary group |
 | `sensu_remote_plugins` | _undefined_ | A list of plugins to install via `sensu-install` (Ruby Gems) |
 | `sensu_client_name` | `"{{ ansible_hostname }}"` | Sensu client identification (for display purposes) |
 | `sensu_client_subscriptions` | `"{{ group_names }}"` | Sensu client subscriptions |
 
 ### Sensu/RabbitMQ SSL certificate properties
-``` yaml
-sensu_ssl_gen_certs: true
-sensu_ssl_manage_cert: true
-sensu_master_config_path: "{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"
-sensu_ssl_tool_base_path: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"
-sensu_ssl_deploy_remote_src: false  # Copy certificates from paths in the destination host, not in the controller host.
-                                    # Useful if certificates are managed externally and already acquired before running this role.
-sensu_ssl_client_cert: "{{ sensu_ssl_tool_base_path }}/client/cert.pem"
-sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
-sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
-sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
-sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
-```
+| `sensu_ssl_gen_certs` | `true` | Determines when this role generates its own SSL certs |
+| `sensu_ssl_manage_cert` | `true` | Determines when this role manages deployment of the certs |
+| `sensu_master_config_path` | `"{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"` | The configuration path of sensu on the first master host |
+| `sensu_ssl_tool_base_path` | `"{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"` ||
+| `sensu_ssl_deploy_remote_src` | `false` | Copy certificates from paths in the destination host, not in the controller host. Useful if certificates are managed externally and already acquired before running this role. |
+| `sensu_ssl_client_cert` | `"{{ sensu_ssl_tool_base_path }}/client/cert.pem"` ||
+| `sensu_ssl_client_key` | `"{{ sensu_ssl_tool_base_path }}/client/key.pem"` ||
+| `sensu_ssl_server_cacert` | `"{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"` ||
+| `sensu_ssl_server_cert` | `"{{ sensu_ssl_tool_base_path }}/server/cert.pem"` ||
+| `sensu_ssl_server_key` | `"{{ sensu_ssl_tool_base_path }}/server/key.pem"` ||
 
 ### [Uchiwa Properties](http://docs.uchiwa.io/en/latest/)
 | Name               | Default Value | Description                  |
@@ -83,36 +80,15 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `uchiwa_users`| [{username: admin, password: admin}] | The users to log into Uchiwa |
 | `uchiwa_port` | 3000 | The TCP port to bind the Uchiwa web service to |
 | `uchiwa_refresh` | 5 | The interval to pull the Sensu APIs in seconds |
-| `uchiwa_pkg_download_sha256sum` | _undefined_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched (specific to Linux systems) |
-| `uchiwa_pkg_download_path` | _undefined_ | The path to fetch the Uchiwa package to (specific to Linux systems) |
-| `uchiwa_pkg_version` | _undefined_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_rpm_download_url` | _undefined_ | The URL of the Uchiwa package to fetch on rpm based distros |
-| `uchiwa_pkg_deb_download_url` | _undefined_ | The URL of the Uchiwa package to fetch on deb based distros |
-| `uchiwa_sensu_api_port' | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
+| `uchiwa_sensu_api_port` | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
+| `uchiwa_auth_privatekey` | None | If set, Uchiwa uses the key at this location for signing JWT token |
+| `uchiwa_auth_publickey` | None | Public counterpart to the above variable |
 
 ## Ubuntu
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
 | `redis_pkg_name` | redis-server |  The name of the redis package to install |
-
-
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
-| Name               | Default Value | Description                  |
-|--------------------|---------------|------------------------------|
-| `sensu_user_name`    | root        | The name of the Sensu service user |
-| `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `uchiwa_pkg_download_sha256sum` | _See `defaults/main.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
-| `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
-| `uchiwa_pkg_deb_download_url` |  _See `defaults/main.yml`_  | The URL of the Uchiwa package to fetch on deb based distros |
-| `uchiwa_pkg_download_url`  | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch (template will add .deb or .rpm - specific to Linux systems)|
-
-## Debian
-### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
-| Name               | Default Value | Description                  |
-|--------------------|---------------|------------------------------|
-| `redis_pkg_repo`   | `'ppa:rwky/redis'` | The PPA to use for installing redis from |
 | `redis_service_name` | redis-server | The name of the redis service |
 
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
@@ -120,10 +96,19 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `uchiwa_pkg_download_sha256sum` | _See `defaults/main.yml`_ | The SHA256 hash sum to use for verification of the Uchiwa package being fetched |
-| `uchiwa_pkg_download_path` | `/root/uchiwa_latest.deb` | The path to fetch the Uchiwa package to |
-| `uchiwa_pkg_version` | _See `default/main.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_deb_download_url` |  _See `defaults/main.yml`_  | The URL of the Uchiwa package to fetch on deb based distros |
+
+## Debian
+### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `redis_pkg_name` | redis-server | The name of the redis service |
+| `redis_service_name` | redis-server | The name of the redis service |
+
+### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
+| `sensu_user_name`    | root        | The name of the Sensu service user |
+| `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
@@ -131,8 +116,8 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `uchiwa_pkg_version` | _See `defaults/main.yml`_ | The version of the Uchiwa package to fetch (specific to Linux systems) |
-| `uchiwa_pkg_rpm_download_url` | _See `defaults/main.yml`_ | The URL of the Uchiwa package to fetch on rpm based distros |
+| `centos_repository`   | epel        | The name of repository use for redis or rabbitmq packages. If it set as empty string, it's using the repository already enable on the node |
+
 
 ## SmartOS
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
@@ -145,14 +130,16 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/opt/local/etc/sensu` | Path to the Sensu configuration directory |
+| `sensu_gem_state` | present | State of the Sensu gem - can be set to `latest` to keep Sensu updated |
+| `sensu_plugin_gem_state` | present | State of the Sensu Plugins gem - can be set to `latest` to keep Sensu Plugins updated |
 
 ## FreeBSD
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
-| `sensu_pkg_version` | `0.25.3_1` | Version of Sensu to download and install |
-| `sensu_pkg_download_url` | `http://sensu.global.ssl.fastly.net/freebsd/10.0/amd64/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
+| `sensu_pkg_version` | `0.29.0_1` | Version of Sensu to download and install |
+| `sensu_pkg_download_url` | `https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/sensu/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
 | `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
@@ -162,7 +149,7 @@ sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 | `rabbitmq_config_path` | `/usr/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
 
 ### Internal properties
-# Internal settings
+## Internal settings
 ```yaml
 __bash_path: /bin/bash
 __root_group: root
