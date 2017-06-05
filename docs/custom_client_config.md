@@ -17,43 +17,36 @@ It's contents (as of writing) are as follows:
   "client": {
     "name": "{{ ansible_hostname }}",
     "address": "{{ ansible_default_ipv4['address'] }}",
-      "subscriptions": {{ group_names | to_nice_json }}
+    "subscriptions": {{ group_names | to_nice_json }}
   }
 }
 ```
 As you can see from above, this configuration's values are all populated using [facts](http://docs.ansible.com/playbooks_variables.html#information-discovered-from-systems-facts).
 
-To override this for a single node, this can be set in the `host_vars/node_name.domain.name.yml` file.
+To override this for a single node, `sensu_client_config` can be set in the `host_vars/node_name.domain.name.yml` file. We can also override it for entire groups in `group_vars/group_name.yml`.
 
-Let's say we have a node, called `custom.cmacr.ae`, that we'd like to set the `subscriptions` value for.
+Let's say we have a node, called `lazynode.cmacr.ae`, that we'd like to override the subcriptions for, and also set a `keepalive.thresholds` value.
 We could drop a template somewhere into our Ansible codebase called `custom_sensu.client.json.j2` then populate like so:
 ``` jinja2
 {
   "client": {
     "name": "{{ ansible_hostname }}",
     "address": "{{ ansible_default_ipv4['address'] }}",
-      "subscriptions": [
-	    "production",
-	    "custom"
-      ]
+    "subscriptions": [
+      "lazyserver",
+    ],
+    "keepalive": {
+      "thresholds": {
+        "warning": 240,
+        "critical": 480
+      }
+    }
   }
 }
 ```
 
-Then we would need to set the `sensu_client_config` variable for `custom.cmacr.ae` in `host_vars/custom.cmacr.ae.yml`:
+Then we would need to set the `sensu_client_config` variable for `lazynode.cmacr.ae` in `host_vars/lazynode.cmacr.ae.yml`:
 ``` yaml
 sensu_client_config: path/to/custom_sensu.client.json.j2
 ```
-This would override this particular node's value(s) for the `subscriptions` field, therefore changing what monitoring streams it subscribes to.
-
-
-## Setting a custom client configuration for a group
-Setting a custom client configuration for a group of nodes is done just the same as a single node instance, just using something like `group_vars/group_name.yml` instead of `host_vars/node.domain.name.yml`
-
-Alright, we've got some servers that we don't want to bother all that much in a group called `thelazyones`.
-Let's set their `keepalive` value to a higher value than usual (20 seconds).
-An easy and logical way of approaching this would be to set `group_vars/thelazyones.yml` like so:
-``` yaml
-sensu_client_config: path/to/lazy_sensu.client.json.j2
-```
-Where `path/to/lazy_sensu.client.json.j2` is a Jinja2 template setting the `keepalive` value to something greater than usual.
+This would override this particular node's value(s) for the `keepalive.thresholds` and `subscriptions` fields, extending the amount of time it takes Sensu to consider a node down due to a lack of keepalives and overriding the checks it subscribes to.

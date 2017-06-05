@@ -4,8 +4,18 @@ One of the awesome features of this role (if I do say so myself) is the deployme
 Have a group of webservers you need to monitor webservices on? Well, I'm sure you've bunched them together in your inventory under the `[webservers]` group, right? Or perhaps you only want to monitor disk space on your production systems; if they're a member of `[production]` within the inventory, you can do this easily.
 
 ## How it works
-Much like [the dynamic datastore](dynamic_data/), I have also defined a static data store within my Ansible codebase, by setting the variable `static_data_store`.
+Much like [the dynamic datastore](dynamic_data/), I have also defined a static data store within my Ansible codebase, by setting the variable `static_data_store`. By default it's set to the playbook directory, but it can be changed to any location.
 Within this static datastore resides the following directory structure:
+```
+$ tree data/static
+data/static
+`-- sensu
+    |-- checks
+    |-- definitions
+    |-- handlers
+    `-- mutators
+```
+With all the checks and definitions dropped in, the static data store might look something like this:
 ```
 $ tree data/static
 data/static
@@ -70,7 +80,7 @@ web.cmacr.ae
 test.cmacr.ae
 ```
 Under these subdirectories, you can see [checks](https://sensuapp.org/docs/latest/reference/checks) that relate to the directory they're placed in.
-The `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
+For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
 
 So how do these checks actually get deployed to their associated nodes?
 With this pair of plays, in the `tasks/plugins.yml` playbook:
@@ -96,28 +106,6 @@ This will [register](http://docs.ansible.com/playbooks_conditionals.html#registe
 
 And, because nodes can of course be members of more than just one group, checks will be deployed in full to nodes that belong to several groups!
 
-## Defining your static data store
-Just like defining the dynamic data store, this needs to be done somewhere it can be made available to all the nodes you'll be applying this role to. I do this in the same place I define `dynamic_data_store`: `group_vars/all.yml`, like so:
-``` yaml
-static_data_store: path/to/ansible/codebase/data/static
-```
-Once you've defined where you'd like your static data store to be, you can drop in some checks by creating a similar data structure to mine:
-```
-data/static
-`-- sensu
-    `-- checks
-        |-- rabbitmq_servers
-        |   `-- check_rabbitmq.sh
-        |-- redis_servers
-        |   `-- check_redis.sh
-        |-- webservers
-        |   `-- check_nginx.sh
-        `-- zones
-            |-- check_cpu.rb
-            |-- check_disk.rb
-            `-- check_mem.rb
-```
-
 ## Picking up changes on the fly
 Let's say, for some reason, one of your nodes decides to switch roles, or take on the responsibility of another role.
 You've got a webserver, who all of a sudden you decide "this guy should be running redis too". No problem!
@@ -126,7 +114,7 @@ You probably had something like:
 [webservers]
 mime.domain.name
 ```
-In your Ansible inventory, after this spontaneous decision to have your webserver act as a key-value store, you may change it to the following:
+In your Ansible inventory, after this spontaneous decision to have your webserver also act as a key-value store, you may change it to the following:
 ```
 [webservers]
 mime.domain.name
