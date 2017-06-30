@@ -4,6 +4,11 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Set sensu_pkg_version {{ ansible_distribution }} override
+    set_fact:
+      sensu_pkg_version: "{{ sensu_pkg_version }}"
+    when: sensu_pkg_version is none
+
   - name: Ensure the Sensu Core Yum repo is present
     yum_repository:
       name: sensu
@@ -52,3 +57,9 @@
     yum:
       name: "{{sensu_package }}-{{sensu_pkg_version}}"
       state: "{{ sensu_pkg_state }}"
+
+  - name: Ensure Sensu Enterprise is installed
+    yum:
+      name={{ sensu_enterprise_package }}
+      state={{ sensu_pkg_state }}
+    when: se_enterprise

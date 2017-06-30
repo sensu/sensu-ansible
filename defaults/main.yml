@@ -7,11 +7,15 @@ se_pass: ''
 
 # Sensu package
 sensu_package: sensu
+sensu_pkg_version:  # This 'none' value allows the var to be overriden in /vars or in group/host_vars
+sensu_enterprise_package: sensu-enterprise
+sensu_enterprise_dashboard_package: sensu-enterprise-dashboard
+
 # Sensu repo urls
-sensu_yum_repo_url: http://repositories.sensuapp.org/yum/$releasever/$basearch/
-sensu_apt_repo_url: 'deb     http://repositories.sensuapp.org/apt sensu main'
-sensu_apt_key_url: http://repositories.sensuapp.org/apt/pubkey.gpg
-sensu_freebsd_url: https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/
+sensu_yum_repo_url: "http://repositories.sensuapp.org/yum/$releasever/$basearch/"
+sensu_apt_repo_url: "deb     http://repositories.sensuapp.org/apt {{ ansible_distribution_release }} main"
+sensu_apt_key_url: "http://repositories.sensuapp.org/apt/pubkey.gpg"
+sensu_freebsd_url: "https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/"
 
 # Sensu service names
 sensu_server_service_name: sensu-server

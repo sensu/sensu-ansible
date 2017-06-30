@@ -4,7 +4,7 @@
 
 # Sensu config/package properties
 sensu_config_path: /etc/sensu
-sensu_gem_version: 0.26.5
+sensu_gem_version: 0.29.0
 sensu_client_service_name: sensuclient
 
 # RabbitMQ options
