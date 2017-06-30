@@ -6,12 +6,12 @@
 
   - name: Ensure the Sensu APT repo GPG key is present
     apt_key:
-      url: https://sensu.global.ssl.fastly.net/apt/pubkey.gpg
+      url: "{{ sensu_apt_key_url }}"
       state: present
 
   - name: Ensure the Sensu Core APT repo is present
     apt_repository:
-      repo: "deb     https://sensu.global.ssl.fastly.net/apt {{ ansible_distribution_release }} main"
+      repo: "{{ sensu_apt_repo_url }}"
       state: present
       update_cache: true
 

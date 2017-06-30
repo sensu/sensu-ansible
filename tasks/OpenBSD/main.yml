@@ -1,0 +1,58 @@
+---
+# tasks/OpenBSD/main.yml: OpenBSD specific set-up
+# This takes care of base prerequisites for OpenBSD
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Ensure the Sensu group is present
+    group: name={{ sensu_group_name }} state=present
+
+  - name: Ensure the Sensu user is present
+    user:
+      name: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+      shell: /bin/false
+      home: "{{ sensu_config_path }}"
+      createhome: true
+      state: present
+
+  - name: Install prerequisite packages
+    openbsd_pkg:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - bash
+      - ruby%2.3
+
+  - name: Get the current version of rubygems
+    shell: /usr/local/bin/gem23 --version
+    check_mode: no
+    register: gem23_version
+    changed_when: False
+
+  - name: Update rubygems to work around rubygems/rubygems/issues/1448
+    shell: /usr/local/bin/gem23 update --system
+    when: "{{ gem23_version.stdout | version_compare('2.5.3', '<') }}"
+
+  - name: Install sensu gem and all of its dependencies
+    gem:
+      name: sensu
+      repository: "{{ sensu_gem_repository | default('https://api.rubygems.org/')}}"
+      user_install: no
+      version: "{{ sensu_gem_version }}"
+      executable: /usr/local/bin/gem23
+
+  - name: Create the sensu log folder
+    file:
+      path: /var/log/sensu
+      owner: root
+      group: wheel
+      state: directory
+
+  - name: Deploy OpenBSD rc script
+    template:
+      src: sensuclient_openbsd.j2
+      dest: /etc/rc.d/sensuclient
+      owner: root
+      group: wheel
+      mode: 0755
