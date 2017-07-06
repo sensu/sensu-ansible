@@ -6,7 +6,7 @@
 
   - name: Set sensu_pkg_version {{ ansible_distribution }} override
     set_fact:
-      sensu_pkg_version: "{{ sensu_pkg_version }}"
+      sensu_pkg_version: "{{ _sensu_pkg_version }}"
     when: sensu_pkg_version is none
 
   - name: Ensure the Sensu group is present
