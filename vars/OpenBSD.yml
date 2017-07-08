@@ -1,13 +1,14 @@
 ---
 # vars/FreeBSD.yml: Variables for FreeBSD
-# Defaults are defined in defaults/main.yml
+# Defaults are defined in vars/default.yml
 
 # Sensu config/package properties
-sensu_config_path: /usr/local/etc/sensu
-_sensu_pkg_version: ~
+sensu_config_path: /etc/sensu
+sensu_gem_version: 0.29.0
+sensu_client_service_name: sensuclient
 
 # RabbitMQ options
-rabbitmq_config_path: /usr/local/etc/rabbitmq
+rabbitmq_config_path: /etc/rabbitmq
 rabbitmq_service_name: rabbitmq
 
 # Internal settings
