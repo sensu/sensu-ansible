@@ -1,0 +1,19 @@
+# Install pdagent on a master
+
+- name: Ensure the pdagent APT repo GPG key is present
+  apt_key:
+    url: "{{ pdagent_apt_key_url }}"
+    state: present
+
+- name: Ensure the pdagent repo is present
+  apt_repository:
+    repo: "{{ pdagent_apt_repo_url }}"
+    state: present
+    filename: "pdagent"
+    update_cache: true
+
+- name: Ensure pdagent is installed
+  apt: name={{ item }} state=present
+  with_items:
+    - "pdagent"
+    - "pdagent-integrations"
