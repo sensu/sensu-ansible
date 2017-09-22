@@ -6,6 +6,10 @@
   - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
     tags: setup
 
+  - include: "{{ role_path }}/tasks/pdagent.yml"
+    tags: pdagent
+    when: pdagent
+
   - include: "{{ role_path }}/tasks/redis.yml"
     tags: redis
     when: redis_server
