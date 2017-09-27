@@ -1,0 +1,7 @@
+#sensu_config_path: "c:\\opt\\sensu"
+sensu_client_config: "windows_client.json.j2"
+sensu_win_rabbitmq_config: "windows-sensu-rabbitmq.json.j2"
+
+rabbitmq_host: "13.57.3.178"
+
+sensu_msi_download_path: "http://repositories.sensuapp.org/msi/2012r2/sensu-1.0.2-1-x64.msi"
