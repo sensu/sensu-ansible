@@ -1,0 +1,95 @@
+---
+# tasks/windows_client.yml: Deploy various client-side configurations for Sensu-client on Windows
+# This contains all tasks, but these should be moved off into their respective places.
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+    # win_package throws an SSL error with a remote source. Using two steps here as a workaround
+  - name: Download the Sensu installer msi
+    win_get_url:
+      url: "{{ sensu_msi_download_path }}"
+      dest: "c:\\temp\\sensu-installer.msi"
+      skip_certificate_validation: true
+
+  - name: Install the local sensu-client
+    win_package:
+      path: "c:\\temp\\sensu-installer.msi"
+      product_id: '{FF98EE93-B344-4548-ADD2-E2F1BD217A84}'
+      arguments: /qn
+      force_extension: msi
+      validate_certs: no
+
+  - name: Build the config folders
+    win_file:
+      dest: "{{ sensu_win_base_path }}\\conf.d\\ssl"
+      state: directory
+
+  - name: Deploy Sensu Redis configuration
+    win_template:
+      dest: "{{ sensu_win_base_path }}\\conf.d\\redis.json"
+      src: "{{ sensu_redis_config }}"
+    when: sensu_deploy_redis
+    notify:
+      - restart sensu-client service
+
+  - name: Deploy Sensu RabbitMQ configuration on Windows
+    win_template:
+      dest: "{{ sensu_win_base_path }}\\conf.d\\rabbitmq.json"
+      src: "{{ sensu_win_rabbitmq_config }}"
+    when: sensu_transport == "rabbitmq"
+    notify:
+      - restart sensu-api service
+      - restart sensu-client service
+
+  - name: Deploy Sensu transport configuration on Windows
+    win_template:
+      dest: "{{ sensu_win_base_path }}\\conf.d\\transport.json"
+      src: transport.json.j2
+    notify:
+      - restart sensu-client service
+
+  - name: Deploy Sensu client service configuration on Windows
+    win_template:
+      dest: "{{ sensu_win_base_path }}\\conf.d\\client.json"
+      src: "{{ sensu_client_config  }}"
+    notify: restart sensu-client service
+
+  - name: Deploy the Sensu client SSL cert/key on Windows
+    win_copy:
+      src: "{{ item.src }}"
+      remote_src: "{{ sensu_ssl_deploy_remote_src }}"
+      dest: "{{ sensu_win_base_path }}\\conf.d\\ssl\\{{ item.dest }}"
+    with_items:
+      - { src: "{{ sensu_ssl_client_cert }}", dest: cert.pem }
+      - { src: "{{ sensu_ssl_client_key }}", dest: key.pem }
+    notify: restart sensu-client service
+
+  - name: Install the sensu-client service
+    win_service:
+      name: sensu-client
+      path: 'c:\opt\sensu\bin\sensu-client.exe'
+      display_name: Sensu Client
+      description: The Sensu Client Service
+      start_mode: delayed
+
+  - name: Fetch sensu-plugins-windows repo 
+    win_get_url: 
+      url: "http://github.com/sensu-plugins/sensu-plugins-windows/zipball/{{ sensu_win_plugins_commit_id }}/"
+      dest: c:/temp/sensu-plugins.zip
+    when: install_plugins
+
+  - name: Install sensu-plugins-windows into bin
+    win_unzip:
+      src: c:/temp/sensu-plugins.zip
+      dest: "{{ sensu_win_base_path }}\\bin"
+    when: install_plugins
+
+  - name: Rename the plugins folder
+    raw: "cmd /C 'cd c:/opt/sensu/bin & rename sensu-plugins-sensu-plugins-windows-{{ sensu_win_plugins_commit_id }} sensu-plugins-windows'"
+    when: install_plugins
+
+  - name: Ensure Sensu client service is running on Windows
+    win_service:
+      name: "{{ sensu_client_service_name }}"
+      state: restarted
+      enabled: yes

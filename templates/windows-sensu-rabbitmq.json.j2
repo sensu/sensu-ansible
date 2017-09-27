@@ -1,0 +1,15 @@
+{
+  "rabbitmq": {
+{% if rabbitmq_enable_ssl %}
+    "ssl": {
+      "cert_chain_file": "{{ sensu_win_base_path }}/conf.d/ssl/cert.pem",
+      "private_key_file": "{{ sensu_win_base_path }}/conf.d/ssl/key.pem"
+    },
+{% endif %}
+    "host": "{{ rabbitmq_host }}",
+    "port": {{ rabbitmq_port }},
+    "vhost": "{{ rabbitmq_sensu_vhost }}",
+    "user": "{{ rabbitmq_sensu_user_name }}",
+    "password": "{{ rabbitmq_sensu_password }}"
+  }
+}
