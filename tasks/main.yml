@@ -27,6 +27,7 @@
 
   - include: "{{ role_path }}/tasks/common.yml"
     tags: common
+    when: windows_server != "yes"
 
   - include: "{{ role_path }}/tasks/server.yml"
     tags: server
@@ -40,8 +41,14 @@
 
   - include: "{{ role_path }}/tasks/client.yml"
     tags: client
+    when: windows_server != "yes"
+
+  - include: "{{ role_path }}/tasks/windows_client.yml"
+    tags: client
+    when: windows_server == "yes"
 
   - include: "{{ role_path }}/tasks/plugins.yml"
     tags: plugins
     when: sensu_include_plugins
+          and windows_server != "yes"
     static: false
