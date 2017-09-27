@@ -2,9 +2,19 @@
 # tasks/main.yml: "Master" playbook for the cmacrae.sensu role
 
   - include_vars: "{{ ansible_distribution }}.yml"
+    when: windows_server != "yes"
+
+  - include_vars: "{{ ansible_os_family }}.yml"
+    when: windows_server == "yes"
 
   - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
     tags: setup
+    when: windows_server != "yes"
+
+    # windows server path with no spaces
+  - include: "{{ role_path }}/tasks/{{ ansible_os_family }}/main.yml"
+    tags: setup
+    when: windows_server == "yes"
 
   - include: "{{ role_path }}/tasks/pdagent.yml"
     tags: pdagent
@@ -18,12 +28,14 @@
 
   - include: "{{ role_path }}/tasks/ssl.yml"
     tags: ssl
+    when: windows_server != "yes"
 
   - include: "{{ role_path }}/tasks/rabbit.yml"
     tags: rabbitmq
     when: rabbitmq_server
           and sensu_deploy_rabbitmq
     static: false
+    when: windows_server != "yes"
 
   - include: "{{ role_path }}/tasks/common.yml"
     tags: common

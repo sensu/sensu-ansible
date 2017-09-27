@@ -2,7 +2,8 @@
 # tasks/windows_client.yml: Deploy various client-side configurations for Sensu-client on Windows
 # This contains all tasks, but these should be moved off into their respective places.
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+  #- include_vars: "{{ ansible_distribution }}.yml"
+  - include_vars: "{{ ansible_os_family }}.yml"
 
     # win_package throws an SSL error with a remote source. Using two steps here as a workaround
   - name: Download the Sensu installer msi
