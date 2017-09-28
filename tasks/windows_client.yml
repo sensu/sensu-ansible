@@ -85,9 +85,16 @@
       dest: "{{ sensu_win_base_path }}\\bin"
     when: install_plugins
 
+  - name: Check if plugins folder exists
+    win_stat:
+      path: "{{ sensu_win_base_path }}\\bin\\sensu-plugins-windows"
+    register: file_info
+
+  - debug: var=file_info
+
   - name: Rename the plugins folder
     raw: "cmd /C 'cd c:/opt/sensu/bin & rename sensu-plugins-sensu-plugins-windows-{{ sensu_win_plugins_commit_id }} sensu-plugins-windows'"
-    when: install_plugins
+    when: install_plugins and not file_info.stat.exists
 
   - name: Ensure Sensu client service is running on Windows
     win_service:
