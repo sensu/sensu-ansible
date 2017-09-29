@@ -1,9 +1,10 @@
 {
   "client": {
-    "name": "windows-clientxx",
-    "address": "127.0.0.1",
-    "environment": "development",
+    "name": "{{ ansible_hostname }}",
+    "address": "{{ inventory_hostname }}",
+    "environment": "production",
     "subscriptions": [
+      "windows",
       "test"
     ],
     "socket": {
