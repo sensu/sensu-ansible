@@ -53,6 +53,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_include_plugins` | `true` | Determines whether to include the `sensu-plugins` gem |
 | `sensu_include_dashboard` | `false` | Determines whether to deploy the Uchiwa dashboard |
 | `sensu_master` | `false` | Determines if a node is to act as the Sensu "master" node |
+| `sensu_client` | `true` | Determines if a node should be given the sensu client config |
 | `sensu_user_name`| sensu | The name of the Sensu service user |
 | `sensu_group_name` | sensu | The name of the Sensu service user's primary group |
 | `sensu_remote_plugins` | _undefined_ | A list of plugins to install via `sensu-install` (Ruby Gems) |

@@ -5,6 +5,8 @@
 
   - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
     tags: setup
+    when: sensu_master
+          or sensu_client
 
   - include: "{{ role_path }}/tasks/redis.yml"
     tags: redis
@@ -23,6 +25,8 @@
 
   - include: "{{ role_path }}/tasks/common.yml"
     tags: common
+    when: sensu_master
+          or sensu_client
 
   - include: "{{ role_path }}/tasks/server.yml"
     tags: server
@@ -36,6 +40,7 @@
 
   - include: "{{ role_path }}/tasks/client.yml"
     tags: client
+    when: sensu_client
 
   - include: "{{ role_path }}/tasks/plugins.yml"
     tags: plugins
