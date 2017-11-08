@@ -18,6 +18,8 @@
       - filters
       - handlers
       - mutators
+      - definitions
+      - client-definitions
 
   - name: Ensure any remote plugins defined are present
     shell: sensu-install -p {{ item }}
@@ -83,3 +85,21 @@
       - restart sensu-server service
       - restart sensu-api service
       - restart sensu-enterprise service
+
+  - name: Register available client definitions
+    local_action: command ls {{ static_data_store }}/sensu/client_definitions
+    register: sensu_available_client_definitions
+    changed_when: false
+    become: false
+
+  - name: Deploy client definitions
+    copy:
+      src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
+      dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
+      mode: 0755
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+    when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
+    with_flattened:
+      - "{{ group_names }}"
+    notify: restart sensu-client service
