@@ -20,7 +20,7 @@ You'll want to ensure you have a directory named `ssl` under your `rabbitmq_conf
 
 redis
 -----
-If you'd like to use a different role/management method for redis, the following vairables are of interest:
+If you'd like to use a different role/management method for redis, the following variables are of interest:
 ``` yaml
 sensu_deploy_redis_server: false
 redis_host: < IP/DNS record of your redis server >
