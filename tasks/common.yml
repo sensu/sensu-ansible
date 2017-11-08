@@ -16,7 +16,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       src: "{{ sensu_redis_config }}"
-    when: sensu_deploy_redis
+    when: sensu_deploy_redis_config
     notify:
       - restart sensu-server service
       - restart sensu-api service
@@ -30,6 +30,7 @@
       group: "{{ sensu_group_name }}"
       src: "{{ sensu_rabbitmq_config }}"
     when: sensu_transport == "rabbitmq"
+          and sensu_deploy_rabbitmq_config
     notify:
       - restart sensu-server service
       - restart sensu-api service
@@ -42,6 +43,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       src: transport.json.j2
+    when: sensu_deploy_transport_config
     notify:
       - restart sensu-server service
       - restart sensu-api service

@@ -6,7 +6,7 @@ RabbitMQ
 --------
 If you'd like to use a different role/management method for RabbitMQ, the following variables are of interest:
 ``` yaml
-sensu_deploy_rabbitmq: false
+sensu_deploy_rabbitmq_server: false
 rabbitmq_host: < IP/DNS record of your RabbitMQ server >
 rabbitmq_port: < optionally set a differing port, defaults to 5671 >
 rabbitmq_sensu_user_name: < the username for interacting with RabbitMQ >
@@ -22,7 +22,7 @@ redis
 -----
 If you'd like to use a different role/management method for redis, the following vairables are of interest:
 ``` yaml
-sensu_deploy_redis: false
+sensu_deploy_redis_server: false
 redis_host: < IP/DNS record of your redis server >
 redis_port: < optionally set a differing port, defaults to 6379 >
 ```

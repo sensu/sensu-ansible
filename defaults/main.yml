@@ -26,8 +26,8 @@ sensu_enterprise_dashboard_service_name: sensu-enterprise-dashboard
 uchiwa_service_name: uchiwa
 
 # Service deployment options
-sensu_deploy_rabbitmq: true
-sensu_deploy_redis: true
+sensu_deploy_rabbitmq_server: true
+sensu_deploy_redis_server: true
 
 # RabbitMQ server properties
 rabbitmq_config_path: /etc/rabbitmq
@@ -78,6 +78,9 @@ sensu_remote_plugins: ~
 sensu_transport: rabbitmq
 sensu_client_name: "{{ ansible_hostname }}"
 sensu_client_subscriptions: "{{ group_names }}"
+sensu_deploy_rabbitmq_config: true
+sensu_deploy_redis_config: true
+sensu_deploy_transport_config: true
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
