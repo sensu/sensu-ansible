@@ -40,6 +40,11 @@ data/static
     |   |-- smartos_check_cpu.json.j2
     |   |-- smartos_check_disk.json.j2
     |   `-- smartos_check_mem.json.j2
+    |-- client-definitions
+    |   |-- rabbitmq_servers
+    |   |   `-- check_users.json.j2
+    |   `-- webservers
+    |       `-- check_uptime.json.j2
     |-- handlers
     |   `-- pushover.rb
     `-- mutators
@@ -105,6 +110,29 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
 This will [register](http://docs.ansible.com/playbooks_conditionals.html#register-variables) a list of available checks, then deploy them to their intended groups based on node membership, as set within the Ansible inventory.
 
 And, because nodes can of course be members of more than just one group, checks will be deployed in full to nodes that belong to several groups!
+
+Additionally, standalone checks can be distributed to hosts based on group membership. These definitions are located in the client-definitions folder. These will be deployed to the configuration directory of the clients.
+
+These are deployed with the following pair of plays, also in the `tasks/plugins.yml` playbook:
+``` yaml
+- name: Register available client definitions
+  local_action: command ls {{ static_data_store }}/sensu/client_definitions
+  register: sensu_available_client_definitions
+  changed_when: false
+  become: false
+
+- name: Deploy client definitions
+  copy:
+    src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
+    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
+    mode: 0755
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
+  with_flattened:
+    - "{{ group_names }}"
+  notify: restart sensu-client service
+```
 
 ## Picking up changes on the fly
 Let's say, for some reason, one of your nodes decides to switch roles, or take on the responsibility of another role.
