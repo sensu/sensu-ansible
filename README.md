@@ -57,7 +57,7 @@ Or, passing parameter values:
 ``` yaml
   - hosts: sensu_masters
     roles:
-	  - { role: cmacrae.sensu, sensu_master: true, sensu_include_dashboard: true  }
+      - { role: cmacrae.sensu, sensu_master: true, sensu_include_dashboard: true  }
 ```
 
 License
@@ -74,4 +74,4 @@ Stephen Muth - ([@smuth4](https://github.com/smuth4))
 Feel free to:  
 Contact me - [@calumacrae](https://twitter.com/calumacrae), [mailto:calum0macrae@gmail.com](calum0macrae@gmail.com)  
 [Raise an issue](https://github.com/cmacrae/ansible-sensu/issues)  
-[Contribute](https://github.com/cmacrae/ansible-sensu/pulls)  
+[Contribute](https://github.com/cmacrae/ansible-sensu/pulls)
