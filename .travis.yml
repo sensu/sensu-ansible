@@ -1,0 +1,21 @@
+---
+group: travis_lts
+services: docker
+env:
+  - distro: centos6
+  - distro: centos7
+  - distro: ubuntu1404
+  - distro: ubuntu1604
+  - distro: debian8
+  - distro: debian9
+before_install:
+  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+script:
+  - export container_id=$(date +%s)
+  - export cleanup=false
+  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
+  - chmod +x ${PWD}/tests/test.sh
+  - ${PWD}/tests/test.sh
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
