@@ -96,6 +96,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
+| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
 
 ## Debian
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
@@ -109,6 +110,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
+| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
