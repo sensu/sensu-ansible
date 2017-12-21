@@ -11,7 +11,7 @@
   - include: "{{ role_path }}/tasks/redis.yml"
     tags: redis
     when: redis_server
-          and sensu_deploy_redis
+          and sensu_deploy_redis_server
     static: false
 
   - include: "{{ role_path }}/tasks/ssl.yml"
@@ -20,7 +20,7 @@
   - include: "{{ role_path }}/tasks/rabbit.yml"
     tags: rabbitmq
     when: rabbitmq_server
-          and sensu_deploy_rabbitmq
+          and sensu_deploy_rabbitmq_server
     static: false
 
   - include: "{{ role_path }}/tasks/common.yml"

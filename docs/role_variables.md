@@ -4,8 +4,8 @@
 ### Service Deployment Options
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-|`sensu_deploy_rabbitmq` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ |
-|`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure redis |
+|`sensu_deploy_rabbitmq_server` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ server |
+|`sensu_deploy_redis_server`    | `true`    | Determines whether or not to use this role to deploy/configure redis server |
 
 _Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
@@ -59,6 +59,9 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_remote_plugins` | _undefined_ | A list of plugins to install via `sensu-install` (Ruby Gems) |
 | `sensu_client_name` | `"{{ ansible_hostname }}"` | Sensu client identification (for display purposes) |
 | `sensu_client_subscriptions` | `"{{ group_names }}"` | Sensu client subscriptions |
+| `sensu_deploy_rabbitmq_config` | `true`    | Determines whether or not to deploy RabbitMQ config for sensu |
+| `sensu_deploy_redis_config`    | `true`    | Determines whether or not to deploy redis config for sensu |
+| `sensu_deploy_transport_config`    | `true`    | Determines whether or not to deploy transport config for sensu |
 
 ### Sensu/RabbitMQ SSL certificate properties
 | `sensu_ssl_gen_certs` | `true` | Determines when this role generates its own SSL certs |
