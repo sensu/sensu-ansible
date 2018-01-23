@@ -5,3 +5,6 @@
 # Sensu/Uchiwa user/group/service properties
 sensu_user_name: root
 sensu_group_name: root
+
+# Define repo url without $releasever
+sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/7/$basearch/"
