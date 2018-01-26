@@ -3,7 +3,7 @@
    {
        "name": "{{ uchiwa_dc_name }}",
        "host": "{{ sensu_api_host }}",
-       "ssl": {{ sensu_api_ssl }},
+       "ssl": {{ sensu_api_ssl | to_nice_json }},
        "port": {{ uchiwa_sensu_api_port }},
        "user": "{{ sensu_api_user_name }}",
        "pass": "{{ sensu_api_password }}",
