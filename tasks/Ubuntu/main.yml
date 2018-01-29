@@ -5,10 +5,12 @@
   - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure that https transport is ready
-    apt: 
-      name: apt-transport-https 
+    apt:
+      name: apt-transport-https
       state: present
-    
+      cache_valid_time: 3600
+      update_cache: true
+
   - name: Ensure the Sensu APT repo GPG key is present
     apt_key:
       url: "{{ sensu_apt_key_url }}"
