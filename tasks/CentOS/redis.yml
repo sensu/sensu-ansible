@@ -4,6 +4,12 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Install EPEL repo
+    yum:
+      name: epel-release
+      state: present
+    when: enable_epel_repo == true
+
   - name: Ensure redis is installed
     yum:
       name: "{{ redis_pkg_name }}"
