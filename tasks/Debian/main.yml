@@ -8,6 +8,13 @@
     apt:
       name: apt-transport-https
       state: present
+      cache_valid_time: 3600
+      update_cache: true
+
+  - name: Ensure that gnupg is installed for apt_key
+    apt:
+      name: gnupg
+      state: present
 
   - name: Ensure the Sensu APT repo GPG key is present
     apt_key:
