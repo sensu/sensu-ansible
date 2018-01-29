@@ -1,0 +1,20 @@
+---
+- hosts: all
+  pre_tasks:
+      - name: Add localhost to sensu_masters group
+        add_host:
+          name: localhost
+          groups: sensu_masters
+        changed_when: false
+
+  roles:
+    - role: role_under_test
+      sensu_master: true
+      sensu_include_dashboard: true
+      rabbitmq_server: true
+      redis_server: true
+      rabbitmq_host: localhost
+      redis_host: localhost
+      sensu_api_host: localhost
+      ansible_default_ipv4:
+        address: 127.0.0.1
