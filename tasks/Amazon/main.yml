@@ -4,6 +4,11 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Set epel_version override when AmazonLinux AMIv2
+    set_fact:
+      epel_version: 7
+    when: ansible_distribution_version == 'Candidate'
+
   - name: Ensure the Sensu Core Yum repo is present
     yum_repository:
       name: sensu
