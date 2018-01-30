@@ -5,3 +5,11 @@
 # Sensu/Uchiwa user/group/service properties
 sensu_user_name: root
 sensu_group_name: root
+
+# Define repo url without $releasever
+#Define epel version to 6 by default, change to 7 when using a version 2 AMI
+epel_version: 6
+sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/{{epel_version}}/$basearch/"
+
+#Set this to false to disable the EPEL repo installation
+enable_epel_repo: true
