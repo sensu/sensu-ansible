@@ -6,12 +6,13 @@
 
   - name: Ensure the RabbitMQ APT repo GPG key is present
     apt_key:
-      url: https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
+      url: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
       state: present
 
   - name: Ensure the RabbitMQ APT repo is present
     apt_repository:
-      repo: 'deb http://www.rabbitmq.com/debian/ testing main'
+      repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
+      filename: rabbitmq
       state: present
       update_cache: true
 
@@ -19,4 +20,5 @@
     apt:
       name: rabbitmq-server
       state: "{{ rabbitmq_pkg_state }}"
+      cache_valid_time: 600
       update_cache: true
