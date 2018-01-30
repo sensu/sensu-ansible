@@ -14,7 +14,8 @@
       name: sensu
       description: The Sensu Core yum repository
       baseurl: "{{ sensu_yum_repo_url }}"
-      gpgcheck: no
+      gpgkey: "{{ sensu_yum_key_url }}"
+      gpgcheck: yes
       enabled: yes
 
   - name: Ensure that credential is supplied if installing Sensu Enterprise

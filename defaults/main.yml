@@ -12,9 +12,10 @@ sensu_enterprise_package: sensu-enterprise
 sensu_enterprise_dashboard_package: sensu-enterprise-dashboard
 
 # Sensu repo urls
-sensu_yum_repo_url: "http://repositories.sensuapp.org/yum/$releasever/$basearch/"
-sensu_apt_repo_url: "deb     http://repositories.sensuapp.org/apt {{ ansible_distribution_release }} main"
-sensu_apt_key_url: "http://repositories.sensuapp.org/apt/pubkey.gpg"
+sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/"
+sensu_yum_key_url: "https://sensu.global.ssl.fastly.net/yum/pubkey.gpg"
+sensu_apt_repo_url: "deb     https://repositories.sensuapp.org/apt {{ ansible_distribution_release }} main"
+sensu_apt_key_url: "https://sensu.global.ssl.fastly.net/apt/pubkey.gpg"
 sensu_freebsd_url: "https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/"
 
 # Sensu service names
@@ -26,8 +27,8 @@ sensu_enterprise_dashboard_service_name: sensu-enterprise-dashboard
 uchiwa_service_name: uchiwa
 
 # Service deployment options
-sensu_deploy_rabbitmq: true
-sensu_deploy_redis: true
+sensu_deploy_rabbitmq_server: true
+sensu_deploy_redis_server: true
 
 # RabbitMQ server properties
 rabbitmq_config_path: /etc/rabbitmq
@@ -73,11 +74,15 @@ sensu_group_name: sensu
 sensu_include_plugins: true
 sensu_include_dashboard: false
 sensu_master: false
+sensu_client: true
 sensu_user_name: sensu
 sensu_remote_plugins: ~
 sensu_transport: rabbitmq
 sensu_client_name: "{{ ansible_hostname }}"
 sensu_client_subscriptions: "{{ group_names }}"
+sensu_deploy_rabbitmq_config: true
+sensu_deploy_redis_config: true
+sensu_deploy_transport_config: true
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
@@ -90,7 +95,7 @@ sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
 sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
 sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
 sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
-sensu_ssl_tool_version: "0.23"
+sensu_ssl_tool_version: "1.2"
 dynamic_data_store: "{{ playbook_dir }}/data/store"
 static_data_store: "{{ playbook_dir}}/data/static"
 
