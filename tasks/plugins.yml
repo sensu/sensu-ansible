@@ -19,7 +19,7 @@
       - handlers
       - mutators
       - definitions
-      - client-definitions
+      - client_definitions
 
   - name: Ensure any remote plugins defined are present
     shell: sensu-install -p {{ item }}
