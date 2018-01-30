@@ -16,6 +16,18 @@
       state: present
       update_cache: true
 
+  - name: Ensure the Erlang APT repo GPG key is present
+    apt_key:
+      url: https://packages.erlang-solutions.com/debian/erlang_solutions.asc
+      state: present
+
+  - name: Ensure the Erlang APT repo is present
+    apt_repository:
+      repo: "deb https://packages.erlang-solutions.com/debian {{ ansible_distribution_release }} contrib"
+      filename: erlang
+      state: present
+      update_cache: true
+
   - name: Ensure RabbitMQ is installed
     apt:
       name: rabbitmq-server
