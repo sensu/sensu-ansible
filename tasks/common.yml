@@ -9,7 +9,7 @@
       state: directory
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
-      mode: "0640"
+      mode: "0750"
 
   - name: Deploy Sensu Redis configuration
     template:
