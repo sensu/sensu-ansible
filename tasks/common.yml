@@ -9,6 +9,7 @@
       state: directory
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
+      mode: "0750"
 
   - name: Deploy Sensu Redis configuration
     template:
@@ -29,6 +30,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       src: "{{ sensu_rabbitmq_config }}"
+      mode: "0640"
     when: sensu_transport == "rabbitmq"
           and sensu_deploy_rabbitmq_config
     notify:
@@ -43,6 +45,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       src: transport.json.j2
+      mode: "0640"
     when: sensu_deploy_transport_config
     notify:
       - restart sensu-server service

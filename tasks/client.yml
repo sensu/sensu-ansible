@@ -9,6 +9,7 @@
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       src: "{{ sensu_client_config  }}"
+      mode: "0640"
     notify: restart sensu-client service
 
   - include: "{{ role_path }}/tasks/SmartOS/client.yml"

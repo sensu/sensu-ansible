@@ -5,7 +5,3 @@
 # redis server properties
 redis_pkg_name: redis-server
 redis_service_name: redis-server
-
-# Sensu/Uchiwa user/group/service properties
-sensu_user_name: root
-sensu_group_name: root
