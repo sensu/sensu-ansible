@@ -2,10 +2,6 @@
 # vars/Amazon.yml: Variables for Amazon Linux AMI
 # Defaults are defined in defaults/main.yml
 
-# Sensu/Uchiwa user/group/service properties
-sensu_user_name: root
-sensu_group_name: root
-
 # Define repo url without $releasever
 #Define epel version to 6 by default, change to 7 when using a version 2 AMI
 epel_version: 6

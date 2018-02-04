@@ -22,7 +22,7 @@
       - client_definitions
 
   - name: Ensure any remote plugins defined are present
-    shell: sensu-install -p {{ item }}
+    shell: umask 0022; sensu-install -p {{ item }}
     with_items: "{{ sensu_remote_plugins }}"
     changed_when: false
     when: sensu_remote_plugins > 0

@@ -3,8 +3,6 @@
 # Defaults are defined in defaults/main.yml
 
 # Sensu/Uchiwa user/group/service properties
-sensu_user_name: root
-sensu_group_name: root
 _sensu_pkg_version: '0.29.0'
 
 #Set this to false to disable the EPEL repo installation
