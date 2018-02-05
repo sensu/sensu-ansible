@@ -28,18 +28,19 @@ This role requires:
 
 ## Supported Platforms
 ### Current Release
+#### Automatically tested via TravisCI
 
-- [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/) - only client side support is tested
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
+- [Debian - 9 (Stretch)](https://wiki.debian.org/DebianStretch)
+- [Ubuntu - 14.04 (Trusty Tahr)](http://releases.ubuntu.com/14.04/)
 - [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
+
+#### Supported manually (compatibility not always guaranteed)
+- [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
-
-### Future Releases
-
-- OpenBSD
-- NetBSD
+- [OpenBSD - 6.2](https://www.openbsd.org/62.html)
 
 ## Role Variables
 
@@ -69,7 +70,7 @@ Author Information
 Created by [Calum MacRae](http://cmacr.ae)
 
 ### Contributors
-Stephen Muth - ([@smuth4](https://github.com/smuth4))
+See the projects [Contributors page](https://github.com/sensu/sensu-ansible/graphs/contributors)
 
 Feel free to:
 Contact me - [@calumacrae](https://twitter.com/calumacrae), [mailto:calum0macrae@gmail.com](calum0macrae@gmail.com)
