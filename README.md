@@ -61,6 +61,11 @@ Or, passing parameter values:
       - { role: cmacrae.sensu, sensu_master: true, sensu_include_dashboard: true  }
 ```
 
+## Ansible version support
+All changes to this role are actively tested with the last two stable versions of Ansible to ensure compatibility. As such, this role
+only officially supports running with the last two stable releases of Ansible, which aligns with the [Ansible support model](http://docs.ansible.com/ansible/latest/release_and_maintenance.html#release-status).
+
+
 License
 -------
 MIT
