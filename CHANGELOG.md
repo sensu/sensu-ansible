@@ -6,14 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [1.3.0] - 2018-02-04
+## [2.0.0] - 2018-02-06
 ### Added
 - Initial support for OpenBSD! (@smbambling)
 - Ubuntu now get's `apt-transport-https` installed to support HTTPS repos. (@kevit)
 - Default to HTTPS APT repo's.  @jaredledvina
-- Ubuntu - Redis now always binds to `0.0.0.0` to ensure it's accessible. (@tculp)
 - Allow for configuring when a node gets the `sensu-client` config file. (@tculp)
-- Split up the variables used to determine if a host gets rabbitmq/redis for more flexibility in deployments. (@tculp)
 - Allow for deploying client definitions based on groups. (@tculp)
 - Default to HTTPS Yum repo's and install the Yum key for package signing validation via HTTPS.  (@jaredledvina)
 - Used HTTPS for APT key.  (@jaredledvina)
@@ -28,6 +26,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Switched from Gitter to `#ansible` in the Sensu Community Slack. (@grepory)
 - Bumped SSL tools version to 1.2 by default. (@marji)
 - Update 'Generate SSL Certs' to support Ansible 2.4. (@tculp)
+
+### Fixed
+- Ubuntu - Redis now always binds to `0.0.0.0` to match other distro's configurgation and to ensure it's accessible. (@tculp)
+
+### Breaking Change
+- Split up the variables used to determine if a host gets rabbitmq/redis for more flexibility in deployments. (@tculp)
+  `sensu_deploy_rabbitmq` and `sensu_deploy_redis` are now `sensu_deploy_rabbitmq_server` and `sensu_deploy_redis_server` respectively.
+  See the [role variable documentation](https://github.com/sensu/sensu-ansible/blob/master/docs/role_variables.md) for details on the parameters.
 
 ## [1.2.0] - 2017-05-13
 ### Added
@@ -59,7 +65,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/1.3.0...HEAD
-[1.3.0]: https://github.com/sensu/sensu-ansible/compare/1.2.0...1.3.0
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.0.0...HEAD
+[2.0.0]: https://github.com/sensu/sensu-ansible/compare/1.2.0...2.0.0
 [1.2.0]: https://github.com/sensu/sensu-ansible/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/sensu/sensu-ansible/compare/1.0.0...1.1.0
