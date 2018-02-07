@@ -72,12 +72,11 @@ MIT
 
 Author Information
 ------------------
-Created by [Calum MacRae](http://cmacr.ae)
+Originally created by [Calum MacRae](http://cmacr.ae) and supported by the [Sensu Community Ansible Maintainers](https://github.com/sensu-plugins/community/#maintained-areas)
 
 ### Contributors
 See the projects [Contributors page](https://github.com/sensu/sensu-ansible/graphs/contributors)
 
 Feel free to:
-Contact me - [@calumacrae](https://twitter.com/calumacrae), [mailto:calum0macrae@gmail.com](calum0macrae@gmail.com)
-[Raise an issue](https://github.com/cmacrae/ansible-sensu/issues)
-[Contribute](https://github.com/cmacrae/ansible-sensu/pulls)
+[Raise an issue](https://github.com/sensu/sensu-ansible/issues)
+[Contribute](https://github.com/sensu/sensu-ansible/pulls)
