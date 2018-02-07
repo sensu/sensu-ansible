@@ -7,18 +7,25 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [Unreleased]
 
 ## [2.0.0] - 2018-02-06
+### Breaking Change
+- Split up the variables used to determine if a host gets rabbitmq/redis for more flexibility in deployments. (@tculp)
+  `sensu_deploy_rabbitmq` and `sensu_deploy_redis` are now `sensu_deploy_rabbitmq_server` and `sensu_deploy_redis_server` respectively.
+  See the [role variable documentation](https://github.com/sensu/sensu-ansible/blob/master/docs/role_variables.md) for details on the parameters.
+- Redis on Ubuntu will now be configured to bind to `0.0.0.0` to ensure accessiblity and to match the other supported OS configurations (@tculp)
+
+
 ### Added
 - Initial support for OpenBSD! (@smbambling)
 - Ubuntu now get's `apt-transport-https` installed to support HTTPS repos. (@kevit)
-- Default to HTTPS APT repo's.  @jaredledvina
+- Default to HTTPS APT repos.  @jaredledvina
 - Allow for configuring when a node gets the `sensu-client` config file. (@tculp)
 - Allow for deploying client definitions based on groups. (@tculp)
 - Default to HTTPS Yum repo's and install the Yum key for package signing validation via HTTPS.  (@jaredledvina)
 - Used HTTPS for APT key.  (@jaredledvina)
-- Amazon Linux now get's proper yum repo and supports Amazon Linux 2. (@romainrbr)
+- Amazon Linux has proper yum repo configured and supports Amazon Linux 2. (@romainrbr)
 - Yum based distros now get EPEL to support installing a newer and supported version of RabbitMQ. (@romainrbr)
 - CentOS now supports using Bintray mirrors for installing RabbitMQ to work around Erlang issues with older versions. (@romainrbr)
-- All PR's are now required to pass TravisCI tests.  (@jaredledvina)
+- All PRs are now required to pass TravisCI integrations tests.  (@jaredledvina)
 - Ensure that we configure the `mode` and `umask` for files to work in a more restrictive environment. (@roumano)
 - Debian and Ubuntu switch to Bintray for RabbitMQ to match yum distros. (@jaredledvina)
 
@@ -26,14 +33,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Switched from Gitter to `#ansible` in the Sensu Community Slack. (@grepory)
 - Bumped SSL tools version to 1.2 by default. (@marji)
 - Update 'Generate SSL Certs' to support Ansible 2.4. (@tculp)
-
-### Fixed
-- Ubuntu - Redis now always binds to `0.0.0.0` to match other distro's configurgation and to ensure it's accessible. (@tculp)
-
-### Breaking Change
-- Split up the variables used to determine if a host gets rabbitmq/redis for more flexibility in deployments. (@tculp)
-  `sensu_deploy_rabbitmq` and `sensu_deploy_redis` are now `sensu_deploy_rabbitmq_server` and `sensu_deploy_redis_server` respectively.
-  See the [role variable documentation](https://github.com/sensu/sensu-ansible/blob/master/docs/role_variables.md) for details on the parameters.
 
 ## [1.2.0] - 2017-05-13
 ### Added
