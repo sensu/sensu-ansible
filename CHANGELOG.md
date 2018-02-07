@@ -6,13 +6,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-## [2.0.0] - 2018-02-06
+## [2.0.0] - 2018-02-07
 ### Breaking Change
 - Split up the variables used to determine if a host gets rabbitmq/redis for more flexibility in deployments. (@tculp)
   `sensu_deploy_rabbitmq` and `sensu_deploy_redis` are now `sensu_deploy_rabbitmq_server` and `sensu_deploy_redis_server` respectively.
   See the [role variable documentation](https://github.com/sensu/sensu-ansible/blob/master/docs/role_variables.md) for details on the parameters.
 - Redis on Ubuntu will now be configured to bind to `0.0.0.0` to ensure accessiblity and to match the other supported OS configurations (@tculp)
-
+- Updated the supported Ansible version to the last two stable releases (currently that's Ansible 2.3 and 2.4) (@jaredledvina)
+  Please note that we have not explicitly broken support for running this role on versions of Ansible <2.3. However, we will only
+  be activly supporting the last two stable Ansible releases to reduce the maintenance burden.
 
 ### Added
 - Initial support for OpenBSD! (@smbambling)
