@@ -5,8 +5,10 @@
        "host": "{{ sensu_api_host }}",
        "ssl": {{ sensu_api_ssl | lower }},
        "port": {{ uchiwa_sensu_api_port }},
+       {% if sensu_api_user_name | length > 0 %}
        "user": "{{ sensu_api_user_name }}",
        "pass": "{{ sensu_api_password }}",
+       {% endif %}
        "path": "{{ sensu_api_uchiwa_path }}",
        "timeout": {{ sensu_api_timeout }}
    }
