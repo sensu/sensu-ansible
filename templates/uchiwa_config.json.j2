@@ -5,7 +5,7 @@
        "host": "{{ sensu_api_host }}",
        "ssl": {{ sensu_api_ssl | lower }},
        "port": {{ uchiwa_sensu_api_port }},
-       {% if sensu_api_user_name | length > 0 %}
+       {% if sensu_api_user_name %}
        "user": "{{ sensu_api_user_name }}",
        "pass": "{{ sensu_api_password }}",
        {% endif %}
@@ -14,7 +14,9 @@
    }
  ],
  "uchiwa": {
+   {% if uchiwa_users %}
    "users": {{ uchiwa_users | to_nice_json }},
+   {% endif %}
    "port": {{ uchiwa_port }},
    {% if uchiwa_auth_privatekey %}
    "auth": {
