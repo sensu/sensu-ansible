@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [2.1.0]
 ### Fixed
 - `defaults/main.yaml`,`tasks/plugins.yml`: Fix Python 3.X compatability issue when checking the contents of sensu_remote_plugins. (@danragnar)
 
@@ -68,7 +70,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.0.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.1.0...HEAD
+[2.1.0]: https://github.com/sensu/sensu-ansible/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/sensu/sensu-ansible/compare/1.2.0...2.0.0
 [1.2.0]: https://github.com/sensu/sensu-ansible/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/sensu/sensu-ansible/compare/1.0.0...1.1.0
