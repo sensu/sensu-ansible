@@ -6,18 +6,19 @@ site_author: Calum MacRae
 
 theme: flatly
 pages:
-  - [ 'index.md', 'Home' ]
-  - [ 'role_variables.md', 'Usage', 'Role variables' ]
-  - [ 'example_infra.md', 'Usage', 'Example infrastructure layout' ]
-  - [ 'single_master.md', 'Usage', 'Deploy the stack to a single node' ]
-  - [ 'differing_master_environment.md', 'Usage', 'A differing master environment' ]
-  - [ 'custom_client_config.md', 'Usage', 'Custom client configuration' ]
-  - [ 'deploy_plugins.md', 'Usage', 'Deployment of handlers/filters/mutators' ]
-  - [ 'remote_plugins.md', 'Usage', 'Remote plugin deployment']
-  - [ 'sensitive_info.md', 'Usage', 'Sensitive information in version control' ]
-  - [ 'integration.md', 'Usage', 'Integration with other roles/managment methods']
-  - [ 'testing.md', 'Usage', 'Testing' ]
-  - [ 'dynamic_data.md','Conventions','Dynamic data store' ]
-  - [ 'dynamic_checks.md','Conventions','Dynamic check deployment' ]
-  - [ 'afewwords.md','About','A few words from the author' ]
-  - [ 'license.md','About','License' ]
+  - Home: index.md
+  - Usage:
+    - Role Variables: role_variables.md
+    - Example Infrastructure Layout: example_infra.md
+    - Deploy The Stack to a Single Node: single_master.md
+    - Custom Client Configuration: custom_client_config.md
+    - Deployment - Handlers/Filters/Mutators: deploy_plugins.md
+    - Remote Plugin Deployment: remote_plugins.md
+    - Sensitive Information in Version Control: sensitive_info.md
+    - Testing: testing.md
+  - Conventions:
+    - Dynamic Data Store: dynamic_data.md
+    - Dynamic Check Deployment: dynamic_checks.md
+  - About:
+    - A few words from the author: afewwords.md
+    - License: license.md
