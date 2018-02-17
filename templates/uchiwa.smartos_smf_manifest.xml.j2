@@ -13,7 +13,7 @@
     <method_context>
       <method_credential user="{{ sensu_user_name }}" group="{{ sensu_user_name }}" />
       <method_environment>
-        <envvar name="HOME" value="{{ uchiwa_path }}" />
+        <envvar name="HOME" value="{{ sensu_uchiwa_path }}" />
         <envvar name="PATH" value="/opt/uchiwa/go/bin:/opt/local/sbin:/opt/local/bin:/sbin:/usr/sbin:/usr/bin" />
       </method_environment>
     </method_context>

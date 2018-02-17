@@ -1,20 +1,20 @@
 {
  "sensu": [
    {
-       "name": "{{ uchiwa_dc_name }}",
+       "name": "{{ sensu_uchiwa_dc_name }}",
        "host": "{{ sensu_api_host }}",
        "ssl": {{ sensu_api_ssl }},
        "port": {{ sensu_api_port }},
        "user": "{{ sensu_api_user_name }}",
        "pass": "{{ sensu_api_password }}",
-       "path": "{{ sensu_api_uchiwa_path }}",
+       "path": "{{ sensu_api_sensu_uchiwa_path }}",
        "timeout": {{ sensu_api_timeout }}
    }
  ],
  "uchiwa": {
-   "user": "{{ uchiwa_user_name }}",
-   "pass": "{{ uchiwa_password }}",
-   "port": {{ uchiwa_port }},
-   "refresh": {{ uchiwa_refresh }}
+   "user": "{{ sensu_uchiwa_user_name }}",
+   "pass": "{{ sensu_uchiwa_password }}",
+   "port": {{ sensu_uchiwa_port }},
+   "refresh": {{ sensu_uchiwa_refresh }}
   }
 }

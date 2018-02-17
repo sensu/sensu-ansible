@@ -6,8 +6,8 @@
 
   - name: Ensure Redis is installed
     yum:
-      name: "{{ redis_pkg_name }}"
-      state: "{{ redis_pkg_state }}"
+      name: "{{ sensu_redis_pkg_name }}"
+      state: "{{ sensu_redis_pkg_state }}"
       enablerepo: epel
 
   - name: Ensure Redis binds to accessible IP

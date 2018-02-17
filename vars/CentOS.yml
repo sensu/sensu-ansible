@@ -5,5 +5,5 @@
 # Sensu/Uchiwa user/group/service properties
 sensu_user_name: root
 sensu_group_name: root
-uchiwa_pkg_version: 0.14.2-1
-uchiwa_pkg_download_url: http://dl.bintray.com/palourde/uchiwa/uchiwa-{{ uchiwa_pkg_version }}.x86_64.rpm
+sensu_uchiwa_pkg_version: 0.14.2-1
+sensu_uchiwa_pkg_download_url: http://dl.bintray.com/palourde/uchiwa/uchiwa-{{ sensu_uchiwa_pkg_version }}.x86_64.rpm

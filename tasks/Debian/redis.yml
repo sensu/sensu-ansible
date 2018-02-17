@@ -6,8 +6,8 @@
 
   - name: Ensure Redis is installed
     apt:
-      name: "{{ redis_pkg_name }}"
-      state: "{{ redis_pkg_state }}"
+      name: "{{ sensu_redis_pkg_name }}"
+      state: "{{ sensu_redis_pkg_state }}"
       update_cache: true
 
   - name: Ensure Redis binds to accessible IP

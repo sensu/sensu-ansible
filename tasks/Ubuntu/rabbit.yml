@@ -18,5 +18,5 @@
   - name: Ensure RabbitMQ is installed
     apt:
       name: rabbitmq-server
-      state: "{{ rabbitmq_pkg_state }}"
+      state: "{{ sensu_rabbitmq_pkg_state }}"
       update_cache: true

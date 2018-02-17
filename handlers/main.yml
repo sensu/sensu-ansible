@@ -1,10 +1,10 @@
 ---
 
   - name: restart rabbitmq service
-    service: name={{ rabbitmq_service_name }} state=restarted
+    service: name={{ sensu_rabbitmq_service_name }} state=restarted
   
   - name: restart redis service
-    service: name={{ redis_service_name }} state=restarted
+    service: name={{ sensu_redis_service_name }} state=restarted
 
   - name: restart uchiwa service
     service: name=uchiwa state=restarted
@@ -36,6 +36,6 @@
   - name: Build and deploy Uchiwa
     shell: npm install --production
     args:
-      chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+      chdir: "{{ sensu_uchiwa_path }}/go/src/github.com/sensu/uchiwa"
     become: true
     become_user: "{{ sensu_user_name }}"

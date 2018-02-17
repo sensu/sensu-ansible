@@ -8,8 +8,8 @@ set -o xtrace
 
 . /lib/svc/share/smf_include.sh
 
-HOME={{ uchiwa_path }}
-UCHIWA_PATH=${HOME}/go/src/github.com/sensu/uchiwa
+HOME={{ sensu_uchiwa_path }}
+sensu_uchiwa_path=${HOME}/go/src/github.com/sensu/uchiwa
 UCHIWA_USER={{ sensu_user_name }}
 
 if [ ! -d $HOME ]; then
@@ -20,6 +20,6 @@ if [ ! -f $HOME/etc/config.json ]; then
    echo "No Uchiwa config found at: ${HOME}/config.json"
 fi
 
-cd $UCHIWA_PATH
+cd $sensu_uchiwa_path
 ${HOME}/go/bin/uchiwa -c ${HOME}/etc/config.json &
 exit ${SMF_EXIT_OK}

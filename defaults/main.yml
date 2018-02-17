@@ -4,25 +4,25 @@ sensu_deploy_rabbitmq: true
 sensu_deploy_redis: true
 
 # RabbitMQ server properties
-rabbitmq_config_path: /etc/rabbitmq
-rabbitmq_config_template: rabbitmq.config.j2
-rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
-rabbitmq_port: 5671
-rabbitmq_pkg_state: present
-rabbitmq_server: false
-rabbitmq_service_name: rabbitmq-server
-rabbitmq_sensu_user_name: sensu
-rabbitmq_sensu_password: sensu
-rabbitmq_sensu_vhost: /sensu
+sensu_rabbitmq_config_path: /etc/rabbitmq
+sensu_rabbitmq_config_template: rabbitmq.config.j2
+sensu_rabbitmq_host: "{{ groups['sensu_rabbitmq_servers'][0] }}"
+sensu_rabbitmq_port: 5671
+sensu_rabbitmq_pkg_state: present
+sensu_rabbitmq_server: false
+sensu_rabbitmq_service_name: rabbitmq-server
+sensu_rabbitmq_sensu_user_name: sensu
+sensu_rabbitmq_sensu_password: sensu
+sensu_rabbitmq_sensu_vhost: /sensu
 
 # Redis server properties
-redis_host: "{{ groups['redis_servers'][0] }}"
-redis_server: false
-redis_service_name: redis
-redis_pkg_repo: ~
-redis_pkg_name: redis
-redis_pkg_state: present
-redis_port: 6379
+sensu_redis_host: "{{ groups['sensu_redis_servers'][0] }}"
+sensu_redis_server: false
+sensu_redis_service_name: redis
+sensu_redis_pkg_repo: ~
+sensu_redis_pkg_name: redis
+sensu_redis_pkg_state: present
+sensu_redis_port: 6379
 
 # Sensu/Uchiwa user/group/service properties
 sensu_api_host: "{{ groups['sensu_masters'][0] }}"
@@ -30,7 +30,7 @@ sensu_api_port: 4567
 sensu_api_ssl: "false"
 sensu_api_user_name: admin
 sensu_api_password: secret
-sensu_api_uchiwa_path: ''
+sensu_api_sensu_uchiwa_path: ''
 sensu_api_timeout: 5000
 sensu_client_config: client.json.j2
 sensu_config_path: /etc/sensu
@@ -46,21 +46,21 @@ sensu_remote_plugins: ~
 
 # Sensu/RabbitMQ SSL certificate properties
 sensu_ssl_gen_certs: true
-sensu_ssl_client_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
-sensu_ssl_client_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
-sensu_ssl_server_cacert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
-sensu_ssl_server_cert: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
-sensu_ssl_server_key: "{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
-  
+sensu_ssl_client_cert: "{{ sensu_dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
+sensu_ssl_client_key: "{{ sensu_dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
+sensu_ssl_server_cacert: "{{ sensu_dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
+sensu_ssl_server_cert: "{{ sensu_dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
+sensu_ssl_server_key: "{{ sensu_dynamic_data_store }}/{{ groups['sensu_masters'][0] }}/{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
+
 # Uchiwa properties
-uchiwa_dc_name: ~
-uchiwa_path: /opt/uchiwa
-uchiwa_redis_use_ssl: false
-uchiwa_user_name: admin
-uchiwa_password: admin
-uchiwa_port: 3000
-uchiwa_refresh: 5
-uchiwa_pkg_download_sha256sum: ~
-uchiwa_pkg_download_path: ~
-uchiwa_pkg_version: ~
-uchiwa_pkg_download_url: ~
+sensu_uchiwa_dc_name: ~
+sensu_uchiwa_path: /opt/uchiwa
+sensu_uchiwa_redis_use_ssl: false
+sensu_uchiwa_user_name: admin
+sensu_uchiwa_password: admin
+sensu_uchiwa_port: 3000
+sensu_uchiwa_refresh: 5
+sensu_uchiwa_pkg_download_sha256sum: ~
+sensu_uchiwa_pkg_download_path: ~
+sensu_uchiwa_pkg_version: ~
+sensu_uchiwa_pkg_download_url: ~

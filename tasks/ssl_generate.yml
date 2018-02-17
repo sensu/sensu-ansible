@@ -45,7 +45,7 @@
   - name: Stash the Sensu SSL certs/keys
     fetch:
       src: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/{{ item }}"
-      dest: "{{ dynamic_data_store }}"
+      dest: "{{ sensu_dynamic_data_store }}"
     when: sensu_master
     with_items:
       - sensu_ca/cacert.pem

@@ -1,5 +1,5 @@
 # Dynamic Data Store
-Throughout this role, you may notice the use of the variable `dynamic_data_store`.
+Throughout this role, you may notice the use of the variable `sensu_dynamic_data_store`.
 This is a convention that I have implemented personally within my infrastructure, though it stems from a feature that I'm sure many people leverage in their own way - probably in a very similar manner.
 
 ## The concept
@@ -24,9 +24,9 @@ Very handy!
 
 I've coupled this with the generation of SSL certs on the Sensu "master". So, when applying this role to a node on which `sensu_master` evaluates to `true`, several SSL certs are generated, then stashed on the Ansible control node in the dynamic data store for distribution to client nodes at a later point in the playbook.
 
-I've defined my `dynamic_data_store` variable at the top level of my Ansible codebase, in the file `group_vars/all.yml`:
+I've defined my `sensu_dynamic_data_store` variable at the top level of my Ansible codebase, in the file `group_vars/all.yml`:
 ``` yaml
-dynamic_data_store: /path/to/ansible/config/data/dynamic
+sensu_dynamic_data_store: /path/to/ansible/config/data/dynamic
 ```
 Let's take a look at this directory:
 ```
@@ -72,7 +72,7 @@ The same method is used for node communication with RabbitMQ:
   - name: Ensure RabbitMQ SSL certs/keys are in place
     copy:
 	  src: "{{ item }}"
-	  dest: "{{ rabbitmq_config_path }}/ssl"
+	  dest: "{{ sensu_rabbitmq_config_path }}/ssl"
     with_items:
       - "{{ sensu_ssl_server_cacert }}"
       - "{{ sensu_ssl_server_cert }}"
@@ -85,11 +85,11 @@ The same method is used for node communication with RabbitMQ:
 
 ## So, what do I need to do?
 Well, you simply need to decide where, on your Ansible control node's filesystem, you'd like your dynamic data store to reside.
-Then simply set the `dynamic_data_store` value to that path for all nodes that are going to be using this Sensu role, as described above.
+Then simply set the `sensu_dynamic_data_store` value to that path for all nodes that are going to be using this Sensu role, as described above.
 
 This variable's value, like any other in Ansible, can include variable(s) itself also.
 I have a role that deploys an Ansible control node, and use a variable for where I want my Ansible codebase to sit.
-So my `dynamic_data_store` (again) defined in `group_vars/all.yml` is actually set to:
+So my `sensu_dynamic_data_store` (again) defined in `group_vars/all.yml` is actually set to:
 ``` yaml
-dynamic_data_store: {{ ansible_conf_path }}/data/dynamic
+sensu_dynamic_data_store: {{ ansible_conf_path }}/data/dynamic
 ```

@@ -4,16 +4,16 @@ One of the awesome features of this role (if I do say so myself) is the deployme
 Have a group of webservers you need to monitor webservices on? Well, I'm sure you've bunched them together in your inventory under the `[webservers]` group, right? Or perhaps you only want to monitor disk space on your production systems; if they're a member of `[production]` within the inventory, you can do this easily.
 
 ## How it works
-Much like [the dynamic datastore](dynamic_data/), I have also defined a static data store within my Ansible codebase, by setting the variable `static_data_store`.
+Much like [the dynamic datastore](dynamic_data/), I have also defined a static data store within my Ansible codebase, by setting the variable `sensu_static_data_store`.
 Within this static datastore resides the following directory structure:
 ```
 $ tree data/static
 data/static
 `-- sensu
     |-- checks
-    |   |-- rabbitmq_servers
+    |   |-- sensu_rabbitmq_servers
     |   |   `-- check_rabbitmq.sh
-    |   |-- redis_servers
+    |   |-- sensu_redis_servers
     |   |   `-- check_redis.sh
     |   |-- webservers
     |   |   `-- check_nginx.sh
@@ -34,13 +34,13 @@ data/static
     |   `-- pushover.rb
     `-- mutators
 ```
-As you can see, in the `sensu/checks` directory, there are the `rabbitmq_servers`, `redis_servers`, `webservers` & `zones` subdirectories.
+As you can see, in the `sensu/checks` directory, there are the `sensu_rabbitmq_servers`, `sensu_redis_servers`, `webservers` & `zones` subdirectories.
 If you've had a peruse through some of the other documentation here, you'll know that these groups are defined within my Ansible inventory:
 ``` ini
-[rabbitmq_servers]
+[sensu_rabbitmq_servers]
 test.cmacr.ae
 
-[redis_servers]
+[sensu_redis_servers]
 redis.cmacr.ae
 
 [sensu_masters]
@@ -70,19 +70,19 @@ web.cmacr.ae
 test.cmacr.ae
 ```
 Under these subdirectories, you can see [checks](https://sensuapp.org/docs/0.21/checks) that relate to the directory they're placed in.
-The `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
+The `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `sensu_rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
 
 So how do these checks actually get deployed to their associated nodes?
 With this pair of plays, in the `tasks/plugins.yml` playbook:
 ``` yaml
   - name: Register available checks
-    local_action: command ls {{ static_data_store }}/sensu/checks
+    local_action: command ls {{ sensu_static_data_store }}/sensu/checks
     register: sensu_available_checks
     changed_when: false
 
   - name: Deploy check plugins
     copy:
-      src: "{{ static_data_store }}/sensu/checks/{{ item }}/"
+      src: "{{ sensu_static_data_store }}/sensu/checks/{{ item }}/"
       dest: "{{ sensu_config_path }}/plugins/"
       mode: 0755
       owner: "{{ sensu_user_name }}"
@@ -97,18 +97,18 @@ This will [register](http://docs.ansible.com/playbooks_conditionals.html#registe
 And, because nodes can of course be members of more than just one group, checks will be deployed in full to nodes that belong to several groups!
 
 ## Defining your static data store
-Just like defining the dynamic data store, this needs to be done somewhere it can be made available to all the nodes you'll be applying this role to. I do this in the same place I define `dynamic_data_store`: `group_vars/all.yml`, like so:
+Just like defining the dynamic data store, this needs to be done somewhere it can be made available to all the nodes you'll be applying this role to. I do this in the same place I define `sensu_dynamic_data_store`: `group_vars/all.yml`, like so:
 ``` yaml
-static_data_store: path/to/ansible/codebase/data/static
+sensu_static_data_store: path/to/ansible/codebase/data/static
 ```
 Once you've defined where you'd like your static data store to be, you can drop in some checks by creating a similar data structure to mine:
 ```
 data/static
 `-- sensu
     `-- checks
-        |-- rabbitmq_servers
+        |-- sensu_rabbitmq_servers
         |   `-- check_rabbitmq.sh
-        |-- redis_servers
+        |-- sensu_redis_servers
         |   `-- check_redis.sh
         |-- webservers
         |   `-- check_nginx.sh
@@ -131,10 +131,10 @@ In your Ansible inventory, after this spontaneous decision to have your webserve
 [webservers]
 mime.domain.name
 
-[redis_servers]
+[sensu_redis_servers]
 mime.domain.name
 ```
-Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for Redis will be deployed to `mime.domain.name` and it'll be subscribed to the `redis_servers` stream within Sensu. Pretty slick, right?
+Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for Redis will be deployed to `mime.domain.name` and it'll be subscribed to the `sensu_redis_servers` stream within Sensu. Pretty slick, right?
 
 The same goes for the removal of a node from a group. Did you just realize you really don't want `mime.domain.name` to act as a Redis server?
-It's cool, we all make mistakes, just take him out of the `[redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `redis_servers` stream, and Redis'll stop being monitored!
+It's cool, we all make mistakes, just take him out of the `[sensu_redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `sensu_redis_servers` stream, and Redis'll stop being monitored!
