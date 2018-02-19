@@ -8,7 +8,7 @@
     yum:
       name: epel-release
       state: present
-    when: enable_epel_repo
+    when: sensu_enable_epel_repo
 
   - name: Ensure redis is installed
     yum:

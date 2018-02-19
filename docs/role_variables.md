@@ -14,7 +14,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_rabbitmq_config_path` | `/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
 | `sensu_rabbitmq_config_template` | `rabbitmq.config.j2` | The template to use for the RabbitMQ service configuration |
-|` sensu_rabbitmq_host` | `"{{ groups\['sensu_sensu_rabbitmq_servers']\[0] }}"` | The hostname/IP address of the RabbitMQ node |
+|` sensu_rabbitmq_host` | `"{{ groups\['sensu_rabbitmq_servers']\[0] }}"` | The hostname/IP address of the RabbitMQ node |
 | `sensu_rabbitmq_port` | 5671 | The transmission port for RabbitMQ communications |
 | `sensu_rabbitmq_pkg_state` | present | The state of the RabbitMQ package (should be set to `present` or `latest`) |
 | `sensu_rabbitmq_server` | `false` | Determines whether to include the deployment of RabbitMQ |

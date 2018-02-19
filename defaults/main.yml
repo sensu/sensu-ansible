@@ -34,7 +34,7 @@ sensu_deploy_redis_server: true
 sensu_rabbitmq_config_path: /etc/rabbitmq
 sensu_rabbitmq_config_template: rabbitmq.config.j2
 sensu_rabbitmq_enable_ssl: true
-sensu_rabbitmq_host: "{{ groups['sensu_sensu_rabbitmq_servers'][0] }}"
+sensu_rabbitmq_host: "{{ groups['sensu_rabbitmq_servers'][0] }}"
 sensu_rabbitmq_port: 5671
 sensu_rabbitmq_pkg_state: present
 sensu_rabbitmq_server: false

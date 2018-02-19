@@ -21,7 +21,7 @@ $ tree data/static
 data/static
 `-- sensu
     |-- checks
-    |   |-- sensu_sensu_rabbitmq_servers
+    |   |-- sensu_rabbitmq_servers
     |   |   `-- check_rabbitmq.sh
     |   |-- sensu_redis_servers
     |   |   `-- check_redis.sh
@@ -41,7 +41,7 @@ data/static
     |   |-- smartos_check_disk.json.j2
     |   `-- smartos_check_mem.json.j2
     |-- client-definitions
-    |   |-- sensu_sensu_rabbitmq_servers
+    |   |-- sensu_rabbitmq_servers
     |   |   `-- check_users.json.j2
     |   `-- webservers
     |       `-- check_uptime.json.j2
@@ -49,10 +49,10 @@ data/static
     |   `-- pushover.rb
     `-- mutators
 ```
-As you can see, in the `sensu/checks` directory, there are the `sensu_sensu_rabbitmq_servers`, `sensu_redis_servers`, `webservers` & `zones` subdirectories.
+As you can see, in the `sensu/checks` directory, there are the `sensu_rabbitmq_servers`, `sensu_redis_servers`, `webservers` & `zones` subdirectories.
 If you've had a peruse through some of the other documentation here, you'll know that these groups are defined within my Ansible inventory:
 ``` ini
-[sensu_sensu_rabbitmq_servers]
+[sensu_rabbitmq_servers]
 test.cmacr.ae
 
 [sensu_redis_servers]
@@ -85,7 +85,7 @@ web.cmacr.ae
 test.cmacr.ae
 ```
 Under these subdirectories, you can see [checks](https://sensuapp.org/docs/latest/reference/checks) that relate to the directory they're placed in.
-For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `sensu_sensu_rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
+For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `sensu_rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
 
 So how do these checks actually get deployed to their associated nodes?
 With this pair of plays, in the `tasks/plugins.yml` playbook:

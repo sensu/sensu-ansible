@@ -6,4 +6,4 @@
 _sensu_pkg_version: '0.29.0'
 
 #Set this to false to disable the EPEL repo installation
-enable_epel_repo: true
+sensu_enable_epel_repo: true

@@ -18,7 +18,7 @@ Vagrant.configure(2) do | config |
     config.vm.provision "ansible" do |ansible|
       ansible.groups = {
         "sensu_masters" => ["ubuntu15"],
-        "sensu_sensu_rabbitmq_servers" => ["ubuntu15"],
+        "sensu_rabbitmq_servers" => ["ubuntu15"],
         "sensu_redis_servers" => ["ubuntu15"],
       }
 
