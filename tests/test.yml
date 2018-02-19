@@ -11,10 +11,10 @@
     - role: role_under_test
       sensu_master: true
       sensu_include_dashboard: true
-      rabbitmq_server: true
-      redis_server: true
-      rabbitmq_host: localhost
-      redis_host: localhost
+      sensu_rabbitmq_server: true
+      sensu_redis_server: true
+      sensu_rabbitmq_host: localhost
+      sensu_redis_host: localhost
       sensu_api_host: localhost
       # Workaround for https://github.com/geerlingguy/docker-ubuntu1604-ansible/issues/5
       ansible_default_ipv4:

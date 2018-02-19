@@ -1,32 +1,32 @@
 ---
 
   - name: restart rabbitmq service
-    service: name={{ rabbitmq_service_name }} state=restarted
+    service: name={{ sensu_rabbitmq_service_name }} state=restarted
 
   - name: restart redis service
-    service: name={{ redis_service_name }} state=restarted
+    service: name={{ sensu_redis_service_name }} state=restarted
 
   - name: restart uchiwa service
-    service: name={{ uchiwa_service_name }} state=restarted
+    service: name={{ sensu_uchiwa_service_name }} state=restarted
 
   - name: restart sensu-server service
     service: name={{ sensu_server_service_name }} state=restarted
-    when: sensu_master and not se_enterprise
+    when: sensu_master and not sensu_se_enterprise
 
   - name: restart sensu-api service
     service: name={{ sensu_api_service_name }} state=restarted
-    when: sensu_master and not se_enterprise
+    when: sensu_master and not sensu_se_enterprise
 
   - name: restart sensu-client service
     service: name={{ sensu_client_service_name }} state=restarted
 
   - name: restart sensu-enterprise service
     service: name={{ sensu_enterprise_service_name }} state=restarted
-    when: se_enterprise and sensu_master
+    when: sensu_se_enterprise and sensu_master
 
   - name: restart sensu-enterprise-dashboard service
     service: name={{ sensu_enterprise_dashboard_service_name }} state=restarted
-    when: se_enterprise and sensu_master
+    when: sensu_se_enterprise and sensu_master
 
   # Joyent SmartOS specific handlers
   - name: import sensu-server service
@@ -44,7 +44,7 @@
   - name: Build and deploy Uchiwa
     shell: npm install --production
     args:
-      chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+      chdir: "{{ sensu_uchiwa_path }}/go/src/github.com/sensu/uchiwa"
     become: true
     become_user: "{{ sensu_user_name }}"
 

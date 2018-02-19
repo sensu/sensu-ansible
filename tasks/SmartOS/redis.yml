@@ -5,4 +5,4 @@
   - include_vars: "{{ ansible_distribution }}.yml"
 
   - name: Ensure redis is installed
-    pkgin: name=redis state={{ redis_pkg_state }}
+    pkgin: name=redis state={{ sensu_redis_pkg_state }}

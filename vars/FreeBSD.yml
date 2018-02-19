@@ -7,9 +7,9 @@ sensu_config_path: /usr/local/etc/sensu
 _sensu_pkg_version: ~
 
 # RabbitMQ options
-rabbitmq_config_path: /usr/local/etc/rabbitmq
-rabbitmq_service_name: rabbitmq
+sensu_rabbitmq_config_path: /usr/local/etc/rabbitmq
+sensu_rabbitmq_service_name: rabbitmq
 
 # Internal settings
-__bash_path: /usr/local/bin/bash
-__root_group: wheel
+sensu_bash_path: /usr/local/bin/bash
+sensu_root_group: wheel

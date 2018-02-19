@@ -21,10 +21,10 @@
   - name: Ensure that credential is supplied if installing Sensu Enterprise
     assert:
       that:
-        - "se_user != ''"
-        - "se_pass != ''"
-      msg: Sensu enterprise credential must not be empty. Did you forget to set se_user and se_pass?
-    when: se_enterprise
+        - "sensu_se_user != ''"
+        - "sensu_se_pass != ''"
+      msg: Sensu enterprise credential must not be empty. Did you forget to set sensu_se_user and sensu_se_pass?
+    when: sensu_se_enterprise
 
   - name: Ensure the Sensu Enterprise repo is present
     copy:
@@ -32,13 +32,13 @@
       content: |
         [sensu-enterprise]
         name=sensu-enterprise
-        baseurl=http://{{ se_user }}:{{ se_pass }}@enterprise.sensuapp.com/yum/noarch/
+        baseurl=http://{{ sensu_se_user }}:{{ sensu_se_pass }}@enterprise.sensuapp.com/yum/noarch/
         gpgcheck=0
         enabled=1
       owner: root
       group: root
       mode: 0644
-    when: se_enterprise
+    when: sensu_se_enterprise
 
   - name: Ensure the Sensu Enterprise Dashboard repo is present
     copy:
@@ -46,13 +46,13 @@
       content: |
         [sensu-enterprise-dashboard]
         name=sensu-enterprise-dashboard
-        baseurl=http://{{ se_user }}:{{ se_pass }}@enterprise.sensuapp.com/yum/\$basearch/
+        baseurl=http://{{ sensu_se_user }}:{{ sensu_se_pass }}@enterprise.sensuapp.com/yum/\$basearch/
         gpgcheck=0
         enabled=1
       owner: root
       group: root
       mode: 0644
-    when: se_enterprise
+    when: sensu_se_enterprise
 
   - name: Ensure Sensu is installed
     yum:
@@ -63,4 +63,4 @@
     yum:
       name={{ sensu_enterprise_package }}
       state={{ sensu_pkg_state }}
-    when: se_enterprise
+    when: sensu_se_enterprise

@@ -8,9 +8,9 @@ sensu_gem_version: 0.29.0
 sensu_client_service_name: sensuclient
 
 # RabbitMQ options
-rabbitmq_config_path: /etc/rabbitmq
-rabbitmq_service_name: rabbitmq
+sensu_rabbitmq_config_path: /etc/rabbitmq
+sensu_rabbitmq_service_name: rabbitmq
 
 # Internal settings
-__bash_path: /usr/local/bin/bash
-__root_group: wheel
+sensu_bash_path: /usr/local/bin/bash
+sensu_root_group: wheel

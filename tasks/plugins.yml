@@ -11,7 +11,7 @@
       group: "{{ sensu_group_name }}"
 
   - name: Ensure local directories exist
-    local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
+    local_action: file state=directory dest="{{ sensu_static_data_store }}/sensu/{{ item }}"
     become: no
     with_items:
       - checks
@@ -28,14 +28,14 @@
     when: sensu_remote_plugins | length > 0
 
   - name: Register available checks
-    local_action: command ls {{ static_data_store }}/sensu/checks
+    local_action: command ls {{ sensu_static_data_store }}/sensu/checks
     register: sensu_available_checks
     changed_when: false
     become: false
 
   - name: Deploy check plugins
     copy:
-      src: "{{ static_data_store }}/sensu/checks/{{ item }}/"
+      src: "{{ sensu_static_data_store }}/sensu/checks/{{ item }}/"
       dest: "{{ sensu_config_path }}/plugins/"
       mode: 0755
       owner: "{{ sensu_user_name }}"
@@ -47,7 +47,7 @@
 
   - name: Deploy handler plugins
     copy:
-      src: "{{ static_data_store }}/sensu/handlers/"
+      src: "{{ sensu_static_data_store }}/sensu/handlers/"
       dest: "{{ sensu_config_path }}/plugins/"
       mode: 0755
       owner: "{{ sensu_user_name }}"
@@ -56,7 +56,7 @@
 
   - name: Deploy filter plugins
     copy:
-      src: "{{ static_data_store }}/sensu/filters/"
+      src: "{{ sensu_static_data_store }}/sensu/filters/"
       dest: "{{ sensu_config_path }}/plugins/"
       mode: 0755
       owner: "{{ sensu_user_name }}"
@@ -65,7 +65,7 @@
 
   - name: Deploy mutator plugins
     copy:
-      src: "{{ static_data_store }}/sensu/mutators/"
+      src: "{{ sensu_static_data_store }}/sensu/mutators/"
       dest: "{{ sensu_config_path }}/plugins/"
       mode: 0755
       owner: "{{ sensu_user_name }}"
@@ -80,21 +80,21 @@
       group: "{{ sensu_group_name }}"
     when: sensu_master
     with_fileglob:
-      - "{{ static_data_store }}/sensu/definitions/*"
+      - "{{ sensu_static_data_store }}/sensu/definitions/*"
     notify:
       - restart sensu-server service
       - restart sensu-api service
       - restart sensu-enterprise service
 
   - name: Register available client definitions
-    local_action: command ls {{ static_data_store }}/sensu/client_definitions
+    local_action: command ls {{ sensu_static_data_store }}/sensu/client_definitions
     register: sensu_available_client_definitions
     changed_when: false
     become: false
 
   - name: Deploy client definitions
     copy:
-      src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
+      src: "{{ sensu_static_data_store }}/sensu/client_definitions/{{ item }}/"
       dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"

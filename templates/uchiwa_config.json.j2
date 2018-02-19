@@ -1,29 +1,29 @@
 {
  "sensu": [
    {
-       "name": "{{ uchiwa_dc_name }}",
+       "name": "{{ sensu_uchiwa_dc_name }}",
        "host": "{{ sensu_api_host }}",
        "ssl": {{ sensu_api_ssl | lower }},
-       "port": {{ uchiwa_sensu_api_port }},
+       "port": {{ sensu_uchiwa_sensu_api_port }},
        {% if sensu_api_user_name %}
        "user": "{{ sensu_api_user_name }}",
        "pass": "{{ sensu_api_password }}",
        {% endif %}
-       "path": "{{ sensu_api_uchiwa_path }}",
+       "path": "{{ sensu_api_sensu_uchiwa_path }}",
        "timeout": {{ sensu_api_timeout }}
    }
  ],
  "uchiwa": {
-   {% if uchiwa_users %}
-   "users": {{ uchiwa_users | to_nice_json }},
+   {% if sensu_uchiwa_users %}
+   "users": {{ sensu_uchiwa_users | to_nice_json }},
    {% endif %}
-   "port": {{ uchiwa_port }},
-   {% if uchiwa_auth_privatekey %}
+   "port": {{ sensu_uchiwa_port }},
+   {% if sensu_uchiwa_auth_privatekey %}
    "auth": {
-     "privatekey": "{{ uchiwa_auth_privatekey }}",
-     "publickey": "{{ uchiwa_auth_publickey }}"
+     "privatekey": "{{ sensu_uchiwa_auth_privatekey }}",
+     "publickey": "{{ sensu_uchiwa_auth_publickey }}"
    },
    {% endif %}
-   "refresh": {{ uchiwa_refresh }}
+   "refresh": {{ sensu_uchiwa_refresh }}
   }
 }

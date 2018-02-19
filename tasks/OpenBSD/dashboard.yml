@@ -15,7 +15,7 @@
 
   - name: Ensure Uchiwa directory exists
     file:
-      dest: "{{ uchiwa_path }}"
+      dest: "{{ sensu_uchiwa_path }}"
       state: directory
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
@@ -23,7 +23,7 @@
 
   - name: Ensure Uchiwa Go/config directory exists
     file:
-      dest: "{{ uchiwa_path }}/{{ item }}"
+      dest: "{{ sensu_uchiwa_path }}/{{ item }}"
       state: directory
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
@@ -34,7 +34,7 @@
 
   - name: Ensure Uchiwa GOPATH exists
     file:
-      dest: "{{ uchiwa_path }}/go/{{ item }}"
+      dest: "{{ sensu_uchiwa_path }}/go/{{ item }}"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       state: directory
@@ -47,9 +47,9 @@
   - name: Fetch Uchiwa from GitHub
     command: go get github.com/sensu/uchiwa
     environment:
-      GOPATH: "{{ uchiwa_path }}/go"
+      GOPATH: "{{ sensu_uchiwa_path }}/go"
     args:
-      creates: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+      creates: "{{ sensu_uchiwa_path }}/go/src/github.com/sensu/uchiwa"
     notify: Build and deploy Uchiwa
     become: true
     become_user: "{{ sensu_user_name }}"
@@ -59,7 +59,7 @@
   - name: Deploy Uchiwa config
     template:
       src: uchiwa_config.json.j2
-      dest: "{{ uchiwa_path }}/etc/config.json"
+      dest: "{{ sensu_uchiwa_path }}/etc/config.json"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     notify: restart uchiwa service
