@@ -2,19 +2,19 @@
 # tasks/main.yml: "Master" playbook for the cmacrae.sensu role
 
   - include_vars: "{{ ansible_distribution }}.yml"
-    when: windows_server != "yes"
+    when: not windows_server
 
   - include_vars: "{{ ansible_os_family }}.yml"
-    when: windows_server == "yes"
+    when: windows_server
 
   - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
     tags: setup
-    when: windows_server != "yes"
+    when: not windows_server
 
     # windows server path with no spaces
   - include: "{{ role_path }}/tasks/{{ ansible_os_family }}/main.yml"
     tags: setup
-    when: windows_server == "yes"
+    when: windows_server
 
   - include: "{{ role_path }}/tasks/pdagent.yml"
     tags: pdagent
@@ -28,18 +28,18 @@
 
   - include: "{{ role_path }}/tasks/ssl.yml"
     tags: ssl
-    when: windows_server != "yes"
+    when: not windows_server
 
   - include: "{{ role_path }}/tasks/rabbit.yml"
     tags: rabbitmq
     when: rabbitmq_server
           and sensu_deploy_rabbitmq
     static: false
-    when: windows_server != "yes"
+    when: not windows_server
 
   - include: "{{ role_path }}/tasks/common.yml"
     tags: common
-    when: windows_server != "yes"
+    when: not windows_server
 
   - include: "{{ role_path }}/tasks/server.yml"
     tags: server
@@ -53,14 +53,14 @@
 
   - include: "{{ role_path }}/tasks/client.yml"
     tags: client
-    when: windows_server != "yes"
+    when: not windows_server
 
   - include: "{{ role_path }}/tasks/windows_client.yml"
     tags: client
-    when: windows_server == "yes"
+    when: windows_server
 
   - include: "{{ role_path }}/tasks/plugins.yml"
     tags: plugins
     when: sensu_include_plugins
-          and windows_server != "yes"
+          and not windows_server
     static: false
