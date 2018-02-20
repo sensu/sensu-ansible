@@ -3,13 +3,10 @@
     "name": "{{ ansible_hostname }}",
     "address": "{{ inventory_hostname }}",
     "environment": "production",
-    "subscriptions": [
-      "windows",
-      "test"
-    ],
     "socket": {
       "bind": "127.0.0.1",
       "port": 3030
-    }
+    },
+    "subscriptions": {{ sensu_client_subscriptions | to_nice_json | indent(width=2) }}
   }
 }
