@@ -6,19 +6,21 @@
   - include_vars: "{{ ansible_os_family }}.yml"
 
     # win_package throws an SSL error with a remote source. Using two steps here as a workaround
-  - name: Download the Sensu installer msi
+  - name: Download the Sensu installer msi into a local dir
     win_get_url:
       url: "{{ sensu_msi_download_path }}"
       dest: "c:\\temp\\sensu-installer.msi"
       skip_certificate_validation: true
 
-  - name: Install the local sensu-client
+    # If a version already exists on the target system, it should be made absent first.
+  - name: Install sensu-client from local dir
     win_package:
       path: "c:\\temp\\sensu-installer.msi"
-      product_id: '{FF98EE93-B344-4548-ADD2-E2F1BD217A84}'
+      product_id: "{{ sensu_msi_product_id }}"
       arguments: /qn
       force_extension: msi
       validate_certs: no
+      state: present
 
   - name: Build the config folders
     win_file:
@@ -64,6 +66,7 @@
       - { src: "{{ sensu_ssl_client_cert }}", dest: cert.pem }
       - { src: "{{ sensu_ssl_client_key }}", dest: key.pem }
     notify: restart sensu-client service
+    when: sensu_ssl_gen_certs
 
   - name: Install the sensu-client service
     win_service:
