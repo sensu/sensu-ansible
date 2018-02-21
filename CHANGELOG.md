@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+- `vars/Fedora.yml`, `tasks/Fedora/main.yml`: Add Fedora as a client OS. Tested on Fedora 25, but should work on newer releases as well.
+
 ## [2.1.0]
 ### Fixed
 - `defaults/main.yaml`,`tasks/plugins.yml`: Fix Python 3.X compatability issue when checking the contents of sensu_remote_plugins. (@danragnar)
