@@ -19,7 +19,7 @@
 
   - name: restart sensu-client service
     service: name={{ sensu_client_service_name }} state=restarted
-    when: windows_server != "yes"
+    when: not windows_server
 
   - name: restart sensu-enterprise service
     service: name={{ sensu_enterprise_service_name }} state=restarted
