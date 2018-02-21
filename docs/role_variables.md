@@ -4,8 +4,8 @@
 ### Service Deployment Options
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-|`sensu_deploy_rabbitmq` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ |
-|`sensu_deploy_redis`    | `true`    | Determines whether or not to use this role to deploy/configure redis |
+|`sensu_deploy_rabbitmq_server` | `true`    | Determines whether or not to use this role to deploy/configure RabbitMQ server |
+|`sensu_deploy_redis_server`    | `true`    | Determines whether or not to use this role to deploy/configure redis server |
 
 _Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
@@ -53,15 +53,19 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_include_plugins` | `true` | Determines whether to include the `sensu-plugins` gem |
 | `sensu_include_dashboard` | `false` | Determines whether to deploy the Uchiwa dashboard |
 | `sensu_master` | `false` | Determines if a node is to act as the Sensu "master" node |
+| `sensu_client` | `true` | Determines if a node should be given the sensu client config |
 | `sensu_user_name`| sensu | The name of the Sensu service user |
 | `sensu_group_name` | sensu | The name of the Sensu service user's primary group |
 | `sensu_remote_plugins` | _undefined_ | A list of plugins to install via `sensu-install` (Ruby Gems) |
 | `sensu_client_name` | `"{{ ansible_hostname }}"` | Sensu client identification (for display purposes) |
 | `sensu_client_subscriptions` | `"{{ group_names }}"` | Sensu client subscriptions |
+| `sensu_deploy_rabbitmq_config` | `true`    | Determines whether or not to deploy RabbitMQ config for sensu |
+| `sensu_deploy_redis_config`    | `true`    | Determines whether or not to deploy redis config for sensu |
+| `sensu_deploy_transport_config`    | `true`    | Determines whether or not to deploy transport config for sensu |
 
 ### Sensu/RabbitMQ SSL certificate properties
 | `sensu_ssl_gen_certs` | `true` | Determines when this role generates its own SSL certs |
-| `sensu_ssl_manage_cert` | `true` | Determines when this role manages deployment of the certs |
+| `sensu_ssl_manage_certs` | `true` | Determines when this role manages deployment of the certs |
 | `sensu_master_config_path` | `"{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"` | The configuration path of sensu on the first master host |
 | `sensu_ssl_tool_base_path` | `"{{ dynamic_data_store }}/{{ groups['sensu_masters'][0] }}{{ sensu_master_config_path }}/ssl_generation/sensu_ssl_tool"` ||
 | `sensu_ssl_deploy_remote_src` | `false` | Copy certificates from paths in the destination host, not in the controller host. Useful if certificates are managed externally and already acquired before running this role. |
@@ -96,6 +100,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
+| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
 
 ## Debian
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
@@ -109,6 +114,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
+| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)

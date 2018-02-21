@@ -1,6 +1,6 @@
-# Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/cmacrae/sensu/)
+# Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/cmacrae/sensu/) [![Build Status](https://travis-ci.org/sensu/sensu-ansible.svg?branch=master)](https://travis-ci.org/sensu/sensu-ansible)
 
-[![Join the chat at https://gitter.im/cmacrae/ansible-sensu](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cmacrae/ansible-sensu?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://slack.sensu.io/](https://slack.sensu.io/badge.svg)](https://slack.sensu.io/)
 
 This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
 
@@ -14,7 +14,7 @@ This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open sou
 - Highly configurable
 
 ## Batteries included, but not imposed
-Along with deploying the Sensu Server, API and clients, this role can deploy a full stack: [RabbitMQ](http://www.rabbitmq.com/), [redis](http://redis.io), and the [Uchiwa dashboard](https://uchiwa.io/#/).  
+Along with deploying the Sensu Server, API and clients, this role can deploy a full stack: [RabbitMQ](http://www.rabbitmq.com/), [redis](http://redis.io), and the [Uchiwa dashboard](https://uchiwa.io/#/).
 However, if you want to rely on other roles/management methods to deploy/manage these services, [it's nice and easy to integrate this role](http://ansible-sensu.readthedocs.io/en/latest/integration/).
 
 ## Documentation [![Documentation](https://readthedocs.org/projects/ansible-sensu/badge/?version=latest)](http://ansible-sensu.readthedocs.io/en/latest/)
@@ -22,19 +22,20 @@ However, if you want to rely on other roles/management methods to deploy/manage 
 
 ## Requirements
 This role requires:
-- Ansible 2.0
+- A supported version of Ansible, see [Ansible version support](#ansible-version-support) for details.
 - The `dynamic_data_store` variable to be set: see [Dynamic Data Store](http://ansible-sensu.readthedocs.io/en/latest/dynamic_data/)
 - If `sensu_include_plugins` is true (the default), the `static_data_store` variable needs to be set: see [Check Deployment](http://ansible-sensu.readthedocs.io/en/latest/dynamic_checks/)
 
 ## Supported Platforms
 ### Current Release
+#### Automatically tested via TravisCI
 
-- [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/) - only client side support is tested
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
+- [Debian - 9 (Stretch)](https://wiki.debian.org/DebianStretch)
+- [Ubuntu - 14.04 (Trusty Tahr)](http://releases.ubuntu.com/14.04/)
 - [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
-- [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
 ### In Testing
 
@@ -45,6 +46,11 @@ This role requires:
 
 - OpenBSD
 - NetBSD
+
+#### Supported manually (compatibility not always guaranteed)
+- [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
+- [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
+- [OpenBSD - 6.2](https://www.openbsd.org/62.html)
 
 ## Role Variables
 
@@ -62,8 +68,13 @@ Or, passing parameter values:
 ``` yaml
   - hosts: sensu_masters
     roles:
-	  - { role: cmacrae.sensu, sensu_master: true, sensu_include_dashboard: true  }
+      - { role: cmacrae.sensu, sensu_master: true, sensu_include_dashboard: true  }
 ```
+
+## Ansible version support
+All changes to this role are actively tested with the last two stable versions of Ansible to ensure compatibility. As such, this role
+only officially supports running with the last two stable releases of Ansible, which aligns with the [Ansible support model](http://docs.ansible.com/ansible/latest/release_and_maintenance.html#release-status).
+
 
 License
 -------
@@ -71,12 +82,11 @@ MIT
 
 Author Information
 ------------------
-Created by [Calum MacRae](http://cmacr.ae)
+Originally created by [Calum MacRae](http://cmacr.ae) and supported by the [Sensu Community Ansible Maintainers](https://github.com/sensu-plugins/community/#maintained-areas)
 
 ### Contributors
-Stephen Muth - ([@smuth4](https://github.com/smuth4))
+See the projects [Contributors page](https://github.com/sensu/sensu-ansible/graphs/contributors)
 
-Feel free to:  
-Contact me - [@calumacrae](https://twitter.com/calumacrae), [mailto:calum0macrae@gmail.com](calum0macrae@gmail.com)  
-[Raise an issue](https://github.com/cmacrae/ansible-sensu/issues)  
-[Contribute](https://github.com/cmacrae/ansible-sensu/pulls)  
+Feel free to:
+[Raise an issue](https://github.com/sensu/sensu-ansible/issues)
+[Contribute](https://github.com/sensu/sensu-ansible/pulls)

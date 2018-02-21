@@ -4,6 +4,18 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Ensure apt-transport-https is installed
+    apt:
+      name: apt-transport-https
+      state: present
+      cache_valid_time: 3600
+      update_cache: true
+
+  - name: Ensure that gnupg is installed for apt_key
+    apt:
+      name: gnupg
+      state: present
+
   - name: Ensure the Sensu APT repo GPG key is present
     apt_key:
       url: "{{ sensu_apt_key_url }}"
@@ -16,4 +28,6 @@
       update_cache: true
 
   - name: Ensure Sensu is installed
-    apt: name={{ sensu_package }} state={{ sensu_pkg_state }}
+    apt:
+      name: "{{ sensu_package }}"
+      state: "{{ sensu_pkg_state }}"
