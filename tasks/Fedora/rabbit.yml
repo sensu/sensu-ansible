@@ -1,6 +1,6 @@
 ---
-# tasks/CentOS/rabbit.yml: Deploy RabbitMQ
-# Specific to CentOS
+# tasks/Fedora/rabbit.yml: Deploy RabbitMQ
+# Specific to Fedora
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
@@ -23,7 +23,7 @@
       repo_gpgcheck: no
 
   - name: Ensure Erlang & RabbitMQ are installed
-    yum:
+    dnf:
       name:
         - erlang
         - rabbitmq-server

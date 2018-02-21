@@ -1,1 +1,23 @@
-../CentOS/redis.yml
+---
+# tasks/Fedora/redis.yml: Deploy redis
+# Specific to Fedora
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Install EPEL repo
+    dnf:
+      name: epel-release
+      state: present
+    when: enable_epel_repo
+
+  - name: Ensure redis is installed
+    dnf:
+      name: "{{ redis_pkg_name }}"
+      state: "{{ redis_pkg_state }}"
+      enablerepo: "{{ centos_repository }}"
+
+  - name: Ensure redis binds to accessible IP
+    lineinfile:
+      dest: /etc/redis.conf
+      regexp: '^bind'
+      line: 'bind 0.0.0.0'
