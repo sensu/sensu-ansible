@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- `vars/Fedora.yml`, `tasks/Fedora/main.yml`: Add Fedora as a client OS. Tested on Fedora 25, but should work on newer releases as well.
 
 ## [2.1.0]
 ### Fixed
