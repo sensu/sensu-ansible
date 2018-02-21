@@ -36,6 +36,11 @@ This role requires:
 - [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 
+### In Testing
+
+- Windows 2012
+- Windows 2016
+
 ### Future Releases
 
 - OpenBSD
