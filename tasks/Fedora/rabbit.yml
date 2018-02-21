@@ -8,7 +8,7 @@
     yum_repository:
       name: rabbitmq
       description: rabbitmq
-      baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.7.x/el/{{ansible_distribution_major_version}}"
+      baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.7.x/el/7"
       gpgcheck: yes
       gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
       repo_gpgcheck: no
@@ -17,7 +17,7 @@
     yum_repository:
       name: rabbitmq-erlang
       description: rabbitmq-erlang
-      baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/19/el/{{ansible_distribution_major_version}}"
+      baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/19/el/7"
       gpgcheck: yes
       gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
       repo_gpgcheck: no
@@ -29,7 +29,6 @@
         - rabbitmq-server
       state: present
       enablerepo: rabbitmq,rabbitmq-erlang
-      disablerepo: epel
 
 
 
