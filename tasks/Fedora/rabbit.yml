@@ -1,0 +1,35 @@
+---
+# tasks/CentOS/rabbit.yml: Deploy RabbitMQ
+# Specific to CentOS
+
+  - include_vars: "{{ ansible_distribution }}.yml"
+
+  - name: Add RabbitMQ's repo
+    yum_repository:
+      name: rabbitmq
+      description: rabbitmq
+      baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.7.x/el/{{ansible_distribution_major_version}}"
+      gpgcheck: yes
+      gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+      repo_gpgcheck: no
+
+  - name: Add RabbitMQ's Erlang repo
+    yum_repository:
+      name: rabbitmq-erlang
+      description: rabbitmq-erlang
+      baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/19/el/{{ansible_distribution_major_version}}"
+      gpgcheck: yes
+      gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+      repo_gpgcheck: no
+
+  - name: Ensure Erlang & RabbitMQ are installed
+    yum:
+      name:
+        - erlang
+        - rabbitmq-server
+      state: present
+      enablerepo: rabbitmq,rabbitmq-erlang
+      disablerepo: epel
+
+
+
