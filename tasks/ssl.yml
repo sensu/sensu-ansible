@@ -11,7 +11,7 @@
       group: "{{ sensu_group_name }}"
     when: sensu_ssl_manage_certs
 
-  - include: "{{ role_path }}/tasks/ssl_generate.yml"
+  - include_tasks: "{{ role_path }}/tasks/ssl_generate.yml"
     when: sensu_ssl_gen_certs
     static: false
 

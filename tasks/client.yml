@@ -12,7 +12,7 @@
       mode: "0640"
     notify: restart sensu-client service
 
-  - include: "{{ role_path }}/tasks/SmartOS/client.yml"
+  - include_tasks: "{{ role_path }}/tasks/SmartOS/client.yml"
     when: ansible_distribution == "SmartOS"
     static: false
 

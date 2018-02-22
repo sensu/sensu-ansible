@@ -3,46 +3,46 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
-  - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
+  - include_tasks: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
     tags: setup
     when: sensu_master
           or sensu_client
 
-  - include: "{{ role_path }}/tasks/redis.yml"
+  - include_tasks: "{{ role_path }}/tasks/redis.yml"
     tags: redis
     when: redis_server
           and sensu_deploy_redis_server
     static: false
 
-  - include: "{{ role_path }}/tasks/ssl.yml"
+  - include_tasks: "{{ role_path }}/tasks/ssl.yml"
     tags: ssl
 
-  - include: "{{ role_path }}/tasks/rabbit.yml"
+  - include_tasks: "{{ role_path }}/tasks/rabbit.yml"
     tags: rabbitmq
     when: rabbitmq_server
           and sensu_deploy_rabbitmq_server
     static: false
 
-  - include: "{{ role_path }}/tasks/common.yml"
+  - include_tasks: "{{ role_path }}/tasks/common.yml"
     tags: common
     when: sensu_master
           or sensu_client
 
-  - include: "{{ role_path }}/tasks/server.yml"
+  - include_tasks: "{{ role_path }}/tasks/server.yml"
     tags: server
     when: sensu_master
     static: false
 
-  - include: "{{ role_path }}/tasks/dashboard.yml"
+  - include_tasks: "{{ role_path }}/tasks/dashboard.yml"
     tags: dashboard
     when: sensu_include_dashboard
     static: false
 
-  - include: "{{ role_path }}/tasks/client.yml"
+  - include_tasks: "{{ role_path }}/tasks/client.yml"
     tags: client
     when: sensu_client
 
-  - include: "{{ role_path }}/tasks/plugins.yml"
+  - include_tasks: "{{ role_path }}/tasks/plugins.yml"
     tags: plugins
     when: sensu_include_plugins
     static: false
