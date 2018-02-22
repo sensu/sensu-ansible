@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2.2.0] - 2018-02-22
+### Added
+- Fedora support. Tested in the wild on Fedora 25 as a client and Fedora 27 on the test suite as both master and client. (@danragnar)
+    - `tasks/Fedora/redis.yml`, `tasks/Fedora/rabbit.yml`: Based on CentOS equivalents but with dnf module instead of yum
+    - `tasks/Fedora/main.yml`, `tasks/Fedora/dashboard.yml`: links to Centos files
+    - `vars/Fedora.yml`: vars for Fedora
+
+### Changed
+- `tasks/CentOS/dashboard.yml`, `tasks/CentOS/main.yml`: Use generic package module to support Fedora (@danragnar)
+
 ## [2.1.0]
 ### Fixed
 - `defaults/main.yaml`,`tasks/plugins.yml`: Fix Python 3.X compatability issue when checking the contents of sensu_remote_plugins. (@danragnar)
@@ -70,7 +80,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.1.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.2.0...HEAD
+[2.2.0]: https://github.com/sensu/sensu-ansible/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/sensu/sensu-ansible/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/sensu/sensu-ansible/compare/1.2.0...2.0.0
 [1.2.0]: https://github.com/sensu/sensu-ansible/compare/1.1.0...1.2.0
