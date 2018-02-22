@@ -55,12 +55,12 @@
     when: se_enterprise
 
   - name: Ensure Sensu is installed
-    yum:
+    package:
       name: "{{sensu_package }}-{{sensu_pkg_version}}"
       state: "{{ sensu_pkg_state }}"
 
   - name: Ensure Sensu Enterprise is installed
-    yum:
+    package:
       name={{ sensu_enterprise_package }}
       state={{ sensu_pkg_state }}
     when: se_enterprise
