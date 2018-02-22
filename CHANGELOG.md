@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Added
+- Fedora support. Tested in the wild on Fedora 25 as a client and Fedora 27 on the test suite as both master and client.
+    - `tasks/Fedora/redis.yml`, `tasks/Fedora/rabbit.yml`: Based on CentOS equivalents but with dnf module instead of yum
+    - `tasks/Fedora/main.yml`, `tasks/Fedora/dashboard.yml`: links to Centos files
+    - `vars/Fedora.yml`: vars for Fedora
+
+### Changed
+- `tasks/CentOS/dashboard.yml`, `tasks/CentOS/main.yml`: Use generic package module to support Fedora
 
 ## [2.1.0]
 ### Fixed
