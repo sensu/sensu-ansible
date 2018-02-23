@@ -37,20 +37,13 @@ This role requires:
 - [Ubuntu - 14.04 (Trusty Tahr)](http://releases.ubuntu.com/14.04/)
 - [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
 
-### In Testing
-
-- Windows 2012
-- Windows 2016
-
-### Future Releases
-
-- OpenBSD
-- NetBSD
-
 #### Supported manually (compatibility not always guaranteed)
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 - [OpenBSD - 6.2](https://www.openbsd.org/62.html)
+- [Windows - 2008](https://en.wikipedia.org/wiki/Windows_Server_2008)
+- [Windows - 2012](https://en.wikipedia.org/wiki/Windows_Server_2012)
+- [Windows - 2016](https://en.wikipedia.org/wiki/Windows_Server_2016)
 
 ## Role Variables
 
