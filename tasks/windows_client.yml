@@ -5,17 +5,15 @@
     #- include_vars: "{{ ansible_distribution }}.yml"
   - include_vars: "{{ ansible_os_family }}.yml"
 
-    # win_package throws an SSL error with a remote source. Using two steps here as a workaround
   - name: Download the Sensu installer msi into a local dir
     win_get_url:
       url: "{{ sensu_msi_download_path }}"
-      dest: "c:\\temp\\sensu-installer.msi"
-      skip_certificate_validation: true
+      dest: "{{ sensu_win_temp_path }}\\sensu-installer.msi"
 
     # If a version already exists on the target system, it should be made absent first.
   - name: Install sensu-client from local dir
     win_package:
-      path: "c:\\temp\\sensu-installer.msi"
+      path: "{{ sensu_win_temp_path }}\\sensu-installer.msi"
       product_id: "{{ sensu_msi_product_id }}"
       arguments: /qn
       force_extension: msi
@@ -92,8 +90,6 @@
     win_stat:
       path: "{{ sensu_win_base_path }}\\bin\\sensu-plugins-windows"
     register: file_info
-
-  - debug: var=file_info
 
   - name: Rename the plugins folder
     raw: "cmd /C 'cd c:/opt/sensu/bin & rename sensu-plugins-sensu-plugins-windows-{{ sensu_win_plugins_commit_id }} sensu-plugins-windows'"

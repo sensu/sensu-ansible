@@ -1,4 +1,4 @@
 sensu_client_config: "windows_client.json.j2"
 sensu_win_rabbitmq_config: "windows-sensu-rabbitmq.json.j2"
-sensu_msi_download_path: "http://repositories.sensuapp.org/msi/2012r2/sensu-1.2.1-2-x86.msi"
+sensu_msi_download_path: "https://repositories.sensuapp.org/msi/2012r2/sensu-1.2.1-2-x86.msi"
 sensu_msi_product_id: "{FF98EE93-B344-4548-ADD2-E2F1BD217A84}"

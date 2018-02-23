@@ -2,6 +2,7 @@
 
 # windows paths (forward slashes for JSON compatiblity)
 sensu_win_base_path: "c:/opt/sensu"
+sensu_win_temp_path: "c:\\temp" # Double backslash paths are required for win_* modules
 sensu_win_plugins_commit_id: "9c2fdfd"
 
 # Sensu enterprise credential
