@@ -16,11 +16,6 @@
     tags: setup
     when: windows_server
 
-  - include: "{{ role_path }}/tasks/pdagent.yml"
-    tags: pdagent
-    when: pdagent
-          and not windows_server
-
   - include: "{{ role_path }}/tasks/redis.yml"
     tags: redis
     when: redis_server

@@ -17,10 +17,6 @@ sensu_pkg_version:  # This 'none' value allows the var to be overriden in /vars 
 sensu_enterprise_package: sensu-enterprise
 sensu_enterprise_dashboard_package: sensu-enterprise-dashboard
 
-# Pagerduty agent urls
-pdagent_apt_key_url: "https://packages.pagerduty.com/GPG-KEY-pagerduty"
-pdagent_apt_repo_url: "deb     https://packages.pagerduty.com/pdagent deb/"
-
 # Sensu repo urls
 sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/$releasever/$basearch/"
 sensu_yum_key_url: "https://sensu.global.ssl.fastly.net/yum/pubkey.gpg"
