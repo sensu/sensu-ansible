@@ -80,6 +80,11 @@ sensu_remote_plugins: []
 sensu_transport: rabbitmq
 sensu_client_name: "{{ ansible_hostname }}"
 sensu_client_subscriptions: "{{ group_names }}"
+sensu_client_keepalive_handlers:
+  - default
+sensu_client_keepalive_threshold_warning: 120
+sensu_client_keepalive_threshold_critical: 180
+sensu_client_safe_mode: false
 sensu_deploy_rabbitmq_config: true
 sensu_deploy_redis_config: true
 sensu_deploy_transport_config: true
