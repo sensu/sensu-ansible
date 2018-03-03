@@ -64,6 +64,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_deploy_transport_config`    | `true`    | Determines whether or not to deploy transport config for sensu |
 
 ### Sensu/RabbitMQ SSL certificate properties
+| Name               | Default Value | Description                  |
+|--------------------|---------------|------------------------------|
 | `sensu_ssl_gen_certs` | `true` | Determines when this role generates its own SSL certs |
 | `sensu_ssl_manage_certs` | `true` | Determines when this role manages deployment of the certs |
 | `sensu_master_config_path` | `"{{ hostvars[groups['sensu_masters'][0]]['sensu_config_path'] }}"` | The configuration path of sensu on the first master host |
