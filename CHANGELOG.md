@@ -5,6 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Fixed
+- Issue that prevented older OS such as CentOS 5 from installing the Sensu RPM package as they are unsigned (@smbambling)
+- Security issue with redis.json being world readable, as it can contain sensitive information (@smbambling)
+- Issue with conf.d that limited access and prevent automated tests from passing (@smbambling)
+
+### Added
+- Support for keepalive attributes: handlers and thresholds (warning/critical) in client.json (@smbambling)
+- Support for managing safe_mode in client.json (@smbambling)
 
 ## [2.2.0] - 2018-02-22
 ### Added
