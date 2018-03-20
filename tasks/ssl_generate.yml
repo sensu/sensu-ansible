@@ -12,6 +12,10 @@
       group: "{{ sensu_group_name }}"
     when: sensu_master
 
+  - name: Install urllib3 to ensure we can validate the SAN cert
+    package:
+      name: python-urllib3
+
   - block:
 
     - name: Untar the ssl_certs tarball from sensuapp.org
