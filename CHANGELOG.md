@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+
+## [2.3.0] - 2018-05-04
 ### Fixed
 - Issue that prevented older OS such as CentOS 5 from installing the Sensu RPM package as they are unsigned (@smbambling)
 - Security issue with redis.json being world readable, as it can contain sensitive information (@smbambling)
@@ -88,7 +91,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.3.0...HEAD
+[2.3.0]: https://github.com/sensu/sensu-ansible/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/sensu/sensu-ansible/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/sensu/sensu-ansible/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/sensu/sensu-ansible/compare/1.2.0...2.0.0
