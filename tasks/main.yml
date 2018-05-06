@@ -1,5 +1,5 @@
 ---
-# tasks/main.yml: "Master" playbook for the sensu.sensu-ansible role
+# tasks/main.yml: "Master" playbook for the sensu.sensu role
 
   - include_vars: "{{ ansible_distribution }}.yml"
 

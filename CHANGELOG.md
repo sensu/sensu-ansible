@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Changed
+- Ansible role is officially mirrored to the `sensu.sensu` namespace (@jaredledvina)
 
 ## [2.4.0] - 2018-05-06
 ### Fixed:

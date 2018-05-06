@@ -1,5 +1,5 @@
 ---
-# tasks/SmartOS/main.yml: "Set-up" playbook for sensu.sensu-ansible role
+# tasks/SmartOS/main.yml: "Set-up" playbook for sensu.sensu role
 # This takes care of base prerequisites for Joyent SmartOS
 
   - include_vars: "{{ ansible_distribution }}.yml"
