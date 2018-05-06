@@ -1,5 +1,10 @@
 ---
 - name: Converge
   hosts: all
+  pre_tasks:
+     - add_host:
+         name: "{{ ansible_hostname }}"
+         groups: sensu_masters
+       changed_when: false
   roles:
     - role: sensu-ansible
