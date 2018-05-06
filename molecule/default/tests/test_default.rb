@@ -43,4 +43,3 @@ describe port(3000) do
   its('protocols') { should include 'tcp' }
   its('addresses') { should include '::' }
 end
-
