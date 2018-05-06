@@ -80,6 +80,11 @@ sensu_remote_plugins: []
 sensu_transport: rabbitmq
 sensu_client_name: "{{ ansible_hostname }}"
 sensu_client_subscriptions: "{{ group_names }}"
+sensu_client_keepalive_handlers:
+  - default
+sensu_client_keepalive_threshold_warning: 120
+sensu_client_keepalive_threshold_critical: 180
+sensu_client_safe_mode: false
 sensu_deploy_rabbitmq_config: true
 sensu_deploy_redis_config: true
 sensu_deploy_transport_config: true
@@ -95,7 +100,6 @@ sensu_ssl_client_key: "{{ sensu_ssl_tool_base_path }}/client/key.pem"
 sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
 sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
 sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
-sensu_ssl_tool_version: "1.2"
 dynamic_data_store: "{{ playbook_dir }}/data/store"
 static_data_store: "{{ playbook_dir}}/data/static"
 

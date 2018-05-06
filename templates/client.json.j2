@@ -2,6 +2,14 @@
   "client": {
     "name": "{{ sensu_client_name }}",
     "address": "{{ ansible_default_ipv4['address'] }}",
-    "subscriptions": {{ sensu_client_subscriptions | to_nice_json }}
+    "subscriptions": {{ sensu_client_subscriptions | to_nice_json(indent=6) }},
+    "keepalive": {
+      "handlers": {{ sensu_client_keepalive_handlers | to_nice_json(indent=8) }},
+      "thresholds": {
+        "warning": {{ sensu_client_keepalive_threshold_warning }},
+        "critical": {{ sensu_client_keepalive_threshold_critical }}
+        }
+    },
+    "safe_mode": {{ sensu_client_safe_mode | bool | lower }}
   }
 }
