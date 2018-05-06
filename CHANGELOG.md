@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [2.4.0] - 2018-05-06
+### Fixed:
+- Automated SSL key & cert generation fails on systems with Python 2.6 or older (@jaredledvina)
+
+### Changed
+- Port over the latest ssl_tools code to more native Ansible `command` instructions for greater flexibility (@jaredledvina)
+
+## [2.3.0] - 2018-05-04
+### Fixed
+- Issue that prevented older OS such as CentOS 5 from installing the Sensu RPM package as they are unsigned (@smbambling)
+- Security issue with redis.json being world readable, as it can contain sensitive information (@smbambling)
+- Issue with conf.d that limited access and prevent automated tests from passing (@smbambling)
+
+### Added
+- Support for keepalive attributes: handlers and thresholds (warning/critical) in client.json (@smbambling)
+- Support for managing safe_mode in client.json (@smbambling)
+
 ## [2.2.0] - 2018-02-22
 ### Added
 - Fedora support. Tested in the wild on Fedora 25 as a client and Fedora 27 on the test suite as both master and client. (@danragnar)
@@ -80,7 +97,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.2.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.4.0...HEAD
+[2.4.0]: https://github.com/sensu/sensu-ansible/compare/2.3.0...2.4.0
+[2.3.0]: https://github.com/sensu/sensu-ansible/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/sensu/sensu-ansible/compare/2.1.0...2.2.0
 [2.1.0]: https://github.com/sensu/sensu-ansible/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/sensu/sensu-ansible/compare/1.2.0...2.0.0
