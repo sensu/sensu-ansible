@@ -102,7 +102,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
+| `sensu_package`      | sensu       | The name of the Sensu package. |
 
 ## Debian
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
@@ -116,7 +116,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
+| `sensu_package`      | sensu       | The name of the Sensu package. |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
@@ -146,8 +146,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
-| `sensu_pkg_version` | `0.29.0_1` | Version of Sensu to download and install |
-| `sensu_pkg_download_url` | `https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/sensu/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
+| `sensu_pkg_download_url` | `https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/sensu/{{ sensu_package }}.txz` | URL to download Sensu from |
 | `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)

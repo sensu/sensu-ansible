@@ -4,11 +4,6 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Set sensu_pkg_version {{ ansible_distribution }} override
-    set_fact:
-      sensu_pkg_version: "{{ _sensu_pkg_version }}"
-    when: sensu_pkg_version is none
-
   - name: Ensure the Sensu group is present
     group: name={{ sensu_group_name }} state=present
 
@@ -43,5 +38,5 @@
 
   - name: Install sensu
     pkgng:
-      name: "sensu{% if sensu_pkg_version %}-{{ sensu_pkg_version }}{% endif %}"
+      name: "{{ sensu_package }}"
       state: present
