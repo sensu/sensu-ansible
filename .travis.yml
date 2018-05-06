@@ -10,6 +10,7 @@ addons:
 install:
   - pip install pipenv
   - pipenv install --two --dev
+  - gem install rubocop
 script:
   - pipenv run molecule test --scenario-name default --driver-name docker --destroy always
 
