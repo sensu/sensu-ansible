@@ -54,11 +54,11 @@
 
   - name: Ensure Sensu is installed
     package:
-      name: "{{sensu_package }}"
+      name: "{{ sensu_package }}"
       state: "{{ sensu_pkg_state }}"
 
   - name: Ensure Sensu Enterprise is installed
     package:
-      name: {{ sensu_enterprise_package }}
-      state: {{ sensu_pkg_state }}
+      name: "{{ sensu_enterprise_package }}"
+      state: "{{ sensu_pkg_state }}"
     when: se_enterprise
