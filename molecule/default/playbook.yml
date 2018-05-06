@@ -2,9 +2,14 @@
 - name: Converge
   hosts: all
   pre_tasks:
-     - add_host:
-         name: "{{ ansible_hostname }}"
-         groups: sensu_masters
-       changed_when: false
+    - name: All ansible hostname to sensu_masters group
+      add_host:
+        name: "{{ ansible_hostname }}"
+        groups: sensu_masters
+      changed_when: false
+
+    - name: Ensure container hostnames are correct
+      hostname:
+        name: "{{ inventory_hostname }}"
   roles:
     - role: sensu-ansible
