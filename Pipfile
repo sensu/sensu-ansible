@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+molecule = "==2.13.1"
+
+[dev-packages]
+docker-py = "*"
+
+[requires]
+python_version = "2.7"
