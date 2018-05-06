@@ -1,5 +1,5 @@
 ---
-# tasks/main.yml: "Master" playbook for the cmacrae.sensu role
+# tasks/main.yml: "Master" playbook for the sensu.sensu-ansible role
 
   - include_vars: "{{ ansible_distribution }}.yml"
 

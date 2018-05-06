@@ -1,4 +1,4 @@
-# Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-cmacrae.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/cmacrae/sensu/) [![Build Status](https://travis-ci.org/sensu/sensu-ansible.svg?branch=master)](https://travis-ci.org/sensu/sensu-ansible)
+# Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-sensu.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/sensu/sensu/) [![Build Status](https://travis-ci.org/sensu/sensu-ansible.svg?branch=master)](https://travis-ci.org/sensu/sensu-ansible)
 
 [![Join the chat at https://slack.sensu.io/](https://slack.sensu.io/badge.svg)](https://slack.sensu.io/)
 
@@ -51,14 +51,14 @@ See [Role Variables](http://ansible-sensu.readthedocs.io/en/latest/role_variable
 ``` yaml
   - hosts: all
     roles:
-      - role: cmacrae.sensu
+      - role: sensu.sensu
 ```
 Or, passing parameter values:
 
 ``` yaml
   - hosts: sensu_masters
     roles:
-      - { role: cmacrae.sensu, sensu_master: true, sensu_include_dashboard: true  }
+      - { role: sensu.sensu, sensu_master: true, sensu_include_dashboard: true  }
 ```
 
 ## Ansible version support
