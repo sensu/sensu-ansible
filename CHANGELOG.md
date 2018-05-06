@@ -5,7 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Fixed:
+- Automated SSL key & cert generation fails on systems with Python 2.6 or older (@jaredledvina)
 
+### Changed
+- Port over the latest ssl_tools code to more native Ansible `command` instructions for greater flexibility (@jaredledvina)
 
 ## [2.3.0] - 2018-05-04
 ### Fixed
