@@ -1,6 +1,6 @@
 site_name: Ansible Sensu
-site_url: https://galaxy.ansible.com/cmacrae/sensu/
-repo_url: https://github.com/cmacrae/ansible-sensu/
+site_url: https://galaxy.ansible.com/sensu/sensu
+repo_url: https://github.com/sensu/sensu-ansible
 site_description: An Ansible role to deploy a fully dynamic Sensu stack!
 site_author: Calum MacRae
 

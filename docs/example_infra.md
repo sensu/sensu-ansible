@@ -1,6 +1,6 @@
 # Example Infrastructure Layout
 
-This document showcases an example layout for use with the Sensu role within your infrastructure.  
+This document showcases an example layout for use with the Sensu role within your infrastructure.
 It ties in with use of inventory grouping and variables.
 
 ## Inventory & Variables
@@ -46,7 +46,7 @@ Here we have some nodes grouped into `rabbitmq_servers`, `redis_servers`, `sensu
 
 Since we only want one Sensu "master", the default to act as a master in this role is set to `false` - defined by `sensu_master`.
 
-There are several ways to approach setting `sensu_master` to `true` for the node you'd like to act as the Sensu "master".  
+There are several ways to approach setting `sensu_master` to `true` for the node you'd like to act as the Sensu "master".
 Personally, I do this by setting the following in `group_vars/sensu_masters.yml`:
 ``` yaml
 sensu_master: true
@@ -63,7 +63,7 @@ The above code could also be set straight in the node's `host_vars` file: `host_
 	  sensu_include_dashboard: true
 
     roles:
-	  - cmacrae.sensu
+	  - sensu.sensu
 ```
 
 ### RabbitMQ/redis variables
