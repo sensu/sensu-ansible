@@ -62,6 +62,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_deploy_rabbitmq_config` | `true`    | Determines whether or not to deploy RabbitMQ config for sensu |
 | `sensu_deploy_redis_config`    | `true`    | Determines whether or not to deploy redis config for sensu |
 | `sensu_deploy_transport_config`    | `true`    | Determines whether or not to deploy transport config for sensu |
+| `sensu_package` | `sensu` | The package to install for Sensu. If you would like to pin versions, for example, append `-1.3.3` to pin the package to version 1.3.3 |
+| `sensu_pkg_state` | `present` | The state to ensure Sensu's package at. Change to `latest` and set `sensu_package` to `sensu` to always ensure the latest Sensu version is installed|
 
 ### Sensu/RabbitMQ SSL certificate properties
 | Name               | Default Value | Description                  |
@@ -102,7 +104,6 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `sensu_package`      | sensu       | The name of the Sensu package. |
 
 ## Debian
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
@@ -116,7 +117,6 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `sensu_package`      | sensu       | The name of the Sensu package. |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
