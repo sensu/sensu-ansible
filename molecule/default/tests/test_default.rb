@@ -1,4 +1,5 @@
-# Verify that redis, rabbitmq-server, sensu-{api,client}, and Uchiwa are all listening as expected
+# Verify that redis, rabbitmq-server, sensu-{api,client}, and Uchiwa
+# are all listening as expected
 
 # Redis
 describe port(6379) do
