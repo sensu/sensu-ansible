@@ -4,8 +4,9 @@
   pre_tasks:
     - name: All ansible hostname to sensu_masters group
       add_host:
-        name: "{{ ansible_hostname }}"
+        name: "{{ item }}"
         groups: sensu_masters
+      with_items: "{{ ansible_play_hosts }}"
       changed_when: false
 
     - name: Ensure container hostnames are correct
