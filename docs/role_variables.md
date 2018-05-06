@@ -146,8 +146,6 @@ _Note: The above options are intended to provide users with flexibility. This al
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
-| `sensu_pkg_download_url` | `https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/sensu/{{ sensu_package }}.txz` | URL to download Sensu from |
-| `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
 | Name               | Default Value | Description                  |

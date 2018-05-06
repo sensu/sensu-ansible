@@ -4,7 +4,6 @@
 
 # Sensu config/package properties
 sensu_config_path: /usr/local/etc/sensu
-sensu_package: sensu-latest
 
 # RabbitMQ options
 rabbitmq_config_path: /usr/local/etc/rabbitmq
