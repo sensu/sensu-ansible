@@ -4,29 +4,111 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Ensure OpenSSL is installed
+    package:
+      name: openssl
+      state: installed
+
   - name: Ensure SSL generation directory exists
     file:
-      dest: "{{ sensu_config_path }}/ssl_generation"
+      dest: "{{ sensu_config_path }}/{{ item }}"
       state: directory
+      owner: "{{ sensu_user_name }}"
+      group: "{{ sensu_group_name }}"
+    when: sensu_master
+    with_items:
+      - ssl_generation
+      - ssl_generation/sensu_ssl_tool
+      - ssl_generation/sensu_ssl_tool/client
+      - ssl_generation/sensu_ssl_tool/server
+      - ssl_generation/sensu_ssl_tool/sensu_ca
+      - ssl_generation/sensu_ssl_tool/sensu_ca/private
+      - ssl_generation/sensu_ssl_tool/sensu_ca/certs
+
+  - name: Ensure OpenSSL configuration is in place
+    template:
+      src: openssl.cnf.j2
+      dest: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/openssl.cnf"
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     when: sensu_master
 
   - block:
-
-    - name: Untar the ssl_certs tarball from sensuapp.org
-      unarchive:
+    - name: Ensure the Sensu CA serial configuration
+      shell: 'echo 01 > sensu_ca/serial'
       args:
-        src: http://sensuapp.org/docs/{{ sensu_ssl_tool_version }}/files/sensu_ssl_tool.tar
-        dest: "{{ sensu_config_path }}/ssl_generation/"
-        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
-        copy: no
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/serial"
+      register: sensu_ca_new_serial
 
-    - name: Generate SSL certs
-      command: "{{ __bash_path }} {{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/ssl_certs.sh generate"
+    - name: Ensure sensu_ca/index.txt exists
+      file:
+        dest: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/index.txt"
+        state: touch
+      when: sensu_ca_new_serial is changed
+
+      #TODO: The following mirrors the commands used in sensu_ssl_tool/ssl_certs.sh
+      # from the 1.3 version of the script. Ideally, this moves into the native openssl_* modules.
+      # See https://docs.sensu.io/sensu-core/1.3/reference/ssl/#reference-documentation for limitations and further instructions
+    - name: Generate Sensu CA certificate
+      command: openssl req -x509 -config openssl.cnf -newkey rsa:2048 -days 1825 -out cacert.pem -outform PEM -subj /CN=SensuCA/ -nodes
       args:
-        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool"
-        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.pem"
+
+    - name: Generate CA cert
+      command: openssl x509 -in cacert.pem -out cacert.cer -outform DER
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca/cacert.cer"
+
+    - name: Generate server keys
+      command: openssl genrsa -out key.pem 2048
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/key.pem"
+
+    - name: Generate server certificate signing request
+      command: openssl req -new -key key.pem -out req.pem -outform PEM -subj /CN=sensu/O=server/ -nodes
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/req.pem"
+
+    - name: Sign the server certificate
+      command: openssl ca -config openssl.cnf -in ../server/req.pem -out ../server/cert.pem -notext -batch -extensions server_ca_extensions
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/cert.pem"
+
+    - name: Convert server certificate and key to PKCS12 formart
+      command: openssl pkcs12 -export -out keycert.p12 -in cert.pem -inkey key.pem -passout pass:secret
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/server/keycert.p12"
+
+    - name: Generate client key
+      command: openssl genrsa -out key.pem 2048
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/key.pem"
+
+    - name: Generate client certificate signing request
+      command: openssl req -new -key key.pem -out req.pem -outform PEM -subj /CN=sensu/O=client/ -nodes
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/req.pem"
+
+    - name: Sign the client certificate
+      command: openssl ca -config openssl.cnf -in ../client/req.pem -out ../client/cert.pem -notext -batch -extensions client_ca_extensions
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/sensu_ca"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/cert.pem"
+
+    - name: Convert client key/certificate to PKCS12 format
+      command: openssl pkcs12 -export -out keycert.p12 -in cert.pem -inkey key.pem -passout pass:secret
+      args:
+        chdir: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client"
+        creates: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/client/keycert.p12"
 
     when: sensu_master|bool
     become: true
