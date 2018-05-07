@@ -27,6 +27,12 @@
       when: ansible_pkg_mgr == 'yum'
 
     - name: Install Inspec
+      dnf:
+        name: "{{ inspec_download.dest }}"
+        state: latest
+      when: ansible_pkg_mgr == 'dnf'
+
+    - name: Install Inspec
       apt:
         deb: "{{ inspec_download.dest }}"
         state: present
