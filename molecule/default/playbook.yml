@@ -12,5 +12,6 @@
     - name: Ensure container hostnames are correct
       hostname:
         name: "{{ inventory_hostname }}"
+      when: inventory_hostname != 'amazonlinux-1'
   roles:
     - role: sensu-ansible
