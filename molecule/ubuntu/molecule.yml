@@ -1,0 +1,68 @@
+---
+scenario:
+  name: ubuntu
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: ubuntu-14.04
+    image: dokken/ubuntu-14.04
+    command: /sbin/init
+    capabilities:
+      - SYS_ADMIN
+  - name: ubuntu-16.04
+    image: dokken/ubuntu-16.04
+    command: /bin/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu-18.04
+    image: dokken/ubuntu-18.04
+    command: /bin/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    converge: ../default/playbook.yml
+    verify: ../default/verify.yml
+  lint:
+    name: ansible-lint
+    enabled: False
+  inventory:
+    group_vars:
+      all:
+        sensu_master: true
+        sensu_include_dashboard: true
+        rabbitmq_server: true
+        redis_server: true
+        rabbitmq_host: "{{ ansible_hostname }}"
+        redis_host: "{{ ansible_hostname }}"
+        sensu_api_host: "{{ ansible_hostname }}"
+        ansible_default_ipv4:
+          address: 127.0.0.1
+    host_vars:
+      ubuntu-14.04:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/14.04/inspec_2.1.68-1_amd64.deb
+        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+      ubuntu-16.04:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/16.04/inspec_2.1.68-1_amd64.deb
+        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+      ubuntu-18.04:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/18.04/inspec_2.1.68-1_amd64.deb
+        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+verifier:
+  name: inspec
+  directory: ../default/tests/
+  lint:
+    name: rubocop
+    enabled: true

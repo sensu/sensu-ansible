@@ -1,0 +1,70 @@
+---
+scenario:
+  name: fedora
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: fedora-26
+    image: dokken/fedora-26
+    command: /usr/lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora-27
+    image: dokken/fedora-27
+    command: /usr/lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: fedora-28
+    image: dokken/fedora-latest
+    command: /usr/lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    converge: ../default/playbook.yml
+    verify: ../default/verify.yml
+  lint:
+    name: ansible-lint
+    enabled: False
+  inventory:
+    group_vars:
+      all:
+        sensu_master: true
+        sensu_include_dashboard: true
+        rabbitmq_server: true
+        redis_server: true
+        rabbitmq_host: "{{ ansible_hostname }}"
+        redis_host: "{{ ansible_hostname }}"
+        sensu_api_host: "{{ ansible_hostname }}"
+        ansible_default_ipv4:
+          address: 127.0.0.1
+    host_vars:
+      fedora-26:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/7/inspec-2.1.68-1.el7.x86_64.rpm
+        inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
+      fedora-27:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/7/inspec-2.1.68-1.el7.x86_64.rpm
+        inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
+      fedora-27:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/7/inspec-2.1.68-1.el7.x86_64.rpm
+        inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
+verifier:
+  name: inspec
+  directory: ../default/tests/
+  lint:
+    name: rubocop
+    enabled: true

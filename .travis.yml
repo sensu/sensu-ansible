@@ -2,6 +2,12 @@
 group: trusty
 language: python
 python: "2.7"
+env:
+  - SCENARIO=debian
+  - SCENARIO=ubuntu
+  - SCENARIO=centos
+  - SCENARIO=fedora
+  - SCENARIO=amazonlinux
 services: docker
 addons:
   apt:
@@ -12,7 +18,7 @@ install:
   - pipenv install --two --dev
   - gem install rubocop
 script:
-  - pipenv run molecule test --scenario-name default --driver-name docker --destroy always
+  - pipenv run molecule test --scenario-name $SCENARIO --driver-name docker --destroy always
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
