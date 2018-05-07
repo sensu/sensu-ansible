@@ -59,7 +59,7 @@ provisioner:
       fedora-27:
         inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/7/inspec-2.1.68-1.el7.x86_64.rpm
         inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
-      fedora-27:
+      fedora-28:
         inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/7/inspec-2.1.68-1.el7.x86_64.rpm
         inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
 verifier:
