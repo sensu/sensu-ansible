@@ -58,6 +58,7 @@ provisioner:
         inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/16.04/inspec_2.1.68-1_amd64.deb
         inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
       ubuntu-18.04:
+        sensu_apt_repo_url: "deb https://repositories.sensuapp.org/apt xenial main"
         inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/18.04/inspec_2.1.68-1_amd64.deb
         inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
 verifier:
