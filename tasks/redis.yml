@@ -6,5 +6,6 @@
   - name: Ensure redis is running
     service:
       name: "{{ redis_service_name }}"
+      pattern: /usr/bin/redis-server
       state: started
       enabled: true
