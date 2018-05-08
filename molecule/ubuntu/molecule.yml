@@ -31,6 +31,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
+    prepare: ../default/prepare.yml
     create: ../default/create.yml
     destroy: ../default/destroy.yml
     converge: ../default/playbook.yml
