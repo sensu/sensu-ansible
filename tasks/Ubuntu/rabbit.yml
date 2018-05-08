@@ -11,7 +11,7 @@
 
   - name: Ensure the RabbitMQ APT repo is present
     apt_repository:
-      repo: "{{ sensu_rabbitmq_repo }}"
+      repo: "{{ sensu_rabbitmq_repo.ansible_distribution_version | default(sensu_rabbitmq_repo.default) }}"
       filename: rabbitmq
       state: present
       update_cache: true
@@ -23,7 +23,7 @@
 
   - name: Ensure the Erlang APT repo is present
     apt_repository:
-      repo: "{{ sensu_rabbitmq_erlang_repo }}"
+      repo: "{{ sensu_rabbitmq_erlang_repo.ansible_distribution_version | default(sensu_rabbitmq_erlang_repo.default)  }}"
       filename: erlang
       state: present
       update_cache: true

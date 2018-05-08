@@ -6,5 +6,9 @@
 redis_pkg_name: redis-server
 redis_service_name: redis-server
 
-sensu_rabbitmq_repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
-sensu_rabbitmq_erlang_repo: "deb https://packages.erlang-solutions.com/ubuntu {{ ansible_distribution_release }} contrib"
+sensu_rabbitmq_repo:
+  default: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
+  18.04: "deb https://dl.bintray.com/rabbitmq/debian xenial main"
+sensu_rabbitmq_erlang_repo:
+  default: "deb https://packages.erlang-solutions.com/ubuntu {{ ansible_distribution_release }} contrib"
+  18.04: "deb https://packages.erlang-solutions.com/ubuntu xenial contrib"
