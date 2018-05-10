@@ -12,6 +12,15 @@
     inspec_bin: /opt/inspec/bin/inspec
     inspec_test_directory: "/tmp/molecule/inspec"
   tasks:
+    - name: Install system dependencies for Inspec
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - lsof
+        - iproute
+        - net-tools
+
     - name: Download Inspec
       get_url:
         url: "{{ inspec_download_url }}"
