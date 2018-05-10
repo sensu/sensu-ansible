@@ -9,6 +9,15 @@
       name: "{{ redis_pkg_name }}"
       state: "{{ redis_pkg_state }}"
       update_cache: true
+    register: sensu_ubuntu_redis_install
+
+    # BUG: On Ubuntu 14.04, when first installed, redis, will be started
+    # however, the /var/run/redis/redis-server.pid file gets lost during the restart
+    # causing the process to be orphaned from the init system.
+    # We manually stop it right after install to account for this.
+  - name: Stop redis manually
+    shell: kill $(pgrep redis-server)
+    when: sensu_ubuntu_redis_install is changed
 
   - name: Ensure redis binds to accessible IP
     lineinfile:
