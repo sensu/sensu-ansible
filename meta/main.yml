@@ -12,7 +12,6 @@ galaxy_info:
     versions:
       - trusty
       - vivid
-      - bionic
   - name: Debian
     versions:
       - jessie
