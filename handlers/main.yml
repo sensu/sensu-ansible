@@ -8,6 +8,7 @@
   - name: restart redis service
     service:
       name: "{{ redis_service_name }}"
+      pattern: /usr/bin/redis-server
       state: restarted
 
   - name: restart uchiwa service
