@@ -2,7 +2,7 @@
 # are all listening as expected
 
 # Redis
-#TODO Ubuntu 14.04 - Redis is bound to 127.0.0.1
+# TODO Ubuntu 14.04 - Redis is bound to 127.0.0.1
 describe port(6379) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
@@ -24,7 +24,7 @@ describe port(4567) do
 end
 
 # Sensu Client TCP/UDP Socket
-#TODO Amazon Linux 2 - Client does NOT bund to it's socket ports
+# TODO Amazon Linux 2 - Client does NOT bund to it's socket ports
 describe port(3030) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
