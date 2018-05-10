@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Deprecated `sensu_pkg_version` for Redhat, Fedora, CentOS, and FreeBSD. To pin going forward across all operating systems, simply append the Sensu version to `sensu_package`. For example, `sensu_package: sensu-1.3.3` will ensure that only Sensu 1.3.3 is ever installed. (@jaredledvina)
 - Ensure that on first install we install the latest stable Sensu release (@jaredledvina)
 - Document `sensu_pkg_state`. If you'd like to ensure the latest stable release is always installed, simply leave `sensu_package` to the default `sensu` and change `sensu_pkg_state` to `latest`. (@jaredledvina)
+- Switched entirely to [molecule](https://github.com/metacloud/molecule) for integration testing (@jaredledvina)
 
 ## [2.4.0] - 2018-05-06
 ### Fixed:
