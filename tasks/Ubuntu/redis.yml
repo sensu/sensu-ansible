@@ -17,7 +17,9 @@
     # We manually stop it right after install to account for this.
   - name: Stop redis manually
     shell: kill $(pgrep redis-server)
-    when: sensu_ubuntu_redis_install is changed
+    when:
+      - sensu_ubuntu_redis_install is changed
+      - ansible_distribution_version == '14.04'
 
   - name: Ensure redis binds to accessible IP
     lineinfile:
