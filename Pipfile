@@ -7,7 +7,7 @@ name = "pypi"
 
 [dev-packages]
 docker-py = "*"
-molecule = "==2.13.1"
+molecule = "==2.15"
 
 [requires]
 python_version = "2.7"
