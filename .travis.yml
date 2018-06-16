@@ -1,21 +1,24 @@
 ---
-group: travis_lts
-services: docker
+group: trusty
+language: python
+python: "2.7"
 env:
-  - distro: centos7
-  - distro: ubuntu1404
-  - distro: ubuntu1604
-  - distro: debian8
-  - distro: debian9
-  - distro: fedora27
-before_install:
-  - 'docker pull geerlingguy/docker-${distro}-ansible:latest'
+  - SCENARIO=debian
+  - SCENARIO=ubuntu
+  - SCENARIO=centos
+  - SCENARIO=fedora
+  - SCENARIO=amazonlinux
+services: docker
+addons:
+  apt:
+    packages:
+      - docker-ce
+install:
+  - pip install pipenv
+  - pipenv install --two --dev
+  - gem install rubocop
 script:
-  - export container_id=$(date +%s)
-  - export cleanup=false
-  - wget -O ${PWD}/tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/
-  - chmod +x ${PWD}/tests/test.sh
-  - ${PWD}/tests/test.sh
+  - pipenv run molecule test --scenario-name $SCENARIO --driver-name docker --destroy always
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

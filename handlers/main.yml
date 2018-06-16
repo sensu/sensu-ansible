@@ -1,31 +1,48 @@
 ---
 
   - name: restart rabbitmq service
-    service: name={{ rabbitmq_service_name }} state=restarted
+    service:
+      name: "{{ rabbitmq_service_name }}"
+      state: restarted
 
   - name: restart redis service
-    service: name={{ redis_service_name }} state=restarted
+    service:
+      name: "{{ redis_service_name }}"
+      pattern: /usr/bin/redis-server
+      state: restarted
 
   - name: restart uchiwa service
-    service: name={{ uchiwa_service_name }} state=restarted
+    service:
+      name: "{{ uchiwa_service_name }}"
+      state: restarted
 
   - name: restart sensu-server service
-    service: name={{ sensu_server_service_name }} state=restarted
+    service:
+      name: "{{ sensu_server_service_name }}"
+      state: restarted
     when: sensu_master and not se_enterprise
 
   - name: restart sensu-api service
-    service: name={{ sensu_api_service_name }} state=restarted
+    service:
+      name: "{{ sensu_api_service_name }}"
+      state: restarted
     when: sensu_master and not se_enterprise
 
   - name: restart sensu-client service
-    service: name={{ sensu_client_service_name }} state=restarted
+    service:
+      name: "{{ sensu_client_service_name }}"
+      state: restarted
 
   - name: restart sensu-enterprise service
-    service: name={{ sensu_enterprise_service_name }} state=restarted
+    service:
+      name: "{{ sensu_enterprise_service_name }}"
+      state: restarted
     when: se_enterprise and sensu_master
 
   - name: restart sensu-enterprise-dashboard service
-    service: name={{ sensu_enterprise_dashboard_service_name }} state=restarted
+    service:
+      name: "{{ sensu_enterprise_dashboard_service_name }}"
+      state: restarted
     when: se_enterprise and sensu_master
 
   # Joyent SmartOS specific handlers

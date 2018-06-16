@@ -1,0 +1,60 @@
+---
+scenario:
+  name: debian
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+  enabled: False
+platforms:
+  - name: debian-8
+    image: dokken/debian-8
+    command: /lib/systemd/systemd
+    privileged: yes
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: debian-9
+    image: dokken/debian-9
+    command: /lib/systemd/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  playbooks:
+    prepare: ../default/prepare.yml
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    converge: ../default/playbook.yml
+    verify: ../default/verify.yml
+  lint:
+    name: ansible-lint
+    enabled: False
+  inventory:
+    group_vars:
+      all:
+        sensu_master: true
+        sensu_include_dashboard: true
+        rabbitmq_server: true
+        redis_server: true
+        rabbitmq_host: "{{ ansible_hostname }}"
+        redis_host: "{{ ansible_hostname }}"
+        sensu_api_host: "{{ ansible_hostname }}"
+        ansible_default_ipv4:
+          address: 127.0.0.1
+    host_vars:
+      debian-8:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/16.04/inspec_2.1.68-1_amd64.deb
+        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+      debian-9:
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/16.04/inspec_2.1.68-1_amd64.deb
+        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+verifier:
+  name: inspec
+  directory: ../default/
+  lint:
+    name: rubocop
+    enabled: true

@@ -1,0 +1,17 @@
+---
+- name: Converge
+  hosts: all
+  pre_tasks:
+    - name: All ansible hostname to sensu_masters group
+      add_host:
+        name: "{{ item }}"
+        groups: sensu_masters
+      with_items: "{{ ansible_play_hosts }}"
+      changed_when: false
+
+    - name: Ensure container hostnames are correct
+      hostname:
+        name: "{{ inventory_hostname }}"
+      when: inventory_hostname != 'amazonlinux-1'
+  roles:
+    - role: sensu-ansible

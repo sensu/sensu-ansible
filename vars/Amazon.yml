@@ -9,3 +9,4 @@ sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/{{epel_version}}/$b
 
 #Set this to false to disable the EPEL repo installation
 enable_epel_repo: true
+epel_repo_rpm: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{epel_version}}.noarch.rpm"
