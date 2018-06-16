@@ -62,6 +62,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_deploy_rabbitmq_config` | `true`    | Determines whether or not to deploy RabbitMQ config for sensu |
 | `sensu_deploy_redis_config`    | `true`    | Determines whether or not to deploy redis config for sensu |
 | `sensu_deploy_transport_config`    | `true`    | Determines whether or not to deploy transport config for sensu |
+| `sensu_package` | `sensu` | The package to install for Sensu. If you would like to pin versions, for example, append `-1.3.3` to pin the package to version 1.3.3 |
+| `sensu_pkg_state` | `present` | The state to ensure Sensu's package at. Change to `latest` and set `sensu_package` to `sensu` to always ensure the latest Sensu version is installed|
 
 ### Sensu/RabbitMQ SSL certificate properties
 | Name               | Default Value | Description                  |
@@ -102,7 +104,6 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
 
 ## Debian
 ### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
@@ -116,7 +117,6 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `sensu_package`      | sensu       | The name of the Sensu package. Can optionally include a version (sensu=0.20.3-1) |
 
 ## CentOS
 ### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
@@ -146,9 +146,6 @@ _Note: The above options are intended to provide users with flexibility. This al
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
-| `sensu_pkg_version` | `0.29.0_1` | Version of Sensu to download and install |
-| `sensu_pkg_download_url` | `https://sensu.global.ssl.fastly.net/freebsd/FreeBSD:{{ ansible_distribution_major_version }}:{{ ansible_architecture }}/sensu/sensu-{{ sensu_pkg_version }}.txz` | URL to download Sensu from |
-| `sensu_pkg_download_path` | `/root/sensu_latest.txz` | Path to store package file to |
 
 ### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
 | Name               | Default Value | Description                  |
