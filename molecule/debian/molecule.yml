@@ -7,7 +7,7 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: False
+  enabled: True
 platforms:
   - name: debian-8
     image: dokken/debian-8

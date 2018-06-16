@@ -1,3 +1,4 @@
+---
 site_name: Ansible Sensu
 site_url: https://galaxy.ansible.com/sensu/sensu
 repo_url: https://github.com/sensu/sensu-ansible
@@ -8,19 +9,19 @@ theme: flatly
 pages:
   - Home: index.md
   - Usage:
-    - Role variables: role_variables.md
-    - Example infrastructure layout: example_infra.md
-    - Deploy the stack to a single node: single_master.md
-    - A differing master environment: differing_master_environment.md
-    - Custom client configuration: custom_client_config.md
-    - Deployment of handlers/filters/mutators: deploy_plugins.md
-    - Remote plugin deployment: remote_plugins.md
-    - Sensitive information in version control: sensitive_info.md
-    - Integration with other roles/managment methods: integration.md
-    - Testing: testing.md
+      - Role variables: role_variables.md
+      - Example infrastructure layout: example_infra.md
+      - Deploy the stack to a single node: single_master.md
+      - A differing master environment: differing_master_environment.md
+      - Custom client configuration: custom_client_config.md
+      - Deployment of handlers/filters/mutators: deploy_plugins.md
+      - Remote plugin deployment: remote_plugins.md
+      - Sensitive information in version control: sensitive_info.md
+      - Integration with other roles/managment methods: integration.md
+      - Testing: testing.md
   - Conventions:
-    - Dynamic data store: dynamic_data.md
-    - Dynamic check deployment: dynamic_checks.md
+      - Dynamic data store: dynamic_data.md
+      - Dynamic check deployment: dynamic_checks.md
   - About:
-    - A few words from the author: afewwords.md
-    - License: license.md
+      - A few words from the author: afewwords.md
+      - License: license.md

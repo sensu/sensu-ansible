@@ -1,23 +1,23 @@
 ---
 # tasks/server.yml: Deploy Sensu Server/API
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Deploy Sensu server API configuration
-    template:
-      dest: "{{ sensu_config_path }}/conf.d/api.json"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      src: sensu-api.json.j2
-    notify: restart sensu-api service
+- name: Deploy Sensu server API configuration
+  template:
+    dest: "{{ sensu_config_path }}/conf.d/api.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    src: sensu-api.json.j2
+  notify: restart sensu-api service
 
-  - include: "{{ role_path }}/tasks/SmartOS/server.yml"
-    when: ansible_distribution == "SmartOS"
-    static: false
+- include: "{{ role_path }}/tasks/SmartOS/server.yml"
+  when: ansible_distribution == "SmartOS"
+  static: false
 
-  - name: Ensure Sensu server service is running
-    service: name={{ sensu_server_service_name if not se_enterprise else sensu_enterprise_service_name }} state=started enabled=yes
+- name: Ensure Sensu server service is running
+  service: name={{ sensu_server_service_name if not se_enterprise else sensu_enterprise_service_name }} state=started enabled=yes
 
-  - name: Ensure Sensu API service is running
-    service: name=sensu-api state=started enabled=yes
-    when: not se_enterprise
+- name: Ensure Sensu API service is running
+  service: name=sensu-api state=started enabled=yes
+  when: not se_enterprise

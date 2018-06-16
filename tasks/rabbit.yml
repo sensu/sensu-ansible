@@ -1,47 +1,47 @@
 ---
 # tasks/rabbit.yml: Deploy RabbitMQ and set-up vhost for Sensu messaging
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - include: "{{ ansible_distribution }}/rabbit.yml"
+- include: "{{ ansible_distribution }}/rabbit.yml"
 
-  - name: Ensure RabbitMQ SSL directory exists
-    file: dest={{ rabbitmq_config_path }}/ssl state=directory
+- name: Ensure RabbitMQ SSL directory exists
+  file: dest={{ rabbitmq_config_path }}/ssl state=directory
 
-  - name: Ensure RabbitMQ SSL certs/keys are in place
-    copy: src="{{ item.src }}" dest="{{ rabbitmq_config_path }}/ssl/{{ item.dest }}" remote_src="{{ sensu_ssl_deploy_remote_src }}"
-    with_items:
-      - { src: "{{ sensu_ssl_server_cacert }}", dest: cacert.pem }
-      - { src: "{{ sensu_ssl_server_cert }}", dest: cert.pem }
-      - { src: "{{ sensu_ssl_server_key }}", dest: key.pem }
-    notify:
-      - restart rabbitmq service
-      - restart sensu-api service
-      - restart sensu-server service
-      - restart sensu-enterprise service
-    when: sensu_ssl_manage_certs
+- name: Ensure RabbitMQ SSL certs/keys are in place
+  copy: src="{{ item.src }}" dest="{{ rabbitmq_config_path }}/ssl/{{ item.dest }}" remote_src="{{ sensu_ssl_deploy_remote_src }}"
+  with_items:
+    - { src: "{{ sensu_ssl_server_cacert }}", dest: cacert.pem }
+    - { src: "{{ sensu_ssl_server_cert }}", dest: cert.pem }
+    - { src: "{{ sensu_ssl_server_key }}", dest: key.pem }
+  notify:
+    - restart rabbitmq service
+    - restart sensu-api service
+    - restart sensu-server service
+    - restart sensu-enterprise service
+  when: sensu_ssl_manage_certs
 
-  - name: Deploy RabbitMQ config
-    template:
-      dest: "{{ rabbitmq_config_path }}/rabbitmq.config"
-      src: "{{ rabbitmq_config_template }}"
-      owner: root
-      group: "{{ __root_group }}"
-      mode: 0644
-    notify: restart rabbitmq service
+- name: Deploy RabbitMQ config
+  template:
+    dest: "{{ rabbitmq_config_path }}/rabbitmq.config"
+    src: "{{ rabbitmq_config_template }}"
+    owner: root
+    group: "{{ __root_group }}"
+    mode: 0644
+  notify: restart rabbitmq service
 
-  - name: Ensure RabbitMQ is running
-    service:
-      name: "{{ rabbitmq_service_name }}"
-      state: started
-      enabled: true
-    register: rabbitmq_state
+- name: Ensure RabbitMQ is running
+  service:
+    name: "{{ rabbitmq_service_name }}"
+    state: started
+    enabled: true
+  register: rabbitmq_state
 
-  - name: Wait for RabbitMQ to be up and running before asking to create a vhost
-    pause: seconds=3
-    when: rabbitmq_state|changed
+- name: Wait for RabbitMQ to be up and running before asking to create a vhost
+  pause: seconds=3
+  when: rabbitmq_state|changed
 
-  - block:
+- block:
     - name: Ensure Sensu RabbitMQ vhost exists
       rabbitmq_vhost: name={{ rabbitmq_sensu_vhost }} state=present
 
@@ -54,5 +54,5 @@
         read_priv: .*
         write_priv: .*
         state: present
-    become: true
-    become_user: rabbitmq
+  become: true
+  become_user: rabbitmq

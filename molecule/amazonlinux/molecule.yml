@@ -7,7 +7,7 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: False
+  enabled: True
 platforms:
   - name: amazonlinux-1
     image: dokken/amazonlinux

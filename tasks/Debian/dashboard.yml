@@ -2,15 +2,15 @@
 # tasks/Debian/dashboard.yml: Deployment of the Uchiwa dashboard
 # Specific to Debian
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Install uchiwa
-    apt:
-      name: uchiwa
-      state: present
+- name: Install uchiwa
+  apt:
+    name: uchiwa
+    state: present
 
-  - name: Deploy Uchiwa config
-    template:
-      src: uchiwa_config.json.j2
-      dest: "{{ sensu_config_path }}/uchiwa.json"
-    notify: restart uchiwa service
+- name: Deploy Uchiwa config
+  template:
+    src: uchiwa_config.json.j2
+    dest: "{{ sensu_config_path }}/uchiwa.json"
+  notify: restart uchiwa service

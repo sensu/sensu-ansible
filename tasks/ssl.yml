@@ -1,30 +1,30 @@
 ---
 # tasks/ssl.yml: Deploy the client SSL cert/key to client systems
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure Sensu SSL directory exists
-    file:
-      dest: "{{ sensu_config_path }}/ssl"
-      state: directory
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    when: sensu_ssl_manage_certs
+- name: Ensure Sensu SSL directory exists
+  file:
+    dest: "{{ sensu_config_path }}/ssl"
+    state: directory
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  when: sensu_ssl_manage_certs
 
-  - include: "{{ role_path }}/tasks/ssl_generate.yml"
-    when: sensu_ssl_gen_certs
-    static: false
+- include: "{{ role_path }}/tasks/ssl_generate.yml"
+  when: sensu_ssl_gen_certs
+  static: false
 
-  - name: Deploy the Sensu client SSL cert/key
-    copy:
-      src: "{{ item.src }}"
-      owner: "{{ sensu_user_name }}"
-      remote_src: "{{ sensu_ssl_deploy_remote_src }}"
-      group: "{{ sensu_group_name }}"
-      dest: "{{ sensu_config_path }}/ssl/{{ item.dest }}"
-      mode: " {{ item.perm }}"
-    with_items:
-      - {src: "{{ sensu_ssl_client_cert }}", dest: cert.pem , perm: "0640" }
-      - {src: "{{ sensu_ssl_client_key }}", dest: key.pem  , perm: "0640" }
-    notify: restart sensu-client service
-    when: sensu_ssl_manage_certs
+- name: Deploy the Sensu client SSL cert/key
+  copy:
+    src: "{{ item.src }}"
+    owner: "{{ sensu_user_name }}"
+    remote_src: "{{ sensu_ssl_deploy_remote_src }}"
+    group: "{{ sensu_group_name }}"
+    dest: "{{ sensu_config_path }}/ssl/{{ item.dest }}"
+    mode: " {{ item.perm }}"
+  with_items:
+    - {src: "{{ sensu_ssl_client_cert }}", dest: cert.pem, perm: "0640" }
+    - {src: "{{ sensu_ssl_client_key }}", dest: key.pem, perm: "0640" }
+  notify: restart sensu-client service
+  when: sensu_ssl_manage_certs

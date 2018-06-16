@@ -2,5 +2,5 @@
 # vars/CentOS.yml: Variables for CentOS
 # Defaults are defined in defaults/main.yml
 
-#Set this to false to disable the EPEL repo installation
+# Set this to false to disable the EPEL repo installation
 enable_epel_repo: true

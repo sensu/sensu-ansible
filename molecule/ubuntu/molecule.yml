@@ -7,7 +7,7 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: False
+  enabled: True
 platforms:
   - name: ubuntu-14.04
     image: dokken/ubuntu-14.04

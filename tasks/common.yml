@@ -1,55 +1,55 @@
 ---
 # tasks/common.yml: Deploy configurations common to client and server for Sensu
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure the Sensu config directory is present
-    file:
-      dest: "{{ sensu_config_path }}/conf.d"
-      state: directory
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      mode: "0555"
+- name: Ensure the Sensu config directory is present
+  file:
+    dest: "{{ sensu_config_path }}/conf.d"
+    state: directory
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    mode: "0555"
 
-  - name: Deploy Sensu Redis configuration
-    template:
-      dest: "{{ sensu_config_path }}/conf.d/redis.json"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      src: "{{ sensu_redis_config }}"
-      mode: "0640"
-    when: sensu_deploy_redis_config
-    notify:
-      - restart sensu-server service
-      - restart sensu-api service
-      - restart sensu-enterprise service
-      - restart sensu-client service
+- name: Deploy Sensu Redis configuration
+  template:
+    dest: "{{ sensu_config_path }}/conf.d/redis.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    src: "{{ sensu_redis_config }}"
+    mode: "0640"
+  when: sensu_deploy_redis_config
+  notify:
+    - restart sensu-server service
+    - restart sensu-api service
+    - restart sensu-enterprise service
+    - restart sensu-client service
 
-  - name: Deploy Sensu RabbitMQ configuration
-    template:
-      dest: "{{ sensu_config_path }}/conf.d/rabbitmq.json"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      src: "{{ sensu_rabbitmq_config }}"
-      mode: "0640"
-    when: sensu_transport == "rabbitmq"
-          and sensu_deploy_rabbitmq_config
-    notify:
-      - restart sensu-server service
-      - restart sensu-api service
-      - restart sensu-enterprise service
-      - restart sensu-client service
+- name: Deploy Sensu RabbitMQ configuration
+  template:
+    dest: "{{ sensu_config_path }}/conf.d/rabbitmq.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    src: "{{ sensu_rabbitmq_config }}"
+    mode: "0640"
+  when: sensu_transport == "rabbitmq"
+        and sensu_deploy_rabbitmq_config
+  notify:
+    - restart sensu-server service
+    - restart sensu-api service
+    - restart sensu-enterprise service
+    - restart sensu-client service
 
-  - name: Deploy Sensu transport configuration
-    template:
-      dest: "{{ sensu_config_path }}/conf.d/transport.json"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      src: transport.json.j2
-      mode: "0640"
-    when: sensu_deploy_transport_config
-    notify:
-      - restart sensu-server service
-      - restart sensu-api service
-      - restart sensu-enterprise service
-      - restart sensu-client service
+- name: Deploy Sensu transport configuration
+  template:
+    dest: "{{ sensu_config_path }}/conf.d/transport.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    src: transport.json.j2
+    mode: "0640"
+  when: sensu_deploy_transport_config
+  notify:
+    - restart sensu-server service
+    - restart sensu-api service
+    - restart sensu-enterprise service
+    - restart sensu-client service

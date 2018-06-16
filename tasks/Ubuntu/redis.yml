@@ -2,30 +2,30 @@
 # tasks/Ubuntu/redis.yml: Deploy redis
 # Specific to Ubuntu
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure redis is installed
-    apt:
-      name: "{{ redis_pkg_name }}"
-      state: "{{ redis_pkg_state }}"
-      update_cache: true
-    register: sensu_ubuntu_redis_install
+- name: Ensure redis is installed
+  apt:
+    name: "{{ redis_pkg_name }}"
+    state: "{{ redis_pkg_state }}"
+    update_cache: true
+  register: sensu_ubuntu_redis_install
 
-    # BUG: On Ubuntu 14.04, when first installed, redis, will be started
-    # however, the /var/run/redis/redis-server.pid file gets lost during the restart
-    # causing the process to be orphaned from the init system.
-    # We manually stop it right after install to account for this.
-  - name: Stop redis manually
-    shell: kill $(pgrep redis-server)
-    when:
-      - sensu_ubuntu_redis_install is changed
-      - ansible_distribution_version == '14.04'
+  # BUG: On Ubuntu 14.04, when first installed, redis, will be started
+  # however, the /var/run/redis/redis-server.pid file gets lost during the restart
+  # causing the process to be orphaned from the init system.
+  # We manually stop it right after install to account for this.
+- name: Stop redis manually
+  shell: kill $(pgrep redis-server)
+  when:
+    - sensu_ubuntu_redis_install is changed
+    - ansible_distribution_version == '14.04'
 
-  - name: Ensure redis binds to accessible IP
-    lineinfile:
-      dest: /etc/redis/redis.conf
-      regexp: '^bind'
-      line: 'bind 0.0.0.0'
-    notify: restart redis service
+- name: Ensure redis binds to accessible IP
+  lineinfile:
+    dest: /etc/redis/redis.conf
+    regexp: '^bind'
+    line: 'bind 0.0.0.0'
+  notify: restart redis service
 
-  - meta: flush_handlers
+- meta: flush_handlers

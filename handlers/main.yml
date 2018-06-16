@@ -1,69 +1,69 @@
 ---
 
-  - name: restart rabbitmq service
-    service:
-      name: "{{ rabbitmq_service_name }}"
-      state: restarted
+- name: restart rabbitmq service
+  service:
+    name: "{{ rabbitmq_service_name }}"
+    state: restarted
 
-  - name: restart redis service
-    service:
-      name: "{{ redis_service_name }}"
-      pattern: /usr/bin/redis-server
-      state: restarted
+- name: restart redis service
+  service:
+    name: "{{ redis_service_name }}"
+    pattern: /usr/bin/redis-server
+    state: restarted
 
-  - name: restart uchiwa service
-    service:
-      name: "{{ uchiwa_service_name }}"
-      state: restarted
+- name: restart uchiwa service
+  service:
+    name: "{{ uchiwa_service_name }}"
+    state: restarted
 
-  - name: restart sensu-server service
-    service:
-      name: "{{ sensu_server_service_name }}"
-      state: restarted
-    when: sensu_master and not se_enterprise
+- name: restart sensu-server service
+  service:
+    name: "{{ sensu_server_service_name }}"
+    state: restarted
+  when: sensu_master and not se_enterprise
 
-  - name: restart sensu-api service
-    service:
-      name: "{{ sensu_api_service_name }}"
-      state: restarted
-    when: sensu_master and not se_enterprise
+- name: restart sensu-api service
+  service:
+    name: "{{ sensu_api_service_name }}"
+    state: restarted
+  when: sensu_master and not se_enterprise
 
-  - name: restart sensu-client service
-    service:
-      name: "{{ sensu_client_service_name }}"
-      state: restarted
+- name: restart sensu-client service
+  service:
+    name: "{{ sensu_client_service_name }}"
+    state: restarted
 
-  - name: restart sensu-enterprise service
-    service:
-      name: "{{ sensu_enterprise_service_name }}"
-      state: restarted
-    when: se_enterprise and sensu_master
+- name: restart sensu-enterprise service
+  service:
+    name: "{{ sensu_enterprise_service_name }}"
+    state: restarted
+  when: se_enterprise and sensu_master
 
-  - name: restart sensu-enterprise-dashboard service
-    service:
-      name: "{{ sensu_enterprise_dashboard_service_name }}"
-      state: restarted
-    when: se_enterprise and sensu_master
+- name: restart sensu-enterprise-dashboard service
+  service:
+    name: "{{ sensu_enterprise_dashboard_service_name }}"
+    state: restarted
+  when: se_enterprise and sensu_master
 
-  # Joyent SmartOS specific handlers
-  - name: import sensu-server service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
+# Joyent SmartOS specific handlers
+- name: import sensu-server service
+  command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-server.xml
 
-  - name: import sensu-api service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-api.xml
+- name: import sensu-api service
+  command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-api.xml
 
-  - name: import sensu-client service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-client.xml
+- name: import sensu-client service
+  command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/sensu-client.xml
 
-  - name: import uchiwa service
-    command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
+- name: import uchiwa service
+  command: /usr/sbin/svccfg import /opt/local/lib/svc/manifest/uchiwa.xml
 
-  - name: Build and deploy Uchiwa
-    shell: npm install --production
-    args:
-      chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
-    become: true
-    become_user: "{{ sensu_user_name }}"
+- name: Build and deploy Uchiwa
+  shell: npm install --production
+  args:
+    chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+  become: true
+  become_user: "{{ sensu_user_name }}"
 
-  - name: Update pkgng database
-    command: /usr/sbin/pkg update
+- name: Update pkgng database
+  command: /usr/sbin/pkg update
