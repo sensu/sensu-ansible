@@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Amazon Linux now installs a supported version of Erlang and RabbitMQ from Bintray (@jaredledvina)
 - Fixup the CentOS RabbitMQ install w/ full GPG signing verification (@jaredledvina)
 - Various syntax cleanups and testing documentation updates (@jaredledvina)
+- Enable `yamllint` checking and fixup all files to pass checks (@jaredledvina)
 
 ## [2.4.0] - 2018-05-06
 ### Fixed:
