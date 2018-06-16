@@ -57,4 +57,4 @@
         - rabbitmq-server
       state: present
       enablerepo: rabbitmq,rabbitmq-erlang
-      disablerepo: epel,amzn-main
+      disablerepo: '*'
