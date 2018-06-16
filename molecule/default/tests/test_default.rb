@@ -2,7 +2,6 @@
 # are all listening as expected
 
 # Redis
-# TODO Ubuntu 14.04 - Redis is bound to 127.0.0.1
 describe port(6379) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
