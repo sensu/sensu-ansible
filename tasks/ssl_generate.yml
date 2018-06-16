@@ -7,7 +7,7 @@
   - name: Ensure OpenSSL is installed
     package:
       name: openssl
-      state: installed
+      state: present
 
   - name: Ensure SSL generation directory exists
     file:
