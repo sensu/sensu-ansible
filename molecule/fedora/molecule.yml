@@ -40,7 +40,7 @@ provisioner:
     verify: ../default/verify.yml
   lint:
     name: ansible-lint
-    enabled: False
+    enabled: True
   inventory:
     group_vars:
       all:
