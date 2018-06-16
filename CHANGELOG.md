@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Switched entirely to [molecule](https://github.com/metacloud/molecule) for integration testing (@jaredledvina)
 - Configure [Inspec](https://www.inspec.io/) for full automated verification after integration testing (@jaredledvina)
 - Amazon Linux now installs proper version of EPEL (@jaredledvina)
+- Amazon Linux now installs a supported version of Erlang and RabbitMQ from Bintray (@jaredledvina)
 - Fixup the CentOS RabbitMQ install w/ full GPG signing verification (@jaredledvina)
 - Various syntax cleanups and testing documentation updates (@jaredledvina)
 
