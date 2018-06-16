@@ -2,18 +2,18 @@
 # tasks/OpenBSD/redis.yml: Deploy redis
 # Specific to OpenBSD
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure redis is installed
-    pkgng:
-      name: "{{ redis_pkg_name }}"
-      state: "{{ redis_pkg_state }}"
+- name: Ensure redis is installed
+  pkgng:
+    name: "{{ redis_pkg_name }}"
+    state: "{{ redis_pkg_state }}"
 
-  - name: Ensure redis binds to accessible IP
-    lineinfile:
-      dest: /usr/local/etc/redis.conf
-      regexp: '^bind'
-      line: 'bind 0.0.0.0'
-    notify: restart redis service
+- name: Ensure redis binds to accessible IP
+  lineinfile:
+    dest: /usr/local/etc/redis.conf
+    regexp: '^bind'
+    line: 'bind 0.0.0.0'
+  notify: restart redis service
 
-  - meta: flush_handlers
+- meta: flush_handlers

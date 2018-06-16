@@ -2,9 +2,9 @@
 # tasks/OpenBSD/rabbit.yml: Deploy RabbitMQ
 # Specific to OpenBSD
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure RabbitMQ is installed
-    pkgng:
-      name: rabbitmq
-      state: "{{ rabbitmq_pkg_state }}"
+- name: Ensure RabbitMQ is installed
+  pkgng:
+    name: rabbitmq
+    state: "{{ rabbitmq_pkg_state }}"

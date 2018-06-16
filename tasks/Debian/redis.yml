@@ -2,19 +2,19 @@
 # tasks/Debian/redis.yml: Deploy redis
 # Specific to Debian
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure redis is installed
-    apt:
-      name: "{{ redis_pkg_name }}"
-      state: "{{ redis_pkg_state }}"
-      update_cache: true
+- name: Ensure redis is installed
+  apt:
+    name: "{{ redis_pkg_name }}"
+    state: "{{ redis_pkg_state }}"
+    update_cache: true
 
-  - name: Ensure redis binds to accessible IP
-    lineinfile:
-      dest: /etc/redis/redis.conf
-      regexp: '^bind'
-      line: 'bind 0.0.0.0'
-    notify: restart redis service
+- name: Ensure redis binds to accessible IP
+  lineinfile:
+    dest: /etc/redis/redis.conf
+    regexp: '^bind'
+    line: 'bind 0.0.0.0'
+  notify: restart redis service
 
-  - meta: flush_handlers
+- meta: flush_handlers

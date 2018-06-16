@@ -2,11 +2,11 @@
 # tasks/SmartOS/rabbit.yml: Deploy RabbitMQ
 # Specific to Joyent SmartOS
 
-  - name: Ensure RabbitMQ is installed
-    pkgin: name=rabbitmq state=present
+- name: Ensure RabbitMQ is installed
+  pkgin: name=rabbitmq state=present
 
-  - name: Ensure EPMD is running
-    service:
-      name: epmd
-      state: started
-      enabled: true
+- name: Ensure EPMD is running
+  service:
+    name: epmd
+    state: started
+    enabled: true

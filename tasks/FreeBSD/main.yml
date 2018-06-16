@@ -2,43 +2,43 @@
 # tasks/FreeBSD/main.yml: FreeBSD specific set-up
 # This takes care of base prerequisites for FreeBSD
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure the Sensu group is present
-    group:
-      name: {{ sensu_group_name }}
-      state: present
+- name: Ensure the Sensu group is present
+  group:
+    name: {{ sensu_group_name }}
+    state: present
 
-  - name: Ensure the Sensu user is present
-    user:
-      name: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      shell: /bin/false
-      home: "{{ sensu_config_path }}"
-      createhome: true
-      state: present
+- name: Ensure the Sensu user is present
+  user:
+    name: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    shell: /bin/false
+    home: "{{ sensu_config_path }}"
+    createhome: true
+    state: present
 
-  - name: Ensure pkgng custom repo config directory exists
-    file:
-      path: /usr/local/etc/pkg/repos/
-      state: directory
+- name: Ensure pkgng custom repo config directory exists
+  file:
+    path: /usr/local/etc/pkg/repos/
+    state: directory
 
-  - name: Ensure Sensu repo is configured
-    template:
-      src: sensu-freebsd-repo.conf.j2
-      dest: /usr/local/etc/pkg/repos/sensu.conf
-    notify:
-      - Update pkgng database
+- name: Ensure Sensu repo is configured
+  template:
+    src: sensu-freebsd-repo.conf.j2
+    dest: /usr/local/etc/pkg/repos/sensu.conf
+  notify:
+    - Update pkgng database
 
-  - name: Ensure prerequisite packages are installed
-    pkgng:
-      name: "{{ item }}"
-      state: present
-    with_items:
-      - bash
-      - ca_root_nss
+- name: Ensure prerequisite packages are installed
+  pkgng:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bash
+    - ca_root_nss
 
-  - name: Ensure Sensu is installed
-    pkgng:
-      name: "{{ sensu_package }}"
-      state: "{{ sensu_pkg_state }}"
+- name: Ensure Sensu is installed
+  pkgng:
+    name: "{{ sensu_package }}"
+    state: "{{ sensu_pkg_state }}"

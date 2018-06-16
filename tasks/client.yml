@@ -1,23 +1,23 @@
 ---
 # tasks/client.yml: Deploy various client-side configurations for Sensu
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Deploy Sensu client service configuration
-    template:
-      dest: "{{ sensu_config_path }}/conf.d/client.json"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-      src: "{{ sensu_client_config  }}"
-      mode: "0640"
-    notify: restart sensu-client service
+- name: Deploy Sensu client service configuration
+  template:
+    dest: "{{ sensu_config_path }}/conf.d/client.json"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+    src: "{{ sensu_client_config  }}"
+    mode: "0640"
+  notify: restart sensu-client service
 
-  - include: "{{ role_path }}/tasks/SmartOS/client.yml"
-    when: ansible_distribution == "SmartOS"
-    static: false
+- include: "{{ role_path }}/tasks/SmartOS/client.yml"
+  when: ansible_distribution == "SmartOS"
+  static: false
 
-  - name: Ensure Sensu client service is running
-    service:
-      name: "{{ sensu_client_service_name }}"
-      state: started
-      enabled: yes
+- name: Ensure Sensu client service is running
+  service:
+    name: "{{ sensu_client_service_name }}"
+    state: started
+    enabled: yes

@@ -1,104 +1,104 @@
 ---
 # tasks/plugins.yml: Deploy available checks/plugins/handlers/filters/mutators
 
-  - include_vars: "{{ ansible_distribution }}.yml"
+- include_vars: "{{ ansible_distribution }}.yml"
 
-  - name: Ensure Sensu plugin directory exists
-    file:
-      dest: "{{ sensu_config_path }}/plugins"
-      state: directory
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
+- name: Ensure Sensu plugin directory exists
+  file:
+    dest: "{{ sensu_config_path }}/plugins"
+    state: directory
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
 
-  - name: Ensure local directories exist
-    local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
-    become: no
-    with_items:
-      - checks
-      - filters
-      - handlers
-      - mutators
-      - definitions
-      - client_definitions
+- name: Ensure local directories exist
+  local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
+  become: no
+  with_items:
+    - checks
+    - filters
+    - handlers
+    - mutators
+    - definitions
+    - client_definitions
 
-  - name: Ensure any remote plugins defined are present
-    shell: umask 0022; sensu-install -p {{ item }}
-    with_items: "{{ sensu_remote_plugins }}"
-    changed_when: false
-    when: sensu_remote_plugins | length > 0
+- name: Ensure any remote plugins defined are present
+  shell: umask 0022; sensu-install -p {{ item }}
+  with_items: "{{ sensu_remote_plugins }}"
+  changed_when: false
+  when: sensu_remote_plugins | length > 0
 
-  - name: Register available checks
-    local_action: command ls {{ static_data_store }}/sensu/checks
-    register: sensu_available_checks
-    changed_when: false
-    become: false
+- name: Register available checks
+  local_action: command ls {{ static_data_store }}/sensu/checks
+  register: sensu_available_checks
+  changed_when: false
+  become: false
 
-  - name: Deploy check plugins
-    copy:
-      src: "{{ static_data_store }}/sensu/checks/{{ item }}/"
-      dest: "{{ sensu_config_path }}/plugins/"
-      mode: 0755
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    when: "sensu_available_checks is defined and item in sensu_available_checks.stdout_lines"
-    with_flattened:
-      - "{{ group_names }}"
-    notify: restart sensu-client service
+- name: Deploy check plugins
+  copy:
+    src: "{{ static_data_store }}/sensu/checks/{{ item }}/"
+    dest: "{{ sensu_config_path }}/plugins/"
+    mode: 0755
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  when: "sensu_available_checks is defined and item in sensu_available_checks.stdout_lines"
+  with_flattened:
+    - "{{ group_names }}"
+  notify: restart sensu-client service
 
-  - name: Deploy handler plugins
-    copy:
-      src: "{{ static_data_store }}/sensu/handlers/"
-      dest: "{{ sensu_config_path }}/plugins/"
-      mode: 0755
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    notify: restart sensu-client service
+- name: Deploy handler plugins
+  copy:
+    src: "{{ static_data_store }}/sensu/handlers/"
+    dest: "{{ sensu_config_path }}/plugins/"
+    mode: 0755
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  notify: restart sensu-client service
 
-  - name: Deploy filter plugins
-    copy:
-      src: "{{ static_data_store }}/sensu/filters/"
-      dest: "{{ sensu_config_path }}/plugins/"
-      mode: 0755
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    notify: restart sensu-client service
+- name: Deploy filter plugins
+  copy:
+    src: "{{ static_data_store }}/sensu/filters/"
+    dest: "{{ sensu_config_path }}/plugins/"
+    mode: 0755
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  notify: restart sensu-client service
 
-  - name: Deploy mutator plugins
-    copy:
-      src: "{{ static_data_store }}/sensu/mutators/"
-      dest: "{{ sensu_config_path }}/plugins/"
-      mode: 0755
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    notify: restart sensu-client service
+- name: Deploy mutator plugins
+  copy:
+    src: "{{ static_data_store }}/sensu/mutators/"
+    dest: "{{ sensu_config_path }}/plugins/"
+    mode: 0755
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  notify: restart sensu-client service
 
-  - name: Deploy check/handler/filter/mutator definitions to the master
-    template:
-      src: "{{ item }}"
-      dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    when: sensu_master
-    with_fileglob:
-      - "{{ static_data_store }}/sensu/definitions/*"
-    notify:
-      - restart sensu-server service
-      - restart sensu-api service
-      - restart sensu-enterprise service
+- name: Deploy check/handler/filter/mutator definitions to the master
+  template:
+    src: "{{ item }}"
+    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  when: sensu_master
+  with_fileglob:
+    - "{{ static_data_store }}/sensu/definitions/*"
+  notify:
+    - restart sensu-server service
+    - restart sensu-api service
+    - restart sensu-enterprise service
 
-  - name: Register available client definitions
-    local_action: command ls {{ static_data_store }}/sensu/client_definitions
-    register: sensu_available_client_definitions
-    changed_when: false
-    become: false
+- name: Register available client definitions
+  local_action: command ls {{ static_data_store }}/sensu/client_definitions
+  register: sensu_available_client_definitions
+  changed_when: false
+  become: false
 
-  - name: Deploy client definitions
-    copy:
-      src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
-      dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
-      owner: "{{ sensu_user_name }}"
-      group: "{{ sensu_group_name }}"
-    when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
-    with_flattened:
-      - "{{ group_names }}"
-    notify: restart sensu-client service
+- name: Deploy client definitions
+  copy:
+    src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
+    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
+  with_flattened:
+    - "{{ group_names }}"
+  notify: restart sensu-client service

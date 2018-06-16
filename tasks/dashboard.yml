@@ -1,9 +1,9 @@
 ---
 # tasks/dashboard.yml: Deployment of the Uchiwa dashboard
-  - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/dashboard.yml"
+- include: "{{ role_path }}/tasks/{{ ansible_distribution }}/dashboard.yml"
 
-  - name: Ensure Uchiwa/Sensu Enterprise Dashboard server service is running
-    service:
-      name: "{{ uchiwa_service_name if not se_enterprise else sensu_enterprise_dashboard_service_name }}"
-      state: started
-      enabled: yes
+- name: Ensure Uchiwa/Sensu Enterprise Dashboard server service is running
+  service:
+    name: "{{ uchiwa_service_name if not se_enterprise else sensu_enterprise_dashboard_service_name }}"
+    state: started
+    enabled: yes
