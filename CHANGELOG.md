@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Ensure that on first install we install the latest stable Sensu release (@jaredledvina)
 - Document `sensu_pkg_state`. If you'd like to ensure the latest stable release is always installed, simply leave `sensu_package` to the default `sensu` and change `sensu_pkg_state` to `latest`. (@jaredledvina)
 - Switched entirely to [molecule](https://github.com/metacloud/molecule) for integration testing (@jaredledvina)
+- Configure [Inspec](https://www.inspec.io/) for full automated verification after integration testing (@jaredledvina)
+- Amazon Linux now installs proper version of EPEL (@jaredledvina)
+- Fixup the CentOS RabbitMQ install w/ full GPG signing verification (@jaredledvina)
+- Various syntax cleanups and testing documentation updates (@jaredledvina)
 
 ## [2.4.0] - 2018-05-06
 ### Fixed:
