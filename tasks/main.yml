@@ -1,7 +1,8 @@
 ---
 # tasks/main.yml: "Master" playbook for the sensu.sensu role
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include distribution specific variables
+  include_vars: "{{ ansible_distribution }}.yml"
 
 - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/main.yml"
   tags: setup
