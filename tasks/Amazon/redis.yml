@@ -6,7 +6,7 @@
 
   - name: Install EPEL repo
     yum:
-      name: epel-release
+      name: "{{ epel_repo_rpm }}"
       state: present
     when: enable_epel_repo
 

@@ -4,6 +4,15 @@
 
   - include_vars: "{{ ansible_distribution }}.yml"
 
+  - name: Configure RabbitMQ/RabbitMQ-erlang GPG keys in the RPM keyring
+    rpm_key:
+      key: "{{ item }}"
+      state: present
+    with_items:
+      - https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+      - https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    register: sensu_rabbitmq_import_key
+
   - name: Add RabbitMQ's repo
     yum_repository:
       name: rabbitmq
@@ -22,6 +31,25 @@
       gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
       repo_gpgcheck: no
 
+  # HACK: https://github.com/ansible/ansible/issues/20711#issuecomment-306260869
+  # Can be removed once we're running w/ a version of Ansible that has https://github.com/ansible/ansible/pull/35989
+  - name: Make yum cache to import GPG keys
+    command: "yum -q makecache -y --disablerepo='*' --enablerepo='{{ item }}'"
+    args:
+      warn: false
+    when: sensu_rabbitmq_import_key.changed
+    with_items:
+      - rabbitmq
+      - rabbitmq-erlang
+
+  # Hard dependency for rabbitmq-server, however, typically comes from EPEL, so
+  # we simply install it here, as we purposely disable epel when installing rabbitmq
+  # causing dependency issues during installs
+  - name: Ensure socat is installed
+    yum:
+      name: socat
+      state: present
+
   - name: Ensure Erlang & RabbitMQ are installed
     yum:
       name:
@@ -30,6 +58,3 @@
       state: present
       enablerepo: rabbitmq,rabbitmq-erlang
       disablerepo: epel
-
-
-

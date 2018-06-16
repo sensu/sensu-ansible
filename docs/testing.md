@@ -1,15 +1,34 @@
 # Testing
-A small testing framework is provided with this role using [Vagrant](https://vagrantup.com/).  
+This Ansible role makes use of the [molecule](https://github.com/metacloud/molecule)
+testing framework to run automatic integration tests for every change.
 
-To test this role locally, once you've set up Vagrant, simply `cd` to `tests` and run `vagrant up [centos7|debian8|ubuntu15]`, after which you can visit the following URLs in your browser for the associated deployments:  
+Molecule is using Python 2.7 with the latest stable release of Ansible to deploy this
+Ansible role. After succesfully deploying the entire role, Molecule then uses
+[Inspec](https://www.inspec.io/) to perform a set of tests against the final
+containers. This ensures that for every supported operating system, the end result
+is what we expect.
 
-- CentOS 7: `http://localhost:3001`
-- Debian 8: `http://localhost:3002`
-- Ubuntu 15.04: `http://localhost:3003`
+All changes submitted via [Pull Requests](https://github.com/sensu/sensu-ansible/pulls)
+are blocked from merging until the integration tests pass.
 
-_Note: To test SmartOS, please simply roll out a base64 zone_  
+## Testing locally
+In order to speed up local development, you may opt to locally run the integration
+tests to more quickly iterate on new features.
 
-To log in, use `admin` as both the username & password.  
+### Local environment prep
+1. Fork the [sensu-ansible](https://github.com/sensu/sensu-ansible) repository
+2. `git clone` your fork of the `sensu-ansible` repository and `cd` into your local clone.
+3. Add the `upstream` repo to your local clone of the repository with the following `git` command:
+```
+git remote add upstream https://github.com/sensu/sensu-ansible.git
+```
+4. Execute `git checkout -b feature/NEW_FEATURE_NAME_HERE` to work on a dedicated branch
+5. Ensure you have a recent version of Docker installed locally: https://docs.docker.com/install/
+6. Ensure you have [pipenv](https://docs.pipenv.org/install/#installing-pipenv) installed.
+7. Install this repositories development dependacies with `pipenv install --two --dev` followed by ` gem install rubocop`
+8. Execute the full integration tests for your chosen operating system distribution: ` pipenv run molecule test --scenario-name $OS --driver-name docker --destroy always`
 
-
-As support for other operating systems/distributions is written, they will be added as options for testing.
+Notes:
+1. Currently, you can set `$OS` above to one of `debian`, `ubuntu`, `centos`, `fedora`, or `amazonlinux`
+2. It's faster to iterate by changing `--destroy always` to `--destroy never` such that you don't have to full rebuild the testing infrastructure.
+3. If you want to limit testing to just the Inspec unit tests, you can simply run ` pipenv run molecule verify --scenario-name $OS` to re-run those steps.

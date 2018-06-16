@@ -4,4 +4,8 @@
   - include: "{{ role_path }}/tasks/{{ ansible_distribution }}/redis.yml"
 
   - name: Ensure redis is running
-    service: name={{ redis_service_name }} state=started enabled=true
+    service:
+      name: "{{ redis_service_name }}"
+      pattern: /usr/bin/redis-server
+      state: started
+      enabled: true

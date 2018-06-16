@@ -6,15 +6,21 @@ galaxy_info:
   platforms:
   - name: EL
     versions:
-    - 7
+      - 6
+      - 7
   - name: Ubuntu
     versions:
-    - trusty
-    - vivid
+      - trusty
+      - vivid
   - name: Debian
     versions:
-    - jessie
-    - stretch
+      - jessie
+      - stretch
+  - name: Fedora
+    versions:
+      - 26
+      - 27
+      - 28
 
   galaxy_tags:
     - cloud
