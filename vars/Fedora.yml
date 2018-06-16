@@ -2,8 +2,5 @@
 # vars/Fedora.yml: Variables for Fedora
 # Defaults are defined in defaults/main.yml
 
-# Sensu/Uchiwa user/group/service properties
-_sensu_pkg_version: '1.2.1'
-
 #RH/Centos 7 version works for Fedora 25 as a client
 sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/7/$basearch/"

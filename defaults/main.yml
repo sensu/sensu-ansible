@@ -7,7 +7,6 @@ se_pass: ''
 
 # Sensu package
 sensu_package: sensu
-sensu_pkg_version:  # This 'none' value allows the var to be overriden in /vars or in group/host_vars
 sensu_enterprise_package: sensu-enterprise
 sensu_enterprise_dashboard_package: sensu-enterprise-dashboard
 

@@ -19,4 +19,6 @@
       enabled: yes
 
   - name: Ensure Sensu is installed
-    yum: name={{ sensu_package }} state={{ sensu_pkg_state }}
+    yum:
+      name: {{ sensu_package }}
+      state: {{ sensu_pkg_state }}
