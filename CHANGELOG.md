@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 ### Changed
+- Add support for configuring [Tessen](https://docs.sensu.io/sensu-core/1.4/reference/tessen/) via `sensu_enable_tessen` (@jaredledvina)
 
 ## [2.5.0] - 2018-06-16
 ### Changed
