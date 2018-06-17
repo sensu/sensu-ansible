@@ -4,22 +4,16 @@ Well, thanks for bothering to even visit this page!
 This role was born out of my own passion for the absolutely excellent projects that it uses.
 I figure I have to list them, in no particular order, here they are. __Make sure to check them all out!__
 
-- [Ansible](http://ansible.com/home)
-- [Sensu](https://sensuapp.org/)
-- [Uchiwa](https://uchiwa.io/#/)
-- [SmartOS](https://smartos.org/)
-- [RabbitMQ](https://rabbitmq.com/)
-- [redis](http://redis.io/)
+- [Ansible](https://www.ansible.com/)
+- [Sensu](https://sensu.io/)
+- [Uchiwa](https://uchiwa.io/)
+- [SmartOS](https://www.joyent.com/smartos)
+- [RabbitMQ](https://www.rabbitmq.com/)
+- [redis](https://redis.io/)
 
 ## What about support for other operating systems?
-It's planned!
-
-Coming in the near future:
-
-- OpenBSD
-- NetBSD
-
-I'd be happy to add any others to the list if high demand shows.
+At this time, the role supports a plethora of operating systems. If there's 
+another one you'd like to see support for, please [file an issue!](https://github.com/sensu/sensu-ansible/issues)
 
 ## About updates
 This is a personal project of mine that I work on in my own free time.

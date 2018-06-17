@@ -1,7 +1,7 @@
 # Custom Client Configuration
-When this Ansible role deploys the Sensu client configuration - defined in `client.json` in the Sensu configuration directory, it works out [subscriptions](https://sensuapp.org/docs/latest/reference/clients#client-subscriptions) based on group membership within the Ansible inventory.
+When this Ansible role deploys the Sensu client configuration - defined in `client.json` in the Sensu configuration directory, it works out [subscriptions](https://docs.sensu.io/sensu-core/latest/reference/clients/#client-subscriptions) based on group membership within the Ansible inventory.
 For example, if you have a `webservers` group within your Ansible inventory, any nodes listed in that group will automatically gain a subscription to `webservers` within Sensu.
-This is quite a powerful, convenient feature. It's coupled with the deployment of [checks](https://sensuapp.org/docs/latest/guides/getting-started/intro-to-checks.html). If you add a new webserver to your infrastructure, Sensu will dynamically pick it up, subscribe it to 'webservers', and deploy webserver checks, without you having to do anything other than add that node into the `webservers` group within your Ansible inventory. Instantaneous monitoring of your web services!
+This is quite a powerful, convenient feature. It's coupled with the deployment of [checks](https://docs.sensu.io/sensu-core/latest/guides/intro-to-checks/). If you add a new webserver to your infrastructure, Sensu will dynamically pick it up, subscribe it to 'webservers', and deploy webserver checks, without you having to do anything other than add that node into the `webservers` group within your Ansible inventory. Instantaneous monitoring of your web services!
 
 The above is all very nice and fancy, but, what if you want to define some other properties for a specific node, or override its subscriptions altogether?
 
@@ -21,7 +21,7 @@ It's contents (as of writing) are as follows:
   }
 }
 ```
-As you can see from above, this configuration's values are all populated using [facts](http://docs.ansible.com/playbooks_variables.html#information-discovered-from-systems-facts).
+As you can see from above, this configuration's values are all populated using [facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#information-discovered-from-systems-facts).
 
 To override this for a single node, `sensu_client_config` can be set in the `host_vars/node_name.domain.name.yml` file. We can also override it for entire groups in `group_vars/group_name.yml`.
 
