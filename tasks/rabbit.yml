@@ -39,7 +39,7 @@
 
 - name: Wait for RabbitMQ to be up and running before asking to create a vhost
   pause: seconds=3
-  when: rabbitmq_state|changed
+  when: rabbitmq_state is changed
 
 - block:
     - name: Ensure Sensu RabbitMQ vhost exists
