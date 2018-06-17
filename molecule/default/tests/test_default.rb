@@ -43,3 +43,10 @@ describe port(3000) do
   its('protocols') { should include 'tcp' }
   its('addresses') { should be_in ['0.0.0.0', '::'] }
 end
+
+# Ensure Sensu API has one consumer
+describe http('http://127.0.0.1:4567/health',
+              auth: { user: 'admin', pass: 'secret' },
+              params: { consumers: 1 }) do
+  its('status') { should eq 204 }
+end
