@@ -9,7 +9,7 @@
 
 _Note: The above options are intended to provide users with flexibility. This allows the use of other roles for deployment of these services._
 
-### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
+### [RabbitMQ Server Properties](https://docs.sensu.io/sensu-core/latest/reference/rabbitmq/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `rabbitmq_config_path` | `/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
@@ -24,7 +24,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
 | `rabbitmq_enable_ssl` | `true` | Determines whether or not to use `ssl_listener` for RabbitMQ |
 
-### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
+### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
@@ -38,7 +38,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `redis_sentinels` | `[]` | List of Redis Sentinel servers to use, with each item having `host` and `port` keys. Disables Sentinel when empty/unset |
 | `redis_master_name` | `` | Name of the master (replica set) to use with Redis Sentinel |
 
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_api_host` | `"{{ groups['sensu_masters'][0] }}"` | Hostname/IP address of the node running the Sensu API |
@@ -79,7 +79,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_ssl_server_cert` | `"{{ sensu_ssl_tool_base_path }}/server/cert.pem"` ||
 | `sensu_ssl_server_key` | `"{{ sensu_ssl_tool_base_path }}/server/key.pem"` ||
 
-### [Uchiwa Properties](http://docs.uchiwa.io/en/latest/)
+### [Uchiwa Properties](https://docs.uchiwa.io/getting-started/configuration/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `uchiwa_dc_name` | _undefined_ | Datacenter name for Uchiwa instance |
@@ -93,33 +93,33 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `uchiwa_auth_publickey` | None | Public counterpart to the above variable |
 
 ## Ubuntu
-### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
+### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_pkg_name` | redis-server |  The name of the redis package to install |
 | `redis_service_name` | redis-server | The name of the redis service |
 
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
 
 ## Debian
-### [redis Server Properties](https://sensuapp.org/docs/latest/reference/redis)
+### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `redis_pkg_name` | redis-server | The name of the redis service |
 | `redis_service_name` | redis-server | The name of the redis service |
 
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
 
 ## CentOS
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
@@ -128,13 +128,13 @@ _Note: The above options are intended to provide users with flexibility. This al
 
 
 ## SmartOS
-### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
+### [RabbitMQ Server Properties](https://docs.sensu.io/sensu-core/latest/reference/rabbitmq/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `rabbitmq_config_path` | `/opt/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
 | `rabbitmq_service_name` | rabbitmq | The name of the RabbitMQ service |
 
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/opt/local/etc/sensu` | Path to the Sensu configuration directory |
@@ -142,12 +142,12 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_plugin_gem_state` | present | State of the Sensu Plugins gem - can be set to `latest` to keep Sensu Plugins updated |
 
 ## FreeBSD
-### [Sensu Properties](https://sensuapp.org/docs/latest/installation/overview)
+### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_config_path` | `/usr/local/etc/sensu` | Path to the Sensu configuration directory |
 
-### [RabbitMQ Server Properties](https://sensuapp.org/docs/latest/reference/rabbitmq)
+### [RabbitMQ Server Properties](https://docs.sensu.io/sensu-core/latest/reference/rabbitmq/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `rabbitmq_service_name` | `rabbitmq` | The name of the RabbitMQ service |

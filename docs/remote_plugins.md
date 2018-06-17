@@ -6,7 +6,7 @@ sensu_remote_plugins:
   - graphite
   - process-checks
 ```
-This will install the `graphite` and `process-checks` plugins from [sensu-plugins.io](http://sensu-plugins.io/).  
+This will install the `graphite` and `process-checks` plugins from [https://github.com/sensu-plugins/](https://github.com/sensu-plugins/).  
 
 Specific versions of plugins can also be defined, as shown below:
 ``` yaml

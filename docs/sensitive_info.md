@@ -5,7 +5,7 @@ Naturally, a means of authentication falls into place. This can require setting 
 You might have noticed, in this role's `defaults/main.yml` that there are a few variables you can set for password properties.
 If you're keeping your Ansible configuration in version control (as you really should be) - or anywhere for that matter - you most likely don't want such information to be expressed in plain text, readable to anyone/anything that may stumble upon it.
 
-Ansible has an excellent feature called [Vault](http://docs.ansible.com/playbooks_vault.html) - introduced in version 1.5.
+Ansible has an excellent feature called [Vault](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html) - introduced in version 1.5.
 It offers a means of encrypting various pieces of data throughout your Ansible codebase.
 
 As mentioned already throughout this documentation: Ansible really is quite versatile, so this can be approached in quite a few ways, but here's how I would suggest encrypting the sensitive variables necessary for use with this Sensu role.
@@ -51,4 +51,4 @@ Then, to ensure the variables are picked up during the play, you can add `vars/s
 
 ### Editing encrypted data
 Editing encrypted data is as easy as `$ ansible-vault edit path/to/data.yml`  
-See [the Ansible Vault page for more information](http://docs.ansible.com/playbooks_vault.html)
+See [the Ansible Vault page for more information](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vault.html)

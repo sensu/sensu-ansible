@@ -57,11 +57,9 @@ You can see I decided I want the Uchiwa dashboard to be deployed also, so I set 
 The above code could also be set straight in the node's `host_vars` file: `host_vars/sensu.cmacr.ae.yml` or set straight in a playbook intended just for the `sensu_masters` node:
 ``` yaml
   - hosts: sensu_masters
-
     vars:
 	  sensu_master: true
 	  sensu_include_dashboard: true
-
     roles:
 	  - sensu.sensu
 ```

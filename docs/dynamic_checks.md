@@ -1,5 +1,5 @@
 # Check Deployment
-One of the awesome features of this role (if I do say so myself) is the deployment of Sensu [checks](https://sensuapp.org/docs/latest/reference/checks) on a dynamic basis. Deployment of which checks should be distributed to which nodes is determined from group membership within the Ansible inventory.
+One of the awesome features of this role (if I do say so myself) is the deployment of Sensu [checks](https://docs.sensu.io/sensu-core/latest/reference/checks/) on a dynamic basis. Deployment of which checks should be distributed to which nodes is determined from group membership within the Ansible inventory.
 
 Have a group of webservers you need to monitor webservices on? Well, I'm sure you've bunched them together in your inventory under the `[webservers]` group, right? Or perhaps you only want to monitor disk space on your production systems; if they're a member of `[production]` within the inventory, you can do this easily.
 
@@ -84,7 +84,7 @@ tater.cmacr.ae
 web.cmacr.ae
 test.cmacr.ae
 ```
-Under these subdirectories, you can see [checks](https://sensuapp.org/docs/latest/reference/checks) that relate to the directory they're placed in.
+Under these subdirectories, you can see [checks](https://docs.sensu.io/sensu-core/latest/reference/checks/) that relate to the directory they're placed in.
 For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
 
 So how do these checks actually get deployed to their associated nodes?
@@ -107,7 +107,7 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
       - group_names
     notify: restart sensu-client service
 ```
-This will [register](http://docs.ansible.com/playbooks_conditionals.html#register-variables) a list of available checks, then deploy them to their intended groups based on node membership, as set within the Ansible inventory.
+This will [register](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#register-variables) a list of available checks, then deploy them to their intended groups based on node membership, as set within the Ansible inventory.
 
 And, because nodes can of course be members of more than just one group, checks will be deployed in full to nodes that belong to several groups!
 

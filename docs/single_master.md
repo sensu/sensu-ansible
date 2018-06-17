@@ -24,7 +24,6 @@ rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
 redis_host: "{{ groups['redis_servers'][0] }}"
 sensu_api_host: "{{ groups['sensu_masters'][0] }}"
 ```
-This is an example of using [Ansible's awesome lookups](http://docs.ansible.com/playbooks_lookups.html).  
 
 These are very important values, they determine the points of communication for each component of Sensu.  
 If you're just deploying the stack to a single node and you've decided you'd like to leave any of the `rabbitmq_servers`/`redis_servers`/`sensu_masters` groups out of your inventory, you'll need to statically set the communication endpoints.
