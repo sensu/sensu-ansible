@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 ### Changed
+- Stop publishing development/testing files to Ansible Galaxy (@jaredledvina)
 
 ## [2.5.0] - 2018-06-16
 ### Changed
