@@ -1,2 +1,3 @@
 site
 molecule/default/data/
+molecule/*/cache/
