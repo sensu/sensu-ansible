@@ -32,6 +32,15 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
+  config_options:
+    defaults:
+      callback_whitelist: timer,profile_tasks
+      fact_caching: jsonfile
+      fact_caching_connection: ./cache
+      poll_interval: 3
+      forks: 100
+    connection:
+      pipelining: true
   playbooks:
     prepare: ../default/prepare.yml
     create: ../default/create.yml
