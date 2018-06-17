@@ -27,7 +27,7 @@
   service:
     name: "{{ sensu_server_service_name if not se_enterprise else sensu_enterprise_service_name }}"
     state: started
-  enabled: yes
+    enabled: yes
 
 - name: Ensure Sensu API service is running
   service:
