@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 ### Changed
+
+## [2.5.0] - 2018-06-16
+### Changed
 - Ansible role is officially mirrored to the `sensu.sensu` namespace (@jaredledvina)
 - Deprecated `sensu_pkg_version` for Redhat, Fedora, CentOS, and FreeBSD. To pin going forward across all operating systems, simply append the Sensu version to `sensu_package`. For example, `sensu_package: sensu-1.3.3` will ensure that only Sensu 1.3.3 is ever installed. (@jaredledvina)
 - Ensure that on first install we install the latest stable Sensu release (@jaredledvina)
@@ -18,6 +21,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Various syntax cleanups and testing documentation updates (@jaredledvina)
 - Enable `yamllint` checking and fixup all files to pass checks (@jaredledvina)
 - Enable `ansible-lint` checking and fixup all errors to pass checks (@jaredledvina)
+- Various doc cleanup and fixes (@jaredledvina)
+- Switch openssl to `present` as `installed` is deprecated (@rlizana)
+
 
 ## [2.4.0] - 2018-05-06
 ### Fixed:
@@ -110,7 +116,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.4.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.5.0...HEAD
+[2.5.0]: https://github.com/sensu/sensu-ansible/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/sensu/sensu-ansible/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/sensu/sensu-ansible/compare/2.2.0...2.3.0
 [2.2.0]: https://github.com/sensu/sensu-ansible/compare/2.1.0...2.2.0
