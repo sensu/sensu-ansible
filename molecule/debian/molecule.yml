@@ -7,7 +7,6 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: True
 platforms:
   - name: debian-8
     image: dokken/debian-8
@@ -41,7 +40,6 @@ provisioner:
     verify: ../shared/verify.yml
   lint:
     name: ansible-lint
-    enabled: True
   inventory:
     group_vars:
       all:
@@ -56,14 +54,13 @@ provisioner:
           address: 127.0.0.1
     host_vars:
       debian-8:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/16.04/inspec_2.1.68-1_amd64.deb
-        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.16/ubuntu/16.04/inspec_2.2.16-1_amd64.deb
+        inspec_download_sha256sum: c65a9ee4a38dac46760caf2500b4504ba49845423420be685aa8ea20ea52f3b4
       debian-9:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/ubuntu/16.04/inspec_2.1.68-1_amd64.deb
-        inspec_download_sha256sum: bb411271af5275c26f0129a61230a1080d22a6e99eb0f1b52223ee9d55827375
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.16/ubuntu/16.04/inspec_2.2.16-1_amd64.deb
+        inspec_download_sha256sum: c65a9ee4a38dac46760caf2500b4504ba49845423420be685aa8ea20ea52f3b4
 verifier:
   name: inspec
   directory: ../shared/
   lint:
     name: rubocop
-    enabled: true

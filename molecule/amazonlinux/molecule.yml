@@ -7,7 +7,6 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: True
 platforms:
   - name: amazonlinux-1
     image: dokken/amazonlinux
@@ -40,7 +39,6 @@ provisioner:
     verify: ../shared/verify.yml
   lint:
     name: ansible-lint
-    enabled: True
   inventory:
     group_vars:
       all:
@@ -55,14 +53,13 @@ provisioner:
           address: 127.0.0.1
     host_vars:
       amazonlinux-1:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/6/inspec-2.1.68-1.el6.x86_64.rpm
-        inspec_download_sha256sum: a62bc8d8ea803a72b7e834f5993c1d9eab50539293365a067cd29736daeb3fea
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.16/el/6/inspec-2.2.16-1.el6.x86_64.rpm
+        inspec_download_sha256sum: 616af0700b3c80f545d143dfe24c987039a8d715cbb615aac5ad94b0e0b34323
       amazonlinux-2:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.1.68/el/7/inspec-2.1.68-1.el7.x86_64.rpm
-        inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.16/el/7/inspec-2.2.16-1.el7.x86_64.rpm
+        inspec_download_sha256sum: 2fdf2000630c38828c3172d471a61ecc4b8ff58ce9bee9a5543a99434be30e83
 verifier:
   name: inspec
   directory: ../shared/tests/
   lint:
     name: rubocop
-    enabled: true
