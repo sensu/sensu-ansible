@@ -13,6 +13,10 @@ addons:
   apt:
     packages:
       - docker-ce
+cache:
+  pip: true
+  directories:
+    - ~/.cache/pipenv
 install:
   - pip install pipenv
   - pipenv install --two --dev
