@@ -42,11 +42,11 @@ provisioner:
     connection:
       pipelining: true
   playbooks:
-    prepare: ../default/prepare.yml
-    create: ../default/create.yml
-    destroy: ../default/destroy.yml
-    converge: ../default/playbook.yml
-    verify: ../default/verify.yml
+    prepare: ../shared/prepare.yml
+    create: ../shared/create.yml
+    destroy: ../shared/destroy.yml
+    converge: ../shared/playbook.yml
+    verify: ../shared/verify.yml
   lint:
     name: ansible-lint
     enabled: True
@@ -74,7 +74,7 @@ provisioner:
         inspec_download_sha256sum: 54fb2aab023a228c8f622653daabed14f2345780ec978670dbd262a63ad06fe9
 verifier:
   name: inspec
-  directory: ../default/tests/
+  directory: ../shared/tests/
   lint:
     name: rubocop
     enabled: true
