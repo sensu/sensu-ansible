@@ -1,0 +1,13 @@
+platform:
+  - x86
+
+matrix:
+  fast_finish: true
+
+install:
+  - pip install pipenv
+  - pipenv install --two --dev
+  - gem install rubocop
+
+test_script:
+  - pipenv run molecule test --scenario-name $SCENARIO --driver-name docker --destroy always
