@@ -6,24 +6,24 @@
 
 - name: Ensure the RabbitMQ APT repo GPG key is present
   apt_key:
-    url: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    url: "{{ sensu_rabbitmq_signing_key }}"
     state: present
 
 - name: Ensure the RabbitMQ APT repo is present
   apt_repository:
-    repo: "deb https://dl.bintray.com/rabbitmq/debian {{ ansible_distribution_release }} main"
+    repo: "{{ sensu_rabbitmq_repo }}"
     filename: rabbitmq
     state: present
     update_cache: true
 
 - name: Ensure the Erlang APT repo GPG key is present
   apt_key:
-    url: https://packages.erlang-solutions.com/debian/erlang_solutions.asc
+    url: "{{ sensu_rabbitmq_erlang_signing_key }}"
     state: present
 
 - name: Ensure the Erlang APT repo is present
   apt_repository:
-    repo: "deb https://packages.erlang-solutions.com/debian {{ ansible_distribution_release }} contrib"
+    repo: "{{ sensu_rabbitmq_erlang_repo }}"
     filename: erlang
     state: present
     update_cache: true
