@@ -4,31 +4,28 @@
 
 - include_vars: "{{ ansible_distribution }}.yml"
 
-- name: Configure RabbitMQ/RabbitMQ-erlang GPG keys in the RPM keyring
+- name: Configure RabbitMQ GPG keys in the RPM keyring
   rpm_key:
-    key: "{{ item }}"
+    key: "{{ sensu_rabbitmq_signing_key }}"
     state: present
-  with_items:
-    - https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
-    - https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
   register: sensu_rabbitmq_import_key
 
 - name: Add RabbitMQ's repo
   yum_repository:
     name: rabbitmq
     description: rabbitmq
-    baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/v3.7.x/el/{{ansible_distribution_major_version}}"
+    baseurl: "{{ sensu_rabbitmq_baseurl }}"
     gpgcheck: yes
-    gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    gpgkey: "{{ sensu_rabbitmq_signing_key }}"
     repo_gpgcheck: no
 
 - name: Add RabbitMQ's Erlang repo
   yum_repository:
     name: rabbitmq-erlang
     description: rabbitmq-erlang
-    baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/19/el/{{ansible_distribution_major_version}}"
+    baseurl: "{{ sensu_rabbitmq_erlang_baseurl }}"
     gpgcheck: yes
-    gpgkey: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    gpgkey: "{{ sensu_rabbitmq_erlang_signing_key }}"
     repo_gpgcheck: no
 
 # HACK: https://github.com/ansible/ansible/issues/20711#issuecomment-306260869
