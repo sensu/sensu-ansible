@@ -16,6 +16,14 @@
     state: present
     update_cache: true
 
+- name: Ensure Erlang APT preferences is configured
+  template:
+    src: erlang-apt-preferences.j2
+    dest: /etc/apt/preferences.d/erlang
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Ensure the Erlang APT repo GPG key is present
   apt_key:
     url: "{{ sensu_rabbitmq_erlang_signing_key }}"
