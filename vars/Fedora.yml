@@ -4,3 +4,9 @@
 
 # RH/Centos 7 version works for Fedora 25 as a client
 sensu_yum_repo_url: "https://sensu.global.ssl.fastly.net/yum/7/$basearch/"
+sensu_rabbitmq_repo_version: v3.7.x
+sensu_rabbitmq_erlang_repo_version: 19
+sensu_rabbitmq_signing_key: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+sensu_rabbitmq_baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/{{ sensu_rabbitmq_repo_version }}/el/{{ epel_version }}"
+sensu_rabbitmq_erlang_signing_key: "{{ sensu_rabbitmq_signing_key }}"
+sensu_rabbitmq_erlang_baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/{{ sensu_rabbitmq_erlang_repo_version }}/el/7"
