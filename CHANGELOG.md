@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 - Stop publishing development/testing files to Ansible Galaxy (@jaredledvina)
 - Update molecule's testing configuration for speed and task profiling (@jaredledvina)
 - Update Inspec to latest stable & refactor shared testing files (@jaredledvina)
+- RabbitMQ - Expose a varient distro repo configs via variables for more flexibility
+- RabbitMQ - Configure apt-preferences and pin erlang to version 20.X
+- Fedora - RabbitMQ - Reconfigure GPG key pinning to match CentOS/AmazonLinux
+- Fedora/CentOS/AmazonLinux - Upgrade to zero-dep erlang v20 repo's
 
 ## [2.5.0] - 2018-06-16
 ### Changed
