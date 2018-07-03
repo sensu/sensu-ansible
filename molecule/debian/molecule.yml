@@ -54,11 +54,11 @@ provisioner:
           address: 127.0.0.1
     host_vars:
       debian-8:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.16/ubuntu/16.04/inspec_2.2.16-1_amd64.deb
-        inspec_download_sha256sum: c65a9ee4a38dac46760caf2500b4504ba49845423420be685aa8ea20ea52f3b4
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.27/ubuntu/16.04/inspec_2.2.27-1_amd64.deb
+        inspec_download_sha256sum: ae6c1214643e1dbfa03c2b87432529132bd6e1fcdc20863bd9ee038cbfb705a0
       debian-9:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.16/ubuntu/16.04/inspec_2.2.16-1_amd64.deb
-        inspec_download_sha256sum: c65a9ee4a38dac46760caf2500b4504ba49845423420be685aa8ea20ea52f3b4
+        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.27/ubuntu/16.04/inspec_2.2.27-1_amd64.deb
+        inspec_download_sha256sum: ae6c1214643e1dbfa03c2b87432529132bd6e1fcdc20863bd9ee038cbfb705a0
 verifier:
   name: inspec
   directory: ../shared/
