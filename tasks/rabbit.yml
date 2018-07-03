@@ -6,10 +6,15 @@
 - include: "{{ ansible_distribution }}/rabbit.yml"
 
 - name: Ensure RabbitMQ SSL directory exists
-  file: dest={{ rabbitmq_config_path }}/ssl state=directory
+  file:
+    dest: "{{ rabbitmq_config_path }}/ssl"
+    state: directory
 
 - name: Ensure RabbitMQ SSL certs/keys are in place
-  copy: src="{{ item.src }}" dest="{{ rabbitmq_config_path }}/ssl/{{ item.dest }}" remote_src="{{ sensu_ssl_deploy_remote_src }}"
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ rabbitmq_config_path }}/ssl/{{ item.dest }}"
+    remote_src: "{{ sensu_ssl_deploy_remote_src }}"
   with_items:
     - { src: "{{ sensu_ssl_server_cacert }}", dest: cacert.pem }
     - { src: "{{ sensu_ssl_server_cert }}", dest: cert.pem }
@@ -38,12 +43,15 @@
   register: rabbitmq_state
 
 - name: Wait for RabbitMQ to be up and running before asking to create a vhost
-  pause: seconds=3
+  pause:
+    seconds: 3
   when: rabbitmq_state is changed
 
 - block:
     - name: Ensure Sensu RabbitMQ vhost exists
-      rabbitmq_vhost: name={{ rabbitmq_sensu_vhost }} state=present
+      rabbitmq_vhost:
+        name: "{{ rabbitmq_sensu_vhost }}"
+        state: present
 
     - name: Ensure Sensu RabbitMQ user has access to the Sensu vhost
       rabbitmq_user:

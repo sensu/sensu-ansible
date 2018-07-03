@@ -6,7 +6,7 @@
 
 - name: Ensure the RabbitMQ APT repo GPG key is present
   apt_key:
-    url: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+    url: "{{ sensu_rabbitmq_signing_key }}"
     state: present
 
 - name: Ensure the RabbitMQ APT repo is present
@@ -16,9 +16,17 @@
     state: present
     update_cache: true
 
+- name: Ensure Erlang APT preferences is configured
+  template:
+    src: erlang-apt-preferences.j2
+    dest: /etc/apt/preferences.d/erlang
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Ensure the Erlang APT repo GPG key is present
   apt_key:
-    url: https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc
+    url: "{{ sensu_rabbitmq_erlang_signing_key }}"
     state: present
 
 - name: Ensure the Erlang APT repo is present

@@ -8,6 +8,10 @@ env:
   - SCENARIO=centos
   - SCENARIO=fedora
   - SCENARIO=amazonlinux
+matrix:
+  fast_finish: true
+  allow_failures:
+    - env: SCENARIO=amazonlinux  # https://github.com/inspec/train/pull/312
 services: docker
 addons:
   apt:

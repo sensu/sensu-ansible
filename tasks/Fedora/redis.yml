@@ -4,6 +4,11 @@
 
 - include_vars: "{{ ansible_distribution }}.yml"
 
+- name: Ensure jemalloc is installed as a dependency of Redis
+  dnf:
+    name: jemalloc
+    state: present
+
 - name: Ensure redis is installed
   dnf:
     name: "{{ redis_pkg_name }}"
