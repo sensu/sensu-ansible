@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [2.6.0] - 2018-07-03
 ### Changed
 - Add support for configuring [Tessen](https://docs.sensu.io/sensu-core/1.4/reference/tessen/) via `sensu_enable_tessen` (@jaredledvina)
 - Stop publishing development/testing files to Ansible Galaxy (@jaredledvina)
@@ -124,7 +126,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.5.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.6.0...HEAD
+[2.6.0]: https://github.com/sensu/sensu-ansible/compare/2.5.0...2.6.0
 [2.5.0]: https://github.com/sensu/sensu-ansible/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/sensu/sensu-ansible/compare/2.3.0...2.4.0
 [2.3.0]: https://github.com/sensu/sensu-ansible/compare/2.2.0...2.3.0
