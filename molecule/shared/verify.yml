@@ -8,9 +8,24 @@
   become: true
   vars:
     inspec_download_source_dir: /usr/local/src
-    inspec_package_name: "{{ inspec_download_url.split('/')[-1] }}"
     inspec_bin: /opt/inspec/bin/inspec
     inspec_test_directory: "/tmp/molecule/inspec"
+    inspec_downloads:
+      el6:
+        url: https://packages.chef.io/files/stable/inspec/2.2.35/el/6/inspec-2.2.35-1.el6.x86_64.rpm
+        sha256: 824d2a4fa801206c2ba10bca2b2a04783f6e6a3690a59e0618b2c7232036b01f
+      el7:
+        url: https://packages.chef.io/files/stable/inspec/2.2.35/el/7/inspec-2.2.35-1.el7.x86_64.rpm
+        sha256: 610c60132ac28f2f54e7d17a9b7afeaec3e11912c1463584495e0e4e81667200
+      ubuntu1404:
+        url: https://packages.chef.io/files/stable/inspec/2.2.35/ubuntu/14.04/inspec_2.2.35-1_amd64.deb
+        sha256: 2cff0ee43eae1dcca8591b947f9175a6771964e8017af99be9adfb5e581a06e0
+      ubuntu1604:
+        url: https://packages.chef.io/files/stable/inspec/2.2.35/ubuntu/16.04/inspec_2.2.35-1_amd64.deb
+        sha256: 2cff0ee43eae1dcca8591b947f9175a6771964e8017af99be9adfb5e581a06e0
+      ubuntu1804:
+        url: https://packages.chef.io/files/stable/inspec/2.2.35/ubuntu/18.04/inspec_2.2.35-1_amd64.deb
+        sha256: 2cff0ee43eae1dcca8591b947f9175a6771964e8017af99be9adfb5e581a06e0
   tasks:
     - name: Install system dependencies for Inspec
       package:
@@ -23,9 +38,9 @@
 
     - name: Download Inspec
       get_url:
-        url: "{{ inspec_download_url }}"
+        url: "{{ inspec_downloads[inspec_version]['url'] }}"
         dest: "{{ inspec_download_source_dir }}"
-        sha256sum: "{{ inspec_download_sha256sum }}"
+        sha256sum: "{{ inspec_downloads[inspec_version]['sha256'] }}"
         mode: 0755
       register: inspec_download
 

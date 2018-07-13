@@ -61,14 +61,11 @@ provisioner:
           address: 127.0.0.1
     host_vars:
       ubuntu-14.04:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.27/ubuntu/14.04/inspec_2.2.27-1_amd64.deb
-        inspec_download_sha256sum: ae6c1214643e1dbfa03c2b87432529132bd6e1fcdc20863bd9ee038cbfb705a0
+        inspec_version: ubuntu1404
       ubuntu-16.04:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.27/ubuntu/16.04/inspec_2.2.27-1_amd64.deb
-        inspec_download_sha256sum: ae6c1214643e1dbfa03c2b87432529132bd6e1fcdc20863bd9ee038cbfb705a0
+        inspec_version: ubuntu1604
       ubuntu-18.04:
-        inspec_download_url: https://packages.chef.io/files/stable/inspec/2.2.27/ubuntu/18.04/inspec_2.2.27-1_amd64.deb
-        inspec_download_sha256sum: ae6c1214643e1dbfa03c2b87432529132bd6e1fcdc20863bd9ee038cbfb705a0
+        inspec_version: ubuntu1804
 verifier:
   name: inspec
   directory: ../shared/tests/
