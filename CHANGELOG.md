@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Fixed
+- RabbitMQ - Configure ciphers when SSL is enabled (@mkobel)
 
 ## [2.6.0] - 2018-07-03
 ### Changed

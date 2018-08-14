@@ -6,6 +6,8 @@
                    {certfile,"{{ rabbitmq_config_path }}/ssl/cert.pem"},
                    {keyfile,"{{ rabbitmq_config_path }}/ssl/key.pem"},
                    {verify,verify_peer},
+                   {versions, ['tlsv1.2']},
+                   {ciphers,  [{rsa,aes_256_cbc,sha256}]},
                    {fail_if_no_peer_cert,true}]}
     {% else %}
     {tcp_listeners, [{{ rabbitmq_port }}]}
