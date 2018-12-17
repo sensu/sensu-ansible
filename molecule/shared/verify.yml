@@ -1,8 +1,4 @@
 ---
-# This is an example playbook to execute inspec tests.
-# Tests need distributed to the appropriate ansible host/groups
-# prior to execution by `inspec exec`.
-
 - name: Verify
   hosts: all
   become: true
@@ -12,29 +8,29 @@
     inspec_test_directory: "/tmp/molecule/inspec"
     inspec_downloads:
       el6:
-        url: https://packages.chef.io/files/stable/inspec/2.2.35/el/6/inspec-2.2.35-1.el6.x86_64.rpm
-        sha256: 824d2a4fa801206c2ba10bca2b2a04783f6e6a3690a59e0618b2c7232036b01f
+        url: https://packages.chef.io/files/stable/inspec/3.1.3/el/6/inspec-3.1.3-1.el6.x86_64.rpm
+        sha256: 1e4f14769edd0dfcfcde93b528520b0fafff94ae06b9cc1c3d01f6a36c395d17
       el7:
-        url: https://packages.chef.io/files/stable/inspec/2.2.35/el/7/inspec-2.2.35-1.el7.x86_64.rpm
-        sha256: 610c60132ac28f2f54e7d17a9b7afeaec3e11912c1463584495e0e4e81667200
+        url: https://packages.chef.io/files/stable/inspec/3.1.3/el/7/inspec-3.1.3-1.el7.x86_64.rpm
+        sha256: 1ffc7cfcbc67dab3ca57b28704ef237700b67e6a56a6520a89512042633efa23
       ubuntu1404:
-        url: https://packages.chef.io/files/stable/inspec/2.2.35/ubuntu/14.04/inspec_2.2.35-1_amd64.deb
-        sha256: 2cff0ee43eae1dcca8591b947f9175a6771964e8017af99be9adfb5e581a06e0
+        url: https://packages.chef.io/files/stable/inspec/3.1.3/ubuntu/14.04/inspec_3.1.3-1_amd64.deb
+        sha256: 6b0e7f46b32aa141da24fd04cc52136c83b54e534d2e997a3ebac0fe17f78809
       ubuntu1604:
-        url: https://packages.chef.io/files/stable/inspec/2.2.35/ubuntu/16.04/inspec_2.2.35-1_amd64.deb
-        sha256: 2cff0ee43eae1dcca8591b947f9175a6771964e8017af99be9adfb5e581a06e0
+        url: https://packages.chef.io/files/stable/inspec/3.1.3/ubuntu/16.04/inspec_3.1.3-1_amd64.deb
+        sha256: 6b0e7f46b32aa141da24fd04cc52136c83b54e534d2e997a3ebac0fe17f78809
       ubuntu1804:
-        url: https://packages.chef.io/files/stable/inspec/2.2.35/ubuntu/18.04/inspec_2.2.35-1_amd64.deb
-        sha256: 2cff0ee43eae1dcca8591b947f9175a6771964e8017af99be9adfb5e581a06e0
+        url: https://packages.chef.io/files/stable/inspec/3.1.3/ubuntu/18.04/inspec_3.1.3-1_amd64.deb
+        sha256: 6b0e7f46b32aa141da24fd04cc52136c83b54e534d2e997a3ebac0fe17f78809
+    inspec_package_deps:
+      - lsof
+      - net-tools
   tasks:
     - name: Install system dependencies for Inspec
       package:
         name: "{{ item }}"
         state: present
-      with_items:
-        - lsof
-        - iproute
-        - net-tools
+      with_items: "{{ inspec_package_deps }}"
 
     - name: Download Inspec
       get_url:
