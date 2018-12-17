@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ### Fixed
 - RabbitMQ - Configure ciphers when SSL is enabled (@mkobel)
 
+### Changed
+- Tests - Update Docerfile and bump Inspec to 3.1.1 (@jaredledvina)
+
+
 ## [2.6.0] - 2018-07-03
 ### Changed
 - Add support for configuring [Tessen](https://docs.sensu.io/sensu-core/1.4/reference/tessen/) via `sensu_enable_tessen` (@jaredledvina)
