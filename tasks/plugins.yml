@@ -40,8 +40,8 @@
     mode: 0755
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
-  when: 
-    - sensu_available_checks is defined 
+  when:
+    - sensu_available_checks is defined
     - sensu_available_checks is not skipped
     - item in sensu_available_checks.stdout_lines"
   with_flattened:
