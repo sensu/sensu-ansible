@@ -40,7 +40,10 @@
     mode: 0755
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
-  when: "sensu_available_checks is defined and item in sensu_available_checks.stdout_lines"
+  when:
+    - sensu_available_checks is defined
+    - sensu_available_checks is not skipped
+    - item in sensu_available_checks.stdout_lines
   with_flattened:
     - "{{ group_names }}"
   notify: restart sensu-client service
@@ -98,7 +101,10 @@
     dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
-  when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
+  when:
+    - sensu_available_client_definitions is defined
+    - sensu_available_checks is not skipped
+    - item in sensu_available_client_definitions.stdout_lines
   with_flattened:
     - "{{ group_names }}"
   notify: restart sensu-client service
