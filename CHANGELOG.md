@@ -14,6 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ### Changed
 - Tests - Update Dockerfile and bump Inspec to 3.1.1 (@jaredledvina)
+- Docs - Change theme to readthedocs from flatly to fix builds (@jaredledvina)
 
 ## [2.6.0] - 2018-07-03
 ### Changed
