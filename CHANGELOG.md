@@ -5,12 +5,15 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+
+## [2.7.0] - 2019-01-31
 ### Fixed
 - RabbitMQ - Configure ciphers when SSL is enabled (@mkobel)
+- Check if sensu_available_checks was skipped to support running in check mode (@jaredledvina)
 
 ### Changed
-- Tests - Update Docerfile and bump Inspec to 3.1.1 (@jaredledvina)
-
+- Tests - Update Dockerfile and bump Inspec to 3.1.1 (@jaredledvina)
 
 ## [2.6.0] - 2018-07-03
 ### Changed
@@ -132,7 +135,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.6.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/2.7.0...HEAD
+[2.7.0]: https://github.com/sensu/sensu-ansible/compare/2.6.0...2.7.0
 [2.6.0]: https://github.com/sensu/sensu-ansible/compare/2.5.0...2.6.0
 [2.5.0]: https://github.com/sensu/sensu-ansible/compare/2.4.0...2.5.0
 [2.4.0]: https://github.com/sensu/sensu-ansible/compare/2.3.0...2.4.0
