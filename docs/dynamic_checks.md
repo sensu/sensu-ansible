@@ -40,7 +40,7 @@ data/static
     |   |-- smartos_check_cpu.json.j2
     |   |-- smartos_check_disk.json.j2
     |   `-- smartos_check_mem.json.j2
-    |-- client-definitions
+    |-- client_definitions
     |   |-- rabbitmq_servers
     |   |   `-- check_users.json.j2
     |   `-- webservers
@@ -111,7 +111,7 @@ This will [register](https://docs.ansible.com/ansible/latest/user_guide/playbook
 
 And, because nodes can of course be members of more than just one group, checks will be deployed in full to nodes that belong to several groups!
 
-Additionally, standalone checks can be distributed to hosts based on group membership. These definitions are located in the client-definitions folder. These will be deployed to the configuration directory of the clients.
+Additionally, standalone checks can be distributed to hosts based on group membership. These definitions are located in the client_definitions folder. These will be deployed to the configuration directory of the clients.
 
 These are deployed with the following pair of plays, also in the `tasks/plugins.yml` playbook:
 ``` yaml
