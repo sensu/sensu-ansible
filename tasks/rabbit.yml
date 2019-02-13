@@ -3,7 +3,7 @@
 
 - include_vars: "{{ ansible_distribution }}.yml"
 
-- include: "{{ ansible_distribution }}/rabbit.yml"
+- include_tasks: "{{ ansible_distribution }}/rabbit.yml"
 
 - name: Ensure RabbitMQ SSL directory exists
   file:

@@ -19,9 +19,8 @@
     src: sensu-tessen.json.j2
   notify: restart sensu-server service
 
-- include: "{{ role_path }}/tasks/SmartOS/server.yml"
+- include_tasks: "{{ role_path }}/tasks/SmartOS/server.yml"
   when: ansible_distribution == "SmartOS"
-  static: false
 
 - name: Ensure Sensu server service is running
   service:
