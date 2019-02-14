@@ -2,7 +2,8 @@
 # tasks/server.yml: Deploy Sensu Server/API
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
   tags: server
 
 - name: Deploy Sensu server API configuration

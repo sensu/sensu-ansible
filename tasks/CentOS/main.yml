@@ -3,8 +3,8 @@
 # This takes care of base prerequisites for CentOS
 
 - name: Include ansible_distribution vars
-  include_varse ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
   tags: setup
 
 - name: Ensure the Sensu Core Yum repo is present

@@ -3,7 +3,8 @@
 # data store for deployment to clients
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
 
 - name: Ensure OpenSSL is installed
   package:

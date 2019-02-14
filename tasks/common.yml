@@ -2,7 +2,8 @@
 # tasks/common.yml: Deploy configurations common to client and server for Sensu
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
 
 - name: Ensure the Sensu config directory is present
   file:

@@ -2,7 +2,8 @@
 # tasks/plugins.yml: Deploy available checks/plugins/handlers/filters/mutators
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
 
 - name: Ensure Sensu plugin directory exists
   file:
@@ -79,7 +80,7 @@
 - name: Deploy check/handler/filter/mutator definitions to the master
   template:
     src: "{{ item }}"
-    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
+    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '') }}"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
   when: sensu_master
@@ -99,7 +100,7 @@
 - name: Deploy client definitions
   copy:
     src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
-    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
+    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '') }}"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
   when:

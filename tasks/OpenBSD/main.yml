@@ -3,7 +3,8 @@
 # This takes care of base prerequisites for OpenBSD
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
   tags: setup
 
 - name: Ensure the Sensu group is present
@@ -45,7 +46,7 @@
   tags: setup
   gem:
     name: sensu
-    repository: "{{ sensu_gem_repository | default('https://api.rubygems.org/')}}"
+    repository: "{{ sensu_gem_repository | default('https://api.rubygems.org/') }}"
     user_install: no
     version: "{{ sensu_gem_version }}"
     executable: /usr/local/bin/gem23

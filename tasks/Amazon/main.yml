@@ -3,8 +3,9 @@
 # This takes care of base prerequisites for Amazon Linux AMI
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
   tags: setup
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
 
 - name: Set epel_version override when AmazonLinux AMIv2
   tags: setup

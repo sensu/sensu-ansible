@@ -3,13 +3,14 @@
 # This takes care of base prerequisites for FreeBSD
 
 - name: Include ansible_distribution vars
-  include_vars: "{{ ansible_distribution }}.yml"
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
   tags: setup
 
 - name: Ensure the Sensu group is present
   tags: setup
   group:
-    name: {{ sensu_group_name }}
+    name: "{{ sensu_group_name }}"
     state: present
 
 - name: Ensure the Sensu user is present
