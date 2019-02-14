@@ -3,18 +3,22 @@
 # Specific to Fedora
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: redis
 
 - name: Ensure jemalloc is installed as a dependency of Redis
+  tags: redis
   dnf:
     name: jemalloc
     state: present
 
 - name: Ensure redis is installed
+  tags: redis
   dnf:
     name: "{{ redis_pkg_name }}"
     state: "{{ redis_pkg_state }}"
 
 - name: Ensure redis binds to accessible IP
+  tags: redis
   lineinfile:
     dest: /etc/redis.conf
     regexp: '^bind'

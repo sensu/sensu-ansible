@@ -3,20 +3,24 @@
 # Specific to CentOS
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: redis
 
 - name: Install EPEL repo
+  tags: redis
   yum:
     name: epel-release
     state: present
   when: enable_epel_repo
 
 - name: Ensure redis is installed
+  tags: redis
   yum:
     name: "{{ redis_pkg_name }}"
     state: "{{ redis_pkg_state }}"
     enablerepo: "{{ centos_repository }}"
 
 - name: Ensure redis binds to accessible IP
+  tags: redis
   lineinfile:
     dest: /etc/redis.conf
     regexp: '^bind'

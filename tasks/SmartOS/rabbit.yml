@@ -3,9 +3,11 @@
 # Specific to Joyent SmartOS
 
 - name: Ensure RabbitMQ is installed
+  tags: rabbitmq
   pkgin: name=rabbitmq state=present
 
 - name: Ensure EPMD is running
+  tags: rabbitmq
   service:
     name: epmd
     state: started

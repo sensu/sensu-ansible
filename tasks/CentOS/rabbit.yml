@@ -3,14 +3,17 @@
 # Specific to CentOS
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: rabbitmq
 
 - name: Configure RabbitMQ GPG keys in the RPM keyring
+  tags: rabbitmq
   rpm_key:
     key: "{{ sensu_rabbitmq_signing_key }}"
     state: present
   register: sensu_rabbitmq_import_key
 
 - name: Add RabbitMQ's repo
+  tags: rabbitmq
   yum_repository:
     name: rabbitmq
     description: rabbitmq
@@ -20,6 +23,7 @@
     repo_gpgcheck: no
 
 - name: Add RabbitMQ's Erlang repo
+  tags: rabbitmq
   yum_repository:
     name: rabbitmq-erlang
     description: rabbitmq-erlang
@@ -31,6 +35,7 @@
 # HACK: https://github.com/ansible/ansible/issues/20711#issuecomment-306260869
 # Can be removed once we're running w/ a version of Ansible that has https://github.com/ansible/ansible/pull/35989
 - name: Make yum cache to import GPG keys
+  tags: rabbitmq
   command: "yum -q makecache -y --disablerepo='*' --enablerepo='{{ item }}'"
   args:
     warn: false
@@ -43,11 +48,13 @@
 # we simply install it here, as we purposely disable epel when installing rabbitmq
 # causing dependency issues during installs
 - name: Ensure socat is installed
+  tags: rabbitmq
   yum:
     name: socat
     state: present
 
 - name: Ensure Erlang & RabbitMQ are installed
+  tags: rabbitmq
   yum:
     name:
       - erlang

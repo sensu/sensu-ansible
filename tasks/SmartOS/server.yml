@@ -4,8 +4,10 @@
 # Specific to SmartOS
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: server
 
 - name: Deploy Sensu server service manifest
+  tags: server
   template:
     dest: /opt/local/lib/svc/manifest/sensu-server.xml
     src: sensu-server.smartos_smf_manifest.xml.j2
@@ -15,6 +17,7 @@
   notify: import sensu-server service
 
 - name: Deploy Sensu API service manifest
+  tags: server
   template:
     dest: /opt/local/lib/svc/manifest/sensu-api.xml
     src: sensu-api.smartos_smf_manifest.xml.j2
@@ -24,3 +27,4 @@
   notify: import sensu-api service
 
 - meta: flush_handlers
+  tags: server

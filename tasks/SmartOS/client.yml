@@ -3,8 +3,10 @@
 # Specific to Joyent SmartOS
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: client
 
 - name: Deploy Sensu client service manifest
+  tags: client
   template:
     dest: /opt/local/lib/svc/manifest/sensu-client.xml
     src: sensu-client.smartos_smf_manifest.xml.j2
@@ -16,3 +18,4 @@
     - restart sensu-client service
 
 - meta: flush_handlers
+  tags: client

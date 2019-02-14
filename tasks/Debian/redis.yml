@@ -3,14 +3,17 @@
 # Specific to Debian
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: redis
 
 - name: Ensure redis is installed
+  tags: redis
   apt:
     name: "{{ redis_pkg_name }}"
     state: "{{ redis_pkg_state }}"
     update_cache: true
 
 - name: Ensure redis binds to accessible IP
+  tags: redis
   lineinfile:
     dest: /etc/redis/redis.conf
     regexp: '^bind'
@@ -18,3 +21,4 @@
   notify: restart redis service
 
 - meta: flush_handlers
+  tags: redis

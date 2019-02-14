@@ -3,13 +3,16 @@
 # Specific to FreeBSD
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: redis
 
 - name: Ensure redis is installed
+  tags: redis
   pkgng:
     name: "{{ redis_pkg_name }}"
     state: "{{ redis_pkg_state }}"
 
 - name: Ensure redis binds to accessible IP
+  tags: redis
   lineinfile:
     dest: /usr/local/etc/redis.conf
     regexp: '^bind'
@@ -17,3 +20,4 @@
   notify: restart redis service
 
 - meta: flush_handlers
+  tags: redis

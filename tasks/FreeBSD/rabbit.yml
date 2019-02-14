@@ -3,8 +3,10 @@
 # Specific to FreeBSD
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: rabbitmq
 
 - name: Ensure RabbitMQ is installed
+  tags: rabbitmq
   pkgng:
     name: rabbitmq
     state: "{{ rabbitmq_pkg_state }}"

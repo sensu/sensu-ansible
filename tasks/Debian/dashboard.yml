@@ -3,13 +3,16 @@
 # Specific to Debian
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: dashboard
 
 - name: Install uchiwa
+  tags: dashboard
   apt:
     name: uchiwa
     state: present
 
 - name: Deploy Uchiwa config
+  tags: dashboard
   template:
     src: uchiwa_config.json.j2
     dest: "{{ sensu_config_path }}/uchiwa.json"

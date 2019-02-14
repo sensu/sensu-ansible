@@ -2,8 +2,10 @@
 # tasks/server.yml: Deploy Sensu Server/API
 
 - include_vars: "{{ ansible_distribution }}.yml"
+  tags: server
 
 - name: Deploy Sensu server API configuration
+  tags: server
   template:
     dest: "{{ sensu_config_path }}/conf.d/api.json"
     owner: "{{ sensu_user_name }}"
@@ -12,6 +14,7 @@
   notify: restart sensu-api service
 
 - name: Deploy Tessen server configuratiuon
+  tags: server
   template:
     dest: "{{ sensu_config_path }}/conf.d/tessen.json"
     owner: "{{ sensu_user_name }}"
@@ -20,15 +23,18 @@
   notify: restart sensu-server service
 
 - include_tasks: "{{ role_path }}/tasks/SmartOS/server.yml"
+  tags: server
   when: ansible_distribution == "SmartOS"
 
 - name: Ensure Sensu server service is running
+  tags: server
   service:
     name: "{{ sensu_server_service_name if not se_enterprise else sensu_enterprise_service_name }}"
     state: started
     enabled: yes
 
 - name: Ensure Sensu API service is running
+  tags: server
   service:
     name: sensu-api
     state: started
