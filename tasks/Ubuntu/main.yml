@@ -2,7 +2,8 @@
 # tasks/Ubuntu/main.yml: Ubuntu specific set-up
 # This takes care of base prerequisites for Ubuntu
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: setup
 
 - name: Ensure that https transport is ready

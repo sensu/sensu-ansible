@@ -2,7 +2,8 @@
 # tasks/FreeBSD/main.yml: FreeBSD specific set-up
 # This takes care of base prerequisites for FreeBSD
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: setup
 
 - name: Ensure the Sensu group is present

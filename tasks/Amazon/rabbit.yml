@@ -2,7 +2,8 @@
 # tasks/Amazon/rabbit.yml: Deploy RabbitMQ
 # Specific to Amazon Linux
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: rabbitmq
 
 - name: Configure RabbitMQ/RabbitMQ-erlang GPG keys in the RPM keyring

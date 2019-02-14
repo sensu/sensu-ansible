@@ -1,7 +1,8 @@
 ---
 # tasks/ssl.yml: Deploy the client SSL cert/key to client systems
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
 
 - name: Ensure Sensu SSL directory exists
   file:

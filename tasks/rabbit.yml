@@ -1,7 +1,8 @@
 ---
 # tasks/rabbit.yml: Deploy RabbitMQ and set-up vhost for Sensu messaging
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: rabbitmq
 
 - include_tasks: "{{ ansible_distribution }}/rabbit.yml"

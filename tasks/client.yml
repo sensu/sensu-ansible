@@ -1,7 +1,8 @@
 ---
 # tasks/client.yml: Deploy various client-side configurations for Sensu
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: client
 
 - name: Deploy Sensu client service configuration

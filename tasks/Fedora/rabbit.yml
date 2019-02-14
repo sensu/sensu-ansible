@@ -2,7 +2,8 @@
 # tasks/Fedora/rabbit.yml: Deploy RabbitMQ
 # Specific to Fedora
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: rabbitmq
 
 - name: Configure RabbitMQ GPG keys in the RPM keyring

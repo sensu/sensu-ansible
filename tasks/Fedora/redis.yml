@@ -2,7 +2,8 @@
 # tasks/Fedora/redis.yml: Deploy redis
 # Specific to Fedora
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: redis
 
 - name: Ensure jemalloc is installed as a dependency of Redis

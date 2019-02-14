@@ -2,7 +2,8 @@
 # tasks/FreeBSD/rabbit.yml: Deploy RabbitMQ
 # Specific to FreeBSD
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars: "{{ ansible_distribution }}.yml"
   tags: rabbitmq
 
 - name: Ensure RabbitMQ is installed
