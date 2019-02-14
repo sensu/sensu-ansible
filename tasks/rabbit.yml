@@ -56,13 +56,11 @@
 
 - block:
     - name: Ensure Sensu RabbitMQ vhost exists
-      tags: rabbitmq
       rabbitmq_vhost:
         name: "{{ rabbitmq_sensu_vhost }}"
         state: present
 
     - name: Ensure Sensu RabbitMQ user has access to the Sensu vhost
-      tags: rabbitmq
       rabbitmq_user:
         user: "{{ rabbitmq_sensu_user_name }}"
         password: "{{ rabbitmq_sensu_password }}"
@@ -73,3 +71,4 @@
         state: present
   become: true
   become_user: rabbitmq
+  tags: rabbitmq
