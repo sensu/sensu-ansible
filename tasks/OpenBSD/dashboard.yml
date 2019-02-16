@@ -2,9 +2,13 @@
 # tasks/OpenBSD/dashboard.yml: Deployment of the Uchiwa dashboard
 # Specific to OpenBSD
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: dashboard
 
 - name: Ensure Uchiwa (dashboard) dependencies are installed
+  tags: dashboard
   openbsd_pkg:
     name: "{{ item }}"
     state: present
@@ -14,6 +18,7 @@
     - npm
 
 - name: Ensure Uchiwa directory exists
+  tags: dashboard
   file:
     dest: "{{ uchiwa_path }}"
     state: directory
@@ -22,6 +27,7 @@
     recurse: true
 
 - name: Ensure Uchiwa Go/config directory exists
+  tags: dashboard
   file:
     dest: "{{ uchiwa_path }}/{{ item }}"
     state: directory
@@ -33,6 +39,7 @@
     - go
 
 - name: Ensure Uchiwa GOPATH exists
+  tags: dashboard
   file:
     dest: "{{ uchiwa_path }}/go/{{ item }}"
     owner: "{{ sensu_user_name }}"
@@ -45,6 +52,7 @@
     - src
 
 - name: Fetch Uchiwa from GitHub
+  tags: dashboard
   command: go get github.com/sensu/uchiwa
   environment:
     GOPATH: "{{ uchiwa_path }}/go"
@@ -55,8 +63,10 @@
   become_user: "{{ sensu_user_name }}"
 
 - meta: flush_handlers
+  tags: dashboard
 
 - name: Deploy Uchiwa config
+  tags: dashboard
   template:
     src: uchiwa_config.json.j2
     dest: "{{ uchiwa_path }}/etc/config.json"
@@ -65,10 +75,12 @@
   notify: restart uchiwa service
 
 - name: Deploy Uchiwa service file
+  tags: dashboard
   template:
     src: uchiwa_openbsd.j2
     dest: "/usr/local/etc/rc.d/uchiwa"
     mode: "0755"
 
 - name: Ensure Uchiwa server service is running
+  tags: dashboard
   service: name=uchiwa state=started enabled=yes

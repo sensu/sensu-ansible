@@ -1,16 +1,22 @@
 ---
 # tasks/rabbit.yml: Deploy RabbitMQ and set-up vhost for Sensu messaging
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: rabbitmq
 
-- include: "{{ ansible_distribution }}/rabbit.yml"
+- include_tasks: "{{ ansible_distribution }}/rabbit.yml"
+  tags: rabbitmq
 
 - name: Ensure RabbitMQ SSL directory exists
+  tags: rabbitmq
   file:
     dest: "{{ rabbitmq_config_path }}/ssl"
     state: directory
 
 - name: Ensure RabbitMQ SSL certs/keys are in place
+  tags: rabbitmq
   copy:
     src: "{{ item.src }}"
     dest: "{{ rabbitmq_config_path }}/ssl/{{ item.dest }}"
@@ -27,6 +33,7 @@
   when: sensu_ssl_manage_certs
 
 - name: Deploy RabbitMQ config
+  tags: rabbitmq
   template:
     dest: "{{ rabbitmq_config_path }}/rabbitmq.config"
     src: "{{ rabbitmq_config_template }}"
@@ -36,6 +43,7 @@
   notify: restart rabbitmq service
 
 - name: Ensure RabbitMQ is running
+  tags: rabbitmq
   service:
     name: "{{ rabbitmq_service_name }}"
     state: started
@@ -43,6 +51,7 @@
   register: rabbitmq_state
 
 - name: Wait for RabbitMQ to be up and running before asking to create a vhost
+  tags: rabbitmq
   pause:
     seconds: 3
   when: rabbitmq_state is changed
@@ -64,3 +73,4 @@
         state: present
   become: true
   become_user: rabbitmq
+  tags: rabbitmq

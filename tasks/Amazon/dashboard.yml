@@ -2,14 +2,19 @@
 # tasks/Amazon/dashboard.yml: Deployment of the Uchiwa dashboard
 # Specific to CentOS
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: dashboard
 
 - name: Ensure Uchiwa is installed
+  tags: dashboard
   yum:
     name: uchiwa
     state: present
 
 - name: Deploy Uchiwa config
+  tags: dashboard
   template:
     src: uchiwa_config.json.j2
     dest: "{{ sensu_config_path }}/uchiwa.json"

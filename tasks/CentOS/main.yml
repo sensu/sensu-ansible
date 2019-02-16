@@ -2,9 +2,13 @@
 # tasks/CentOS/main.yml: CentOS specific set-up
 # This takes care of base prerequisites for CentOS
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: setup
 
 - name: Ensure the Sensu Core Yum repo is present
+  tags: setup
   yum_repository:
     name: sensu
     description: The Sensu Core yum repository
@@ -17,6 +21,7 @@
     enabled: yes
 
 - name: Ensure that credential is supplied if installing Sensu Enterprise
+  tags: setup
   assert:
     that:
       - "se_user != ''"
@@ -25,6 +30,7 @@
   when: se_enterprise
 
 - name: Ensure the Sensu Enterprise repo is present
+  tags: setup
   copy:
     dest: /etc/yum.repos.d/sensu-enterprise.repo
     content: |
@@ -39,6 +45,7 @@
   when: se_enterprise
 
 - name: Ensure the Sensu Enterprise Dashboard repo is present
+  tags: setup
   copy:
     dest: /etc/yum.repos.d/sensu-enterprise-dashboard.repo
     content: |
@@ -53,11 +60,13 @@
   when: se_enterprise
 
 - name: Ensure Sensu is installed
+  tags: setup
   package:
     name: "{{ sensu_package }}"
     state: "{{ sensu_pkg_state }}"
 
 - name: Ensure Sensu Enterprise is installed
+  tags: setup
   package:
     name: "{{ sensu_enterprise_package }}"
     state: "{{ sensu_pkg_state }}"

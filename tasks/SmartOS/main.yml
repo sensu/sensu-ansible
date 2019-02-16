@@ -2,12 +2,17 @@
 # tasks/SmartOS/main.yml: "Set-up" playbook for sensu.sensu role
 # This takes care of base prerequisites for Joyent SmartOS
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: setup
 
 - name: Ensure the Sensu group is present
+  tags: setup
   group: name={{ sensu_group_name }} state=present
 
 - name: Ensure the Sensu user is present
+  tags: setup
   user:
     name: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
@@ -17,12 +22,15 @@
     state: present
 
 - name: Ensure Sensu dependencies are installed
+  tags: setup
   pkgin: name=build-essential,ruby21-base state=present
 
 - name: Ensure Sensu is installed
+  tags: setup
   gem: name=sensu state={{ sensu_gem_state }} user_install=no
   notify:
     - restart sensu-client service
 
 - name: Ensure Sensu 'plugins' gem is installed
+  tags: setup
   gem: name=sensu-plugin state={{ sensu_plugin_gem_state }} user_install=no

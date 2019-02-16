@@ -2,14 +2,19 @@
 # tasks/Amazon/main.yml: CentOS specific set-up
 # This takes care of base prerequisites for Amazon Linux AMI
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  tags: setup
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
 
 - name: Set epel_version override when AmazonLinux AMIv2
+  tags: setup
   set_fact:
     epel_version: 7
   when: ansible_distribution_version == 'Candidate'
 
 - name: Ensure the Sensu Core Yum repo is present
+  tags: setup
   yum_repository:
     name: sensu
     description: The Sensu Core yum repository
@@ -19,6 +24,7 @@
     enabled: yes
 
 - name: Ensure Sensu is installed
+  tags: setup
   yum:
     name: "{{ sensu_package }}"
     state: "{{ sensu_pkg_state }}"

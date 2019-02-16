@@ -2,21 +2,27 @@
 # tasks/Amazon/redis.yml: Deploy redis
 # Specific to Amazon Linux AMI
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: redis
 
 - name: Install EPEL repo
+  tags: redis
   yum:
     name: "{{ epel_repo_rpm }}"
     state: present
   when: enable_epel_repo
 
 - name: Ensure redis is installed
+  tags: redis
   yum:
     name: "{{ redis_pkg_name }}"
     state: "{{ redis_pkg_state }}"
     enablerepo: epel
 
 - name: Ensure redis binds to accessible IP
+  tags: redis
   lineinfile:
     dest: /etc/redis.conf
     regexp: '^bind'

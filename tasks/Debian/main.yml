@@ -2,9 +2,13 @@
 # tasks/Debian/main.yml: Debian specific set-up
 # This takes care of base prerequisites for Debian
 
-- include_vars: "{{ ansible_distribution }}.yml"
+- name: Include ansible_distribution vars
+  include_vars:
+    file: "{{ ansible_distribution }}.yml"
+  tags: setup
 
 - name: Ensure apt-transport-https is installed
+  tags: setup
   apt:
     name: apt-transport-https
     state: present
@@ -12,22 +16,26 @@
     update_cache: true
 
 - name: Ensure that gnupg is installed for apt_key
+  tags: setup
   apt:
     name: gnupg
     state: present
 
 - name: Ensure the Sensu APT repo GPG key is present
+  tags: setup
   apt_key:
     url: "{{ sensu_apt_key_url }}"
     state: present
 
 - name: Ensure the Sensu Core APT repo is present
+  tags: setup
   apt_repository:
     repo: "{{ sensu_apt_repo_url }}"
     state: present
     update_cache: true
 
 - name: Ensure Sensu is installed
+  tags: setup
   apt:
     name: "{{ sensu_package }}"
     state: "{{ sensu_pkg_state }}"
