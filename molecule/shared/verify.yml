@@ -8,20 +8,20 @@
     inspec_test_directory: "/tmp/molecule/inspec"
     inspec_downloads:
       el6:
-        url: https://packages.chef.io/files/stable/inspec/3.1.3/el/6/inspec-3.1.3-1.el6.x86_64.rpm
-        sha256: 1e4f14769edd0dfcfcde93b528520b0fafff94ae06b9cc1c3d01f6a36c395d17
+        url: https://packages.chef.io/files/stable/inspec/3.6.6/el/6/inspec-3.6.6-1.el6.x86_64.rpm
+        sha256: 69b05dd28304b7c915381b88f035b3239d1328d891faef18aa30954266fc4da2
       el7:
-        url: https://packages.chef.io/files/stable/inspec/3.1.3/el/7/inspec-3.1.3-1.el7.x86_64.rpm
-        sha256: 1ffc7cfcbc67dab3ca57b28704ef237700b67e6a56a6520a89512042633efa23
+        url: https://packages.chef.io/files/stable/inspec/3.6.6/el/7/inspec-3.6.6-1.el7.x86_64.rpm
+        sha256: 2a950a2aeecf2c26b16285a2fcec244da97c636d47d5928ee181620e80472cac
       ubuntu1404:
-        url: https://packages.chef.io/files/stable/inspec/3.1.3/ubuntu/14.04/inspec_3.1.3-1_amd64.deb
-        sha256: 6b0e7f46b32aa141da24fd04cc52136c83b54e534d2e997a3ebac0fe17f78809
+        url: https://packages.chef.io/files/stable/inspec/3.6.6/ubuntu/14.04/inspec_3.6.6-1_amd64.deb
+        sha256: 4294bdd3f8cd1aff3e6d912d2c48b345d0ec60ecefd92310cb3ae561b909cfec
       ubuntu1604:
-        url: https://packages.chef.io/files/stable/inspec/3.1.3/ubuntu/16.04/inspec_3.1.3-1_amd64.deb
-        sha256: 6b0e7f46b32aa141da24fd04cc52136c83b54e534d2e997a3ebac0fe17f78809
+        url: https://packages.chef.io/files/stable/inspec/3.6.6/ubuntu/16.04/inspec_3.6.6-1_amd64.deb
+        sha256: 4294bdd3f8cd1aff3e6d912d2c48b345d0ec60ecefd92310cb3ae561b909cfec
       ubuntu1804:
-        url: https://packages.chef.io/files/stable/inspec/3.1.3/ubuntu/18.04/inspec_3.1.3-1_amd64.deb
-        sha256: 6b0e7f46b32aa141da24fd04cc52136c83b54e534d2e997a3ebac0fe17f78809
+        url: https://packages.chef.io/files/stable/inspec/3.6.6/ubuntu/18.04/inspec_3.6.6-1_amd64.deb
+        sha256: 4294bdd3f8cd1aff3e6d912d2c48b345d0ec60ecefd92310cb3ae561b909cfec
     inspec_package_deps:
       - lsof
       - net-tools
