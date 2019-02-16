@@ -66,7 +66,7 @@ Or, passing parameter values:
 ```
 
 ## Ansible version support
-All changes to this role are actively tested against Ansible 2.3 and 2.4 at this time. Ansible 2.3 is required at a minimum.
+All changes to this role are actively tested against Ansible 2.6 and 2.7 at this time. Ansible 2.4 is required at a minimum.
 
 
 License

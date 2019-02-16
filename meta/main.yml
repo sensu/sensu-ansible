@@ -3,7 +3,7 @@ galaxy_info:
   author: Calum MacRae
   description: Deploy a full Sensu monitoring stack; including redis, RabbitMQ & the Uchiwa dashboard
   license: MIT
-  min_ansible_version: 2.3
+  min_ansible_version: 2.4
   platforms:
     - name: EL
       versions:

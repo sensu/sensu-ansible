@@ -14,7 +14,7 @@ Along with deploying the Sensu Server, API and clients, this role can deploy a f
 However, if you want to rely on other roles/management methods to deploy/manage these services, [it's nice and easy to integrate this role](integration/).
 
 ## Requirements
-This role requires Ansible 2.3
+This role requires Ansible 2.4
 
 ## Supported Platforms
 ### Automatically tested via TravisCI
