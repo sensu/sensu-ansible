@@ -13,7 +13,10 @@
     group: "{{ sensu_group_name }}"
 
 - name: Ensure local directories exist
-  local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
+  file:
+    state: directory
+    dest: "{{ static_data_store }}/sensu/{{ item }}"
+  delegate_to: localhost
   become: no
   with_items:
     - checks
@@ -30,7 +33,8 @@
   when: sensu_remote_plugins | length > 0
 
 - name: Register available checks
-  local_action: command ls {{ static_data_store }}/sensu/checks
+  command: "ls {{ static_data_store }}/sensu/checks"
+  delegate_to: localhost
   register: sensu_available_checks
   changed_when: false
   become: false
@@ -92,7 +96,8 @@
     - restart sensu-enterprise service
 
 - name: Register available client definitions
-  local_action: command ls {{ static_data_store }}/sensu/client_definitions
+  command: "ls {{ static_data_store }}/sensu/client_definitions"
+  delegate_to: localhost
   register: sensu_available_client_definitions
   changed_when: false
   become: false
