@@ -6,7 +6,7 @@
       add_host:
         name: "{{ item }}"
         groups: sensu_masters
-      with_items: "{{ ansible_play_hosts }}"
+      loop: "{{ ansible_play_hosts }}"
       changed_when: false
 
     - name: Ensure container hostnames are correct

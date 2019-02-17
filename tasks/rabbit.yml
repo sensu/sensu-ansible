@@ -21,7 +21,7 @@
     src: "{{ item.src }}"
     dest: "{{ rabbitmq_config_path }}/ssl/{{ item.dest }}"
     remote_src: "{{ sensu_ssl_deploy_remote_src }}"
-  with_items:
+  loop:
     - { src: "{{ sensu_ssl_server_cacert }}", dest: cacert.pem }
     - { src: "{{ sensu_ssl_server_cert }}", dest: cert.pem }
     - { src: "{{ sensu_ssl_server_key }}", dest: key.pem }

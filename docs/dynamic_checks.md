@@ -85,7 +85,7 @@ web.cmacr.ae
 test.cmacr.ae
 ```
 Under these subdirectories, you can see [checks](https://docs.sensu.io/sensu-core/latest/reference/checks/) that relate to the directory they're placed in.
-For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).  
+For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).
 
 So how do these checks actually get deployed to their associated nodes?
 With this pair of plays, in the `tasks/plugins.yml` playbook:
@@ -103,8 +103,8 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     when: "'{{ item }}' in sensu_available_checks.stdout_lines"
-    with_flattened:
-      - group_names
+    loop:
+      - group_names|flatten
     notify: restart sensu-client service
 ```
 This will [register](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#register-variables) a list of available checks, then deploy them to their intended groups based on node membership, as set within the Ansible inventory.
@@ -129,8 +129,8 @@ These are deployed with the following pair of plays, also in the `tasks/plugins.
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
   when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
-  with_flattened:
-    - "{{ group_names }}"
+  loop:
+    - "{{ group_names|flatten }}"
   notify: restart sensu-client service
 ```
 

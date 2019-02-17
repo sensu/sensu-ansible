@@ -12,7 +12,7 @@
   openbsd_pkg:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - go
     - git
     - npm
@@ -34,7 +34,7 @@
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
     recurse: true
-  with_items:
+  loop:
     - etc
     - go
 
@@ -46,7 +46,7 @@
     group: "{{ sensu_group_name }}"
     state: directory
     recurse: true
-  with_items:
+  loop:
     - bin
     - pkg
     - src

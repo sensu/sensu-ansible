@@ -42,7 +42,7 @@
   args:
     warn: false
   when: sensu_rabbitmq_import_key.changed
-  with_items:
+  loop:
     - rabbitmq
     - rabbitmq-erlang
 

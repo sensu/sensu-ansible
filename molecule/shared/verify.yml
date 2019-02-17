@@ -30,7 +30,7 @@
       package:
         name: "{{ item }}"
         state: present
-      with_items: "{{ inspec_package_deps }}"
+      loop: "{{ inspec_package_deps }}"
 
     - name: Download Inspec
       get_url:
@@ -77,16 +77,16 @@
     - name: Execute Inspec tests
       command: "{{ inspec_bin }} exec {{ item }} --no-color --reporter progress"
       register: test_results
-      with_items: "{{ test_files.stdout_lines }}"
+      loop: "{{ test_files.stdout_lines }}"
       ignore_errors: true
 
     - name: Display details about the Inspec results
       debug:
         msg: "{{ item.stdout_lines }}"
-      with_items: "{{ test_results.results }}"
+      loop: "{{ test_results.results }}"
 
     - name: Fail when tests fail
       fail:
         msg: "Inspec failed to validate"
       when: item.rc != 0
-      with_items: "{{ test_results.results }}"
+      loop: "{{ test_results.results }}"

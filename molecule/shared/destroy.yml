@@ -12,7 +12,7 @@
         state: absent
         force_kill: "{{ item.force_kill | default(true) }}"
       register: server
-      with_items: "{{ molecule_yml.platforms }}"
+      loop: "{{ molecule_yml.platforms }}"
       async: 7200
       poll: 0
 
@@ -22,11 +22,11 @@
       register: docker_jobs
       until: docker_jobs.finished
       retries: 300
-      with_items: "{{ server.results }}"
+      loop: "{{ server.results }}"
 
     - name: Delete docker network(s)
       docker_network:
         name: "{{ item }}"
         docker_host: "{{ item.docker_host | default('unix://var/run/docker.sock') }}"
         state: absent
-      with_items: "{{ molecule_yml.platforms | molecule_get_docker_networks }}"
+      loop: "{{ molecule_yml.platforms | molecule_get_docker_networks }}"
