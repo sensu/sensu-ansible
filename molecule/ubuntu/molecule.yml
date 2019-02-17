@@ -20,14 +20,13 @@ platforms:
       - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-# Disabled for now, missing Sensu and RabbitMQ packages, total mess to override in tests
-#  - name: ubuntu-18.04
-#    image: dokken/ubuntu-18.04
-#    command: /bin/systemd
-#    capabilities:
-#      - SYS_ADMIN
-#    volumes:
-#      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: ubuntu-18.04
+    image: dokken/ubuntu-18.04
+    command: /bin/systemd
+    capabilities:
+      - SYS_ADMIN
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
   name: ansible
   config_options:
