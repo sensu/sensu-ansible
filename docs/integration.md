@@ -9,9 +9,9 @@ If you'd like to use a different role/management method for RabbitMQ, the follow
 sensu_deploy_rabbitmq_server: false
 sensu_rabbitmq_host: < IP/DNS record of your RabbitMQ server >
 sensu_rabbitmq_port: < optionally set a differing port, defaults to 5671 >
-sensu_rabbitmq_sensu_user_name: < the username for interacting with RabbitMQ >
-sensu_rabbitmq_sensu_password: < the password for interacting with RabbitMQ >
-sensu_rabbitmq_sensu_vhost: < the RabbitMQ vhost to use, defaults to '/sensu' >
+sensu_rabbitmq_user_name: < the username for interacting with RabbitMQ >
+sensu_rabbitmq_password: < the password for interacting with RabbitMQ >
+sensu_rabbitmq_vhost: < the RabbitMQ vhost to use, defaults to '/sensu' >
 sensu_rabbitmq_config_path: < the path to the RabbitMQ configuration >
 
 ```

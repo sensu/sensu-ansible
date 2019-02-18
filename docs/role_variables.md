@@ -19,9 +19,9 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_rabbitmq_pkg_state` | present | The state of the RabbitMQ package (should be set to `present` or `latest`) |
 | `sensu_rabbitmq_server` | `false` | Determines whether to include the deployment of RabbitMQ |
 | `sensu_rabbitmq_service_name` | rabbitmq-server | The name of the RabbitMQ service |
-| `sensu_rabbitmq_sensu_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
-| `sensu_rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
-| `sensu_rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
+| `sensu_rabbitmq_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
+| `sensu_rabbitmq_password` | sensu | Password for authentication with the RabbitMQ vhost |
+| `sensu_rabbitmq_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
 | `sensu_rabbitmq_enable_ssl` | `true` | Determines whether or not to use `ssl_listener` for RabbitMQ |
 
 ### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)

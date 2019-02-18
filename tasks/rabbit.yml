@@ -58,15 +58,15 @@
 
 - block:
     - name: Ensure Sensu RabbitMQ vhost exists
-      sensu_rabbitmq_vhost:
-        name: "{{ sensu_rabbitmq_sensu_vhost }}"
+      rabbitmq_vhost:
+        name: "{{ sensu_rabbitmq_vhost }}"
         state: present
 
     - name: Ensure Sensu RabbitMQ user has access to the Sensu vhost
-      sensu_rabbitmq_user:
-        user: "{{ sensu_rabbitmq_sensu_user_name }}"
-        password: "{{ sensu_rabbitmq_sensu_password }}"
-        vhost: "{{ sensu_rabbitmq_sensu_vhost }}"
+      rabbitmq_user:
+        user: "{{ sensu_rabbitmq_user_name }}"
+        password: "{{ sensu_rabbitmq_password }}"
+        vhost: "{{ sensu_rabbitmq_vhost }}"
         configure_priv: .*
         read_priv: .*
         write_priv: .*

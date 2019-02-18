@@ -38,9 +38,9 @@ sensu_rabbitmq_port: 5671
 sensu_rabbitmq_pkg_state: present
 sensu_rabbitmq_server: false
 sensu_rabbitmq_service_name: rabbitmq-server
-sensu_rabbitmq_sensu_user_name: sensu
-sensu_rabbitmq_sensu_password: sensu
-sensu_rabbitmq_sensu_vhost: /sensu
+sensu_rabbitmq_user_name: sensu
+sensu_rabbitmq_password: sensu
+sensu_rabbitmq_vhost: /sensu
 
 # redis server properties
 sensu_redis_host: "{{ groups['sensu_redis_servers'][0] }}"
