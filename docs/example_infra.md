@@ -9,10 +9,10 @@ It ties in with use of inventory grouping and variables.
 Let's start with an example Ansible Inventory:
 
 ``` ini
-[rabbitmq_servers]
+[sensu_rabbitmq_servers]
 test.cmacr.ae
 
-[redis_servers]
+[sensu_redis_servers]
 redis.cmacr.ae
 
 [sensu_masters]
@@ -42,7 +42,7 @@ web.cmacr.ae
 test.cmacr.ae
 ```
 
-Here we have some nodes grouped into `rabbitmq_servers`, `redis_servers`, `sensu_masters`, `webservers`, and `zones`.
+Here we have some nodes grouped into `sensu_rabbitmq_servers`, `sensu_redis_servers`, `sensu_masters`, `webservers`, and `zones`.
 
 Since we only want one Sensu "master", the default to act as a master in this role is set to `false` - defined by `sensu_master`.
 
@@ -65,20 +65,20 @@ The above code could also be set straight in the node's `host_vars` file: `host_
 ```
 
 ### RabbitMQ/redis variables
-You'll probably have noticed the two groups `rabbitmq_servers` and `redis_servers` in the example inventory.
-Quite self explanatory what these are, but - as with the `sensu_master` variable in the previous section - both the `rabbitmq_server` & `redis_server` values are set to `false` by default (defined in `defaults/main.yml`).
+You'll probably have noticed the two groups `sensu_rabbitmq_servers` and `sensu_redis_servers` in the example inventory.
+Quite self explanatory what these are, but - as with the `sensu_master` variable in the previous section - both the `sensu_rabbitmq_server` & `sensu_redis_server` values are set to `false` by default (defined in `defaults/main.yml`).
 
 The same approach of setting these to `true` is taken here again.
 Once more, I opt to set these in `group_vars`, like so:
 
-`group_vars/rabbitmq_servers.yml`
+`group_vars/sensu_rabbitmq_servers.yml`
 ``` yaml
-rabbitmq_server: true
+sensu_rabbitmq_server: true
 ```
 
-`group_vars/redis_servers.yml`
+`group_vars/sensu_redis_servers.yml`
 ``` yaml
-redis_server: true
+sensu_redis_server: true
 ```
 
 The same can, again, be set directly in your RabbitMQ/redis nodes' `host_vars` files, or done so in the playbook as shown in the previous section for the values `sensu_master` & `sensu_include_dashboard`.

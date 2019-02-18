@@ -8,7 +8,7 @@
 - name: Ensure redis is running
   tags: redis
   service:
-    name: "{{ redis_service_name }}"
+    name: "{{ sensu_redis_service_name }}"
     pattern: /usr/bin/redis-server
     state: started
     enabled: true

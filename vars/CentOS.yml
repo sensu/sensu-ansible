@@ -5,9 +5,9 @@
 # Set this to false to disable the EPEL repo installation
 enable_epel_repo: true
 
-sensu_rabbitmq_repo_version: v3.7.x
-sensu_rabbitmq_erlang_repo_version: 20
-sensu_rabbitmq_signing_key: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
-sensu_rabbitmq_baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/{{ sensu_rabbitmq_repo_version }}/el/{{ ansible_distribution_major_version }}"
-sensu_rabbitmq_erlang_signing_key: "{{ sensu_rabbitmq_signing_key }}"
-sensu_rabbitmq_erlang_baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/{{ sensu_rabbitmq_erlang_repo_version }}/el/{{ ansible_distribution_major_version }}"
+sensu_rabbitmq_bitmq_repo_version: v3.7.x
+sensu_rabbitmq_bitmq_erlang_repo_version: 20
+sensu_rabbitmq_bitmq_signing_key: https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc
+sensu_rabbitmq_bitmq_baseurl: "https://dl.bintray.com/rabbitmq/rpm/rabbitmq-server/{{ sensu_rabbitmq_su_rabbitmq_repo_version }}/el/{{ ansible_distribution_major_version }}"
+sensu_rabbitmq_bitmq_erlang_signing_key: "{{ sensu_rabbitmq_su_rabbitmq_signing_key }}"
+sensu_rabbitmq_bitmq_erlang_baseurl: "https://dl.bintray.com/rabbitmq/rpm/erlang/{{ sensu_rabbitmq_su_rabbitmq_erlang_repo_version }}/el/{{ ansible_distribution_major_version }}"

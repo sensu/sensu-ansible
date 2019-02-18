@@ -1,6 +1,6 @@
 {
   "rabbitmq": {
-    {% if rabbitmq_enable_ssl %}
+    {% if sensu_rabbitmq_enable_ssl %}
     "ssl": {
       "cert_chain_file": "{{ sensu_config_path }}/ssl/cert.pem",
       "private_key_file": "{{ sensu_config_path }}/ssl/key.pem"

@@ -48,6 +48,6 @@
   tags: rabbitmq
   apt:
     name: rabbitmq-server
-    state: "{{ rabbitmq_pkg_state }}"
+    state: "{{ sensu_rabbitmq_pkg_state }}"
     cache_valid_time: 600
     update_cache: true

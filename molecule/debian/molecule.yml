@@ -45,10 +45,10 @@ provisioner:
       all:
         sensu_master: true
         sensu_include_dashboard: true
-        rabbitmq_server: true
-        redis_server: true
-        rabbitmq_host: "{{ ansible_hostname }}"
-        redis_host: "{{ ansible_hostname }}"
+        sensu_rabbitmq_server: true
+        sensu_redis_server: true
+        sensu_rabbitmq_host: "{{ ansible_hostname }}"
+        sensu_redis_host: "{{ ansible_hostname }}"
         sensu_api_host: "{{ ansible_hostname }}"
         ansible_default_ipv4:
           address: 127.0.0.1

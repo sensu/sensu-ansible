@@ -21,9 +21,9 @@ $ tree data/static
 data/static
 `-- sensu
     |-- checks
-    |   |-- rabbitmq_servers
+    |   |-- sensu_rabbitmq_servers
     |   |   `-- check_rabbitmq.sh
-    |   |-- redis_servers
+    |   |-- sensu_redis_servers
     |   |   `-- check_redis.sh
     |   |-- webservers
     |   |   `-- check_nginx.sh
@@ -41,7 +41,7 @@ data/static
     |   |-- smartos_check_disk.json.j2
     |   `-- smartos_check_mem.json.j2
     |-- client_definitions
-    |   |-- rabbitmq_servers
+    |   |-- sensu_rabbitmq_servers
     |   |   `-- check_users.json.j2
     |   `-- webservers
     |       `-- check_uptime.json.j2
@@ -49,13 +49,13 @@ data/static
     |   `-- pushover.rb
     `-- mutators
 ```
-As you can see, in the `sensu/checks` directory, there are the `rabbitmq_servers`, `redis_servers`, `webservers` & `zones` subdirectories.
+As you can see, in the `sensu/checks` directory, there are the `sensu_rabbitmq_servers`, `sensu_redis_servers`, `webservers` & `zones` subdirectories.
 If you've had a peruse through some of the other documentation here, you'll know that these groups are defined within my Ansible inventory:
 ``` ini
-[rabbitmq_servers]
+[sensu_rabbitmq_servers]
 test.cmacr.ae
 
-[redis_servers]
+[sensu_redis_servers]
 redis.cmacr.ae
 
 [sensu_masters]
@@ -85,7 +85,7 @@ web.cmacr.ae
 test.cmacr.ae
 ```
 Under these subdirectories, you can see [checks](https://docs.sensu.io/sensu-core/latest/reference/checks/) that relate to the directory they're placed in.
-For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).
+For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `sensu_rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).
 
 So how do these checks actually get deployed to their associated nodes?
 With this pair of plays, in the `tasks/plugins.yml` playbook:
@@ -147,10 +147,10 @@ In your Ansible inventory, after this spontaneous decision to have your webserve
 [webservers]
 mime.domain.name
 
-[redis_servers]
+[sensu_redis_servers]
 mime.domain.name
 ```
-Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for redis will be deployed to `mime.domain.name` and it'll be subscribed to the `redis_servers` stream within Sensu. Pretty slick, right?
+Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for redis will be deployed to `mime.domain.name` and it'll be subscribed to the `sensu_redis_servers` stream within Sensu. Pretty slick, right?
 
 The same goes for the removal of a node from a group. Did you just realize you really don't want `mime.domain.name` to act as a redis server?
-It's cool, we all make mistakes, just take him out of the `[redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `redis_servers` stream, and redis'll stop being monitored!
+It's cool, we all make mistakes, just take him out of the `[sensu_redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `sensu_redis_servers` stream, and redis'll stop being monitored!

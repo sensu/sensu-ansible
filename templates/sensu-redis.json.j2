@@ -1,14 +1,14 @@
 {
   "redis": {
-{% if redis_password %}
-    "password": "{{ redis_password }}",
+{% if sensu_redis_password %}
+    "password": "{{ sensu_redis_password }}",
 {% endif %}
-{% if redis_sentinels %}
-    "sentinels": {{ redis_sentinels | to_nice_json }},
-    "master": "{{ redis_master_name }}"
+{% if sensu_redis_sentinels %}
+    "sentinels": {{ sensu_redis_sentinels | to_nice_json }},
+    "master": "{{ sensu_redis_master_name }}"
 {% else %}
-    "host": "{{ redis_host }}",
-    "port": {{ redis_port }}
+    "host": "{{ sensu_redis_host }}",
+    "port": {{ sensu_redis_port }}
 {% endif %}
   }
 }

@@ -16,8 +16,8 @@
 - name: Ensure redis is installed
   tags: redis
   dnf:
-    name: "{{ redis_pkg_name }}"
-    state: "{{ redis_pkg_state }}"
+    name: "{{ sensu_redis_pkg_name }}"
+    state: "{{ sensu_redis_pkg_state }}"
 
 - name: Ensure redis binds to accessible IP
   tags: redis

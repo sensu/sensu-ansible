@@ -12,31 +12,31 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [RabbitMQ Server Properties](https://docs.sensu.io/sensu-core/latest/reference/rabbitmq/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `rabbitmq_config_path` | `/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
-| `rabbitmq_config_template` | `rabbitmq.config.j2` | The template to use for the RabbitMQ service configuration |
-|` rabbitmq_host` | `"{{ groups\['rabbitmq_servers']\[0] }}"` | The hostname/IP address of the RabbitMQ node |
-| `rabbitmq_port` | 5671 | The transmission port for RabbitMQ communications |
-| `rabbitmq_pkg_state` | present | The state of the RabbitMQ package (should be set to `present` or `latest`) |
-| `rabbitmq_server` | `false` | Determines whether to include the deployment of RabbitMQ |
-| `rabbitmq_service_name` | rabbitmq-server | The name of the RabbitMQ service |
-| `rabbitmq_sensu_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
-| `rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
-| `rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
-| `rabbitmq_enable_ssl` | `true` | Determines whether or not to use `ssl_listener` for RabbitMQ |
+| `sensu_rabbitmq_config_path` | `/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
+| `sensu_rabbitmq_config_template` | `rabbitmq.config.j2` | The template to use for the RabbitMQ service configuration |
+|` sensu_rabbitmq_host` | `"{{ groups\['sensu_rabbitmq_servers']\[0] }}"` | The hostname/IP address of the RabbitMQ node |
+| `sensu_rabbitmq_port` | 5671 | The transmission port for RabbitMQ communications |
+| `sensu_rabbitmq_pkg_state` | present | The state of the RabbitMQ package (should be set to `present` or `latest`) |
+| `sensu_rabbitmq_server` | `false` | Determines whether to include the deployment of RabbitMQ |
+| `sensu_rabbitmq_service_name` | rabbitmq-server | The name of the RabbitMQ service |
+| `sensu_rabbitmq_sensu_user_name` | sensu | Username for authentication with the RabbitMQ vhost |
+| `sensu_rabbitmq_sensu_password` | sensu | Password for authentication with the RabbitMQ vhost |
+| `sensu_rabbitmq_sensu_vhost` | `/sensu` | Name of the RabbitMQ Sensu vhost |
+| `sensu_rabbitmq_enable_ssl` | `true` | Determines whether or not to use `ssl_listener` for RabbitMQ |
 
 ### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_host` | `"{{ groups['redis_servers'][0] }}"` | Hostname/IP address of the redis node |
-| `redis_server` | `false` | Determines whether to include the deployment of redis |
-| `redis_service_name` | redis |  The name of the redis service to enable |
-| `redis_pkg_repo` | _undefined_ |  The PPA to use for installing redis from (specific to Debian flavored systems) |
-| `redis_pkg_name` | redis |  The name of the redis package to install |
-| `redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
-| `redis_port` | 6379 | The transmission port for redis communications |
-| `redis_password` | `` | Password to use for redis authentication |
-| `redis_sentinels` | `[]` | List of Redis Sentinel servers to use, with each item having `host` and `port` keys. Disables Sentinel when empty/unset |
-| `redis_master_name` | `` | Name of the master (replica set) to use with Redis Sentinel |
+| `sensu_redis_host` | `"{{ groups['sensu_redis_servers'][0] }}"` | Hostname/IP address of the redis node |
+| `sensu_redis_server` | `false` | Determines whether to include the deployment of redis |
+| `sensu_redis_service_name` | redis |  The name of the redis service to enable |
+| `sensu_redis_pkg_repo` | _undefined_ |  The PPA to use for installing redis from (specific to Debian flavored systems) |
+| `sensu_redis_pkg_name` | redis |  The name of the redis package to install |
+| `sensu_redis_pkg_state` | present | The state of the redis package (should be set to `present` or `latest`) |
+| `sensu_redis_port` | 6379 | The transmission port for redis communications |
+| `sensu_redis_password` | `` | Password to use for redis authentication |
+| `sensu_redis_sentinels` | `[]` | List of Redis Sentinel servers to use, with each item having `host` and `port` keys. Disables Sentinel when empty/unset |
+| `sensu_redis_master_name` | `` | Name of the master (replica set) to use with Redis Sentinel |
 
 ### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
@@ -96,8 +96,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_name` | redis-server |  The name of the redis package to install |
-| `redis_service_name` | redis-server | The name of the redis service |
+| `sensu_redis_pkg_name` | redis-server |  The name of the redis package to install |
+| `sensu_redis_service_name` | redis-server | The name of the redis service |
 
 ### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
@@ -109,8 +109,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `redis_pkg_name` | redis-server | The name of the redis service |
-| `redis_service_name` | redis-server | The name of the redis service |
+| `sensu_redis_pkg_name` | redis-server | The name of the redis service |
+| `sensu_redis_service_name` | redis-server | The name of the redis service |
 
 ### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
@@ -131,8 +131,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [RabbitMQ Server Properties](https://docs.sensu.io/sensu-core/latest/reference/rabbitmq/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `rabbitmq_config_path` | `/opt/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
-| `rabbitmq_service_name` | rabbitmq | The name of the RabbitMQ service |
+| `sensu_rabbitmq_config_path` | `/opt/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
+| `sensu_rabbitmq_service_name` | rabbitmq | The name of the RabbitMQ service |
 
 ### [Sensu Properties](https://docs.sensu.io/sensu-core/latest/overview/)
 | Name               | Default Value | Description                  |
@@ -150,8 +150,8 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [RabbitMQ Server Properties](https://docs.sensu.io/sensu-core/latest/reference/rabbitmq/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `rabbitmq_service_name` | `rabbitmq` | The name of the RabbitMQ service |
-| `rabbitmq_config_path` | `/usr/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
+| `sensu_rabbitmq_service_name` | `rabbitmq` | The name of the RabbitMQ service |
+| `sensu_rabbitmq_config_path` | `/usr/local/etc/rabbitmq` | Path to the RabbitMQ configuration directory |
 
 ### Internal properties
 ## Internal settings

@@ -12,14 +12,14 @@
 - name: Ensure RabbitMQ SSL directory exists
   tags: rabbitmq
   file:
-    dest: "{{ rabbitmq_config_path }}/ssl"
+    dest: "{{ sensu_rabbitmq_config_path }}/ssl"
     state: directory
 
 - name: Ensure RabbitMQ SSL certs/keys are in place
   tags: rabbitmq
   copy:
     src: "{{ item.src }}"
-    dest: "{{ rabbitmq_config_path }}/ssl/{{ item.dest }}"
+    dest: "{{ sensu_rabbitmq_config_path }}/ssl/{{ item.dest }}"
     remote_src: "{{ sensu_ssl_deploy_remote_src }}"
   loop:
     - { src: "{{ sensu_ssl_server_cacert }}", dest: cacert.pem }
@@ -35,8 +35,8 @@
 - name: Deploy RabbitMQ config
   tags: rabbitmq
   template:
-    dest: "{{ rabbitmq_config_path }}/rabbitmq.config"
-    src: "{{ rabbitmq_config_template }}"
+    dest: "{{ sensu_rabbitmq_config_path }}/rabbitmq.config"
+    src: "{{ sensu_rabbitmq_config_template }}"
     owner: root
     group: "{{ __root_group }}"
     mode: 0644
@@ -45,28 +45,28 @@
 - name: Ensure RabbitMQ is running
   tags: rabbitmq
   service:
-    name: "{{ rabbitmq_service_name }}"
+    name: "{{ sensu_rabbitmq_service_name }}"
     state: started
     enabled: true
-  register: rabbitmq_state
+  register: sensu_rabbitmq_state
 
 - name: Wait for RabbitMQ to be up and running before asking to create a vhost
   tags: rabbitmq
   pause:
     seconds: 3
-  when: rabbitmq_state is changed
+  when: sensu_rabbitmq_state is changed
 
 - block:
     - name: Ensure Sensu RabbitMQ vhost exists
-      rabbitmq_vhost:
-        name: "{{ rabbitmq_sensu_vhost }}"
+      sensu_rabbitmq_vhost:
+        name: "{{ sensu_rabbitmq_sensu_vhost }}"
         state: present
 
     - name: Ensure Sensu RabbitMQ user has access to the Sensu vhost
-      rabbitmq_user:
-        user: "{{ rabbitmq_sensu_user_name }}"
-        password: "{{ rabbitmq_sensu_password }}"
-        vhost: "{{ rabbitmq_sensu_vhost }}"
+      sensu_rabbitmq_user:
+        user: "{{ sensu_rabbitmq_sensu_user_name }}"
+        password: "{{ sensu_rabbitmq_sensu_password }}"
+        vhost: "{{ sensu_rabbitmq_sensu_vhost }}"
         configure_priv: .*
         read_priv: .*
         write_priv: .*
