@@ -6,13 +6,22 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [4.0.0] - 2019-02-17
+### Breaking Changes
+- Upgrade all playbooks to `loop` syntax, requiring Ansible 2.5 or higher (@michaelpporter)
+
+### Changed
+- Upgrade Inspec to 3.6.6 (@jaredledvina)
+- Re-enabled Ubuntu 18.04 integration tests (@michaelpporter)
+- Switch from `local_action` to `delegate_to: localhost` (@michaelpporter)
+
 ## [3.0.0] - 2019-02-16
 ### Breaking Changes
 - Officially drop support for Ansible 2.3 (@jaredledvina)
-- Switch to `include_tasks` and `import_tasks` (@michaelporter)
+- Switch to `include_tasks` and `import_tasks` (@michaelpporter)
 
 ### Fixed
-- Update the use of tags to support Ansible 2.5 or higher (@michaelporter)
+- Update the use of tags to support Ansible 2.5 or higher (@michaelpporter)
 
 ## [2.7.0] - 2019-01-31
 ### Fixed
