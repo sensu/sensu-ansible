@@ -18,7 +18,7 @@
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
   when: sensu_master
-  with_items:
+  loop:
     - ssl_generation
     - ssl_generation/sensu_ssl_tool
     - ssl_generation/sensu_ssl_tool/client
@@ -121,7 +121,7 @@
     src: "{{ sensu_config_path }}/ssl_generation/sensu_ssl_tool/{{ item }}"
     dest: "{{ dynamic_data_store }}"
   when: sensu_master
-  with_items:
+  loop:
     - sensu_ca/cacert.pem
     - server/cert.pem
     - server/key.pem

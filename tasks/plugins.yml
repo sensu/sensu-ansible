@@ -13,9 +13,12 @@
     group: "{{ sensu_group_name }}"
 
 - name: Ensure local directories exist
-  local_action: file state=directory dest="{{ static_data_store }}/sensu/{{ item }}"
+  file:
+    state: directory
+    dest: "{{ static_data_store }}/sensu/{{ item }}"
+  delegate_to: localhost
   become: no
-  with_items:
+  loop:
     - checks
     - filters
     - handlers
@@ -25,12 +28,13 @@
 
 - name: Ensure any remote plugins defined are present
   shell: umask 0022; sensu-install -p {{ item }}
-  with_items: "{{ sensu_remote_plugins }}"
+  loop: "{{ sensu_remote_plugins }}"
   changed_when: false
   when: sensu_remote_plugins | length > 0
 
 - name: Register available checks
-  local_action: command ls {{ static_data_store }}/sensu/checks
+  command: "ls {{ static_data_store }}/sensu/checks"
+  delegate_to: localhost
   register: sensu_available_checks
   changed_when: false
   become: false
@@ -46,8 +50,8 @@
     - sensu_available_checks is defined
     - sensu_available_checks is not skipped
     - item in sensu_available_checks.stdout_lines
-  with_flattened:
-    - "{{ group_names }}"
+  loop:
+    - "{{ group_names|flatten }}"
   notify: restart sensu-client service
 
 - name: Deploy handler plugins
@@ -92,7 +96,8 @@
     - restart sensu-enterprise service
 
 - name: Register available client definitions
-  local_action: command ls {{ static_data_store }}/sensu/client_definitions
+  command: "ls {{ static_data_store }}/sensu/client_definitions"
+  delegate_to: localhost
   register: sensu_available_client_definitions
   changed_when: false
   become: false
@@ -107,6 +112,6 @@
     - sensu_available_client_definitions is defined
     - sensu_available_checks is not skipped
     - item in sensu_available_client_definitions.stdout_lines
-  with_flattened:
-    - "{{ group_names }}"
+  loop:
+    - "{{ group_names|flatten }}"
   notify: restart sensu-client service

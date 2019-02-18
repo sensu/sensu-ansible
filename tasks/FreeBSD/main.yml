@@ -42,7 +42,7 @@
   pkgng:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
     - bash
     - ca_root_nss
 

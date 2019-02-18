@@ -24,7 +24,7 @@
     group: "{{ sensu_group_name }}"
     dest: "{{ sensu_config_path }}/ssl/{{ item.dest }}"
     mode: " {{ item.perm }}"
-  with_items:
+  loop:
     - {src: "{{ sensu_ssl_client_cert }}", dest: cert.pem, perm: "0640" }
     - {src: "{{ sensu_ssl_client_key }}", dest: key.pem, perm: "0640" }
   notify: restart sensu-client service

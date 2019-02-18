@@ -59,7 +59,7 @@ Next up is this little play (from the `tasks/ssl.yml` playbook):
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
       dest: "{{ sensu_config_path }}/ssl"
-    with_items:
+    loop:
       - "{{ sensu_ssl_client_cert }}"
       - "{{ sensu_ssl_client_key }}"
     notify: restart sensu-client service
@@ -73,7 +73,7 @@ The same method is used for node communication with RabbitMQ:
     copy:
 	  src: "{{ item }}"
 	  dest: "{{ rabbitmq_config_path }}/ssl"
-    with_items:
+    loop:
       - "{{ sensu_ssl_server_cacert }}"
       - "{{ sensu_ssl_server_cert }}"
       - "{{ sensu_ssl_server_key }}"
