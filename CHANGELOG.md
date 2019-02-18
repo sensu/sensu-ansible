@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## [4.0.0] - 2019-02-17
 ### Breaking Changes
 - Upgrade all playbooks to `loop` syntax, requiring Ansible 2.5 or higher (@michaelpporter)
+- Update role metadata to require Ansible 2.5 or higher (@jaredledvina)
 
 ### Changed
 - Upgrade Inspec to 3.6.6 (@jaredledvina)
