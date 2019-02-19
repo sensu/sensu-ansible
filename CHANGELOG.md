@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [5.0.0] - 2019-02-19
+### Breaking Changes
+- Prefix all variables with `sensu_` to reduce collisions with other roles (@michaelpporter)
+
 ## [4.0.0] - 2019-02-17
 ### Breaking Changes
 - Upgrade all playbooks to `loop` syntax, requiring Ansible 2.5 or higher (@michaelpporter)
@@ -153,7 +157,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/4.0.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.0.0...HEAD
+[5.0.0]: https://github.com/sensu/sensu-ansible/compare/4.0.0...5.0.0
 [4.0.0]: https://github.com/sensu/sensu-ansible/compare/3.0.0...4.0.0
 [3.0.0]: https://github.com/sensu/sensu-ansible/compare/2.7.0...3.0.0
 [2.7.0]: https://github.com/sensu/sensu-ansible/compare/2.6.0...2.7.0
