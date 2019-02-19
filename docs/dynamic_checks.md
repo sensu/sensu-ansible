@@ -103,8 +103,7 @@ With this pair of plays, in the `tasks/plugins.yml` playbook:
       owner: "{{ sensu_user_name }}"
       group: "{{ sensu_group_name }}"
     when: "'{{ item }}' in sensu_available_checks.stdout_lines"
-    loop:
-      - group_names|flatten
+    loop: "{{ group_names|flatten }}"
     notify: restart sensu-client service
 ```
 This will [register](https://docs.ansible.com/ansible/latest/user_guide/playbooks_conditionals.html#register-variables) a list of available checks, then deploy them to their intended groups based on node membership, as set within the Ansible inventory.
@@ -129,8 +128,7 @@ These are deployed with the following pair of plays, also in the `tasks/plugins.
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
   when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
-  loop:
-    - "{{ group_names|flatten }}"
+  loop: "{{ group_names|flatten }}"
   notify: restart sensu-client service
 ```
 
