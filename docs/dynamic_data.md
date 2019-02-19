@@ -72,7 +72,7 @@ The same method is used for node communication with RabbitMQ:
   - name: Ensure RabbitMQ SSL certs/keys are in place
     copy:
 	  src: "{{ item }}"
-	  dest: "{{ rabbitmq_config_path }}/ssl"
+	  dest: "{{ sensu_rabbitmq_config_path }}/ssl"
     loop:
       - "{{ sensu_ssl_server_cacert }}"
       - "{{ sensu_ssl_server_cert }}"

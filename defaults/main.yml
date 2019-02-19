@@ -30,29 +30,29 @@ sensu_deploy_rabbitmq_server: true
 sensu_deploy_redis_server: true
 
 # RabbitMQ server properties
-rabbitmq_config_path: /etc/rabbitmq
-rabbitmq_config_template: rabbitmq.config.j2
-rabbitmq_enable_ssl: true
-rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
-rabbitmq_port: 5671
-rabbitmq_pkg_state: present
-rabbitmq_server: false
-rabbitmq_service_name: rabbitmq-server
-rabbitmq_sensu_user_name: sensu
-rabbitmq_sensu_password: sensu
-rabbitmq_sensu_vhost: /sensu
+sensu_rabbitmq_config_path: /etc/rabbitmq
+sensu_rabbitmq_config_template: rabbitmq.config.j2
+sensu_rabbitmq_enable_ssl: true
+sensu_rabbitmq_host: "{{ groups['rabbitmq_servers'][0] }}"
+sensu_rabbitmq_port: 5671
+sensu_rabbitmq_pkg_state: present
+sensu_rabbitmq_server: false
+sensu_rabbitmq_service_name: rabbitmq-server
+sensu_rabbitmq_user_name: sensu
+sensu_rabbitmq_password: sensu
+sensu_rabbitmq_vhost: /sensu
 
 # redis server properties
-redis_host: "{{ groups['redis_servers'][0] }}"
-redis_server: false
-redis_service_name: redis
-redis_pkg_repo: ~
-redis_pkg_name: redis
-redis_pkg_state: present
-redis_port: 6379
-redis_password:
-redis_sentinels: []
-redis_master_name:
+sensu_redis_host: "{{ groups['sensu_redis_servers'][0] }}"
+sensu_redis_server: false
+sensu_redis_service_name: redis
+sensu_redis_pkg_repo: ~
+sensu_redis_pkg_name: redis
+sensu_redis_pkg_state: present
+sensu_redis_port: 6379
+sensu_redis_password:
+sensu_redis_sentinels: []
+sensu_redis_master_name:
 sensu_redis_config: sensu-redis.json.j2
 
 # Sensu/Uchiwa user/group/service properties
@@ -101,23 +101,23 @@ sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
 sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
 sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 dynamic_data_store: "{{ playbook_dir }}/data/store"
-static_data_store: "{{ playbook_dir}}/data/static"
+static_data_store: "{{ playbook_dir }}/data/static"
 
 # Uchiwa properties
-uchiwa_dc_name: ~
-uchiwa_path: /opt/uchiwa
-uchiwa_redis_use_ssl: false
-uchiwa_users:
+sensu_uchiwa_dc_name: ~
+sensu_uchiwa_path: /opt/uchiwa
+sensu_uchiwa_redis_use_ssl: false
+sensu_uchiwa_users:
   - username: admin
     password: admin
-uchiwa_port: 3000
-uchiwa_refresh: 5
-uchiwa_sensu_api_port: "{{ sensu_api_port }}"
-uchiwa_auth_privatekey: ~
-uchiwa_auth_publickey: ~
+sensu_uchiwa_port: 3000
+sensu_uchiwa_refresh: 5
+sensu_uchiwa_api_port: "{{ sensu_api_port }}"
+sensu_uchiwa_auth_privatekey: ~
+sensu_uchiwa_auth_publickey: ~
 
 # CentOS repository for redis and rabbitmq
-centos_repository: epel
+sensu_centos_repository: epel
 
 # Internal settings
 __bash_path: /bin/bash

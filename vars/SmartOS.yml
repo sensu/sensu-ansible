@@ -3,8 +3,8 @@
 # Defaults are defined in defaults/main.yml
 
 # RabbitMQ server properties
-rabbitmq_service_name: rabbitmq
-rabbitmq_config_path: /opt/local/etc/rabbitmq
+sensu_rabbitmq_service_name: rabbitmq
+sensu_rabbitmq_config_path: /opt/local/etc/rabbitmq
 
 # Sensu/Uchiwa user/group/service properties
 sensu_config_path: /opt/local/etc/sensu

@@ -6,8 +6,8 @@
 sensu_config_path: /usr/local/etc/sensu
 
 # RabbitMQ options
-rabbitmq_config_path: /usr/local/etc/rabbitmq
-rabbitmq_service_name: rabbitmq
+sensu_rabbitmq_config_path: /usr/local/etc/rabbitmq
+sensu_rabbitmq_service_name: rabbitmq
 
 # Internal settings
 __bash_path: /usr/local/bin/bash

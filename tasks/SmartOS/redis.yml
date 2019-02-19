@@ -9,4 +9,4 @@
 
 - name: Ensure redis is installed
   tags: redis
-  pkgin: name=redis state={{ redis_pkg_state }}
+  pkgin: name=redis state={{ sensu_redis_pkg_state }}

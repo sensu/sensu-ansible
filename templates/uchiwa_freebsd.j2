@@ -5,8 +5,8 @@
 name=uchiwa
 rcvar=uchiwa_enable
 
-command="{{ uchiwa_path }}/go/bin/${name}"
-uchiwa_flags="-d {{ uchiwa_path }} -c {{ uchiwa_path }}/etc/config.json -p {{ uchiwa_path }}/go/src/github.com/sensu/uchiwa/public"
+command="{{ sensu_uchiwa_path }}/go/bin/${name}"
+uchiwa_flags="-d {{ sensu_uchiwa_path }} -c {{ sensu_uchiwa_path }}/etc/config.json -p {{ sensu_uchiwa_path }}/go/src/github.com/sensu/uchiwa/public"
 
 load_rc_config $name
 

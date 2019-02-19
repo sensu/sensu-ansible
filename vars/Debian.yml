@@ -3,8 +3,8 @@
 # Defaults are defined in defaults/main.yml
 
 # redis server properties
-redis_pkg_name: redis-server
-redis_service_name: redis-server
+sensu_redis_pkg_name: redis-server
+sensu_redis_service_name: redis-server
 
 sensu_erlang_pin_package: 'esl-erlang erlang*'
 sensu_erlang_pin_version: '1:20.3*'
