@@ -61,7 +61,7 @@
 - name: Build and deploy Uchiwa
   command: npm install --production
   args:
-    chdir: "{{ uchiwa_path }}/go/src/github.com/sensu/uchiwa"
+    chdir: "{{ sensu_uchiwa_path }}/go/src/github.com/sensu/uchiwa"
   become: true
   become_user: "{{ sensu_user_name }}"
 

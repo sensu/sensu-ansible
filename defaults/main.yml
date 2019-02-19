@@ -101,23 +101,23 @@ sensu_ssl_server_cacert: "{{ sensu_ssl_tool_base_path }}/sensu_ca/cacert.pem"
 sensu_ssl_server_cert: "{{ sensu_ssl_tool_base_path }}/server/cert.pem"
 sensu_ssl_server_key: "{{ sensu_ssl_tool_base_path }}/server/key.pem"
 dynamic_data_store: "{{ playbook_dir }}/data/store"
-static_data_store: "{{ playbook_dir}}/data/static"
+static_data_store: "{{ playbook_dir }}/data/static"
 
 # Uchiwa properties
-uchiwa_dc_name: ~
-uchiwa_path: /opt/uchiwa
-uchiwa_redis_use_ssl: false
-uchiwa_users:
+sensu_uchiwa_dc_name: ~
+sensu_uchiwa_path: /opt/uchiwa
+sensu_uchiwa_redis_use_ssl: false
+sensu_uchiwa_users:
   - username: admin
     password: admin
-uchiwa_port: 3000
-uchiwa_refresh: 5
-uchiwa_sensu_api_port: "{{ sensu_api_port }}"
-uchiwa_auth_privatekey: ~
-uchiwa_auth_publickey: ~
+sensu_uchiwa_port: 3000
+sensu_uchiwa_refresh: 5
+sensu_uchiwa_api_port: "{{ sensu_api_port }}"
+sensu_uchiwa_auth_privatekey: ~
+sensu_uchiwa_auth_publickey: ~
 
 # CentOS repository for redis and rabbitmq
-centos_repository: epel
+sensu_centos_repository: epel
 
 # Internal settings
 __bash_path: /bin/bash

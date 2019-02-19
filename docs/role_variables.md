@@ -82,15 +82,15 @@ _Note: The above options are intended to provide users with flexibility. This al
 ### [Uchiwa Properties](https://docs.uchiwa.io/getting-started/configuration/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
-| `uchiwa_dc_name` | _undefined_ | Datacenter name for Uchiwa instance |
-| `uchiwa_path` | `/opt/uchiwa` | Path to the Uchiwa configuration directory |
-| `uchiwa_redis_use_ssl` | `false` | Determines whether to use SSL for redis communication |
-| `uchiwa_users`| [{username: admin, password: admin}] | The users to log into Uchiwa |
-| `uchiwa_port` | 3000 | The TCP port to bind the Uchiwa web service to |
-| `uchiwa_refresh` | 5 | The interval to pull the Sensu APIs in seconds |
-| `uchiwa_sensu_api_port` | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
-| `uchiwa_auth_privatekey` | None | If set, Uchiwa uses the key at this location for signing JWT token |
-| `uchiwa_auth_publickey` | None | Public counterpart to the above variable |
+| `sensu_uchiwa_dc_name` | _undefined_ | Datacenter name for Uchiwa instance |
+| `sensu_uchiwa_path` | `/opt/uchiwa` | Path to the Uchiwa configuration directory |
+| `sensu_uchiwa_redis_use_ssl` | `false` | Determines whether to use SSL for redis communication |
+| `sensu_uchiwa_users`| [{username: admin, password: admin}] | The users to log into Uchiwa |
+| `sensu_uchiwa_port` | 3000 | The TCP port to bind the Uchiwa web service to |
+| `sensu_uchiwa_refresh` | 5 | The interval to pull the Sensu APIs in seconds |
+| `sensu_uchiwa_api_port` | "{{ sensu_api_port }}" | Port for Uchiwa to communicate with the Sensu API. Change it if you have a load balancer/reverse proxy in front of the API servers listening on a different port than 4567. |
+| `sensu_uchiwa_auth_privatekey` | None | If set, Uchiwa uses the key at this location for signing JWT token |
+| `sensu_uchiwa_auth_publickey` | None | Public counterpart to the above variable |
 
 ## Ubuntu
 ### [redis Server Properties](https://docs.sensu.io/sensu-core/latest/reference/redis/)
@@ -124,7 +124,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 |--------------------|---------------|------------------------------|
 | `sensu_user_name`    | root        | The name of the Sensu service user |
 | `sensu_group_name`   | root        | The name of the Sensu service user's primary group |
-| `centos_repository`   | epel        | The name of repository use for redis or rabbitmq packages. If it set as empty string, it's using the repository already enable on the node |
+| `sensu_centos_repository`   | epel        | The name of repository use for redis or rabbitmq packages. If it set as empty string, it's using the repository already enable on the node |
 
 
 ## SmartOS

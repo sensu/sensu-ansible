@@ -19,7 +19,7 @@
   yum:
     name: "{{ sensu_redis_pkg_name }}"
     state: "{{ sensu_redis_pkg_state }}"
-    enablerepo: "{{ centos_repository }}"
+    enablerepo: "{{ sensu_centos_repository }}"
 
 - name: Ensure redis binds to accessible IP
   tags: redis
