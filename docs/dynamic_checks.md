@@ -121,7 +121,7 @@ These are deployed with the following pair of plays, also in the `tasks/plugins.
   become: false
 
 - name: Deploy client definitions
-  copy:
+  template:
     src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
     dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
     mode: 0755

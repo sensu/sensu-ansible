@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Changed
+- `client_definitions` now uses `template` instead of `copy` to support native Jinja templates (@jaredledvina)
 
 ## [5.0.0] - 2019-02-19
 ### Breaking Changes
