@@ -14,6 +14,8 @@ platforms:
     privileged: yes
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    groups:
+      - sensu_checks
   - name: debian-9
     image: dokken/debian-9
     command: /lib/systemd/systemd
@@ -21,6 +23,8 @@ platforms:
       - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    groups:
+      - sensu_checks
 provisioner:
   name: ansible
   config_options:
@@ -52,6 +56,9 @@ provisioner:
         sensu_api_host: "{{ ansible_hostname }}"
         ansible_default_ipv4:
           address: 127.0.0.1
+        sensu_remote_plugins:
+          - sensu-plugins-disk-checks
+        sensu_check_interval: 60
     host_vars:
       debian-8:
         inspec_version: ubuntu1604

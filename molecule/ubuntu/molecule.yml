@@ -13,11 +13,15 @@ platforms:
     command: /sbin/init
     capabilities:
       - SYS_ADMIN
+    groups:
+      - sensu_checks
   - name: ubuntu-16.04
     image: dokken/ubuntu-16.04
     command: /bin/systemd
     capabilities:
       - SYS_ADMIN
+    groups:
+      - sensu_checks
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
   - name: ubuntu-18.04
@@ -25,6 +29,8 @@ platforms:
     command: /bin/systemd
     capabilities:
       - SYS_ADMIN
+    groups:
+      - sensu_checks
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
@@ -58,6 +64,9 @@ provisioner:
         sensu_api_host: "{{ ansible_hostname }}"
         ansible_default_ipv4:
           address: 127.0.0.1
+        sensu_remote_plugins:
+          - sensu-plugins-disk-checks
+        sensu_check_interval: 60
     host_vars:
       ubuntu-14.04:
         inspec_version: ubuntu1404

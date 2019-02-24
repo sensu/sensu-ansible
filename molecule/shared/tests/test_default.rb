@@ -50,3 +50,21 @@ describe http('http://127.0.0.1:4567/health',
               params: { consumers: 1 }) do
   its('status') { should eq 204 }
 end
+
+# Ensure disk check exists
+describe file('/etc/sensu/conf.d/sensu_masters/check_disk_usage.json') do
+  it { should exist }
+  its('content') { should match(/check-disk-usage/) }
+end
+
+# Ensure disk metrics exists
+describe file('/etc/sensu/conf.d/sensu_checks/metrics_disk_usage.json') do
+  it { should exist }
+  its('content') { should match(/metrics-disk-usage/) }
+  its('content') { should match(/60/) }
+end
+
+# Ensure not_used does not exist
+describe file('/etc/sensu/conf.d/not_used/not_a_check.json') do
+  it { should_not exist }
+end

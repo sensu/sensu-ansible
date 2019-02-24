@@ -1,3 +1,4 @@
 site
-molecule/default/data/
+molecule/shared/data/*
+!molecule/shared/data/static/
 molecule/*/cache/
