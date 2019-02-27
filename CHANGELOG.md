@@ -5,8 +5,19 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [5.1.0] - 2019-02-27
+## Changed
 - Add `client_templates` option for group based tempaltes (@michaelpporter)
 - Add `run_once: true` to `delegate_to: localhost` (@michaelpporter)
+
+## [5.0.2] - 2019-02-19
+## Fixed
+- Fixup new loop logic to deploy checks/handlers/plugins to hosts (@michaelpporter)
+
+## [5.0.1] - 2019-02-19
+## Fixed
+- Fixup sensu_rabbitmq_host to use new default variable for sensu_rabbitmq_servers (@michaelpporter)
 
 ## [5.0.0] - 2019-02-19
 ### Breaking Changes
@@ -159,7 +170,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.0.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.1.0...HEAD
+[5.1.0]: https://github.com/sensu/sensu-ansible/compare/5.0.2...5.1.0
+[5.0.2]: https://github.com/sensu/sensu-ansible/compare/5.0.1...5.0.2
+[5.0.1]: https://github.com/sensu/sensu-ansible/compare/5.0.0...5.0.1
 [5.0.0]: https://github.com/sensu/sensu-ansible/compare/4.0.0...5.0.0
 [4.0.0]: https://github.com/sensu/sensu-ansible/compare/3.0.0...4.0.0
 [3.0.0]: https://github.com/sensu/sensu-ansible/compare/2.7.0...3.0.0
