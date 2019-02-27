@@ -53,9 +53,9 @@ end
 
 # Ensure disk check exists
 describe json('/etc/sensu/conf.d/sensu_masters/check_disk_usage.json') do
-  its(%w[checks metrics_disk_usage command]) \
+  its(%w[checks check_disk_usage command]) \
     { should eq 'check-disk-usage.rb' }
-  its(%w[checks metrics_disk_usage interval]) { should eq 120 }
+  its(%w[checks check_disk_usage interval]) { should eq 120 }
 end
 
 # Ensure disk metrics exists
