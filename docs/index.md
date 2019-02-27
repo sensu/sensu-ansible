@@ -1,7 +1,9 @@
 # Ansible Sensu [![Ansible Galaxy](https://img.shields.io/badge/galaxy-sensu.sensu-660198.svg?style=flat)](https://galaxy.ansible.com/sensu/sensu/)
+
 An [Ansible](https://ansible.com) role that deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
 
 ## Features
+
 - Deploy a full [Sensu](https://sensu.io) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
@@ -14,9 +16,11 @@ Along with deploying the Sensu Server, API and clients, this role can deploy a f
 However, if you want to rely on other roles/management methods to deploy/manage these services, [it's nice and easy to integrate this role](integration/).
 
 ## Requirements
+
 This role requires Ansible 2.5
 
 ## Supported Platforms
+
 ### Automatically tested via TravisCI
 
 - [CentOS - 6](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS6.9)
@@ -32,15 +36,18 @@ This role requires Ansible 2.5
 - [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/)
 
 ### Supported manually (compatibility not always guaranteed)
+
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 - [OpenBSD - 6.2](https://www.openbsd.org/62.html)
 
 ## Role Variables
+
 All variables have sensible defaults, which can be found in `defaults/main.yml`.
 Head over to [the role variables page](role_variables.md) to review them
 
 ## Install (Ansible Galaxy)
+
 To install this role from [Ansible Galaxy](https://galaxy.ansible.com), simpy run:
 `ansible-galaxy install sensu.sensu`
 
@@ -51,6 +58,7 @@ To install this role from [Ansible Galaxy](https://galaxy.ansible.com), simpy ru
     roles:
       - role: sensu.sensu
 ```
+
 Or, passing parameter values:
 
 ``` yaml
@@ -58,19 +66,20 @@ Or, passing parameter values:
     roles:
       - role: sensu.sensu
         sensu_master: true
-        sensu_include_dashboard: true 
+        sensu_include_dashboard: true
 ```
 
-License
--------
+## License
+
 [MIT](license.md)
 
-Author Information
-------------------
+## Author Information
+
 Originally created by [Calum MacRae](http://cmacr.ae)
 Supported by the [Sensu Community Ansible Maintainers](https://github.com/sensu-plugins/community/#maintained-areas)
 
 ### Contributors
+
 See the projects [Contributors page](https://github.com/sensu/sensu-ansible/graphs/contributors)
 
 Feel free to:

@@ -1,0 +1,11 @@
+{
+    "checks": {
+        "metrics_disk_usage": {
+            "command": "metrics-disk-usage.rb",
+            "standalone": true,
+            "ttl": 1800,
+            "interval": {{ sensu_check_interval }},
+            "refresh": 1800
+        }
+    }
+}

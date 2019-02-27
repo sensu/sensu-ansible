@@ -1,0 +1,11 @@
+{
+    "checks": {
+        "check_disk_usage": {
+            "command": "check-disk-usage.rb",
+            "standalone": true,
+            "ttl": 1800,
+            "interval": 120,
+            "refresh": 1800
+        }
+    }
+}
