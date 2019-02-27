@@ -204,5 +204,4 @@ mime.domain.name
 ```
 Not to worry, the next time your playbook applying this Sensu role runs through (notably the `tasks/client.yml` & `tasks/plugins.yml` playbooks), the new checks for redis will be deployed to `mime.domain.name` and it'll be subscribed to the `sensu_redis_servers` stream within Sensu. Pretty slick, right?
 
-The same goes for the removal of a node from a group. Did you just realize you really don't want `mime.domain.name` to act as a redis server?
-It's cool, we all make mistakes, just take him out of the `[sensu_redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, he'll be unsubscribed from the `sensu_redis_servers` stream, and redis'll stop being monitored!
+The same goes for the removal of a node from a group. Did you just realize you really don't want `mime.domain.name` to act as a redis server? It's cool, we all make mistakes, just take him out of the `[sensu_redis_servers]` group in your inventory. When your play comes through again, applying this Sensu role, the client will be removed from `sensu_redis_servers` subscriptions. The file will still exist on the host, you will have to remove the check manually by following the [delete a check](https://docs.sensu.io/sensu-core/latest/reference/checks/#delete-a-check) guide.
