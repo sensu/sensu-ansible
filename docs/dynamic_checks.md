@@ -15,12 +15,14 @@ data/static
     |-- handlers
     `-- mutators
 ```
-With all the checks and definitions dropped in, the static data store might look something like this:
+With all the checks (check commands) and definitions (JSON check files) dropped in, the static data store might look something like this:
 ```
 $ tree data/static
 data/static
 `-- sensu
     |-- checks
+    |   |-- mysql
+    |   |   `-- check_mysql.sh
     |   |-- sensu_rabbitmq_servers
     |   |   `-- check_rabbitmq.sh
     |   |-- sensu_redis_servers
@@ -42,6 +44,11 @@ data/static
     |   `-- smartos_check_mem.json.j2
     |-- client_definitions
     |   |-- sensu_rabbitmq_servers
+    |   |   `-- check_users.json
+    |   `-- webservers
+    |       `-- check_uptime.json
+    |-- client_templates
+    |   |-- mysql
     |   |   `-- check_users.json.j2
     |   `-- webservers
     |       `-- check_uptime.json.j2
@@ -49,7 +56,7 @@ data/static
     |   `-- pushover.rb
     `-- mutators
 ```
-As you can see, in the `sensu/checks` directory, there are the `sensu_rabbitmq_servers`, `sensu_redis_servers`, `webservers` & `zones` subdirectories.
+As you can see, in the `sensu/checks` directory, there are the `mysql`, `sensu_rabbitmq_servers`, `sensu_redis_servers`, `webservers` & `zones` subdirectories.
 If you've had a peruse through some of the other documentation here, you'll know that these groups are defined within my Ansible inventory:
 ``` ini
 [sensu_rabbitmq_servers]
@@ -69,6 +76,9 @@ tater.cmacr.ae
 beardy.cmacr.ae
 pkgsrc.cmacr.ae
 
+[mysql]
+mysql.cmacr.ae
+
 [zones]
 ansible.cmacr.ae
 beardy.cmacr.ae
@@ -83,6 +93,7 @@ sensu.cmacr.ae
 tater.cmacr.ae
 web.cmacr.ae
 test.cmacr.ae
+mysql.cmacr.ae
 ```
 Under these subdirectories, you can see [checks](https://docs.sensu.io/sensu-core/latest/reference/checks/) that relate to the directory they're placed in.
 For example, our `webservers` subdirectory includes a `check_nginx.sh` script, whilst the `sensu_rabbitmq_servers` subdirectory has one that most likely checks for RabbitMQ problems (it does... trust me).
@@ -110,25 +121,68 @@ This will [register](https://docs.ansible.com/ansible/latest/user_guide/playbook
 
 And, because nodes can of course be members of more than just one group, checks will be deployed in full to nodes that belong to several groups!
 
-Additionally, standalone checks can be distributed to hosts based on group membership. These definitions are located in the client_definitions folder. These will be deployed to the configuration directory of the clients.
+Additionally, standalone checks and subscription cheecks (if your client is in [safe_mode](https://docs.sensu.io/sensu-core/latest/reference/clients/)), can be distributed to hosts based on group membership. These definitions are located in the `client_definitions` folder. These will be deployed to the configuration directory of the clients.
 
 These are deployed with the following pair of plays, also in the `tasks/plugins.yml` playbook:
 ``` yaml
 - name: Register available client definitions
-  local_action: command ls {{ static_data_store }}/sensu/client_definitions
+  command: "ls {{ static_data_store }}/sensu/client_definitions"
+  delegate_to: localhost
   register: sensu_available_client_definitions
   changed_when: false
   become: false
+  run_once: true
 
 - name: Deploy client definitions
   copy:
     src: "{{ static_data_store }}/sensu/client_definitions/{{ item }}/"
-    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '')}}"
-    mode: 0755
+    dest: "{{ sensu_config_path }}/conf.d/{{ item | basename | regex_replace('.j2', '') }}"
     owner: "{{ sensu_user_name }}"
     group: "{{ sensu_group_name }}"
-  when: "sensu_available_client_definitions is defined and item in sensu_available_client_definitions.stdout_lines"
+  when:
+    - sensu_available_client_definitions is defined
+    - sensu_available_client_definitions is not skipped
+    - item in sensu_available_client_definitions.stdout_lines
   loop: "{{ group_names|flatten }}"
+  notify: restart sensu-client service
+```
+
+If you are using templates for your, standalone checks and subscription cheecks can be distributed from the  `client_templates` folder. These will be deployed to the configuration directory of the clients. **Note** if you have a matching folder/file name in the `client_definitions` they will be overwritten by the template.
+
+These are deployed with the following set of plays, also in the `tasks/plugins.yml` playbook:
+
+``` yaml
+- name: Register available client templates
+  command: "ls {{ static_data_store }}/sensu/client_templates"
+  delegate_to: localhost
+  register: sensu_available_client_templates
+  changed_when: false
+  become: false
+  run_once: true
+
+- name: Deploy client template folders
+  file:
+    path: '{{ sensu_config_path }}/conf.d/{{ item | basename }}'
+    state: directory
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  when:
+    - sensu_available_client_templates is defined
+    - sensu_available_client_templates is not skipped
+    - item in sensu_available_client_templates.stdout_lines
+  loop: "{{ group_names|flatten }}"
+  notify: restart sensu-client service
+
+- name: Deploy client templates
+  template:
+    src: "{{ static_data_store }}/sensu/client_templates/{{ item.path | dirname }}/{{ item.path | basename }}"
+    dest: "{{ sensu_config_path }}/conf.d/{{ item.path | dirname }}/{{ item.path | basename | regex_replace('.j2', '') }}"
+    owner: "{{ sensu_user_name }}"
+    group: "{{ sensu_group_name }}"
+  with_filetree: "{{ static_data_store }}/sensu/client_templates"
+  when:
+    - item.state == 'file'
+    - item.path | dirname in group_names
   notify: restart sensu-client service
 ```
 

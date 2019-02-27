@@ -18,6 +18,7 @@
     dest: "{{ static_data_store }}/sensu/{{ item }}"
   delegate_to: localhost
   become: no
+  run_once: true
   loop:
     - checks
     - filters
@@ -39,6 +40,7 @@
   register: sensu_available_checks
   changed_when: false
   become: false
+  run_once: true
 
 - name: Deploy check plugins
   copy:
@@ -101,6 +103,7 @@
   register: sensu_available_client_definitions
   changed_when: false
   become: false
+  run_once: true
 
 - name: Deploy client definitions
   copy:
@@ -121,6 +124,7 @@
   register: sensu_available_client_templates
   changed_when: false
   become: false
+  run_once: true
 
 - name: Deploy client template folders
   file:

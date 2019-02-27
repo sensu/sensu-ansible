@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+- Add `client_templates` option for group based tempaltes (@michaelpporter)
+- Add `run_once: true` to `delegate_to: localhost` (@michaelpporter)
 
 ## [5.0.0] - 2019-02-19
 ### Breaking Changes
