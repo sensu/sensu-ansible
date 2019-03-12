@@ -40,7 +40,7 @@
 - name: Update rubygems to work around rubygems/rubygems/issues/1448
   tags: setup
   command: /usr/local/bin/gem23 update --system
-  when: "{{ gem23_version.stdout | version_compare('2.5.3', '<') }}"
+  when: gem23_version.stdout is version('2.5.3', '<')
 
 - name: Install sensu gem and all of its dependencies
   tags: setup
