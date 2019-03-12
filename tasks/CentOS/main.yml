@@ -20,6 +20,16 @@
       ) | ternary('no', 'yes') }}"
     enabled: yes
 
+- name: Ensure the epel present for OracleLinux
+  tags: setup
+  yum_repository:
+    name: epel
+    description: EPEL YUM repo
+    baseurl: "{{ sensu_ol_yum_repo_url }}"
+    gpgkey: "{{ sensu_ol_yum_key_url }}"
+    enabled: yes
+  when: ansible_distribution == 'OracleLinux'
+
 - name: Ensure that credential is supplied if installing Sensu Enterprise
   tags: setup
   assert:

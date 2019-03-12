@@ -35,13 +35,13 @@ This role requires Ansible 2.5
 - [Fedora - 28](https://docs.fedoraproject.org/f28/release-notes/)
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/)
 - [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/)
+- [OracleLinux - 7](https://docs.oracle.com/cd/E52668_01/)
 
 ### Supported manually (compatibility not always guaranteed)
 
 - [SmartOS - base-64 15.x.x](https://docs.joyent.com/images/smartos/base#version-15xx)
 - [FreeBSD - 10.3, 11.0 (64-bit only)](https://www.freebsd.org/releases/10.2R/relnotes.html)
 - [OpenBSD - 6.2](https://www.openbsd.org/62.html)
-- [OracleLinux - 7](https://docs.oracle.com/cd/E52668_01/)
 
 ## Role Variables
 
