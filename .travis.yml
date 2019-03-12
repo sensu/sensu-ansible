@@ -6,6 +6,7 @@ env:
   - SCENARIO=debian
   - SCENARIO=ubuntu
   - SCENARIO=centos
+  - SCENARIO=oraclelinux
   - SCENARIO=fedora
   - SCENARIO=amazonlinux
 services: docker
