@@ -32,14 +32,14 @@
 
 - name: Get the current version of rubygems
   tags: setup
-  shell: /usr/local/bin/gem23 --version
+  command: /usr/local/bin/gem23 --version
   check_mode: no
   register: gem23_version
   changed_when: False
 
 - name: Update rubygems to work around rubygems/rubygems/issues/1448
   tags: setup
-  shell: /usr/local/bin/gem23 update --system
+  command: /usr/local/bin/gem23 update --system
   when: "{{ gem23_version.stdout | version_compare('2.5.3', '<') }}"
 
 - name: Install sensu gem and all of its dependencies
