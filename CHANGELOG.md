@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [5.2.0] - 2019-03-12
+## Added
+- Add official support for OracleLinux 7 (@michaelpporter)
+
 ## [5.1.0] - 2019-02-27
 ## Changed
 - Add `client_templates` option for group based tempaltes (@michaelpporter)
@@ -170,7 +174,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.1.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.2.0...HEAD
+[5.2.0]: https://github.com/sensu/sensu-ansible/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/sensu/sensu-ansible/compare/5.0.2...5.1.0
 [5.0.2]: https://github.com/sensu/sensu-ansible/compare/5.0.1...5.0.2
 [5.0.1]: https://github.com/sensu/sensu-ansible/compare/5.0.0...5.0.1
