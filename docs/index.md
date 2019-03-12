@@ -29,11 +29,13 @@ This role requires Ansible 2.5
 - [Debian - 9 (Stretch)](https://wiki.debian.org/DebianStretch)
 - [Ubuntu - 14.04 (Trusty Tahr)](http://releases.ubuntu.com/14.04/)
 - [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
+- [Ubuntu - 18.04 (Xenial Xerus)](http://releases.ubuntu.com/18.04/)
 - [Fedora - 26](https://docs.fedoraproject.org/f26/release-notes/)
 - [Fedora - 27](https://docs.fedoraproject.org/f27/release-notes/)
 - [Fedora - 28](https://docs.fedoraproject.org/f28/release-notes/)
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/)
 - [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/)
+- [OracleLinux - 7](https://docs.oracle.com/cd/E52668_01/)
 
 ### Supported manually (compatibility not always guaranteed)
 
