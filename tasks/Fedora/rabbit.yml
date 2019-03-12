@@ -36,7 +36,7 @@
 
 # HACK: https://github.com/ansible/ansible/issues/20711#issuecomment-306260869
 # Can be removed once we're running w/ a version of Ansible that has https://github.com/ansible/ansible/pull/35989
-- name: Make yum cache to import GPG keys
+- name: Make yum cache to import GPG keys # noqa 503 - Order really matters here and flush handlers is too much for this
   tags: rabbitmq
   command: "yum -q makecache -y --disablerepo='*' --enablerepo='{{ item }}'"
   args:
