@@ -2,11 +2,11 @@
 
 [![Join the chat at https://slack.sensu.io/](https://slack.sensu.io/badge.svg)](https://slack.sensu.io/)
 
-This role deploys a full [Sensu](https://sensuapp.org) stack, a modern, open source monitoring framework.
+This role deploys a full [Sensu](https://sensu.io) stack, a modern, open source monitoring framework.
 
 ## Features
-- Deploy a full [Sensu](https://sensuapp.org) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
-- Full support for [Sensu Enterprise](https://sensuapp.org/enterprise)
+- Deploy a full [Sensu](https://sensu.io) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
+- Full support for [Sensu Enterprise](https://sensu.io/products/enterprise)
 - Tight integration with the Ansible inventory - deployment of monitoring checks based on inventory grouping
 - Fine grained control over dynamic client configurations
 - Remote plugin deployment
