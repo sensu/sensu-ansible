@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+## Changed
+- Fixed up issues to improve Ansible Galaxy quality score (@jaredledvina) and (@michaelpporter)
 
 ## [5.2.0] - 2019-03-12
 ## Added
