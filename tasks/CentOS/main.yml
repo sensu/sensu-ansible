@@ -34,8 +34,8 @@
   tags: setup
   assert:
     that:
-      - "se_user != ''"
-      - "se_pass != ''"
+      - se_user
+      - se_pass
     msg: Sensu enterprise credential must not be empty. Did you forget to set se_user and se_pass?
   when: se_enterprise
 
