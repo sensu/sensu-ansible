@@ -25,10 +25,10 @@ data/static
 ```
 
 ## How handlers, filters, and mutators are deployed
-All three are deployed using Ansible's [template]() module. This allows the use of variables within your configurations, which can come in quite handy!
+All three are deployed using Ansible's [template](https://docs.ansible.com/ansible/latest/modules/template_module.html) module. This allows the use of variables within your configurations, which can come in quite handy!
 
 Let's take a look at the stuff I've got for [Pushover](https://pushover.net/).
-First off, the [handler](https://docs.sensu.io/sensu-core/1.4/guides/intro-to-handlers/) json file `pushover_handler.json.j2`:
+First off, the [handler](https://docs.sensu.io/sensu-core/latest/guides/intro-to-handlers/) json file `pushover_handler.json.j2`:
 ``` json
 {
   "handlers": {
