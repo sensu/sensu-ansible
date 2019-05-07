@@ -24,7 +24,7 @@ git remote add upstream https://github.com/sensu/sensu-ansible.git
 ```
 4. Execute `git checkout -b feature/NEW_FEATURE_NAME_HERE` to work on a dedicated branch
 5. Ensure you have a recent version of Docker installed locally: https://docs.docker.com/install/
-6. Ensure you have [pipenv](https://docs.pipenv.org/install/#installing-pipenv) installed.
+6. Ensure you have [pipenv](https://docs.pipenv.org/en/latest/install/#installing-pipenv) installed.
 7. Install this repositories development dependacies with `pipenv install --two --dev` followed by ` gem install rubocop`
 8. Execute the full integration tests for your chosen operating system distribution: ` pipenv run molecule test --scenario-name $OS --driver-name docker --destroy always`
 
