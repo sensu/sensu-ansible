@@ -8,6 +8,8 @@ name = "pypi"
 [dev-packages]
 docker-py = "*"
 molecule = "==2.20.1"
+mkdocs = "*"
+tornado = "*"
 
 [requires]
 python_version = "2.7"
