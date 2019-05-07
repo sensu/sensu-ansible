@@ -79,7 +79,7 @@ _Note: The above options are intended to provide users with flexibility. This al
 | `sensu_ssl_server_cert` | `"{{ sensu_ssl_tool_base_path }}/server/cert.pem"` ||
 | `sensu_ssl_server_key` | `"{{ sensu_ssl_tool_base_path }}/server/key.pem"` ||
 
-### [Uchiwa Properties](https://docs.uchiwa.io/getting-started/configuration/)
+### [Uchiwa Properties](https://docs.uchiwa.io/uchiwa/1.0/getting-started/configuration/)
 | Name               | Default Value | Description                  |
 |--------------------|---------------|------------------------------|
 | `sensu_uchiwa_dc_name` | _undefined_ | Datacenter name for Uchiwa instance |
