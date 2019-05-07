@@ -29,15 +29,16 @@ This role requires:
 ## Supported Platforms
 ### Automatically tested via TravisCI
 
-- [CentOS - 6](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS6.9)
-- [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7)
+- [CentOS - 6](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS6.10)
+- [CentOS - 7](https://wiki.centos.org/Manuals/ReleaseNotes/CentOS7.1810)
 - [Debian - 8 (Jessie)](https://wiki.debian.org/DebianJessie)
 - [Debian - 9 (Stretch)](https://wiki.debian.org/DebianStretch)
 - [Ubuntu - 14.04 (Trusty Tahr)](http://releases.ubuntu.com/14.04/)
 - [Ubuntu - 16.04 (Xenial Xerus)](http://releases.ubuntu.com/16.04/)
-- [Fedora - 26](https://docs.fedoraproject.org/f26/release-notes/)
-- [Fedora - 27](https://docs.fedoraproject.org/f27/release-notes/)
-- [Fedora - 28](https://docs.fedoraproject.org/f28/release-notes/)
+- [Ubuntu - 18.04 (Bionic Beaver)](http://releases.ubuntu.com/18.04/)
+- [Fedora - 26](https://docs.fedoraproject.org/en-US/fedora/f26/release-notes/)
+- [Fedora - 27](https://docs.fedoraproject.org/en-US/fedora/f27/release-notes/)
+- [Fedora - 28](https://docs.fedoraproject.org/en-US/fedora/f28/release-notes/)
 - [Amazon Linux](https://aws.amazon.com/amazon-linux-ami/)
 - [Amazon Linux 2](https://aws.amazon.com/amazon-linux-2/)
 
