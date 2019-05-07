@@ -21,7 +21,7 @@ It's contents (as of writing) are as follows:
   }
 }
 ```
-As you can see from above, this configuration's values are all populated using [facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#information-discovered-from-systems-facts).
+As you can see from above, this configuration's values are all populated using [facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variables-discovered-from-systems-facts).
 
 To override this for a single node, `sensu_client_config` can be set in the `host_vars/node_name.domain.name.yml` file. We can also override it for entire groups in `group_vars/group_name.yml`.
 
