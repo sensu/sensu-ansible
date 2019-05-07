@@ -76,7 +76,7 @@ MIT
 
 Author Information
 ------------------
-Originally created by [Calum MacRae](http://cmacr.ae) and supported by the [Sensu Community Ansible Maintainers](https://github.com/sensu-plugins/community/#maintained-areas)
+Originally created by [Calum MacRae](https://github.com/cmacrae) and supported by the [Sensu Community Ansible Maintainers](https://github.com/sensu-plugins/community/#maintained-areas)
 
 ### Contributors
 See the projects [Contributors page](https://github.com/sensu/sensu-ansible/graphs/contributors)
