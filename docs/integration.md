@@ -16,7 +16,7 @@ sensu_rabbitmq_config_path: < the path to the RabbitMQ configuration >
 
 ```
 
-You'll want to ensure you have a directory named `ssl` under your `rabbitmq_config_path` with the Sensu SSL Server CACert, Cert, and Key data inside (the path to this data is defined by the following variables: `sensu_ssl_server_cacert`,  `sensu_ssl_server_cert`,  `sensu_ssl_server_key`. These are typically stored in the [dynamic data store](dynamic_data/)).
+You'll want to ensure you have a directory named `ssl` under your `rabbitmq_config_path` with the Sensu SSL Server CACert, Cert, and Key data inside (the path to this data is defined by the following variables: `sensu_ssl_server_cacert`,  `sensu_ssl_server_cert`,  `sensu_ssl_server_key`. These are typically stored in the [dynamic data store](/dynamic_data/)).
 
 redis
 -----

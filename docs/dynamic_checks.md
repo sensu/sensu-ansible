@@ -4,7 +4,7 @@ One of the awesome features of this role (if I do say so myself) is the deployme
 Have a group of webservers you need to monitor webservices on? Well, I'm sure you've bunched them together in your inventory under the `[webservers]` group, right? Or perhaps you only want to monitor disk space on your production systems; if they're a member of `[production]` within the inventory, you can do this easily.
 
 ## How it works
-Much like [the dynamic datastore](dynamic_data/), I have also defined a static data store within my Ansible codebase, by setting the variable `static_data_store`. By default it's set to the playbook directory, but it can be changed to any location.
+Much like [the dynamic datastore](/dynamic_data/), I have also defined a static data store within my Ansible codebase, by setting the variable `static_data_store`. By default it's set to the playbook directory, but it can be changed to any location.
 Within this static datastore resides the following directory structure:
 ```
 $ tree data/static
