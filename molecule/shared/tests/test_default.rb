@@ -1,5 +1,6 @@
 # Verify that redis, rabbitmq-server, sensu-{api,client}, and Uchiwa
 # are all listening as expected
+# frozen_string_literal: true
 
 # Redis
 describe port(6379) do

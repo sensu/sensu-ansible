@@ -1,12 +1,6 @@
 ---
 scenario:
   name: centos
-dependency:
-  name: galaxy
-driver:
-  name: docker
-lint:
-  name: yamllint
 platforms:
   - name: centos-6
     image: dokken/centos-6
@@ -25,46 +19,9 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 provisioner:
-  name: ansible
-  config_options:
-    defaults:
-      callback_whitelist: timer,profile_tasks
-      fact_caching: jsonfile
-      fact_caching_connection: ./cache
-      poll_interval: 3
-      forks: 100
-    connection:
-      pipelining: true
-  playbooks:
-    prepare: ../shared/prepare.yml
-    create: ../shared/create.yml
-    destroy: ../shared/destroy.yml
-    converge: ../shared/playbook.yml
-    verify: ../shared/verify.yml
-  lint:
-    name: ansible-lint
   inventory:
-    group_vars:
-      all:
-        sensu_master: true
-        sensu_include_dashboard: true
-        sensu_rabbitmq_server: true
-        sensu_redis_server: true
-        sensu_rabbitmq_host: "{{ ansible_hostname }}"
-        sensu_redis_host: "{{ ansible_hostname }}"
-        sensu_api_host: "{{ ansible_hostname }}"
-        ansible_default_ipv4:
-          address: 127.0.0.1
-        sensu_remote_plugins:
-          - sensu-plugins-disk-checks
-        sensu_check_interval: 60
     host_vars:
       centos-6:
         inspec_version: el6
       centos-7:
         inspec_version: el7
-verifier:
-  name: inspec
-  directory: ../shared/tests/
-  lint:
-    name: rubocop
