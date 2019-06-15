@@ -23,7 +23,7 @@ install:
   - pipenv install --two --dev
   - gem install rubocop
 script:
-  - pipenv run molecule test --scenario-name $SCENARIO --driver-name docker --destroy always
+  - pipenv run molecule --base-config molecule/shared/base.yml test --scenario-name $SCENARIO --driver-name docker --destroy always
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

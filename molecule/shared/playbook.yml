@@ -13,5 +13,26 @@
       hostname:
         name: "{{ inventory_hostname }}"
       when: inventory_hostname != 'amazonlinux-1'
+
+    - block:
+
+      - name: Install apt packages for SNI fix
+        package:
+          name:
+            - python-pip
+            - python-dev
+            - python-urllib3
+            - python-openssl
+            - python-pyasn1
+
+      - name: Install Python packages for SNI fix
+        pip:
+          name:
+            - ndg-httpsclient
+
+      when:
+        - ansible_distribution == 'Ubuntu'
+        - ansible_python_version is version_compare('2.7.9', '<')
+
   roles:
     - role: sensu-ansible
