@@ -2,8 +2,8 @@
 scenario:
   name: fedora
 platforms:
-  - name: fedora-26
-    image: dokken/fedora-26
+  - name: fedora-30
+    image: dokken/fedora-latest
     command: /usr/lib/systemd/systemd
     capabilities:
       - SYS_ADMIN
@@ -11,8 +11,8 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     groups:
       - sensu_checks
-  - name: fedora-27
-    image: dokken/fedora-27
+  - name: fedora-29
+    image: dokken/fedora-29
     command: /usr/lib/systemd/systemd
     capabilities:
       - SYS_ADMIN
@@ -21,7 +21,7 @@ platforms:
     groups:
       - sensu_checks
   - name: fedora-28
-    image: dokken/fedora-latest
+    image: dokken/fedora-28
     command: /usr/lib/systemd/systemd
     capabilities:
       - SYS_ADMIN
@@ -32,9 +32,9 @@ platforms:
 provisioner:
   inventory:
     host_vars:
-      fedora-26:
+      fedora-30:
         inspec_version: el7
-      fedora-27:
+      fedora-29:
         inspec_version: el7
       fedora-28:
         inspec_version: el7
