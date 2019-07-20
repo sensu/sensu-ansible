@@ -5,6 +5,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+## Changed
+- Configure Fedora to automatically test only 28, 29, 30 (@jaredledvina)
+- Upgrade molecule Dockerfile to latest upstream (@jaredledvina)
 
 ## [5.3.0] - 2019-05-07
 ## Changed
