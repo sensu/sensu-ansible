@@ -5,9 +5,13 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [5.4.0] - 2019-07-20
 ## Changed
+- Consolidate molecule configuration into shared base-config (@gofrolist)
 - Configure Fedora to automatically test only 28, 29, 30 (@jaredledvina)
 - Upgrade molecule Dockerfile to latest upstream (@jaredledvina)
+- Cleanup and improve role documentation (@jaredledvina)
 
 ## [5.3.0] - 2019-05-07
 ## Changed
@@ -182,7 +186,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.3.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.4.0...HEAD
+[5.4.0]: https://github.com/sensu/sensu-ansible/compare/5.3.0...5.4.0
 [5.3.0]: https://github.com/sensu/sensu-ansible/compare/5.2.0...5.3.0
 [5.2.0]: https://github.com/sensu/sensu-ansible/compare/5.1.0...5.2.0
 [5.1.0]: https://github.com/sensu/sensu-ansible/compare/5.0.2...5.1.0
