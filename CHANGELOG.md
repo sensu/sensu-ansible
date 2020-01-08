@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+## Changed
+- Update all package URLs to new EOL domain (@mho-CL & @jaredledvin)
 
 ## [5.4.0] - 2019-07-20
 ## Changed
