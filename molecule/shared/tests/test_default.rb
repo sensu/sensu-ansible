@@ -13,7 +13,7 @@ end
 describe port(5671) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
-  its('addresses') { should be_in ['0.0.0.0'] }
+  its('addresses') { should be_in ['0.0.0.0', '[::]'] }
 end
 
 # Sensu API
@@ -42,7 +42,7 @@ end
 describe port(3000) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
-  its('addresses') { should be_in ['0.0.0.0'] }
+  its('addresses') { should be_in ['0.0.0.0', '[::]'] }
 end
 
 # Ensure Sensu API has one consumer
