@@ -7,10 +7,13 @@
     file: "{{ ansible_distribution }}.yml"
   tags: dashboard
 
+
 - name: Ensure Uchiwa is installed
   tags: dashboard
   package:
-    name: uchiwa
+    name:
+      - chkconfig
+      - uchiwa
     state: present
   when: not se_enterprise
 
