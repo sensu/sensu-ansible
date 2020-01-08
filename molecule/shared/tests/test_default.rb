@@ -6,21 +6,21 @@
 describe port(6379) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
-  its('addresses') { should be_in ['0.0.0.0', '::'] }
+  its('addresses') { should be_in ['0.0.0.0'] }
 end
 
 # RabbitMQ Server
 describe port(5671) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
-  its('addresses') { should be_in ['0.0.0.0', '::'] }
+  its('addresses') { should be_in ['0.0.0.0'] }
 end
 
 # Sensu API
 describe port(4567) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
-  its('addresses') { should be_in ['0.0.0.0', '::'] }
+  its('addresses') { should be_in ['0.0.0.0'] }
 end
 
 # Sensu Client TCP/UDP Socket
@@ -42,7 +42,7 @@ end
 describe port(3000) do
   it { should be_listening }
   its('protocols') { should include 'tcp' }
-  its('addresses') { should be_in ['0.0.0.0', '::'] }
+  its('addresses') { should be_in ['0.0.0.0'] }
 end
 
 # Ensure Sensu API has one consumer
