@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 ## Changed
 - Update all package URLs to new EOL domain (@mho-CL & @jaredledvina)
 - Update README with EOL status of Sensu Core (@jaredledvina)
+- Debian: Upgrade Erlang to 21.3 for compatibility w/ rabbitmq-server (@jaredledvina)
 
 ## [5.4.0] - 2019-07-20
 ## Changed
