@@ -5,6 +5,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+## Changed
+- Update all package URLs to new EOL domain (@mho-CL & @jaredledvina)
+- Update README with EOL status of Sensu Core (@jaredledvina)
+- Debian/Ubuntu: Upgrade Erlang to 21.3 for compatibility w/ rabbitmq-server (@jaredledvina)
+- Fedora/CentOS: Ensure chkconfig is installed for Uchiwa support on Fedora 30
 
 ## [5.4.0] - 2019-07-20
 ## Changed
