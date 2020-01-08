@@ -5,6 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 ## [Unreleased]
+
+## [6.0.0] - 2020-01-07
 ## Changed
 - Update all package URLs to new EOL domain (@mho-CL & @jaredledvina)
 - Update README with EOL status of Sensu Core (@jaredledvina)
