@@ -2,7 +2,16 @@
 
 [![Join the chat at https://slack.sensu.io/](https://slack.sensu.io/badge.svg)](https://slack.sensu.io/)
 
-This role deploys a full [Sensu](https://sensu.io) stack, a modern, open source monitoring framework.
+This role deploys a full [Sensu Core](https://sensu.io) stack, a modern, open source monitoring framework.
+
+## End of Life
+
+Please note that this role solely deploys Sensu Core which has reached end of life status. 
+
+For more details, please checkout https://blog.sensu.io/eol-schedule-for-sensu-core-and-enterprise and https://blog.sensu.io/announcing-the-sensu-archives
+
+If you'd like to migrate to Sensu Go, there are docs availible at https://docs.sensu.io/sensu-core/latest/migration/ and 
+a new officially Ansible Collection supported by [XLab](https://www.xlab.si/?lang=en) available here: https://github.com/sensu/sensu-go-ansible
 
 ## Features
 - Deploy a full [Sensu](https://sensu.io) stack, including RabbitMQ, redis, and the [Uchiwa dashboard](https://uchiwa.io/#/)
