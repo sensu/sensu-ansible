@@ -193,7 +193,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
 First tagged release, starting at 1.0.0 since the project can be considered stable at this point.
 
-[Unreleased]: https://github.com/sensu/sensu-ansible/compare/5.4.0...HEAD
+[Unreleased]: https://github.com/sensu/sensu-ansible/compare/6.0.0...HEAD
+[6.0.0]: https://github.com/sensu/sensu-ansible/compare/5.4.0...6.0.0
 [5.4.0]: https://github.com/sensu/sensu-ansible/compare/5.3.0...5.4.0
 [5.3.0]: https://github.com/sensu/sensu-ansible/compare/5.2.0...5.3.0
 [5.2.0]: https://github.com/sensu/sensu-ansible/compare/5.1.0...5.2.0
